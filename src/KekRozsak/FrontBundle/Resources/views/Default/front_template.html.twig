@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Kék Rózsák{% block title %}{% endblock %}</title>
+		<link rel="stylesheet" type="text/css" href="{{ asset('css/kekrozsak_front.css') }}" />
+	</head>
+	<body>
+		<div id="wrapper">
+			<div id="menu">
+				<ul>
+					<li><a href="">Főoldal - Aktuális</a></li>
+					<li><a href="">Rólunk</a></li>
+					<li><a href="">Fórum</a></li>
+					<li><a href="">Mágiáról röviden</a></li>
+					<li><a href="">Rendek</a></li>
+					<li><a href="">A régiek</a></li>
+					<li><a href="">Archívum</a></li>
+					<li><a href="">Ajánlott oldalak</a></li>
+				</ul>
+			</div>
+			<div id="header">
+				<h1><img src="{{ asset('images/kek_rozsak_felirat.jpg') }}" alt="Kék Rózsák" /></h1>
+				<h2><img src="{{ asset('images/okkultista_kor_felirat.jpg') }}" alt="A Kék Rózsa okkultista kör honlapja" /></h2>
+			</div>
+			<div id="content-wrapper">
+				<div id="content-outline">
+					<div id="content">
+{% block content %}{% endblock %}
+					</div>
+				</div>
+				<div id="hirek">
+					<h3>Hírek</h3>
+					<div class="hir">
+						<p class="hir-cim">Rendszer átalakítás, regisztráció</p>
+						<p class="hir-szoveg">Ki lett dolgozva az új rendszer ami hamarosan feltöltésre kerül. Aki szeretne tagja lenni a körnek regisztrálással a fórumon jelentkezhet tagnak. Hamarosan beindulnak a csoportok és megkezdődnek az első órák. hogy mindenki a megfelelő csoportba kerüljön vegyetek részt majd a bemutató órákon. Jelentkezés a kekrozsaokkutkor@freemail.hu e-mail címen is lehet, akár tagnak, akár a csoportok bemutató óráira.</p>
+						<p class="hir-szerzo">Lakshmí</p>
+						<p class="hir-datum">2012. április 1. 23:17</p>
+					</div>
+					<div class="hir">
+						<p class="hir-cim">Rendszer átalakítás</p>
+						<p class="hir-szoveg">Kedves tagok és új jelentkezők! A kör jelenleg belső működési és tanrendi változásokon megy keresztül a zökkenőmentes működés érdekében. Így türelmeteket kérjük. Az átalakítás várhatólag 2012. március 31.éig fog tartani.</p>
+						<p class="hir-szerzo">Lakshmí</p>
+						<p class="hir-datum">2012. március 18. 16:26</p>
+					</div>
+					<div class="hir">
+						<p class="hir-cim">Tavaszi Napéjegyenlőség</p>
+						<p class="hir-szoveg"><img src="{{ asset('upload/images/napejegyenloseg.jpg') }}" alt="" /></p>
+						<p class="hir-szerzo">Lakshmí</p>
+						<p class="hir-datum">2012. február 28. 23:27</p>
+					</div>
+					<div class="hir">
+						<p class="hir-cim">Valentin...</p>
+						<p class="hir-szoveg">Boldog Valentin napot nem csak a pároknak...<br /><img src="{{ asset('upload/images/valentin_rozsa.jpg') }}" alt="" /></p>
+						<p class="hir-szerzo">Lakshmí</p>
+						<p class="hir-datum">2012. február 13. 20:41</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+

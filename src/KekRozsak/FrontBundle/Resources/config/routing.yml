@@ -1,3 +1,10 @@
 KekRozsakFrontBundle_homepage:
-    pattern:  /
-    defaults: { _controller: KekRozsakFrontBundle:Default:index }
+        pattern:  /
+        defaults:
+                _controller: KekRozsakFrontBundle:Default:article
+                articleSlug: aktualis
+
+KekRozsakFrontBundle_article:
+        pattern:  /cikk/{$articleSlug}
+        defaults:
+                _controller: KekRozsakFrontBundle:Default:article

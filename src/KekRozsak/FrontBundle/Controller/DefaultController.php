@@ -6,8 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
+    public function articleAction($articleSlug)
     {
-        return $this->render('KekRozsakFrontBundle:Default:index.html.twig', array());
+        return $this->render('KekRozsakFrontBundle:Default:article.html.twig', array());
     }
 }
