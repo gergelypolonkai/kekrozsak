@@ -1,0 +1,7 @@
+parameters:
+#    kek_rozsak_front.example.class: KekRozsak\FrontBundle\Example
+
+services:
+#    kek_rozsak_front.example:
+#        class: %kek_rozsak_front.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

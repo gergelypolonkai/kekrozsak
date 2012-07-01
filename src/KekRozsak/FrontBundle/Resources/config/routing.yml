@@ -1,0 +1,3 @@
+KekRozsakFrontBundle_homepage:
+    pattern:  /
+    defaults: { _controller: KekRozsakFrontBundle:Default:index }
