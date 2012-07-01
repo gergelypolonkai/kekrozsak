@@ -8,18 +8,18 @@
 		<div id="wrapper">
 			<div id="menu">
 				<ul>
-					<li><a href="">Főoldal - Aktuális</a></li>
-					<li><a href="">Rólunk</a></li>
+					<li><a href="{{ path('KekRozsakFrontBundle_homepage') }}">Főoldal - Aktuális</a></li>
+					<li><a href="{{ path('KekRozsakFrontBundle_article', { articleSlug: 'rolunk' }) }}">Rólunk</a></li>
 					<li><a href="">Fórum</a></li>
-					<li><a href="">Mágiáról röviden</a></li>
-					<li><a href="">Rendek</a></li>
-					<li><a href="">A régiek</a></li>
+					<li><a href="{{ path('KekRozsakFrontBundle_article', { articleSlug: 'magiarol-roviden' }) }}">Mágiáról röviden</a></li>
+					<li><a href="{{ path('KekRozsakFrontBundle_article', { articleSlug: 'rendek' }) }}">Rendek</a></li>
+					<li><a href="{{ path('KekRozsakFrontBundle_article', { articleSlug: 'a-regiek' }) }}">A régiek</a></li>
 					<li><a href="">Archívum</a></li>
 					<li><a href="">Ajánlott oldalak</a></li>
 				</ul>
 			</div>
 			<div id="header">
-				<h1><img src="{{ asset('images/kek_rozsak_felirat.jpg') }}" alt="Kék Rózsák" /></h1>
+				<h1><a href="{{ path('KekRozsakFrontBundle_homepage') }}"><img src="{{ asset('images/kek_rozsak_felirat.jpg') }}" alt="Kék Rózsák" /></a></h1>
 				<h2><img src="{{ asset('images/okkultista_kor_felirat.jpg') }}" alt="A Kék Rózsa okkultista kör honlapja" /></h2>
 			</div>
 			<div id="content-wrapper">

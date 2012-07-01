@@ -29,6 +29,10 @@ KekRozsak\FrontBundle\Entity\Article:
                 update_reason:
                         type: text
                         nullable: true
+                main_page:
+                        type: boolean
+                        nullable: true
+                        default: false
         manyToOne:
                 created_by:
                         targetEntity: User

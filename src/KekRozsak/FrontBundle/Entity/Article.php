@@ -267,4 +267,31 @@ class Article
     {
         return $this->updated_by;
     }
+    /**
+     * @var boolean $main_page
+     */
+    private $main_page;
+
+
+    /**
+     * Set main_page
+     *
+     * @param boolean $mainPage
+     * @return Article
+     */
+    public function setMainPage($mainPage)
+    {
+        $this->main_page = $mainPage;
+        return $this;
+    }
+
+    /**
+     * Get main_page
+     *
+     * @return boolean 
+     */
+    public function getMainPage()
+    {
+        return $this->main_page;
+    }
 }
