@@ -1,0 +1,40 @@
+KekRozsak\FrontBundle\Entity\Article:
+        type: entity
+        table: articles
+        id:
+                id:
+                        type: integer
+                        generator:
+                                strategy: AUTO
+        fields:
+                title:
+                        type: string(100)
+                        nullable: false
+                slug:
+                        type: string(100)
+                        nullable: false
+                        unique: true
+                text:
+                        type: text
+                        nullable: false
+                source:
+                        type: string(255)
+                        nullable: true
+                created_at:
+                        type: datetime
+                        nullable: false
+                updated_at:
+                        type: datetime
+                        nullable: true
+                update_reason:
+                        type: text
+                        nullable: true
+        manyToOne:
+                created_by:
+                        targetEntity: User
+                        inversedBy: articles
+                        nullable: false
+                updated_by:
+                        targetEntity: User
+                        nullable: true
+                        default: null
