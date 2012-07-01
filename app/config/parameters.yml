@@ -2,14 +2,14 @@ parameters:
     database_driver:   pdo_mysql
     database_host:     localhost
     database_port:     ~
-    database_name:     symfony
-    database_user:     root
-    database_password: ~
+    database_name:     kekrozsa_dev
+    database_user:     kekrozsa_dev
+    database_password: Jei5eehe
 
     mailer_transport:  smtp
     mailer_host:       localhost
     mailer_user:       ~
     mailer_password:   ~
 
-    locale:            en
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    locale:            hu
+    secret:            Oob4sahX7Johyoh6uoseev0Quae4Biureih5caGh8puH
