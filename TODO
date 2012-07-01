@@ -1,0 +1,78 @@
+Users
+	id
+	username
+	password
+	email
+	roles
+	avatar picture
+	registration time
+	display name
+
+UserData
+	user id
+	real name
+	real name public?
+	email public?
+	msn address
+	msn address public?
+	google talk address
+	google talk address public?
+
+Permissions
+	id
+	name
+	description
+
+Roles
+	id
+	name
+	permission list
+
+Hírek
+	id
+	title
+	slug
+	timestamp
+	text
+	poster
+
+BlogPost
+	id
+	title
+	slug
+	timestamp
+	lead (?)
+	text
+	poster
+
+Page
+	id
+	title
+	slug
+	text
+
+ForumTopicGroup
+	id
+	title
+	slug
+	creator
+	timestamp
+
+ForumTopic
+	id
+	title
+	slug
+	creator
+	roles who can access it
+	topic group
+
+ForumPost
+	id
+	forum topic
+	creator
+	timestamp
+	last edited by
+	last edited timestamp
+	last edit reason
+	edit count
+	text
