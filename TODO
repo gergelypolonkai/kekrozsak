@@ -1,13 +1,3 @@
-Users
-	id
-	username
-	password
-	email
-	roles
-	avatar picture
-	registration time
-	display name
-
 UserData
 	user id
 	real name
@@ -44,12 +34,6 @@ BlogPost
 	lead (?)
 	text
 	poster
-
-Page
-	id
-	title
-	slug
-	text
 
 ForumTopicGroup
 	id
