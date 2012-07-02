@@ -1,0 +1,10 @@
+KekRozsakSecurityBundle_login:
+        pattern:  /login
+        defaults:
+                _controller: KekRozsakSecurityBundle:Default:login
+
+KekRozsakSecurityBundle_login_check:
+        pattern:  /login_check
+
+KekRozsakSecurityBundle_logout:
+        pattern:  /logout

@@ -3,11 +3,12 @@
 namespace KekRozsak\FrontBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * KekRozsak\FrontBundle\Entity\User
  */
-class User
+class User implements UserInterface
 {
     /**
      * @var integer $id
@@ -188,6 +189,15 @@ class User
      */
     public function getRoles()
     {
-        return $this->roles;
+        return $this->roles->toArray();
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function getSalt()
+    {
+	return $this->password;
     }
 }

@@ -1,0 +1,6 @@
+parameters:
+#        kek_rozsak_security.example.class: KekRozsak\SecurityBundle\Example
+
+services:
+        kek_rozsak_security.encoder.crypt:
+                class: KekRozsak\SecurityBundle\Service\CryptEncoder

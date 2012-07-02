@@ -7,3 +7,8 @@ KekRozsakFrontBundle_article:
         pattern:  /cikk/{articleSlug}
         defaults:
                 _controller: KekRozsakFrontBundle:Default:article
+
+KekRozsakFrontBundle_forum_main:
+        pattern:  /forum
+        defaults:
+                _controller: KekRozsakFrontBundle:Default:forumMain

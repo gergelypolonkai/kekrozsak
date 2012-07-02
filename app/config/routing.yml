@@ -1,3 +1,7 @@
+KekRozsakSecurityBundle:
+    resource: "@KekRozsakSecurityBundle/Resources/config/routing.yml"
+    prefix:   /
+
 KekRozsakFrontBundle:
     resource: "@KekRozsakFrontBundle/Resources/config/routing.yml"
     prefix:   /

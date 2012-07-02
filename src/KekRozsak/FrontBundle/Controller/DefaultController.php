@@ -26,4 +26,9 @@ class DefaultController extends Controller
 			'article' => $article
 		));
 	}
+
+	public function forumMainAction()
+	{
+		return $this->forward('KekRozsakFrontBundle:Default:homepage');	
+	}
 }
