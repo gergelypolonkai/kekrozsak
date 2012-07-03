@@ -109,3 +109,32 @@ p.hir-datum {
 	margin: 0;
 }
 
+#temakor-lista {
+	border: 1px solid #3366ff;
+	border-collapse: collapse;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+#temakor-lista thead td {
+	font-weight: bold;
+	height: 1.5em;
+	border-bottom: 2px solid #3366ff;
+	padding: 3px;
+}
+
+#temakor-lista thead td a {
+	color: #3366ff;
+	text-decoration: none;
+}
+
+#temakor-lista tbody td {
+	padding: 3px;
+	border-bottom: 1px solid #3366ff;
+}
+
+#temakor-lista tbody td a {
+	color: #3366ff;
+	text-decoration: underline;
+}
+

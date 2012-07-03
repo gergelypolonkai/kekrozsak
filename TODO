@@ -9,17 +9,7 @@ UserData
 	google talk address
 	google talk address public?
 
-Permissions
-	id
-	name
-	description
-
-Roles
-	id
-	name
-	permission list
-
-Hírek
+News
 	id
 	title
 	slug
@@ -36,20 +26,8 @@ BlogPost
 	text
 	poster
 
-ForumTopicGroup
-	id
-	title
-	slug
-	creator
-	timestamp
-
 ForumTopic
-	id
-	title
-	slug
-	creator
 	roles who can access it
-	topic group
 
 ForumPost
 	id

@@ -1,0 +1,20 @@
+{% extends '::main_template.html.twig' %}
+{% block title %} - Fórum - {{ topicGroup.title }}{% endblock %}
+{% block content %}
+<h3>Fórum - {{ topicGroup.title }}</h3>
+{% if topicGroup.topics|length > 0 %}
+<table>
+	<thead>
+	</thead>
+	<tbody>
+{% for topic in topicGroup.topics %}
+		<tr>
+			<td><a href="{{ path('KekRozsakFrontBundle_forum_post_list', { topicGroupSlug: topicGroup.slug, topicSlug: topic.slug }) }}">{{ topic.title }}</a></td>
+		</tr>
+{% endfor %}
+	</tbody>
+</table>
+{% else %}
+Ebben a témakörben nincsenek témák.
+{% endif %}
+{% endblock content %}
