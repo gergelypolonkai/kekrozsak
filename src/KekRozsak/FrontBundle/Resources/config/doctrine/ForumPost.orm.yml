@@ -1,0 +1,33 @@
+KekRozsak\FrontBundle\Entity\ForumPost:
+        type: entity
+        table: forum_posts
+        id:
+                id:
+                        type: integer
+                        generator:
+                                strategy: AUTO
+        fields:
+                created_at:
+                        type: datetime
+                        nullable: false
+                updated_at:
+                        type: datetime
+                        nullable: true
+                update_reason:
+                        type: string
+                        nullable: true
+                text:
+                        type: text
+                        nullable: false
+        manyToOne:
+                created_by:
+                        targetEntity: User
+                        inversedBy: forum_posts
+                        nullable: false
+                updated_by:
+                        targetEntity: User
+                        nullable: true
+                        default: null
+                topic:
+                        targetEntity: ForumTopic
+                        inversedBy: posts

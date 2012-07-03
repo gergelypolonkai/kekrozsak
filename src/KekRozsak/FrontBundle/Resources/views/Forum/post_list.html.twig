@@ -1,5 +1,26 @@
 {% extends '::main_template.html.twig' %}
 {% block title %} - Fórum - {{ topicGroup.title }} - {{ topic.title }}{% endblock %}
 {% block content %}
-<h3>Fórum - {{ topicGroup.title }} - {{ topic.title }}</h3>
+<h3><a href="{{ path('KekRozsakFrontBundle_forum_main') }}">Fórum</a> - <a href="{{ path('KekRozsakFrontBundle_forum_topic_list', { topicGroupSlug: topicGroup.slug }) }}">{{ topicGroup.title }}</a> - {{ topic.title }}</h3>
+{% if topic.posts|length > 0 %}
+<table>
+	<thead>
+	</thead>
+	<tbody>
+{% for post in topic.posts %}
+		<tr>
+			<td>
+				{{ post.createdBy.displayName }}<br />
+				{{ post.createdAt|date('Y-m-d H:i') }}<br />
+				Admin<br />
+				Tagság kezdete: {{ post.createdBy.RegisteredAt|date('Y-m-d') }}
+			</td>
+			<td>{{ post.text }}</td>
+		</tr>
+{% endfor %}
+	</tbody>
+</table>
+{% else %}
+A témában még nincsenek hozzászólások.
+{% endif %}
 {% endblock %}

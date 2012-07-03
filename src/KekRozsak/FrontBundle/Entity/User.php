@@ -200,4 +200,58 @@ class User implements UserInterface
     {
 	return $this->password;
     }
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     */
+    private $articles;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     */
+    private $forum_posts;
+
+
+    /**
+     * Add articles
+     *
+     * @param KekRozsak\FrontBundle\Entity\Article $articles
+     * @return User
+     */
+    public function addArticle(\KekRozsak\FrontBundle\Entity\Article $articles)
+    {
+        $this->articles[] = $articles;
+        return $this;
+    }
+
+    /**
+     * Get articles
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
+    /**
+     * Add forum_posts
+     *
+     * @param KekRozsak\FrontBundle\Entity\ForumPost $forumPosts
+     * @return User
+     */
+    public function addForumPost(\KekRozsak\FrontBundle\Entity\ForumPost $forumPosts)
+    {
+        $this->forum_posts[] = $forumPosts;
+        return $this;
+    }
+
+    /**
+     * Get forum_posts
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getForumPosts()
+    {
+        return $this->forum_posts;
+    }
 }

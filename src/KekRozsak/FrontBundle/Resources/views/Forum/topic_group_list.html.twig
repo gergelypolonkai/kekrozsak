@@ -6,21 +6,26 @@
 <table id="temakor-lista">
 	<thead>
 		<tr>
-			<td><a href="{{ path('KekRozsakFrontBundle_forum_topic_list', {topicGroupSlug: topicGroup.slug}) }}">{{ topicGroup.title }}</a></td>
-			<td></td>
+			<td colspan="2"><a href="{{ path('KekRozsakFrontBundle_forum_topic_list', {topicGroupSlug: topicGroup.slug}) }}">{{ topicGroup.title }}</a></td>
+			<td>Témák száma</td>
+			<td>Hozzászólások száma</td>
+			<td>Utolsó hozzászólás</td>
 		</tr>
 	</thead>
 	<tbody>
 {% if topicGroup.topics|length > 0 %}
 {% for topic in topicGroup.topics %}
 		<tr>
+			<td>[]</td>
 			<td><a href="{{ path('KekRozsakFrontBundle_forum_post_list', {topicGroupSlug: topicGroup.slug, topicSlug: topic.slug}) }}">{{ topic.title }}</a></td>
+			<td></td>
+			<td></td>
 			<td></td>
 		</tr>
 {% endfor %}
 {% else %}
 		<tr>
-			<td colspan="2">Ebben a kategóriában nincsenek témák</td>
+			<td colspan="4">Ebben a kategóriában nincsenek témák</td>
 		</tr>
 {% endif %}
 	</tbody>

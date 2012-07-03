@@ -21,6 +21,15 @@ KekRozsak\FrontBundle\Entity\User:
                 display_name:
                         type: string(50)
                         nullable: false
+        oneToMany:
+                articles:
+                        targetEntity: Article
+                        mappedBy: created_by
+                        fetch: EXTRA_LAZY
+                forum_posts:
+                        targetEntity: ForumPost
+                        mappedBy: created_by
+                        fetch: EXTRA_LAZY
         manyToMany:
                 roles:
                         targetEntity: Role

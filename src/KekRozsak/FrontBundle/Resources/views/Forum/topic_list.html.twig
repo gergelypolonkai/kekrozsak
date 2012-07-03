@@ -1,7 +1,7 @@
 {% extends '::main_template.html.twig' %}
 {% block title %} - Fórum - {{ topicGroup.title }}{% endblock %}
 {% block content %}
-<h3>Fórum - {{ topicGroup.title }}</h3>
+<h3><a href="{{ path('KekRozsakFrontBundle_forum_main') }}">Fórum</a> - {{ topicGroup.title }}</h3>
 {% if topicGroup.topics|length > 0 %}
 <table>
 	<thead>

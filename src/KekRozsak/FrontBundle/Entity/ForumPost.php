@@ -5,24 +5,14 @@ namespace KekRozsak\FrontBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * KekRozsak\FrontBundle\Entity\ForumTopic
+ * KekRozsak\FrontBundle\Entity\ForumPost
  */
-class ForumTopic
+class ForumPost
 {
     /**
      * @var integer $id
      */
     private $id;
-
-    /**
-     * @var string $title
-     */
-    private $title;
-
-    /**
-     * @var string $slug
-     */
-    private $slug;
 
     /**
      * @var datetime $created_at
@@ -35,9 +25,14 @@ class ForumTopic
     private $updated_at;
 
     /**
-     * @var text $update_reason
+     * @var string $update_reason
      */
     private $update_reason;
+
+    /**
+     * @var text $text
+     */
+    private $text;
 
     /**
      * @var KekRozsak\FrontBundle\Entity\User
@@ -50,9 +45,9 @@ class ForumTopic
     private $updated_by;
 
     /**
-     * @var KekRozsak\FrontBundle\Entity\ForumTopicGroup
+     * @var KekRozsak\FrontBundle\Entity\ForumTopic
      */
-    private $topic_group;
+    private $topic;
 
 
     /**
@@ -66,54 +61,10 @@ class ForumTopic
     }
 
     /**
-     * Set title
-     *
-     * @param string $title
-     * @return ForumTopic
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string 
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return ForumTopic
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string 
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
      * Set created_at
      *
      * @param datetime $createdAt
-     * @return ForumTopic
+     * @return ForumPost
      */
     public function setCreatedAt($createdAt)
     {
@@ -135,7 +86,7 @@ class ForumTopic
      * Set updated_at
      *
      * @param datetime $updatedAt
-     * @return ForumTopic
+     * @return ForumPost
      */
     public function setUpdatedAt($updatedAt)
     {
@@ -156,8 +107,8 @@ class ForumTopic
     /**
      * Set update_reason
      *
-     * @param text $updateReason
-     * @return ForumTopic
+     * @param string $updateReason
+     * @return ForumPost
      */
     public function setUpdateReason($updateReason)
     {
@@ -168,7 +119,7 @@ class ForumTopic
     /**
      * Get update_reason
      *
-     * @return text 
+     * @return string 
      */
     public function getUpdateReason()
     {
@@ -176,10 +127,32 @@ class ForumTopic
     }
 
     /**
+     * Set text
+     *
+     * @param text $text
+     * @return ForumPost
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+        return $this;
+    }
+
+    /**
+     * Get text
+     *
+     * @return text 
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
      * Set created_by
      *
      * @param KekRozsak\FrontBundle\Entity\User $createdBy
-     * @return ForumTopic
+     * @return ForumPost
      */
     public function setCreatedBy(\KekRozsak\FrontBundle\Entity\User $createdBy = null)
     {
@@ -201,7 +174,7 @@ class ForumTopic
      * Set updated_by
      *
      * @param KekRozsak\FrontBundle\Entity\User $updatedBy
-     * @return ForumTopic
+     * @return ForumPost
      */
     public function setUpdatedBy(\KekRozsak\FrontBundle\Entity\User $updatedBy = null)
     {
@@ -220,55 +193,24 @@ class ForumTopic
     }
 
     /**
-     * Set topic_group
+     * Set topic
      *
-     * @param KekRozsak\FrontBundle\Entity\ForumTopicGroup $topicGroup
-     * @return ForumTopic
+     * @param KekRozsak\FrontBundle\Entity\ForumTopic $topic
+     * @return ForumPost
      */
-    public function setTopicGroup(\KekRozsak\FrontBundle\Entity\ForumTopicGroup $topicGroup = null)
+    public function setTopic(\KekRozsak\FrontBundle\Entity\ForumTopic $topic = null)
     {
-        $this->topic_group = $topicGroup;
+        $this->topic = $topic;
         return $this;
     }
 
     /**
-     * Get topic_group
+     * Get topic
      *
-     * @return KekRozsak\FrontBundle\Entity\ForumTopicGroup 
+     * @return KekRozsak\FrontBundle\Entity\ForumTopic 
      */
-    public function getTopicGroup()
+    public function getTopic()
     {
-        return $this->topic_group;
-    }
-    /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     */
-    private $posts;
-
-    public function __construct()
-    {
-        $this->posts = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
-    /**
-     * Add posts
-     *
-     * @param KekRozsak\FrontBundle\Entity\ForumPost $posts
-     * @return ForumTopic
-     */
-    public function addForumPost(\KekRozsak\FrontBundle\Entity\ForumPost $posts)
-    {
-        $this->posts[] = $posts;
-        return $this;
-    }
-
-    /**
-     * Get posts
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getPosts()
-    {
-        return $this->posts;
+        return $this->topic;
     }
 }

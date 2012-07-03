@@ -23,6 +23,10 @@ KekRozsak\FrontBundle\Entity\ForumTopic:
                 update_reason:
                         type: text
                         nullable: true
+        oneToMany:
+                posts:
+                        targetEntity: ForumPost
+                        mappedBy: topic
         manyToOne:
                 created_by:
                         targetEntity: User
