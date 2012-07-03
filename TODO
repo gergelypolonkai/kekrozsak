@@ -9,14 +9,6 @@ UserData
 	google talk address
 	google talk address public?
 
-News
-	id
-	title
-	slug
-	timestamp
-	text
-	poster
-
 BlogPost
 	id
 	title

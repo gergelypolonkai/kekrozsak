@@ -5,3 +5,9 @@ services:
 #    kek_rozsak_front.example:
 #        class: %kek_rozsak_front.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
+        kek_rozsak_front.twig_extension.news:
+                class: KekRozsak\FrontBundle\Twig\NewsExtension
+                arguments:
+                        doctrine: @doctrine
+                tags:
+                        - { name: twig.extension }
