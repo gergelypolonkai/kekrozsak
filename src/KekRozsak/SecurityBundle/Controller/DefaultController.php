@@ -50,12 +50,19 @@ class DefaultController extends Controller
 			{
 				$user->setPassword($this->get('security.encoder_factory')->getEncoder($user)->encodePassword($user->getPassword(), $user->getSalt()));
 				$roleRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:Role');
-				$regRole = $roleRepo->findOneByName('ROLE_REGISTERED');
+				$regRole = $roleRepo->findOneByName('REGISTERED');
 				$user->addRole($regRole);
 				$user->setRegisteredAt(new \DateTime('now'));
 				$em = $this->getDoctrine()->getEntityManager();
 				$em->persist($user);
 				$em->flush();
+
+				$message = \Swift_Message::newInstance()
+					->setSubject('Új jelentkező')
+					->setFrom('info@blueroses.hu')
+					->setTo('nauryl@blueroses.hu')
+					->setBody($this->renderView('KekRozsakSecurityBundle:Email:new_registration.txt.twig', array('user' => $user)));
+				$this->get('mailer')->send($message);
 
 				return $this->redirect($this->generateUrl('KekRozsakSecurityBundle_reg_success'));
 			}

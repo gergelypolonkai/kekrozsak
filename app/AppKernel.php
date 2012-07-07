@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new KekRozsak\FrontBundle\KekRozsakFrontBundle(),
             new KekRozsak\SecurityBundle\KekRozsakSecurityBundle(),
+            new KekRozsak\AdminBundle\KekRozsakAdminBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

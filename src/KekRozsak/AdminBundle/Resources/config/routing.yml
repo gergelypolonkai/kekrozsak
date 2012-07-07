@@ -1,0 +1,4 @@
+KekRozsakAdminBundle_manage_regs:
+        pattern:  /jelentkezok
+        defaults:
+                _controller: KekRozsakAdminBundle:Default:manageRegs

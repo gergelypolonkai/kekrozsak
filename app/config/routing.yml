@@ -1,3 +1,7 @@
+KekRozsakAdminBundle:
+    resource: "@KekRozsakAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
 KekRozsakSecurityBundle:
     resource: "@KekRozsakSecurityBundle/Resources/config/routing.yml"
     prefix:   /
