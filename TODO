@@ -12,6 +12,11 @@ UserData
 	msn address public?
 	google talk address
 	google talk address public?
+	skype
+	skype public?
+
+UserForumViewed
+	it should contain records that show the last viewed post in each forum topic
 
 BlogPost
 	id
