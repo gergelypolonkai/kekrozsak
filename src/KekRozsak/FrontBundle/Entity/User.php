@@ -307,4 +307,31 @@ class User implements UserInterface, AdvancedUserInterface
     {
 	return ($this->accepted_by !== null);
     }
+    /**
+     * @var datetime $last_login_at
+     */
+    private $last_login_at;
+
+
+    /**
+     * Set last_login_at
+     *
+     * @param datetime $lastLoginAt
+     * @return User
+     */
+    public function setLastLoginAt($lastLoginAt)
+    {
+        $this->last_login_at = $lastLoginAt;
+        return $this;
+    }
+
+    /**
+     * Get last_login_at
+     *
+     * @return datetime 
+     */
+    public function getLastLoginAt()
+    {
+        return $this->last_login_at;
+    }
 }
