@@ -31,13 +31,11 @@ BlogPost
 ForumTopicGroup
 	visible
 	locked
-	public
 
 ForumTopic
 	roles who can access it
 	visible
 	locked
-	public
 
 ForumPost
 	id
@@ -71,4 +69,16 @@ Library
 	borrowable
 	borrowed by
 	borrower returned
+	commentable
 
+Program
+	id
+	creator
+	created at
+	last edited by
+	last edited timestamp
+	last edit reason
+	start time
+	end time (may be null)
+	description
+	commentable
