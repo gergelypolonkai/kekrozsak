@@ -3,12 +3,15 @@
 {% block content %}
 <h3><a href="{{ path('KekRozsakFrontBundle_forum_main') }}">Fórum</a> - {{ topicGroup.title }}</h3>
 {% if topicGroup.topics|length > 0 %}
-<table>
+<table class="forum-lista">
 	<thead>
+		<tr>
+			<td></td>
+		</tr>
 	</thead>
 	<tbody>
 {% for topic in topicGroup.topics %}
-		<tr>
+		<tr class="{{ cycle(['odd', 'even'], loop.index0) }}">
 			<td><a href="{{ path('KekRozsakFrontBundle_forum_post_list', { topicGroupSlug: topicGroup.slug, topicSlug: topic.slug }) }}">{{ topic.title }}</a></td>
 		</tr>
 {% endfor %}

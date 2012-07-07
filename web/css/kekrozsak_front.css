@@ -74,7 +74,7 @@ body {
 
 #hirek {
 	float: left;
-	color: #ddddff;
+	color: #aaaacc;
 	width: 215px;
 }
 
@@ -110,32 +110,72 @@ p.hir-datum {
 	margin: 0;
 }
 
-#temakor-lista {
+h3 a {
+	color: #3366ff;
+	text-decoration: none;
+}
+
+.forum-lista {
 	border: 1px solid #3366ff;
 	border-collapse: collapse;
 	width: 100%;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 }
 
-#temakor-lista thead td {
+.forum-lista thead td {
 	font-weight: bold;
 	height: 1.5em;
 	border-bottom: 2px solid #3366ff;
 	padding: 3px;
 }
 
-#temakor-lista thead td a {
+.forum-lista thead td a {
 	color: #3366ff;
 	text-decoration: none;
 }
 
-#temakor-lista tbody td {
-	padding: 3px;
+.forum-lista tbody td {
+	padding: 5px;
 	border-bottom: 1px solid #3366ff;
 }
 
-#temakor-lista tbody td a {
+.forum-lista tbody tr.odd td {
+	background-color: #001144;
+}
+
+.forum-lista tbody tr.even td {
+	background-color: #000000;
+}
+
+.forum-lista tbody td a {
 	color: #3366ff;
 	text-decoration: underline;
+}
+
+.post-lista {
+	border: 1px solid #3366ff;
+	border-collapse: collapse;
+}
+
+.post-lista td {
+	border-style: solid;
+	border-color: #3366ff;
+	border-width: 3px 1px;
+	vertical-align: top;
+	padding: 5px;
+}
+
+.post-lista td.felado {
+	width: 150px !important;
+	font-size: 80%;
+}
+
+.post-lista td.szoveg {
+	width: 510px;
+}
+
+.post-lista td.szoveg div {
+	width: 510px;
+	overflow: auto;
 }
 

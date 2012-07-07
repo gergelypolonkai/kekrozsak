@@ -3,7 +3,7 @@
 {% block content %}
 <h3>Fórum</h3>
 {% for topicGroup in topicGroups %}
-<table id="temakor-lista">
+<table class="forum-lista">
 	<thead>
 		<tr>
 			<td colspan="2"><a href="{{ path('KekRozsakFrontBundle_forum_topic_list', {topicGroupSlug: topicGroup.slug}) }}">{{ topicGroup.title }}</a></td>
@@ -15,8 +15,8 @@
 	<tbody>
 {% if topicGroup.topics|length > 0 %}
 {% for topic in topicGroup.topics %}
-		<tr>
-			<td>[]</td>
+		<tr class="{{ cycle(['odd', 'even'], loop.index0) }}">
+			<td>[ikon]</td>
 			<td><a href="{{ path('KekRozsakFrontBundle_forum_post_list', {topicGroupSlug: topicGroup.slug, topicSlug: topic.slug}) }}">{{ topic.title }}</a></td>
 			<td></td>
 			<td></td>
