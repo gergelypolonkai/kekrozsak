@@ -14,8 +14,11 @@
 					<li><a href="{{ path('KekRozsakFrontBundle_article', { articleSlug: 'a-magiarol-roviden' }) }}">A Mágiáról röviden</a></li>
 					<li><a href="{{ path('KekRozsakFrontBundle_article', { articleSlug: 'rendek' }) }}">Rendek</a></li>
 					<li><a href="{{ path('KekRozsakFrontBundle_article', { articleSlug: 'a-regiek' }) }}">A régiek</a></li>
-					<li><a href="">Archívum</a></li>
-					<li><a href="">Ajánlott oldalak</a></li>
+{% if app.user %}
+					<li><a href="{{ path('KekRozsakSecurityBundle_logout') }}">Kijelentkezés</a></li>
+{% else %}
+					<li><a href="{{ path('KekRozsakSecurityBundle_registration') }}">Jelentkezés</a></li>
+{% endif %}
 				</ul>
 			</div>
 			<div id="header">

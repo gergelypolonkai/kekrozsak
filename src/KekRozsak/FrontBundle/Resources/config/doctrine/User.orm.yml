@@ -30,6 +30,10 @@ KekRozsak\FrontBundle\Entity\User:
                         targetEntity: ForumPost
                         mappedBy: created_by
                         fetch: EXTRA_LAZY
+        manyToOne:
+                accepted_by:
+                        targetEntity: User
+                        fetch: EXTRA_LAZY
         manyToMany:
                 roles:
                         targetEntity: Role

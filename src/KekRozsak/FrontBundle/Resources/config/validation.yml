@@ -1,0 +1,29 @@
+KekRozsak\FrontBundle\Entity\User:
+        constraints:
+                - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+                        fields: username
+                        message: "Ez a felhasználónév már foglalt. Kérlek, válassz egy másikat!"
+                        groups: [ registration ]
+                - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+                        fields: email
+                        message: "Ez az e-mail cím már foglalt. Kérlek, válassz egy másikat!"
+                        groups: [ registration ]
+                - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+                        fields: display_name
+                        message: "Ez a név már foglalt. Kérlek, válassz egy másikat!"
+                        groups: [ registration ]
+        properties:
+                username:
+                        - NotBlank: { groups: [ registration ] }
+                password:
+                        - NotBlank: { groups: [ registration ] }
+                email:
+                        - NotBlank: { groups: [ registration ] }
+                        - Email:    { groups: [ registration ] }
+                registered_at:
+                        - NotBlank: ~
+                        - Type: \DateTime
+                display_name:
+                        - NotBlank: { groups: [ registration ] }
+KekRozsak\FrontBundle\Form\Type\UserType:
+        

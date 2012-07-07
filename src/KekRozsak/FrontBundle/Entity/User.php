@@ -4,11 +4,12 @@ namespace KekRozsak\FrontBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
  * KekRozsak\FrontBundle\Entity\User
  */
-class User implements UserInterface
+class User implements UserInterface, AdvancedUserInterface
 {
     /**
      * @var integer $id
@@ -192,6 +193,11 @@ class User implements UserInterface
         return $this->roles->toArray();
     }
 
+    public function getRolesCollection()
+    {
+	return $this->roles;
+    }
+
     public function eraseCredentials()
     {
     }
@@ -253,5 +259,52 @@ class User implements UserInterface
     public function getForumPosts()
     {
         return $this->forum_posts;
+    }
+    /**
+     * @var KekRozsak\FrontBundle\Entity\User
+     */
+    private $accepted_by;
+
+
+    /**
+     * Set accepted_by
+     *
+     * @param KekRozsak\FrontBundle\Entity\User $acceptedBy
+     * @return User
+     */
+    public function setAcceptedBy(\KekRozsak\FrontBundle\Entity\User $acceptedBy = null)
+    {
+        $this->accepted_by = $acceptedBy;
+        return $this;
+    }
+
+    /**
+     * Get accepted_by
+     *
+     * @return KekRozsak\FrontBundle\Entity\User 
+     */
+    public function getAcceptedBy()
+    {
+        return $this->accepted_by;
+    }
+
+    public function isAccountNonExpired()
+    {
+	    return true;
+    }
+    
+    public function isAccountNonLocked()
+    {
+	    return true;
+    }
+    
+    public function isCredentialsNonExpired()
+    {
+	return true;
+    }
+    
+    public function isEnabled()
+    {
+	return ($this->accepted_by !== null);
     }
 }

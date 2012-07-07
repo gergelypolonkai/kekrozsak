@@ -41,6 +41,7 @@ security:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/cikk/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/jelentkezes, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: [ IS_AUTHENTICATED_FULLY, IS_AUTHENTICATED_REMEMBERED ] }
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
         #- { path: ^/_internal/secure, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }
