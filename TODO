@@ -1,3 +1,7 @@
+Article
+	public
+	roles who can access it
+
 UserData
 	user id
 	real name
@@ -17,9 +21,18 @@ BlogPost
 	lead (?)
 	text
 	poster
+	public
+
+ForumTopicGroup
+	visible
+	locked
+	public
 
 ForumTopic
 	roles who can access it
+	visible
+	locked
+	public
 
 ForumPost
 	id
@@ -53,3 +66,4 @@ Library
 	borrowable
 	borrowed by
 	borrower returned
+
