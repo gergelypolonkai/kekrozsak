@@ -60,7 +60,7 @@ class DefaultController extends Controller
 				$message = \Swift_Message::newInstance()
 					->setSubject('Új jelentkező')
 					->setFrom('info@blueroses.hu')
-					->setTo('nauryl@blueroses.hu')
+					->setTo('info@blueroses.hu')
 					->setBody($this->renderView('KekRozsakSecurityBundle:Email:new_registration.txt.twig', array('user' => $user)));
 				$this->get('mailer')->send($message);
 
