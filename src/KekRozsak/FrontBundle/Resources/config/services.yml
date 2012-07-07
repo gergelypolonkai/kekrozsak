@@ -15,3 +15,9 @@ services:
                 class: KekRozsak\FrontBundle\Form\Extension\HelpMessageTypeExtension
                 tags:
                         - { name: "form.type_extension", alias: "field" }
+        bb.twig.extension:
+                class: KekRozsak\FrontBundle\Extension\TwigBBExtension
+                arguments:
+                        - @service_container
+                tags:
+                        - { name: "twig.extension" }

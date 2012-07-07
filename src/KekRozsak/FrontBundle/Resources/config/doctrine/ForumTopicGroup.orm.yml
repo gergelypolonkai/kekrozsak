@@ -32,6 +32,12 @@ KekRozsak\FrontBundle\Entity\ForumTopicGroup:
                         targetEntity: User
                         nullable: true
                         default: null
+        oneToOne:
+                last_post:
+                        targetEntity: ForumPost
+                        nullable: true
+                        default: null
+                        cascade: [ persist ]
         oneToMany:
                 topics:
                         targetEntity: ForumTopic

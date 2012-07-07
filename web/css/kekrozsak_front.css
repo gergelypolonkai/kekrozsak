@@ -140,7 +140,7 @@ h3 a {
 }
 
 .forum-lista tbody tr.odd td {
-	background-color: #001144;
+	background-color: #060c16;
 }
 
 .forum-lista tbody tr.even td {
@@ -177,5 +177,44 @@ h3 a {
 .post-lista td.szoveg div {
 	width: 510px;
 	overflow: auto;
+}
+
+td.uj-post {
+}
+
+td.uj-post textarea {
+	width: 500px;
+	background-color: #000000;
+	color: #3366ff;
+	border-style: solid;
+	border-color: #3366ff;
+	border-width: 0 0 2px 0;
+	height: 15em;
+}
+
+td.uj-post p {
+	clear: both;
+	float: none;
+	margin: 0;
+}
+
+td.uj-post p .eszkoztar {
+	float: left;
+}
+
+td.uj-post p .kuldes-gomb {
+	float: right;
+}
+
+.u {
+	text-decoration: underline;
+}
+
+.b {
+	font-weight: bold;
+}
+
+.i {
+	font-style: italic;
 }
 

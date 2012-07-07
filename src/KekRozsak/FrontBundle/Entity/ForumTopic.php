@@ -271,4 +271,37 @@ class ForumTopic
     {
         return $this->posts;
     }
+    /**
+     * @var KekRozsak\FrontBundle\Entity\ForumPost
+     */
+    private $lastPost;
+
+
+    /**
+     * Set lastPost
+     *
+     * @param KekRozsak\FrontBundle\Entity\ForumPost $lastPost
+     * @return ForumTopic
+     */
+    public function setLastPost(\KekRozsak\FrontBundle\Entity\ForumPost $lastPost = null)
+    {
+        $this->lastPost = $lastPost;
+        return $this;
+    }
+
+    /**
+     * Get lastPost
+     *
+     * @return KekRozsak\FrontBundle\Entity\ForumPost 
+     */
+    public function getLastPost()
+    {
+        return $this->lastPost;
+    }
+    /**
+     * @var KekRozsak\FrontBundle\Entity\ForumPost
+     */
+    private $last_post;
+
+
 }

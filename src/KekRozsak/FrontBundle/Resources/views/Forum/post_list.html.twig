@@ -5,14 +5,38 @@
 {% if topic.posts|length > 0 %}
 <table class="post-lista">
 	<tbody>
-{% for post in topic.posts %}
 		<tr>
-			<td class="szoveg"><div>{{ post.text|raw }}</div></td>
+			<td class="uj-post">
+				<form method="post" action="{{ path('KekRozsakFrontBundle_forum_new_post', { topicGroupSlug: topicGroup.slug, topicSlug: topic.slug } ) }}">
+					{{ form_widget(form) }}
+					<p>
+						<span class="eszkoztar">Súgó</span><span class="kuldes-gomb" /><button type="submit">Küldés</button>
+					</p>
+				</form>
+			</td>
 			<td class="felado">
+				<br />
+				<br />
+				[avatar]<br />
+				{{ app.user.displayName }}<br />
+				Saját szint<br />
+				<br />
+				Tagság kezdete:<br />
+				{{ app.user.registeredAt|date('Y-m-d') }}
+			</td>
+		</tr>
+{% for post in posts %}
+		<tr>
+			<td class="szoveg"><div>{{ post.text|bbdecode }}</div></td>
+			<td class="felado">
+				{{ post.createdAt|date('Y-m-d') }}<br />
+				{{ post.createdAt|date('H:i') }}<br />
+				[avatar]<br />
 				{{ post.createdBy.displayName }}<br />
-				{{ post.createdAt|date('Y-m-d H:i') }}<br />
 				Szint<br />
-				Tagság kezdete: {{ post.createdBy.RegisteredAt|date('Y-m-d') }}
+				<br />
+				Tagság kezdete:<br />
+				{{ post.createdBy.RegisteredAt|date('Y-m-d') }}
 			</td>
 		</tr>
 {% endfor %}

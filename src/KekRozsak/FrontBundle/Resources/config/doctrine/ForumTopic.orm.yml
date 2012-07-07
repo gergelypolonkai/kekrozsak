@@ -40,6 +40,12 @@ KekRozsak\FrontBundle\Entity\ForumTopic:
                         targetEntity: ForumTopicGroup
                         inversedBy: topics
                         nullable: false
+        oneToOne:
+                last_post:
+                        targetEntity: ForumPost
+                        nullable: true
+                        default: null
+                        cascade: [ persist ]
         uniqueConstraint:
                 uniqueSlugByGroup:
                         columns: [ topic_group, slug ]

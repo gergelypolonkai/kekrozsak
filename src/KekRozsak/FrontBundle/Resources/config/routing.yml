@@ -22,3 +22,12 @@ KekRozsakFrontBundle_forum_post_list:
         pattern:  /forum/{topicGroupSlug}/{topicSlug}
         defaults:
                 _controller: KekRozsakFrontBundle:Forum:postList
+        requirements:
+                _method: GET
+
+KekRozsakFrontBundle_forum_new_post:
+        pattern:  /forum/{topicGroupSlug}/{topicSlug}/post
+        defaults:
+                _controller: KekRozsakFrontBundle:Forum:postList
+        requirements:
+                _method: POST
