@@ -82,3 +82,14 @@ Program
 	end time (may be null)
 	description
 	commentable
+
+Document
+	id
+	creator
+	created at
+	last edited by
+	last edited timestamp
+	last edit reason
+	title
+	slug
+	text
