@@ -3,8 +3,38 @@
 	<head>
 		<title>Kék Rózsák{% block title %}{% endblock %}</title>
 		<link rel="stylesheet" type="text/css" href="{{ asset('css/kekrozsak_front.css') }}" />
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	</head>
 	<body>
+		<div id="top-line-wrapper">
+			<div id="top-line">
+{% if app.user %}
+				<div id="profil-gomb">
+					<span id="profil-mutato">[avatar] {{ app.user.displayName }}</span>
+					<div id="profil-box">
+						<div id="profil-belso">
+							[avatar]
+							{{ app.user.displayName }}<br />
+							Jogosultság<br />
+							<dl>
+								<dt>Csoportjaim</dt>
+
+								<dt>Kedvenc Fórum-témáim</dt>
+
+								<dt>Üzenetek</dt>
+							</dl>
+						</div>
+						<div id="profil-szerkesztes"><a href="{{ path('KekRozsakFrontBundle_profile_edit') }}">Profil szerkesztése</a></div>
+					</div>
+				</div>
+{% endif %}
+				<div id="search-box">
+					<input type="text" />
+					<button type="submit">Keresés</button>
+				</div>
+			</div>
+			<div id="top-line-padding"></div>
+		</div>
 		<div id="wrapper">
 			<div id="menu">
 				<ul>
@@ -42,8 +72,25 @@
 					</div>
 {% endfor %}
 				</div>
+			</div>{# div#content-wrapper #}
+		</div>{# div#wrapper #}
+		<div id="bottom-line-wrapper">
+			<div id="bottom-line-padding"></div>
+			<div id="bottom-line"{% if app.environment == 'dev' %} style="bottom: 40px;"{% endif %}>
 			</div>
 		</div>
+		<script type="text/javascript">
+			$('#profil-mutato').click(function() {
+				if ($('#profil-box').is(':visible'))
+				{
+					$('#profil-box').hide();
+				}
+				else
+				{
+					$('#profil-box').show();
+				}
+			});
+		</script>
 	</body>
 </html>
 

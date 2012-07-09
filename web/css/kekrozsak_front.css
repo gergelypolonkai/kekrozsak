@@ -4,7 +4,7 @@
 }
 
 body {
-	margin: 15px 0 0 0;
+	margin: 0;
 	background-color: black;
 	background-image: url('../images/rose_bg.png');
 	background-repeat: no-repeat;
@@ -12,9 +12,77 @@ body {
 	background-position: right bottom;
 }
 
+#top-line {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	background-color: #152967;
+	color: #c4d3ff;
+	height: 32px;
+	border-bottom: 1px solid #1b3586;
+}
+
+#top-line-padding {
+	height: 33px;
+	clear: both;
+}
+
+#top-line #search-box {
+	float: right;
+	padding: 5px;
+}
+
+#top-line #profil-gomb {
+	float: left;
+	padding: 5px;
+}
+
+#bottom-line-padding {
+	height: 33px;
+}
+
+#profil-box {
+	position: fixed;
+	left: 5px;
+	top: 32px;
+	width: 300px;
+	height: 400px;
+	background-color: #c4d3ff;
+	border: 2px solid #152967;
+	color: #152967;
+	display: none;
+}
+
+#profil-belso {
+	position: relative;
+	padding: 5px;
+}
+
+#profil-box dt {
+	font-weight: bold;
+}
+
+#profil-szerkesztes {
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+}
+
+#bottom-line {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: #152967;
+	color: #c4d3ff;
+	height: 32px;
+	border-top: 1px solid #1b3586;
+}
+
 #wrapper {
 	background-color: #000000;
-	width: 900px;
+	width: 960px;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -68,8 +136,8 @@ body {
 #content-outline {
 	color:#3366ff;
 	text-align: justify;
-	width: 680px;
-	float: right;
+	width: 740px;
+	float: left;
 }
 
 #content {
@@ -77,7 +145,7 @@ body {
 }
 
 #hirek {
-	float: left;
+	float: right;
 	color: #aaaacc;
 	width: 215px;
 }

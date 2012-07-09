@@ -31,3 +31,8 @@ KekRozsakFrontBundle_forum_new_post:
                 _controller: KekRozsakFrontBundle:Forum:postList
         requirements:
                 _method: POST
+
+KekRozsakFrontBundle_profile_edit:
+        pattern:  /profil
+        defaults:
+                _controller: KekRozsakFrontBundle:Default:profileEdit

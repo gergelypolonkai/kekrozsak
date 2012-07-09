@@ -334,4 +334,31 @@ class User implements UserInterface, AdvancedUserInterface
     {
         return $this->last_login_at;
     }
+    /**
+     * @var KekRozsak\FrontBundle\Entity\UserData
+     */
+    private $user_data;
+
+
+    /**
+     * Set user_data
+     *
+     * @param KekRozsak\FrontBundle\Entity\UserData $userData
+     * @return User
+     */
+    public function setUserData(\KekRozsak\FrontBundle\Entity\UserData $userData = null)
+    {
+        $this->user_data = $userData;
+        return $this;
+    }
+
+    /**
+     * Get user_data
+     *
+     * @return KekRozsak\FrontBundle\Entity\UserData 
+     */
+    public function getUserData()
+    {
+        return $this->user_data;
+    }
 }

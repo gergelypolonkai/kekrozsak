@@ -1,0 +1,71 @@
+KekRozsak\FrontBundle\Entity\UserData:
+        type: entity
+        table: user_data
+        id:
+                user_id:
+                        type: integer
+        fields:
+                emailPublic:
+                        type: boolean
+                        nullable: false
+                        default: false
+                realName:
+                        name: real_name
+                        type: string(100)
+                        nullable: true
+                        default: null
+                realNamePublic:
+                        name: real_name_public
+                        type: boolean
+                        nullable: true
+                        default: false
+                selfDescription:
+                        name: self_description_public
+                        type: text
+                        nullable: true
+                        default: null
+                msnAddress:
+                        name: msn
+                        type: string(100)
+                        nullable: true
+                        default: null
+                msnAddressPublic:
+                        name: msn_public
+                        type: boolean
+                        nullable: false
+                        default: false
+                googleTalk:
+                        name: google_talk
+                        type: string(100)
+                        nullable: true
+                        default: null
+                googleTalkPublic:
+                        name: goole_talk_public
+                        type: boolean
+                        nullable: false
+                        default: false
+                skype:
+                        type: string(100)
+                        nullable: true
+                        default: null
+                skypePublic:
+                        name: skype_public
+                        type: boolean
+                        nullable: false
+                        default: false
+                phoneNumber:
+                        name: phone_number
+                        type: string(30)
+                        nullable: true
+                phoneNumberPublic:
+                        name: phone_number_public
+                        type: boolean
+                        nullable: false
+                        default: false
+        oneToOne:
+                user:
+                        targetEntity: User
+                        inversedBy: user_data
+                        joinColumns:
+                                user_id:
+                                        referencedColumnName: id

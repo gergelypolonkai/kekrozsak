@@ -41,3 +41,11 @@ KekRozsak\FrontBundle\Entity\User:
         manyToMany:
                 roles:
                         targetEntity: Role
+        oneToOne:
+                user_data:
+                        targetEntity: UserData
+                        mappedBy: user
+                        joinColumns:
+                                id:
+                                        referencedColumnName: user_id
+                        cascade: [ 'persist' ]

@@ -2,19 +2,6 @@ Article
 	public
 	roles who can access it
 
-UserData
-	user id
-	real name
-	real name public?
-	self description
-	email public?
-	msn address
-	msn address public?
-	google talk address
-	google talk address public?
-	skype
-	skype public?
-
 UserForumViewed
 	it should contain records that show the last viewed post in each forum topic
 
