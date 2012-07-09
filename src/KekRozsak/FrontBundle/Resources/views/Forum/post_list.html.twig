@@ -2,7 +2,6 @@
 {% block title %} - Fórum - {{ topicGroup.title }} - {{ topic.title }}{% endblock %}
 {% block content %}
 <h3><a href="{{ path('KekRozsakFrontBundle_forum_main') }}">Fórum</a> - <a href="{{ path('KekRozsakFrontBundle_forum_topic_list', { topicGroupSlug: topicGroup.slug }) }}">{{ topicGroup.title }}</a> - {{ topic.title }}</h3>
-{% if topic.posts|length > 0 %}
 <table class="post-lista">
 	<tbody>
 		<tr>
@@ -42,7 +41,4 @@
 {% endfor %}
 	</tbody>
 </table>
-{% else %}
-A témában még nincsenek hozzászólások.
-{% endif %}
 {% endblock %}
