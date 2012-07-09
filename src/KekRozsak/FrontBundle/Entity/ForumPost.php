@@ -4,6 +4,9 @@ namespace KekRozsak\FrontBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use KekRozsak\FrontBundle\Entity\ForumTopic;
+use KekRozsak\FrontBundle\Entity\ForumTopicGroup;
+
 /**
  * KekRozsak\FrontBundle\Entity\ForumPost
  */
@@ -195,12 +198,13 @@ class ForumPost
     /**
      * Set topic
      *
-     * @param KekRozsak\FrontBundle\Entity\ForumTopic $topic
+     * @param ForumTopic $topic
      * @return ForumPost
      */
-    public function setTopic(\KekRozsak\FrontBundle\Entity\ForumTopic $topic = null)
+    public function setTopic(ForumTopic $topic)
     {
         $this->topic = $topic;
+	$topic->setLastPost($this);
         return $this;
     }
 

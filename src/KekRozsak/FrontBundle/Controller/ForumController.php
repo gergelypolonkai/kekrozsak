@@ -63,14 +63,10 @@ class ForumController extends Controller
 				$post->setCreatedAt(new \DateTime('now'));
 				$post->setCreatedBy($this->get('security.context')->getToken()->getUser());
 				$post->setTopic($topic);
-				$topicGroup->setLastPost($post);
-				$topic->setLastPost($post);
 
 				$em = $this->getDoctrine()->getEntityManager();
 				$em->persist($post);
-				// FIXME: Make this next 2 lines work!
 				$em->persist($topic);
-				$em->persist($topicGroup);
 				$em->flush();
 
 				return $this->redirect($this->generateUrl('KekRozsakFrontBundle_forum_post_list', array(

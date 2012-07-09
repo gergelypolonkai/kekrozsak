@@ -283,9 +283,10 @@ class ForumTopic
      * @param KekRozsak\FrontBundle\Entity\ForumPost $lastPost
      * @return ForumTopic
      */
-    public function setLastPost(\KekRozsak\FrontBundle\Entity\ForumPost $lastPost = null)
+    public function setLastPost(\KekRozsak\FrontBundle\Entity\ForumPost $lastPost)
     {
         $this->lastPost = $lastPost;
+	$this->topic_group->setLastPost($lastPost);
         return $this;
     }
 
