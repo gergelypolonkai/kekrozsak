@@ -80,3 +80,24 @@ Document
 	title
 	slug
 	text
+	group - nullable, onetomany
+
+PrivateChatMessage
+	id
+	from user
+	to user
+	timestamp
+
+Group
+	id
+	name
+	created by
+	creation time
+	leader
+	members
+
+GroupChatMessage
+	id
+	from user
+	to group
+	timestamp
