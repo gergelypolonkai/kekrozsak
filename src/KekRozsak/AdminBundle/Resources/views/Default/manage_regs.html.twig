@@ -1,1 +1,32 @@
-Juj!
+{% extends '::main_template.html.twig' %}
+{% block title %} - Jelentkezők{% endblock %}
+{% block content %}
+<h3>Jelentkezők</h3>
+{% if users|length > 0 %}
+<table>
+	<thead>
+		<tr>
+			<td>Felhasználónév</td>
+			<td>E-mail cím</td>
+			<td>Fórum-név</td>
+			<td>Regisztráció ideje</td>
+		</tr>
+	</thead>
+	<tbody>
+{% for user in users %}
+		<tr>
+			<td>{{ user.username }}</td>
+			<td>{{ user.email }}</td>
+			<td>{{ user.displayName }}</td>
+			<td>{{ user.registeredAt|date('Y-m-d H:i') }}</td>
+			<td>
+				<form method="post" action="">
+					<button type="submit">Engedélyezem</button>
+				</form>
+			</td>
+		</tr>
+{% endfor %}
+	</tbody>
+</table>
+{% endif %}
+{%endblock content %}

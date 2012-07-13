@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+	<services>
+		<service id="kek_rozsak_front.twig_extension.news" class="KekRozsak\FrontBundle\Twig\NewsExtension">
+			<argument type="service" id="doctrine" />
+			<tag name="twig.extension" />
+		</service>
+		<service id="form.type_extension.help_message" class="KekRozsak\FrontBundle\Form\Extension\HelpMessageTypeExtension">
+			<tag name="form.type_extension" alias="field" />
+		</service>
+		<service id="bb.twig.extension" class="KekRozsak\FrontBundle\Extension\TwigBBExtension">
+			<argument type="service" id="service_container" />
+			<tag name="twig.extension" />
+		</service>
+	</services>
+</container>

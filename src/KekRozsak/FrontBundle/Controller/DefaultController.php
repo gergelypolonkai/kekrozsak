@@ -2,21 +2,28 @@
 
 namespace KekRozsak\FrontBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use KekRozsak\FrontBundle\Form\Type\UserType;
 
 class DefaultController extends Controller
 {
+	/**
+	 * @Route("/", name="KekRozsakFrontBundle_homepage")
+	 */
 	public function homepageAction()
 	{
-		$mainPageArticle = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:Article')->findOneBy(array('main_page' => 1), true, array('created_at', 'DESC'), 1);
+		$mainPageArticle = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:Article')->findOneBy(array('mainPage' => 1), true, array('createdAt', 'DESC'), 1);
 		if (!$mainPageArticle)
 			throw $this->createNotFoundException('A keresett cikk nem létezik!');
 
 		return $this->forward('KekRozsakFrontBundle:Default:article', array('articleSlug' => $mainPageArticle->getSlug()));
 	}
 
+	/**
+	 * @Route("/cikk/{articleSlug}", name="KekRozsakFrontBundle_article")
+	 */
 	public function articleAction($articleSlug)
 	{
 		$article = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:Article')->findOneBySlug($articleSlug);
@@ -29,6 +36,9 @@ class DefaultController extends Controller
 		));
 	}
 
+	/**
+	 * @Route("/profil", name="KekRozsakFrontBundle_profile_edit")
+	 */
 	public function profileEditAction()
 	{
 		$user = $this->get('security.context')->getToken()->getUser();

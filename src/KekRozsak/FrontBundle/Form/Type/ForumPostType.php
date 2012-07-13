@@ -17,7 +17,7 @@ class ForumPostType extends AbstractType
 
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$builder->add('created_at', 'hidden', array(
+		$builder->add('createdAt', 'hidden', array(
 			'label' => 'Időpont',
 			'data'  => new \DateTime('now')
 		));

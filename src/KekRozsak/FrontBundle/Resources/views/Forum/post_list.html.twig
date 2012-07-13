@@ -6,7 +6,7 @@
 	<tbody>
 		<tr>
 			<td class="uj-post">
-				<form method="post" action="{{ path('KekRozsakFrontBundle_forum_new_post', { topicGroupSlug: topicGroup.slug, topicSlug: topic.slug } ) }}">
+				<form method="post" action="{{ path('KekRozsakFrontBundle_forum_post_list', { topicGroupSlug: topicGroup.slug, topicSlug: topic.slug } ) }}">
 					{{ form_widget(form) }}
 					<p>
 						<span class="eszkoztar">Súgó</span><span class="kuldes-gomb" /><button type="submit">Küldés</button>

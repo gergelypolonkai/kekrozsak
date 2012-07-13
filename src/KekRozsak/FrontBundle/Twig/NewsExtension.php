@@ -16,7 +16,7 @@ class NewsExtension extends \Twig_Extension
 	public function getGlobals()
 	{
 		$newsRepo = $this->doctrine->getRepository('KekRozsakFrontBundle:News');
-		$news = $newsRepo->findBy(array(), array('created_at' => 'DESC'), 4);
+		$news = $newsRepo->findBy(array(), array('createdAt' => 'DESC'), 4);
 
 		return array(
 			'recentNews' => $news,

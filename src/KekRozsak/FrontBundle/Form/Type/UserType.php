@@ -42,7 +42,7 @@ class UserType extends AbstractType
 		));
 		if (!$this->_registration)
 		{
-			$builder->add('user_data', new UserDataType(), array(
+			$builder->add('userData', new UserDataType(), array(
 				'label' => 'Egyéb adatok',
 			));
 		}

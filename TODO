@@ -1,6 +1,6 @@
-Article
-	public
-	roles who can access it
+Polls (Entity already exists)
+Groups (Entity already exists)
+Article check if public
 
 UserForumViewed
 	it should contain records that show the last viewed post in each forum topic
@@ -35,18 +35,6 @@ ForumPost
 	edit count
 	text
 
-Vote
-	id
-	creator
-	created at
-	active
-	text
-	others can add new answers
-	answers
-		id
-		creator
-		text
-
 Library
 	id
 	owner
@@ -58,7 +46,7 @@ Library
 	borrower returned
 	commentable
 
-Program
+Event
 	id
 	creator
 	created at
@@ -68,33 +56,14 @@ Program
 	start time
 	end time (may be null)
 	description
+	location
 	commentable
-
-Document
-	id
-	creator
-	created at
-	last edited by
-	last edited timestamp
-	last edit reason
-	title
-	slug
-	text
-	group - nullable, onetomany
 
 PrivateChatMessage
 	id
 	from user
 	to user
 	timestamp
-
-Group
-	id
-	name
-	created by
-	creation time
-	leader
-	members
 
 GroupChatMessage
 	id

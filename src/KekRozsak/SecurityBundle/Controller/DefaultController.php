@@ -6,12 +6,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 use KekRozsak\FrontBundle\Entity\User;
 use KekRozsak\FrontBundle\Form\Type\UserType;
 
 class DefaultController extends Controller
 {
+	/**
+	 * @Route("/login", name="KekRozsakSecurityBundle_login")
+	 */
 	public function loginAction()
 	{
 		$request = $this->getRequest();
@@ -33,6 +37,25 @@ class DefaultController extends Controller
 		));
 	}
 
+	/**
+	 * @Route("/login_check", name="KekRozsakSecurityBundle_login_check")
+	 */
+	public function loginCheckAction()
+	{
+		// The security layer will intercept this request. This method will never be called.
+	}
+
+	/**
+	 * @Route("/logout", name="KekRozsakSecurityBundle_logout")
+	 */
+	 public function logoutAction()
+	 {
+		// The security layer will intercept this request. This method will never be called.
+	 }
+
+	/**
+	 * @Route("/jelentkezes", name="KekRozsakSecurityBundle_registration")
+	 */
 	public function registrationAction(Request $request)
 	{
 		$user = $this->get('security.context')->getToken()->getUser();
@@ -73,6 +96,9 @@ class DefaultController extends Controller
 		));
 	}
 
+	/**
+	 * @Route("/most-varj", name="KekRozsakSecurityBundle_reg_success")
+	 */
 	public function registrationSuccessAction()
 	{
 		return $this->render('KekRozsakSecurityBundle:Default:registration_success.html.twig', array());

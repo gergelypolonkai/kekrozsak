@@ -1,7 +1,0 @@
-parameters:
-#    kek_rozsak_admin.example.class: KekRozsak\AdminBundle\Example
-
-services:
-#    kek_rozsak_admin.example:
-#        class: %kek_rozsak_admin.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

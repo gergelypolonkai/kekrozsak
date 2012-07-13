@@ -5,23 +5,15 @@ namespace KekRozsak\FrontBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 use KekRozsak\FrontBundle\Entity\User;
-use KekRozsak\FrontBundle\Entity\ForumTopic;
-use KekRozsak\FrontBundle\Entity\ForumPost;
 
 /**
- * KekRozsak\FrontBundle\Entity\ForumTopicGroup
+ * KekRozsak\FrontBundle\Entity\Document
  * @ORM\Entity
- * @ORM\Table(name="forum_topic_groups")
+ * @ORM\Table(name="documents")
  */
-class ForumTopicGroup
+class Document
 {
-	public function __construct()
-	{
-		$this->topic = new \Doctrine\Common\Collections\ArrayCollection();
-	}
-
 	/**
-	 * @var integer $id
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="AUTO")
 	 * @ORM\Column(type="integer")
@@ -31,7 +23,7 @@ class ForumTopicGroup
 	/**
 	 * Get id
 	 *
-	 * @return integer 
+	 * @return integer
 	 */
 	public function getId()
 	{
@@ -40,7 +32,7 @@ class ForumTopicGroup
 
 	/**
 	 * @var string $title
-	 * @ORM\Column(type="string", length=100, unique=true)
+	 * @ORM\Column(type="string", length=150, nullable=false, unique=true)
 	 */
 	private $title;
 
@@ -48,9 +40,9 @@ class ForumTopicGroup
 	 * Set title
 	 *
 	 * @param string $title
-	 * @return ForumTopicGroup
+	 * @return Document
 	 */
-	public function setTitle($title)
+	public function setTitle(string $title)
 	{
 		$this->title = $title;
 		return $this;
@@ -59,7 +51,7 @@ class ForumTopicGroup
 	/**
 	 * Get title
 	 *
-	 * @return string 
+	 * @return string
 	 */
 	public function getTitle()
 	{
@@ -67,8 +59,8 @@ class ForumTopicGroup
 	}
 
 	/**
-	 * @var string $slug
-	 * @ORM\Column(type="string", length=100, unique=true)
+	 * @var string $slug;
+	 * @ORM\Column(type="string", length=150, nullable=false, unique=true)
 	 */
 	private $slug;
 
@@ -76,18 +68,17 @@ class ForumTopicGroup
 	 * Set slug
 	 *
 	 * @param string $slug
-	 * @return ForumTopicGroup
+	 * @return Document
 	 */
-	public function setSlug($slug)
+	public function setSlug(string $slug)
 	{
 		$this->slug = $slug;
 		return $this;
 	}
 
-	/**
-	 * Get slug
+	/** Get slug
 	 *
-	 * @return string 
+	 * @return string
 	 */
 	public function getSlug()
 	{
@@ -95,8 +86,36 @@ class ForumTopicGroup
 	}
 
 	/**
-	 * @var datetime $createdAt
-	 * @ORM\Column(type="datetime", name="created_at")
+	 * @var string $text
+	 * @ORM\Column(type="text", nullable=false)
+	 */
+	private $text;
+
+	/**
+	 * Set text
+	 *
+	 * @param string $text
+	 * @return Document
+	 */
+	public function setText(string $text)
+	{
+		$this->text = $text;
+		return $this;
+	}
+
+	/**
+	 * Get text
+	 *
+	 * @return string
+	 */
+	public function getText()
+	{
+		return $this->text;
+	}
+
+	/**
+	 * @var DateTime $createdAt
+	 * @ORM\Column(type="datetime", name="created_at", nullable=false)
 	 */
 	private $createdAt;
 
@@ -104,7 +123,7 @@ class ForumTopicGroup
 	 * Set createdAt
 	 *
 	 * @param DateTime $createdAt
-	 * @return ForumTopicGroup
+	 * @return Document
 	 */
 	public function setCreatedAt(\DateTime $createdAt)
 	{
@@ -115,7 +134,7 @@ class ForumTopicGroup
 	/**
 	 * Get createdAt
 	 *
-	 * @return DateTime 
+	 * @return DateTime
 	 */
 	public function getCreatedAt()
 	{
@@ -123,9 +142,9 @@ class ForumTopicGroup
 	}
 
 	/**
-	 * @var User
-	 * @ORM\ManyToOne(targetEntity="User")
-	 * @ORM\JoinColumn(name="created_by_id")
+	 * @var User $createdBy
+	 * @ORM\ManyToOne(targetEntity="User", inversedBy="createdDocuments")
+	 * @ORM\JoinColumn(name="created_by_id", referencedColumnName="id")
 	 */
 	private $createdBy;
 
@@ -133,7 +152,7 @@ class ForumTopicGroup
 	 * Set createdBy
 	 *
 	 * @param User $createdBy
-	 * @return ForumTopicGroup
+	 * @return Document
 	 */
 	public function setCreatedBy(User $createdBy)
 	{
@@ -144,7 +163,7 @@ class ForumTopicGroup
 	/**
 	 * Get createdBy
 	 *
-	 * @return User 
+	 * @return User
 	 */
 	public function getCreatedBy()
 	{
@@ -152,7 +171,7 @@ class ForumTopicGroup
 	}
 
 	/**
-	 * @var datetime $updatedAt
+	 * @var DateTime $updatedAt
 	 * @ORM\Column(type="datetime", name="updated_at", nullable=true)
 	 */
 	private $updatedAt;
@@ -161,7 +180,7 @@ class ForumTopicGroup
 	 * Set updatedAt
 	 *
 	 * @param DateTime $updatedAt
-	 * @return ForumTopicGroup
+	 * @return Document
 	 */
 	public function setUpdatedAt(\DateTime $updatedAt = null)
 	{
@@ -172,7 +191,7 @@ class ForumTopicGroup
 	/**
 	 * Get updatedAt
 	 *
-	 * @return datetime 
+	 * @return DateTime
 	 */
 	public function getUpdatedAt()
 	{
@@ -180,9 +199,9 @@ class ForumTopicGroup
 	}
 
 	/**
-	 * @var User
-	 * @ORM\ManyToOne(targetEntity="User")
-	 * @ORM\JoinColumn(name="updated_by_id")
+	 * @var User $updatedBy
+	 * @ORM\ManyToOne(targetEntity="User", inversedBy="updatedDocuments")
+	 * @ORM\JoinColumn(name="updated_by_id", referencedColumnName="id")
 	 */
 	private $updatedBy;
 
@@ -190,7 +209,7 @@ class ForumTopicGroup
 	 * Set updatedBy
 	 *
 	 * @param User $updatedBy
-	 * @return ForumTopicGroup
+	 * @return Document
 	 */
 	public function setUpdatedBy(User $updatedBy = null)
 	{
@@ -201,7 +220,7 @@ class ForumTopicGroup
 	/**
 	 * Get updatedBy
 	 *
-	 * @return User 
+	 * @return User
 	 */
 	public function getUpdatedBy()
 	{
@@ -209,18 +228,18 @@ class ForumTopicGroup
 	}
 
 	/**
-	 * @var text $update_reason
-	 * @ORM\Column(type="text", name="update_reason", nullable=true)
+	 * @var string $updateReason
+	 * @ORM\Column(name="update_reason", type="text", nullable=true)
 	 */
 	private $updateReason;
 
 	/**
 	 * Set updateReason
 	 *
-	 * @param text $updateReason
-	 * @return ForumTopicGroup
+	 * @param string $updateReason
+	 * @return Document
 	 */
-	public function setUpdateReason($updateReason = null)
+	public function setUpdateReason(string $updateReason = null)
 	{
 		$this->updateReason = $updateReason;
 		return $this;
@@ -229,7 +248,7 @@ class ForumTopicGroup
 	/**
 	 * Get updateReason
 	 *
-	 * @return text 
+	 * @return string
 	 */
 	public function getUpdateReason()
 	{
@@ -237,47 +256,31 @@ class ForumTopicGroup
 	}
 
 	/**
-	 * @var ForumPost
-	 * @ORM\OneToOne(targetEntity="ForumPost", cascade={"persist"})
-	 * @ORM\JoinColumn(name="last_post_id")
+	 * @var Group $groups
+	 * @ORM\ManyToMany(targetEntity="Group", mappedBy="documents", fetch="EXTRA_LAZY")
 	 */
-	private $lastPost;
+	private $groups;
 
 	/**
-	 * Set lastPost
+	 * Set groups
 	 *
-	 * @param ForumPost $lastPost
-	 * @return ForumTopicGroup
+	 * @param Group $groups
+	 * @return Document
 	 */
-	public function setLastPost(ForumPost $lastPost = null)
+	public function setGroups(Group $groups = null)
 	{
-		$this->lastPost = $lastPost;
+		$this->groups = $groups;
 		return $this;
 	}
 
 	/**
-	 * Get lastPost
+	 * Get groups
 	 *
-	 * @return ForumPost 
+	 * @return Group
 	 */
-	public function getLastPost()
+	public function getGroups()
 	{
-		return $this->lastPost;
-	}
-
-	/**
-	 * @var \Doctrine\Common\Collections\ArrayCollection
-	 * @ORM\OneToMany(targetEntity="ForumTopic", mappedBy="topicGroup")
-	 */
-	private $topics;
-
-	/**
-	 * Get topics
-	 *
-	 * @return Doctrine\Common\Collections\Collection 
-	 */
-	public function getTopics()
-	{
-		return $this->topics;
+		return $this->groups;
 	}
 }
+

@@ -4,388 +4,379 @@ namespace KekRozsak\FrontBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use KekRozsak\FrontBundle\Entity\User;
+
 /**
  * KekRozsak\FrontBundle\Entity\UserData
+ * @ORM\Entity
+ * @ORM\Table(name="user_data")
  */
 class UserData
 {
-    /**
-     * @var KekRozsak\FrontBundle\Entity\User
-     */
-    private $user;
+	/**
+	 * @var User $user
+	 * @ORM\Id
+	 * @ORM\OneToOne(targetEntity="User", inversedBy="userData")
+	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+	 */
+	protected $user;
 
+	/**
+	 * Set user
+	 *
+	 * @param User $user
+	 * @return UserData
+	 */
+	public function setUser(User $user = null)
+	{
+		$this->user = $user;
+		$this->userId = $user->getId();
+		return $this;
+	}
 
-    /**
-     * Set user
-     *
-     * @param KekRozsak\FrontBundle\Entity\User $user
-     * @return UserData
-     */
-    public function setUser(\KekRozsak\FrontBundle\Entity\User $user = null)
-    {
-        $this->user = $user;
-	$this->user_id = $user->getId();
-        return $this;
-    }
+	/**
+	 * Get user
+	 *
+	 * @return User 
+	 */
+	public function getUser()
+	{
+		return $this->user;
+	}
 
-    /**
-     * Get user
-     *
-     * @return KekRozsak\FrontBundle\Entity\User 
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-    /**
-     * @var integer $user_id
-     */
-    private $user_id;
+	/**
+	 * @var boolean $emailPublic
+	 * @ORM\Column(type="boolean", name="email_public")
+	 */
+	protected $emailPublic;
 
-    /**
-     * @var string $realName
-     */
-    private $realName;
+	/**
+	 * Set emailPublic
+	 *
+	 * @param boolean $emailPublic
+	 * @return UserData
+	 */
+	public function setEmailPublic($emailPublic)
+	{
+		$this->emailPublic = $emailPublic;
+		return $this;
+	}
 
-    /**
-     * @var boolean $realNamePublic
-     */
-    private $realNamePublic;
+	/**
+	 * Get emailPublic
+	 *
+	 * @return boolean 
+	 */
+	public function getEmailPublic()
+	{
+		return $this->emailPublic;
+	}
 
+	/**
+	 * @var string $realName
+	 * @ORM\Column(name="real_name", type="string", length=100, nullable=true)
+	 */
+	protected $realName;
 
-    /**
-     * Set user_id
-     *
-     * @param integer $userId
-     * @return UserData
-     */
-    public function setUserId($userId)
-    {
-        $this->user_id = $userId;
-        return $this;
-    }
+	/**
+	 * Set realName
+	 *
+	 * @param string $realName
+	 * @return UserData
+	 */
+	public function setRealName($realName)
+	{
+		$this->realName = $realName;
+		return $this;
+	}
 
-    /**
-     * Get user_id
-     *
-     * @return integer 
-     */
-    public function getUserId()
-    {
-        return $this->user_id;
-    }
+	/**
+	 * Get realName
+	 *
+	 * @return string 
+	 */
+	public function getRealName()
+	{
+		return $this->realName;
+	}
 
-    /**
-     * Set realName
-     *
-     * @param string $realName
-     * @return UserData
-     */
-    public function setRealName($realName)
-    {
-        $this->realName = $realName;
-        return $this;
-    }
+	/**
+	 * @var boolean $realNamePublic
+	 * @ORM\Column(name="real_name_public", type="boolean", nullable=false)
+	 */
+	protected $realNamePublic;
 
-    /**
-     * Get realName
-     *
-     * @return string 
-     */
-    public function getRealName()
-    {
-        return $this->realName;
-    }
+	/**
+	 * Set realNamePublic
+	 *
+	 * @param boolean $realNamePublic
+	 * @return UserData
+	 */
+	public function setRealNamePublic($realNamePublic)
+	{
+		$this->realNamePublic = $realNamePublic;
+		return $this;
+	}
 
-    /**
-     * Set realNamePublic
-     *
-     * @param boolean $realNamePublic
-     * @return UserData
-     */
-    public function setRealNamePublic($realNamePublic)
-    {
-        $this->realNamePublic = $realNamePublic;
-        return $this;
-    }
+	/**
+	 * Get realNamePublic
+	 *
+	 * @return boolean 
+	 */
+	public function getRealNamePublic()
+	{
+		return $this->realNamePublic;
+	}
 
-    /**
-     * Get realNamePublic
-     *
-     * @return boolean 
-     */
-    public function getRealNamePublic()
-    {
-        return $this->realNamePublic;
-    }
-    /**
-     * @var text $selfDescription
-     */
-    private $selfDescription;
+	/**
+	 * @var text $selfDescription
+	 * @ORM\Column(name="self_description", type="text", nullable=true)
+	 */
+	protected $selfDescription;
 
-    /**
-     * @var boolean $emailPublic
-     */
-    private $emailPublic;
+	/**
+	 * Set selfDescription
+	 *
+	 * @param text $selfDescription
+	 * @return UserData
+	 */
+	public function setSelfDescription($selfDescription)
+	{
+		$this->selfDescription = $selfDescription;
+		return $this;
+	}
 
+	/**
+	 * Get selfDescription
+	 *
+	 * @return text 
+	 */
+	public function getSelfDescription()
+	{
+		return $this->selfDescription;
+	}
 
-    /**
-     * Set selfDescription
-     *
-     * @param text $selfDescription
-     * @return UserData
-     */
-    public function setSelfDescription($selfDescription)
-    {
-        $this->selfDescription = $selfDescription;
-        return $this;
-    }
+	/**
+	 * @var string $msnAddress
+	 * @ORM\Column(type="string", length=100, name="msn_address", nullable=true)
+	 */
+	protected $msnAddress;
 
-    /**
-     * Get selfDescription
-     *
-     * @return text 
-     */
-    public function getSelfDescription()
-    {
-        return $this->selfDescription;
-    }
+	/**
+	 * Set msnAddress
+	 *
+	 * @param string $msnAddress
+	 * @return UserData
+	 */
+	public function setMsnAddress($msnAddress)
+	{
+		$this->msnAddress = $msnAddress;
+		return $this;
+	}
 
-    /**
-     * Set emailPublic
-     *
-     * @param boolean $emailPublic
-     * @return UserData
-     */
-    public function setEmailPublic($emailPublic)
-    {
-        $this->emailPublic = $emailPublic;
-        return $this;
-    }
+	/**
+	 * Get msnAddress
+	 *
+	 * @return string 
+	 */
+	public function getMsnAddress()
+	{
+		return $this->msnAddress;
+	}
 
-    /**
-     * Get emailPublic
-     *
-     * @return boolean 
-     */
-    public function getEmailPublic()
-    {
-        return $this->emailPublic;
-    }
-    /**
-     * @var string $msnAddress
-     */
-    private $msnAddress;
+	/**
+	 * @var boolean $msnAddressPublic
+	 * @ORM\Column(type="boolean", name="msn_address_public", nullable=false)
+	 */
+	protected $msnAddressPublic;
 
-    /**
-     * @var boolean $msnAddressPublic
-     */
-    private $msnAddressPublic;
+	/**
+	 * Set msnAddressPublic
+	 *
+	 * @param boolean $msnAddressPublic
+	 * @return UserData
+	 */
+	public function setMsnAddressPublic($msnAddressPublic)
+	{
+		$this->msnAddressPublic = $msnAddressPublic;
+		return $this;
+	}
 
-    /**
-     * @var string $googleTalk
-     */
-    private $googleTalk;
+	/**
+	 * Get msnAddressPublic
+	 *
+	 * @return boolean 
+	 */
+	public function getMsnAddressPublic()
+	{
+		return $this->msnAddressPublic;
+	}
 
-    /**
-     * @var boolean $googleTalkPublic
-     */
-    private $googleTalkPublic;
+	/**
+	 * @var string $googleTalk
+	 * @ORM\Column(type="string", length=100, name="google_talk", nullable=true)
+	 */
+	protected $googleTalk;
 
-    /**
-     * @var string $skype
-     */
-    private $skype;
+	/**
+	 * Set googleTalk
+	 *
+	 * @param string $googleTalk
+	 * @return UserData
+	 */
+	public function setGoogleTalk($googleTalk)
+	{
+		$this->googleTalk = $googleTalk;
+		return $this;
+	}
 
-    /**
-     * @var boolean $skypePublic
-     */
-    private $skypePublic;
+	/**
+	 * Get googleTalk
+	 *
+	 * @return string
+	 */
+	public function getGoogleTalk()
+	{
+		return $this->googleTalk;
+	}
 
+	/**
+	 * @var boolean $googleTalkPublic
+	 * @ORM\Column(type="boolean", name="google_talk_public", nullable=false)
+	 */
+	protected $googleTalkPublic;
 
-    /**
-     * Set msnAddress
-     *
-     * @param string $msnAddress
-     * @return UserData
-     */
-    public function setMsnAddress($msnAddress)
-    {
-        $this->msnAddress = $msnAddress;
-        return $this;
-    }
+	/**
+	 * Set googleTalkPublic
+	 *
+	 * @param boolean $googleTalkPublic
+	 * @return UserData
+	 */
+	public function setGoogleTalkPublic($googleTalkPublic)
+	{
+		$this->googleTalkPublic = $googleTalkPublic;
+		return $this;
+	}
 
-    /**
-     * Get msnAddress
-     *
-     * @return string 
-     */
-    public function getMsnAddress()
-    {
-        return $this->msnAddress;
-    }
+	/**
+	 * Get googleTalkPublic
+	 *
+	 * @return boolean 
+	 */
+	public function getGoogleTalkPublic()
+	{
+		return $this->googleTalkPublic;
+	}
 
-    /**
-     * Set msnAddressPublic
-     *
-     * @param boolean $msnAddressPublic
-     * @return UserData
-     */
-    public function setMsnAddressPublic($msnAddressPublic)
-    {
-        $this->msnAddressPublic = $msnAddressPublic;
-        return $this;
-    }
+	/**
+	 * @var string $skype
+	 * @ORM\Column(type="string", length=100, nullable=true)
+	 */
+	protected $skype;
 
-    /**
-     * Get msnAddressPublic
-     *
-     * @return boolean 
-     */
-    public function getMsnAddressPublic()
-    {
-        return $this->msnAddressPublic;
-    }
+	/**
+	 * Set skype
+	 *
+	 * @param string $skype
+	 * @return UserData
+	 */
+	public function setSkype($skype)
+	{
+		$this->skype = $skype;
+		return $this;
+	}
 
-    /**
-     * Set googleTalk
-     *
-     * @param string $googleTalk
-     * @return UserData
-     */
-    public function setGoogleTalk($googleTalk)
-    {
-        $this->googleTalk = $googleTalk;
-        return $this;
-    }
+	/**
+	 * Get skype
+	 *
+	 * @return string 
+	 */
+	public function getSkype()
+	{
+		return $this->skype;
+	}
 
-    /**
-     * Get googleTalk
-     *
-     * @return string
-     */
-    public function getGoogleTalk()
-    {
-        return $this->googleTalk;
-    }
+	/**
+	 * @var boolean $skypePublic
+	 * @ORM\Column(type="boolean", name="skype_public", nullable=false)
+	 */
+	protected $skypePublic;
 
-    /**
-     * Set googleTalkPublic
-     *
-     * @param boolean $googleTalkPublic
-     * @return UserData
-     */
-    public function setGoogleTalkPublic($googleTalkPublic)
-    {
-        $this->googleTalkPublic = $googleTalkPublic;
-        return $this;
-    }
+	/**
+	 * Set skypePublic
+	 *
+	 * @param boolean $skypePublic
+	 * @return UserData
+	 */
+	public function setSkypePublic($skypePublic)
+	{
+		$this->skypePublic = $skypePublic;
+		return $this;
+	}
 
-    /**
-     * Get googleTalkPublic
-     *
-     * @return boolean 
-     */
-    public function getGoogleTalkPublic()
-    {
-        return $this->googleTalkPublic;
-    }
+	/**
+	 * Get skypePublic
+	 *
+	 * @return boolean 
+	 */
+	public function getSkypePublic()
+	{
+		return $this->skypePublic;
+	}
 
-    /**
-     * Set skype
-     *
-     * @param string $skype
-     * @return UserData
-     */
-    public function setSkype($skype)
-    {
-        $this->skype = $skype;
-        return $this;
-    }
+	/**
+	 * @var string $phoneNumber
+	 * @ORM\Column(type="string", length=30, name="phone_number", nullable=true)
+	 */
+	protected $phoneNumber;
 
-    /**
-     * Get skype
-     *
-     * @return string 
-     */
-    public function getSkype()
-    {
-        return $this->skype;
-    }
+	/**
+	 * Set phoneNumber
+	 *
+	 * @param string $phoneNumber
+	 * @return UserData
+	 */
+	public function setPhoneNumber($phoneNumber = null)
+	{
+		$this->phoneNumber = $phoneNumber;
+		return $this;
+	}
 
-    /**
-     * Set skypePublic
-     *
-     * @param boolean $skypePublic
-     * @return UserData
-     */
-    public function setSkypePublic($skypePublic)
-    {
-        $this->skypePublic = $skypePublic;
-        return $this;
-    }
+	/**
+	 * Get phoneNumber
+	 *
+	 * @return string 
+	 */
+	public function getPhoneNumber()
+	{
+		return $this->phoneNumber;
+	}
 
-    /**
-     * Get skypePublic
-     *
-     * @return boolean 
-     */
-    public function getSkypePublic()
-    {
-        return $this->skypePublic;
-    }
-    /**
-     * @var string $phoneNumber
-     */
-    private $phoneNumber;
+	/**
+	 * @var boolean $phoneNumberPublic
+	 * @ORM\Column(type="boolean", name="phone_number_public", nullable=false)
+	 */
+	protected $phoneNumberPublic;
 
-    /**
-     * @var boolean $phoneNumberPublic
-     */
-    private $phoneNumberPublic;
+	/**
+	 * Set phoneNumberPublic
+	 *
+	 * @param boolean $phoneNumberPublic
+	 * @return UserData
+	 */
+	public function setPhoneNumberPublic($phoneNumberPublic)
+	{
+		$this->phoneNumberPublic = $phoneNumberPublic;
+		return $this;
+	}
 
-
-    /**
-     * Set phoneNumber
-     *
-     * @param string $phoneNumber
-     * @return UserData
-     */
-    public function setPhoneNumber($phoneNumber)
-    {
-        $this->phoneNumber = $phoneNumber;
-        return $this;
-    }
-
-    /**
-     * Get phoneNumber
-     *
-     * @return string 
-     */
-    public function getPhoneNumber()
-    {
-        return $this->phoneNumber;
-    }
-
-    /**
-     * Set phoneNumberPublic
-     *
-     * @param boolean $phoneNumberPublic
-     * @return UserData
-     */
-    public function setPhoneNumberPublic($phoneNumberPublic)
-    {
-        $this->phoneNumberPublic = $phoneNumberPublic;
-        return $this;
-    }
-
-    /**
-     * Get phoneNumberPublic
-     *
-     * @return boolean 
-     */
-    public function getPhoneNumberPublic()
-    {
-        return $this->phoneNumberPublic;
-    }
+	/**
+	 * Get phoneNumberPublic
+	 *
+	 * @return boolean 
+	 */
+	public function getPhoneNumberPublic()
+	{
+		return $this->phoneNumberPublic;
+	}
 }

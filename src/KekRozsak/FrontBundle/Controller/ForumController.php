@@ -2,14 +2,21 @@
 
 namespace KekRozsak\FrontBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 use KekRozsak\FrontBundle\Entity\ForumPost;
 use KekRozsak\FrontBundle\Form\Type\ForumPostType;
 
+/**
+ * @Route("/forum")
+ */
 class ForumController extends Controller
 {
+	/**
+	 * @Route("", name="KekRozsakFrontBundle_forum_main")
+	 */
 	public function mainAction()
 	{
 		// TODO: Protect this controller with roles? It is also defined in security.yml
@@ -22,6 +29,9 @@ class ForumController extends Controller
 		));
 	}
 
+	/**
+	 * @Route("/{topicGroupSlug}", name="KekRozsakFrontBundle_forum_topic_list")
+	 */
 	public function topicListAction($topicGroupSlug)
 	{
 		$groupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:ForumTopicGroup');
@@ -33,6 +43,9 @@ class ForumController extends Controller
 		));
 	}
 
+	/**
+	 * @Route("/{topicGroupSlug}/{topicSlug}", name="KekRozsakFrontBundle_forum_post_list")
+	 */
 	public function postListAction($topicGroupSlug, $topicSlug)
 	{
 		$request = $this->getRequest();
@@ -44,12 +57,12 @@ class ForumController extends Controller
 
 		// Get the topic based on slug
 		$topicRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:ForumTopic');
-		if (!($topic = $topicRepo->findOneBy(array('topic_group' => $topicGroup, 'slug' => $topicSlug))))
+		if (!($topic = $topicRepo->findOneBy(array('topicGroup' => $topicGroup, 'slug' => $topicSlug))))
 			throw $this->createNotFoundException('A kért téma nem létezik!');
 
 		// Get the list of posts in the requested topic
 		$postRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:ForumPost');
-		$posts = $postRepo->findBy(array('topic' => $topic), array('created_at' => 'DESC') /* TODO: , limit, offset */);
+		$posts = $postRepo->findBy(array('topic' => $topic), array('createdAt' => 'DESC') /* TODO: , limit, offset */);
 
 		// Create an empty post object for posting
 		$post = new ForumPost();

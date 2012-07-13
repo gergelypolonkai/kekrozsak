@@ -1,16 +1,15 @@
 KekRozsakAdminBundle:
-    resource: "@KekRozsakAdminBundle/Resources/config/routing.yml"
-    prefix:   /admin
+        resource: "@KekRozsakAdminBundle/Controller/DefaultController.php"
+        type:     annotation
 
 KekRozsakSecurityBundle:
-    resource: "@KekRozsakSecurityBundle/Resources/config/routing.yml"
-    prefix:   /
+        resource: "@KekRozsakSecurityBundle/Controller/DefaultController.php"
+        type:     annotation
 
-KekRozsakFrontBundle:
-    resource: "@KekRozsakFrontBundle/Resources/config/routing.yml"
-    prefix:   /
+KekRozsakFrontBundle_Default:
+        resource: "@KekRozsakFrontBundle/Controller/DefaultController.php"
+        type:     annotation
 
-# Internal routing configuration to handle ESI
-#_internal:
-#    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
-#    prefix:   /_internal
+KekRozsakFrontBundle_Forum:
+        resource: "@KekRozsakFrontBundle/Controller/ForumController.php"
+        type:     annotation

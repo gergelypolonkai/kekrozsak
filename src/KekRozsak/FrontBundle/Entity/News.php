@@ -6,238 +6,252 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * KekRozsak\FrontBundle\Entity\News
+ * @ORM\Entity
+ * @ORM\Table(name="news")
  */
 class News
 {
-    /**
-     * @var integer $id
-     */
-    private $id;
+	/**
+	 * @var integer $id
+	 * @ORM\Id
+	 * @ORM\GeneratedValue(strategy="AUTO")
+	 * @ORM\Column(type="integer", name="id")
+	 */
+	private $id;
 
-    /**
-     * @var datetime $created_at
-     */
-    private $created_at;
+	/**
+	 * Get id
+	 *
+	 * @return integer 
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
 
-    /**
-     * @var datetime $updated_at
-     */
-    private $updated_at;
+	/**
+	 * @var datetime $createdAt
+	 * @ORM\Column(type="datetime", name="created_at")
+	 */
+	private $createdAt;
 
-    /**
-     * @var text $update_reason
-     */
-    private $update_reason;
+	/**
+	 * Set createdAt
+	 *
+	 * @param datetime $createdAt
+	 * @return News
+	 */
+	public function setCreatedAt($createdAt)
+	{
+		$this->createdAt = $createdAt;
+		return $this;
+	}
 
-    /**
-     * @var string $title
-     */
-    private $title;
+	/**
+	 * Get createdAt
+	 *
+	 * @return datetime 
+	 */
+	public function getCreatedAt()
+	{
+		return $this->createdAt;
+	}
 
-    /**
-     * @var string $slug
-     */
-    private $slug;
+	/**
+	 * @var datetime $updatedAt
+	 * @ORM\Column(type="datetime", name="updated_at", nullable=true)
+	 */
+	private $updatedAt;
 
-    /**
-     * @var text $text
-     */
-    private $text;
+	/**
+	 * @var text $updateReason
+	 * @ORM\Column(type="text", name="update_reason", nullable=true)
+	 */
+	private $updateReason;
 
-    /**
-     * @var KekRozsak\FrontBundle\Entity\User
-     */
-    private $created_by;
+	/**
+	 * @var string $title
+	 * @ORM\Column(type="string", length=100, nullable=false)
+	 */
+	private $title;
 
-    /**
-     * @var KekRozsak\FrontBundle\Entity\User
-     */
-    private $updated_by;
+	/**
+	 * @var string $slug
+	 * @ORM\Column(type="string", length=100, nullable=false, unique=true)
+	 */
+	private $slug;
 
+	/**
+	 * @var text $text
+	 * @ORM\Column(type="text", nullable=true)
+	 */
+	private $text;
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+	/**
+	 * @var KekRozsak\FrontBundle\Entity\User $createdBy
+	 * @ORM\ManyToOne(targetEntity="User")
+	 * @ORM\JoinColumn(name="created_by_id", referencedColumnName="id")
+	 */
+	private $createdBy;
 
-    /**
-     * Set created_at
-     *
-     * @param datetime $createdAt
-     * @return News
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->created_at = $createdAt;
-        return $this;
-    }
+	/**
+	 * @var KekRozsak\FrontBundle\Entity\User $updatedBy
+	 * @ORM\ManyToOne(targetEntity="User", fetch="EXTRA_LAZY")
+	 * @ORM\JoinColumn(name="updated_by_id", referencedColumnName="id")
+	 */
+	private $updatedBy;
 
-    /**
-     * Get created_at
-     *
-     * @return datetime 
-     */
-    public function getCreatedAt()
-    {
-        return $this->created_at;
-    }
+	/**
+	 * Set updatedAt
+	 *
+	 * @param datetime $updatedAt
+	 * @return News
+	 */
+	public function setUpdatedAt($updatedAt)
+	{
+		$this->updatedAt = $updatedAt;
+		return $this;
+	}
 
-    /**
-     * Set updated_at
-     *
-     * @param datetime $updatedAt
-     * @return News
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updated_at = $updatedAt;
-        return $this;
-    }
+	/**
+	 * Get updatedAt
+	 *
+	 * @return datetime 
+	 */
+	public function getUpdatedAt()
+	{
+		return $this->updatedAt;
+	}
 
-    /**
-     * Get updated_at
-     *
-     * @return datetime 
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updated_at;
-    }
+	/**
+	 * Set updateReason
+	 *
+	 * @param text $updateReason
+	 * @return News
+	 */
+	public function setUpdateReason($updateReason)
+	{
+		$this->updateReason = $updateReason;
+		return $this;
+	}
 
-    /**
-     * Set update_reason
-     *
-     * @param text $updateReason
-     * @return News
-     */
-    public function setUpdateReason($updateReason)
-    {
-        $this->update_reason = $updateReason;
-        return $this;
-    }
+	/**
+	 * Get updateReason
+	 *
+	 * @return text 
+	 */
+	public function getUpdateReason()
+	{
+		return $this->updateReason;
+	}
 
-    /**
-     * Get update_reason
-     *
-     * @return text 
-     */
-    public function getUpdateReason()
-    {
-        return $this->update_reason;
-    }
+	/**
+	 * Set title
+	 *
+	 * @param string $title
+	 * @return News
+	 */
+	public function setTitle($title)
+	{
+		$this->title = $title;
+		return $this;
+	}
 
-    /**
-     * Set title
-     *
-     * @param string $title
-     * @return News
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-        return $this;
-    }
+	/**
+	 * Get title
+	 *
+	 * @return string 
+	 */
+	public function getTitle()
+	{
+		return $this->title;
+	}
 
-    /**
-     * Get title
-     *
-     * @return string 
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
+	/**
+	 * Set slug
+	 *
+	 * @param string $slug
+	 * @return News
+	 */
+	public function setSlug($slug)
+	{
+		$this->slug = $slug;
+		return $this;
+	}
 
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return News
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-        return $this;
-    }
+	/**
+	 * Get slug
+	 *
+	 * @return string 
+	 */
+	public function getSlug()
+	{
+		return $this->slug;
+	}
 
-    /**
-     * Get slug
-     *
-     * @return string 
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
+	/**
+	 * Set text
+	 *
+	 * @param text $text
+	 * @return News
+	 */
+	public function setText($text)
+	{
+		$this->text = $text;
+		return $this;
+	}
 
-    /**
-     * Set text
-     *
-     * @param text $text
-     * @return News
-     */
-    public function setText($text)
-    {
-        $this->text = $text;
-        return $this;
-    }
+	/**
+	 * Get text
+	 *
+	 * @return text 
+	 */
+	public function getText()
+	{
+		return $this->text;
+	}
 
-    /**
-     * Get text
-     *
-     * @return text 
-     */
-    public function getText()
-    {
-        return $this->text;
-    }
+	/**
+	 * Set createdBy
+	 *
+	 * @param KekRozsak\FrontBundle\Entity\User $createdBy
+	 * @return News
+	 */
+	public function setCreatedBy(\KekRozsak\FrontBundle\Entity\User $createdBy = null)
+	{
+		$this->createdBy = $createdBy;
+		return $this;
+	}
 
-    /**
-     * Set created_by
-     *
-     * @param KekRozsak\FrontBundle\Entity\User $createdBy
-     * @return News
-     */
-    public function setCreatedBy(\KekRozsak\FrontBundle\Entity\User $createdBy = null)
-    {
-        $this->created_by = $createdBy;
-        return $this;
-    }
+	/**
+	 * Get createdBy
+	 *
+	 * @return KekRozsak\FrontBundle\Entity\User 
+	 */
+	public function getCreatedBy()
+	{
+		return $this->createdBy;
+	}
 
-    /**
-     * Get created_by
-     *
-     * @return KekRozsak\FrontBundle\Entity\User 
-     */
-    public function getCreatedBy()
-    {
-        return $this->created_by;
-    }
+	/**
+	 * Set updatedBy
+	 *
+	 * @param KekRozsak\FrontBundle\Entity\User $updatedBy
+	 * @return News
+	 */
+	public function setUpdatedBy(\KekRozsak\FrontBundle\Entity\User $updatedBy = null)
+	{
+		$this->updatedBy = $updatedBy;
+		return $this;
+	}
 
-    /**
-     * Set updated_by
-     *
-     * @param KekRozsak\FrontBundle\Entity\User $updatedBy
-     * @return News
-     */
-    public function setUpdatedBy(\KekRozsak\FrontBundle\Entity\User $updatedBy = null)
-    {
-        $this->updated_by = $updatedBy;
-        return $this;
-    }
-
-    /**
-     * Get updated_by
-     *
-     * @return KekRozsak\FrontBundle\Entity\User 
-     */
-    public function getUpdatedBy()
-    {
-        return $this->updated_by;
-    }
+	/**
+	 * Get updatedBy
+	 *
+	 * @return KekRozsak\FrontBundle\Entity\User 
+	 */
+	public function getUpdatedBy()
+	{
+		return $this->updatedBy;
+	}
 }
