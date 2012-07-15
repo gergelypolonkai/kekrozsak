@@ -2,13 +2,15 @@
 
 namespace KekRozsak\SecurityBundle\Entity;
 
-use \Doctrine\ORM\Mapping as ORM;
-use \Symfony\Component\Security\Core\User\UserInterface;
-use \Symfony\Component\Security\Core\User\AdvancedUserInterface;
-use \Symfony\Component\Validator\Constraints as Assert;
-use \Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 
-use \KekRozsak\FrontBundle\Entity\UserData;
+use KekRozsak\FrontBundle\Entity\UserData;
+use KekRozsak\FrontBundle\Entity\UserGroupMembership;
 
 /**
  * KekRozsak\SecurityBundle\Entity\User
@@ -20,6 +22,11 @@ use \KekRozsak\FrontBundle\Entity\UserData;
  */
 class User implements UserInterface, AdvancedUserInterface
 {
+	public function __construct()
+	{
+		$this->groups = new ArrayCollection();
+	}
+
 	/**
 	 * @var integer $id
 	 * @ORM\Id
@@ -266,6 +273,35 @@ class User implements UserInterface, AdvancedUserInterface
 	public function getUserData()
 	{
 		return $this->userData;
+	}
+
+	/**
+	 * @var Doctrine\Common\Collections\ArrayCollection $groups
+	 * @ORM\OneToMany(targetEntity="KekRozsak\FrontBundle\Entity\UserGroupMembership", mappedBy="user")
+	 * @ORM\JoinColumn(referencedColumnName="user_id")
+	 */
+	private $groups;
+
+	/**
+	 * Add group
+	 *
+	 * @param KekRozsak\FrontBundle\Entity\UserGroupMembership $group
+	 * @return User
+	 */
+	public function addGroup(\KekRozsak\FrontBundle\Entity\UserGroupMembership $group)
+	{
+		$this->groups[] = $group;
+		return $this;
+	}
+
+	/**
+	 * Get all groups
+	 *
+	 * @return Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getGroups()
+	{
+		return $this->groups;
 	}
 
 	/* Here comes the remaining part of UserInterface implementation */

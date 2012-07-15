@@ -3,6 +3,9 @@
 namespace KekRozsak\FrontBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+use KekRozsak\SecurityBundle\Entity\User;
 
 /**
  * KekRozsak\FrontBundle\Entity\Group
@@ -11,251 +14,195 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Group
 {
-    /**
-     * @var integer $id
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+	public function __construct()
+	{
+		$this->members = new ArrayCollection();
+	}
 
-    /**
-     * @var string $name
-     * @ORM\Column(type="string", length=50, nullable=false, unique=true)
-     */
-    private $name;
+	/**
+	 * @var integer $id
+	 * @ORM\Id
+	 * @ORM\GeneratedValue(strategy="AUTO")
+	 * @ORM\Column(type="integer")
+	 */
+	protected $id;
 
-    /**
-     * @var string $slug
-     * @ORM\Column(type="string", length=50, nullable=false, unique=true)
-     */
-    private $slug;
+	/**
+	 * Get id
+	 *
+	 * @return integer
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
 
-    /**
-     * @var datetime $createdAt
-     * @ORM\Column(type="datetime", name="created_at", nullable=false)
-     */
-    private $createdAt;
+	/**
+	 * @var KekRozsak\SecurityBundle\Entity\User $leader
+	 * @ORM\ManyToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User")
+	 */
+	protected $leader;
 
-    /**
-     * @var datetime $updatedAt
-     * @ORM\Column(type="datetime", name="updated_at", nullable=true)
-     */
-    private $updatedAt;
+	/**
+	 * Set leader
+	 *
+	 * @param KekRozsak\SecurityBundle\Entity\User $leader
+	 * @return Group
+	 */
+	public function setLeader(\KekRozsak\SecurityBundle\Entity\User $leader = null)
+	{
+		$this->leader = $leader;
+		return $this;
+	}
 
-    /**
-     * @var text $updateReason
-     * @ORM\Column(type="text", name="update_reason", nullable=true)
-     */
-    private $updateReason;
+	/**
+	 * Get leader
+	 *
+	 * @return KekRozsak\SecurityBundle\Entity\User
+	 */
+	public function getLeader()
+	{
+		return $this->leader;
+	}
 
-    /**
-     * @var KekRozsak\FrontBundle\Entity\User $createdBy
-     * @ORM\ManyToOne(targetEntity="User")
-     */
-    private $createdBy;
+	/**
+	 * @var string $name
+	 * @ORM\Column(type="string", length=50, nullable=false, unique=true)
+	 */
+	protected $name;
 
-    /**
-     * @var KekRozsak\FrontBundle\Entity\User $updatedBy
-     * @ORM\ManyToOne(targetEntity="User")
-     */
-    private $updatedBy;
+	/**
+	 * Set name
+	 *
+	 * @param string $name
+	 * @return Group
+	 */
+	public function setName($name)
+	{
+		$this->name = $name;
+		return $this;
+	}
 
-    /**
-     * @var KekRozsak\FrontBundle\Entity\User $leader
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="ledGroups")
-     */
-    private $leader;
+	/**
+	 * Get name
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return $this->name;
+	}
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+	/**
+	 * @var string $slug
+	 * @ORM\Column(type="string", length=50, nullable=false, unique=true)
+	 */
+	protected $slug;
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return Group
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-        return $this;
-    }
+	/**
+	 * Set slug
+	 *
+	 * @param string $slug
+	 * @return Group
+	 */
+	public function setSlug($slug)
+	{
+		$this->slug = $slug;
+		return $this;
+	}
 
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
+	/**
+	 * Get slug
+	 *
+	 * @return string
+	 */
+	public function getSlug()
+	{
+		return $this->slug;
+	}
 
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return Group
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-        return $this;
-    }
+	/**
+	 * @var KekRozsak\SecurityBundle\Entity\User $createdBy
+	 * @ORM\ManyToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User")
+	 * @ORM\JoinColumn(name="created_by_id")
+	 */
+	protected $createdBy;
 
-    /**
-     * Get slug
-     *
-     * @return string 
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
+	/**
+	 * Set createdBy
+	 *
+	 * @param KekRozsak\SecurityBundle\Entity\User $createdBy
+	 * @return Group
+	 */
+	public function setCreatedBy(\KekRozsak\SecurityBundle\Entity\User $createdBy)
+	{
+		$this->createdBy = $createdBy;
+		return $this;
+	}
 
-    /**
-     * Set createdAt
-     *
-     * @param datetime $createdAt
-     * @return Group
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-        return $this;
-    }
+	/**
+	 * Get createdBy
+	 *
+	 * @return KekRozsak\SecurityBundle\Entity\User
+	 */
+	public function getCreatedBy()
+	{
+		return $this->createdBy;
+	}
 
-    /**
-     * Get createdAt
-     *
-     * @return datetime 
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
+	/**
+	 * @var DateTime $createdAt
+	 * @ORM\Column(type="datetime", name="created_at", nullable=false)
+	 */
+	protected $createdAt;
 
-    /**
-     * Set updatedAt
-     *
-     * @param datetime $updatedAt
-     * @return Group
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-        return $this;
-    }
+	/**
+	 * Set createdAt
+	 *
+	 * @param DateTime $createdAt
+	 * @return Group
+	 */
+	public function setCreatedAt(\DateTime $createdAt)
+	{
+		$this->createdAt = $createdAt;
+		return $this;
+	}
 
-    /**
-     * Get updatedAt
-     *
-     * @return datetime 
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
+	/**
+	 * Get createdAt
+	 *
+	 * @return DateTime
+	 */
+	public function getCreatedAt()
+	{
+		return $this->createdAt;
+	}
 
-    /**
-     * Set updateReason
-     *
-     * @param text $updateReason
-     * @return Group
-     */
-    public function setUpdateReason($updateReason)
-    {
-        $this->updateReason = $updateReason;
-        return $this;
-    }
+	/**
+	 * @var Doctrine\Common\Collections\ArrayCollection $members
+	 * @ORM\OneToMany(targetEntity="UserGroupMembership", mappedBy="group")
+	 */
+	protected $members;
 
-    /**
-     * Get updateReason
-     *
-     * @return text 
-     */
-    public function getUpdateReason()
-    {
-        return $this->updateReason;
-    }
+	/**
+	 * Add member
+	 *
+	 * @param KekRozsak\FrontBundle\Entity\UserGroupMembership $member
+	 * @return Group
+	 */
+	public function addMember(\KekRozsak\FrontBundle\Entity\UserGroupMembership $member)
+	{
+		$this->members[] = $member;
+		return $this;
+	}
 
-    /**
-     * Set createdBy
-     *
-     * @param KekRozsak\FrontBundle\Entity\User $createdBy
-     * @return Group
-     */
-    public function setCreatedBy(\KekRozsak\FrontBundle\Entity\User $createdBy = null)
-    {
-        $this->createdBy = $createdBy;
-        return $this;
-    }
-
-    /**
-     * Get createdBy
-     *
-     * @return KekRozsak\FrontBundle\Entity\User 
-     */
-    public function getCreatedBy()
-    {
-        return $this->createdBy;
-    }
-
-    /**
-     * Set updatedBy
-     *
-     * @param KekRozsak\FrontBundle\Entity\User $updatedBy
-     * @return Group
-     */
-    public function setUpdatedBy(\KekRozsak\FrontBundle\Entity\User $updatedBy = null)
-    {
-        $this->updatedBy = $updatedBy;
-        return $this;
-    }
-
-    /**
-     * Get updatedBy
-     *
-     * @return KekRozsak\FrontBundle\Entity\User 
-     */
-    public function getUpdatedBy()
-    {
-        return $this->updatedBy;
-    }
-
-    /**
-     * Set leader
-     *
-     * @param KekRozsak\FrontBundle\Entity\User $leader
-     * @return Group
-     */
-    public function setLeader(\KekRozsak\FrontBundle\Entity\User $leader = null)
-    {
-        $this->leader = $leader;
-        return $this;
-    }
-
-    /**
-     * Get leader
-     *
-     * @return KekRozsak\FrontBundle\Entity\User 
-     */
-    public function getLeader()
-    {
-        return $this->leader;
-    }
-
-    /**
-     * @var ArrayCollection $documents
-     * @ORM\ManyToMany(targetEntity="Document", inversedBy="groups")
-     */
-    private $documents;
+	/**
+	 * Get all members
+	 *
+	 * @return Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getMembers()
+	{
+		return $this->members;
+	}
 }
