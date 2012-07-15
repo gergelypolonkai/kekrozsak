@@ -1,15 +1,12 @@
 KekRozsakAdminBundle:
-        resource: "@KekRozsakAdminBundle/Controller/DefaultController.php"
-        type:     annotation
+    resource: "@KekRozsakAdminBundle/Controller/"
+    type:     annotation
+
+KekRozsakFrontBundle:
+    resource: "@KekRozsakFrontBundle/Controller/"
+    type:     annotation
 
 KekRozsakSecurityBundle:
-        resource: "@KekRozsakSecurityBundle/Controller/DefaultController.php"
-        type:     annotation
+    resource: "@KekRozsakSecurityBundle/Controller/"
+    type:     annotation
 
-KekRozsakFrontBundle_Default:
-        resource: "@KekRozsakFrontBundle/Controller/DefaultController.php"
-        type:     annotation
-
-KekRozsakFrontBundle_Forum:
-        resource: "@KekRozsakFrontBundle/Controller/ForumController.php"
-        type:     annotation

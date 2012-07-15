@@ -9,7 +9,7 @@
 		<service id="form.type_extension.help_message" class="KekRozsak\FrontBundle\Form\Extension\HelpMessageTypeExtension">
 			<tag name="form.type_extension" alias="field" />
 		</service>
-		<service id="bb.twig.extension" class="KekRozsak\FrontBundle\Extension\TwigBBExtension">
+		<service id="bb.twig.extension" class="KekRozsak\FrontBundle\Twig\TwigBBExtension">
 			<argument type="service" id="service_container" />
 			<tag name="twig.extension" />
 		</service>

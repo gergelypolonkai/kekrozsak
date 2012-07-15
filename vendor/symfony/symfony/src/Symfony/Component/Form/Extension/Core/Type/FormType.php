@@ -42,8 +42,9 @@ class FormType extends AbstractType
             ->setMapped($options['mapped'])
             ->setByReference($options['by_reference'])
             ->setVirtual($options['virtual'])
+            ->setCompound($options['compound'])
             ->setData($options['data'])
-            ->setDataMapper(new PropertyPathMapper())
+            ->setDataMapper($options['compound'] ? new PropertyPathMapper() : null)
         ;
 
         if ($options['trim']) {
@@ -112,11 +113,11 @@ class FormType extends AbstractType
             'max_length'         => $options['max_length'],
             'pattern'            => $options['pattern'],
             'size'               => null,
-            'label'              => $options['label'] ?: $this->humanize($form->getName()),
+            'label'              => $options['label'],
             'multipart'          => false,
             'attr'               => $options['attr'],
             'label_attr'         => $options['label_attr'],
-            'compound'           => $options['compound'],
+            'compound'           => $form->getConfig()->getCompound(),
             'types'              => $types,
             'translation_domain' => $translationDomain,
         ));
@@ -160,7 +161,7 @@ class FormType extends AbstractType
             }
 
             return function (FormInterface $form) {
-                return count($form) > 0 ? array() : '';
+                return $form->getConfig()->getCompound() ? array() : '';
             };
         };
 
@@ -225,10 +226,5 @@ class FormType extends AbstractType
     public function getName()
     {
         return 'form';
-    }
-
-    private function humanize($text)
-    {
-        return ucfirst(trim(strtolower(preg_replace('/[_\s]+/', ' ', $text))));
     }
 }

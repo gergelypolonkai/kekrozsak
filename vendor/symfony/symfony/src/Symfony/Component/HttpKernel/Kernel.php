@@ -58,7 +58,7 @@ abstract class Kernel implements KernelInterface, TerminableInterface
     protected $classes;
     protected $errorReportingLevel;
 
-    const VERSION         = '2.1.0-BETA1';
+    const VERSION         = '2.1.0-BETA2';
     const VERSION_ID      = '20100';
     const MAJOR_VERSION   = '2';
     const MINOR_VERSION   = '1';
@@ -468,6 +468,18 @@ abstract class Kernel implements KernelInterface, TerminableInterface
     }
 
     /**
+     * Gets the charset of the application.
+     *
+     * @return string The charset
+     *
+     * @api
+     */
+    public function getCharset()
+    {
+        return 'UTF-8';
+    }
+
+    /**
      * Initializes the data structures related to the bundle management.
      *
      *  - the bundles property maps a bundle name to the bundle instance,
@@ -601,7 +613,7 @@ abstract class Kernel implements KernelInterface, TerminableInterface
                 'kernel.cache_dir'       => $this->getCacheDir(),
                 'kernel.logs_dir'        => $this->getLogDir(),
                 'kernel.bundles'         => $bundles,
-                'kernel.charset'         => 'UTF-8',
+                'kernel.charset'         => $this->getCharset(),
                 'kernel.container_class' => $this->getContainerClass(),
             ),
             $this->getEnvParameters()

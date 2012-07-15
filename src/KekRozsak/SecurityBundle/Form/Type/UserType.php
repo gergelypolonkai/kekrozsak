@@ -1,5 +1,5 @@
 <?php
-namespace KekRozsak\FrontBundle\Form\Type;
+namespace KekRozsak\SecurityBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -64,7 +64,7 @@ class UserType extends AbstractType
 	public function getDefaultOptions()
 	{
 		$opts = array(
-			'data_class' => 'KekRozsak\FrontBundle\Entity\User',
+			'data_class' => 'KekRozsak\SecurityBundle\Entity\User',
 		);
 		if ($this->_registration)
 			$opts['validation_groups'] = array('registration');

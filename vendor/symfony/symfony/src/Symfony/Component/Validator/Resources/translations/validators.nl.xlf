@@ -32,7 +32,7 @@
             </trans-unit>
             <trans-unit id="8">
                 <source>One or more of the given values is invalid.</source>
-                <target>Een of meer van de gegeven waarden zijn ongeldig.</target>
+                <target>Eén of meer van de ingegeven waarden zijn ongeldig.</target>
             </trans-unit>
             <trans-unit id="9">
                 <source>The fields {{ fields }} were not expected.</source>
@@ -48,7 +48,7 @@
             </trans-unit>
             <trans-unit id="12">
                 <source>This value is not a valid datetime.</source>
-                <target>Deze waarde is geen geldige datum/tijd.</target>
+                <target>Deze waarde is geen geldige datum en tijd.</target>
             </trans-unit>
             <trans-unit id="13">
                 <source>This value is not a valid email address.</source>

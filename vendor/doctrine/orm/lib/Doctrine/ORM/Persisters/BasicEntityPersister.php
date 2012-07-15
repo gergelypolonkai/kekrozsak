@@ -364,7 +364,19 @@ class BasicEntityPersister
                 $targetMapping = $this->_em->getClassMetadata($this->_class->associationMappings[$idField]['targetEntity']);
                 $where[] = $this->_class->associationMappings[$idField]['joinColumns'][0]['name'];
                 $params[] = $id[$idField];
-                $types[] = $targetMapping->fieldMappings[$targetMapping->identifier[0]]['type'];
+
+                switch (true) {
+                    case (isset($targetMapping->fieldMappings[$targetMapping->identifier[0]])):
+                        $types[] = $targetMapping->fieldMappings[$targetMapping->identifier[0]]['type'];
+                        break;
+
+                    case (isset($targetMapping->associationMappings[$targetMapping->identifier[0]])):
+                        $types[] = $targetMapping->associationMappings[$targetMapping->identifier[0]]['type'];
+                        break;
+
+                    default:
+                        throw ORMException::unrecognizedField($targetMapping->identifier[0]);
+                }
             } else {
                 $where[] = $this->_class->getQuotedColumnName($idField, $this->_platform);
                 $params[] = $id[$idField];
@@ -690,9 +702,9 @@ class BasicEntityPersister
      *                  column or field names to values.
      * @param object $entity The entity to refresh.
      */
-    public function refresh(array $id, $entity)
+    public function refresh(array $id, $entity, $lockMode = 0)
     {
-        $sql = $this->_getSelectEntitiesSQL($id);
+        $sql = $this->_getSelectEntitiesSQL($id, null, $lockMode);
         list($params, $types) = $this->expandParameters($id);
         $stmt = $this->_conn->executeQuery($sql, $params, $types);
 

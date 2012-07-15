@@ -1,15 +1,16 @@
 <?php
-namespace KekRozsak\FrontBundle\Extension;
+namespace KekRozsak\FrontBundle\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class TwigBBExtension extends \Twig_Extension
 {
+	private $container;
 	private $assets;
 
 	public function __construct(ContainerInterface $container)
 	{
-		$this->assets = $container->get('templating.helper.assets');
+		$this->container = $container;
 	}
 
 	public function getFilters()
@@ -44,7 +45,7 @@ class TwigBBExtension extends \Twig_Extension
 			else
 			{
 				// TODO: Thumbnailing!
-				$sentence = substr_replace($sentence, '<img src="' . $this->assets->getUrl('upload/images/' . (($ns == '') ? '' : $ns . '/') . $name) . '" alt="" />', $start, $len);
+				$sentence = substr_replace($sentence, '<img src="' . $this->container->get('templating.helper.assets')->getUrl('upload/images/' . (($ns == '') ? '' : $ns . '/') . $name) . '" alt="" />', $start, $len);
 			}
 		}
 		while (preg_match('/\\[link( (url)="[^"]+"){1,}\\](?P<content>.*?)\\[\\/link\\]/i', $sentence, $m, PREG_OFFSET_CAPTURE))

@@ -94,4 +94,22 @@ interface ParameterBagInterface
      * @throws ParameterNotFoundException if a placeholder references a parameter that does not exist
      */
     function resolveValue($value);
+
+    /**
+     * Escape parameter placeholders %
+     *
+     * @param mixed $value
+     *
+     * @return mixed
+     */
+    function escapeValue($value);
+
+    /**
+     * Unescape parameter placeholders %
+     *
+     * @param mixed $value
+     *
+     * @return mixed
+     */
+    function unescapeValue($value);
 }

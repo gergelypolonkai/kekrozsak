@@ -70,6 +70,27 @@ class ScriptHandler
         static::executeCommand($event, $appDir, 'assets:install '.$symlink.escapeshellarg($webDir));
     }
 
+    public static function installRequirementsFile($event)
+    {
+        $options = self::getOptions($event);
+        $appDir = $options['symfony-app-dir'];
+
+        if (!is_dir($appDir)) {
+            echo 'The symfony-app-dir ('.$appDir.') specified in composer.json was not found in '.getcwd().', can not install the requirements file.'.PHP_EOL;
+
+            return;
+        }
+
+        copy(__DIR__.'/../Resources/skeleton/app/SymfonyRequirements.php', $appDir.'/SymfonyRequirements.php');
+        copy(__DIR__.'/../Resources/skeleton/app/check.php', $appDir.'/check.php');
+
+        $webDir = $options['symfony-web-dir'];
+
+        if (is_file($webDir.'/config.php')) {
+            copy(__DIR__.'/../Resources/skeleton/web/config.php', $webDir.'/config.php');
+        }
+    }
+
     public static function doBuildBootstrap($appDir)
     {
         $file = $appDir.'/bootstrap.php.cache';
@@ -81,16 +102,13 @@ class ScriptHandler
             'Symfony\\Component\\DependencyInjection\\ContainerAwareInterface',
             // Cannot be included because annotations will parse the big compiled class file
             //'Symfony\\Component\\DependencyInjection\\ContainerAware',
-            'Symfony\\Component\\DependencyInjection\\ContainerInterface',
             'Symfony\\Component\\DependencyInjection\\Container',
-            'Symfony\\Component\\HttpKernel\\HttpKernelInterface',
-            'Symfony\\Component\\HttpKernel\\KernelInterface',
             'Symfony\\Component\\HttpKernel\\Kernel',
             'Symfony\\Component\\ClassLoader\\ClassCollectionLoader',
             'Symfony\\Component\\ClassLoader\\ApcClassLoader',
-            'Symfony\\Component\\HttpKernel\\Bundle\\BundleInterface',
             'Symfony\\Component\\HttpKernel\\Bundle\\Bundle',
             'Symfony\\Component\\Config\\ConfigCache',
+            'Symfony\\Bundle\\FrameworkBundle\\HttpKernel',
             // cannot be included as commands are discovered based on the path to this class via Reflection
             //'Symfony\\Bundle\\FrameworkBundle\\FrameworkBundle',
         ), dirname($file), basename($file, '.php.cache'), false, false, '.php.cache');
@@ -107,25 +125,23 @@ namespace { return \$loader; }
 
     protected static function executeCommand($event, $appDir, $cmd)
     {
-        $phpFinder = new PhpExecutableFinder;
-        $php = escapeshellarg($phpFinder->find());
+        $php = escapeshellarg(self::getPhp());
         $console = escapeshellarg($appDir.'/console');
         if ($event->getIO()->isDecorated()) {
             $console.= ' --ansi';
         }
 
-        $process = new Process($php.' '.$console.' '.$cmd);
+        $process = new Process($php.' '.$console.' '.$cmd, null, null, null, 300);
         $process->run(function ($type, $buffer) { echo $buffer; });
     }
 
     protected static function executeBuildBootstrap($appDir)
     {
-        $phpFinder = new PhpExecutableFinder;
-        $php = escapeshellarg($phpFinder->find());
+        $php = escapeshellarg(self::getPhp());
         $cmd = escapeshellarg(__DIR__.'/../Resources/bin/build_bootstrap.php');
         $appDir = escapeshellarg($appDir);
 
-        $process = new Process($php.' '.$cmd.' '.$appDir);
+        $process = new Process($php.' '.$cmd.' '.$appDir, null, null, null, 300);
         $process->run(function ($type, $buffer) { echo $buffer; });
     }
 
@@ -140,5 +156,15 @@ namespace { return \$loader; }
         $options['symfony-assets-install'] = getenv('SYMFONY_ASSETS_INSTALL') ?: $options['symfony-assets-install'];
 
         return $options;
+    }
+
+    protected static function getPhp()
+    {
+        $phpFinder = new PhpExecutableFinder;
+        if (!$phpPath = $phpFinder->find()) {
+            throw new \RuntimeException('The php executable could not be found, add it to your PATH environment variable and try again');
+        }
+
+        return $phpPath;
     }
 }

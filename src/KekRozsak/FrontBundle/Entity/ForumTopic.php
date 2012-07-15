@@ -3,21 +3,19 @@
 namespace KekRozsak\FrontBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
-use KekRozsak\FrontBundle\Entity\User;
-use KekRozsak\FrontBundle\Entity\ForumTopicGroup;
-use KekRozsak\FrontBundle\Entity\ForumPost;
+use KekRozsak\SecurityBundle\Entity\User;
 
 /**
- * KekRozsak\FrontBundle\Entity\ForumTopic
  * @ORM\Entity
- * @ORM\Table(name="forum_topics", uniqueConstraints={@ORM\UniqueConstraint(columns={"topic_group_id", "title"}), @ORM\UniqueConstraint(columns={"topic_group_id", "slug"})})
+ * @ORM\Table(name="forum_topics")
  */
 class ForumTopic
 {
 	public function __construct()
 	{
-		$this->posts = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->posts = new ArrayCollection();
 	}
 
 	/**
@@ -31,72 +29,46 @@ class ForumTopic
 	/**
 	 * Get id
 	 *
-	 * @return integer 
+	 * @return integer
 	 */
 	public function getId()
 	{
-		return $this->id;
+		return  $this->id;
 	}
 
 	/**
-	 * @var string $title
-	 * @ORM\Column(type="string", length=100)
+	 * @var KekRozsak\SecurityBundle\Entity\User $createdBy
+	 * @ORM\ManyToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User")
+	 * @ORM\JoinColumn(name="created_by_id")
 	 */
-	private $title;
+	private $createdBy;
 
 	/**
-	 * Set title
+	 * Set createdBy
 	 *
-	 * @param string $title
+	 * @param KekRozsak\SecurityBundle\Entity\User
 	 * @return ForumTopic
 	 */
-	public function setTitle($title)
+	public function setCreatedBy(\KekRozsak\SecurityBundle\Entity\User $createdBy)
 	{
-		$this->title = $title;
+		$this->createdBy = $createdBy;
 		return $this;
 	}
 
 	/**
-	 * Get title
+	 * Get createdBy
 	 *
-	 * @return string 
+	 * @return KekRozsak\SecurityBundle\Entity\User
 	 */
-	public function getTitle()
+	public function getCreatedBy()
 	{
-		return $this->title;
+		return $this->createdBy;
 	}
 
-	/**
-	 * @var string $slug
-	 * @ORM\Column(type="string", length=100)
-	 */
-	private $slug;
 
 	/**
-	 * Set slug
-	 *
-	 * @param string $slug
-	 * @return ForumTopic
-	 */
-	public function setSlug($slug)
-	{
-		$this->slug = $slug;
-		return $this;
-	}
-
-	/**
-	 * Get slug
-	 *
-	 * @return string 
-	 */
-	public function getSlug()
-	{
-		return $this->slug;
-	}
-
-	/**
-	 * @var datetime $createdAt
-	 * @ORM\Column(type="datetime", name="created_at")
+	 * @var DateTime $createdAt
+	 * @ORM\Column(type="datetime", nullable=false, name="created_at")
 	 */
 	private $createdAt;
 
@@ -106,7 +78,7 @@ class ForumTopic
 	 * @param DateTime $createdAt
 	 * @return ForumTopic
 	 */
-	public function setCreatedAt($createdAt)
+	public function setCreatedAt(\DateTime $createdAt)
 	{
 		$this->createdAt = $createdAt;
 		return $this;
@@ -115,7 +87,7 @@ class ForumTopic
 	/**
 	 * Get createdAt
 	 *
-	 * @return DateTime 
+	 * @return DateTime
 	 */
 	public function getCreatedAt()
 	{
@@ -123,123 +95,9 @@ class ForumTopic
 	}
 
 	/**
-	 * @var User
-	 * @ORM\ManyToOne(targetEntity="User")
-	 * @ORM\JoinColumn(name="created_by_id")
-	 */
-	private $createdBy;
-
-	/**
-	 * Set createdBy
-	 *
-	 * @param User $createdBy
-	 * @return ForumTopic
-	 */
-	public function setCreatedBy(\User $createdBy)
-	{
-		$this->createdBy = $createdBy;
-		return $this;
-	}
-
-	/**
-	 * Get createdBy
-	 *
-	 * @return User 
-	 */
-	public function getCreatedBy()
-	{
-		return $this->createdBy;
-	}
-
-	/**
-	 * @var datetime $updatedAt
-	 * @ORM\Column(type="datetime", name="updated_at", nullable=true)
-	 */
-	private $updatedAt;
-
-	/**
-	 * Set updatedAt
-	 *
-	 * @param datetime $updatedAt
-	 * @return ForumTopic
-	 */
-	public function setUpdatedAt(\DateTime $updatedAt = null)
-	{
-		$this->updatedAt = $updatedAt;
-		return $this;
-	}
-
-	/**
-	 * Get updatedAt
-	 *
-	 * @return datetime 
-	 */
-	public function getUpdatedAt()
-	{
-		return $this->updatedAt;
-	}
-
-	/**
-	 * @var User
-	 * @ORM\ManyToOne(targetEntity="User")
-	 * @ORM\JoinColumn(name="updated_by_id")
-	 */
-	private $updatedBy;
-
-	/**
-	 * Set updatedBy
-	 *
-	 * @param User $updatedBy
-	 * @return ForumTopic
-	 */
-	public function setUpdatedBy(User $updatedBy = null)
-	{
-		$this->updatedBy = $updatedBy;
-		return $this;
-	}
-
-	/**
-	 * Get updatedBy
-	 *
-	 * @return User 
-	 */
-	public function getUpdatedBy()
-	{
-		return $this->updatedBy;
-	}
-
-	/**
-	 * @var text $updateReason
-	 * @ORM\Column(type="text", name="update_reason")
-	 */
-	private $updateReason;
-
-	/**
-	 * Set updateReason
-	 *
-	 * @param text $updateReason
-	 * @return ForumTopic
-	 */
-	public function setUpdateReason($updateReason)
-	{
-		$this->updateReason = $updateReason;
-		return $this;
-	}
-
-	/**
-	 * Get updateReason
-	 *
-	 * @return text 
-	 */
-	public function getUpdateReason()
-	{
-		return $this->updateReason;
-	}
-
-	/**
-	 * @var ForumTopicGroup
-	 * @ORM\ManyToOne(targetEntity="ForumTopicGroup")
-	 * @ORM\JoinColumn(name="topic_group_id", referencedColumnName="id")
+	 * @var ForumTopicGroup $topicGroup
+	 * @ORM\ManyToOne(targetEntity="ForumTopicGroup", inversedBy="topics")
+	 * @ORM\JoinColumn(name="topic_group_id")
 	 */
 	private $topicGroup;
 
@@ -258,44 +116,73 @@ class ForumTopic
 	/**
 	 * Get topicGroup
 	 *
-	 * @return ForumTopicGroup 
+	 * @return ForumTopicGroup
 	 */
 	public function getTopicGroup()
 	{
 		return $this->topicGroup;
 	}
-	/**
-	 * @var \Doctrine\Common\Collections\ArrayCollection
-	 * @ORM\OneToMany(targetEntity="ForumPost", mappedBy="topic")
-	 */
-	private $posts;
 
 	/**
-	 * Add posts
+	 * @var string $slug
+	 * @ORM\Column(type="string", length=100, nullable=false)
+	 */
+	private $slug;
+
+	/**
+	 * Set slug
 	 *
-	 * @param ForumPost $posts
+	 * @param string $slug
 	 * @return ForumTopic
 	 */
-	public function addForumPost(ForumPost $posts)
+	public function setSlug($slug)
 	{
-		$this->posts[] = $posts;
+		$this->slug = $slug;
 		return $this;
 	}
 
 	/**
-	 * Get posts
+	 * Get slug
 	 *
-	 * @return Doctrine\Common\Collections\Collection 
+	 * @return string
 	 */
-	public function getPosts()
+	public function getSlug()
 	{
-		return $this->posts;
+		return $this->slug;
 	}
 
 	/**
-	 * @var ForumPost
+	 * @var string $title
+	 * @ORM\Column(type="string", length=100, nullable=false)
+	 */
+	private $title;
+
+	/**
+	 * Set title
+	 *
+	 * @param string $title
+	 * @return ForumTopic
+	 */
+	public function setTitle($title)
+	{
+		$this->title = $title;
+		return $this;
+	}
+
+	/**
+	 * Get title
+	 *
+	 * @return string
+	 */
+	public function getTitle()
+	{
+		return $this->title;
+	}
+
+	/**
+	 * @var ForumPost $lastPost
 	 * @ORM\OneToOne(targetEntity="ForumPost", cascade={"persist"})
-	 * @ORM\JoinColumn(name="last_post_id", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="last_post_id")
 	 */
 	private $lastPost;
 
@@ -305,20 +192,47 @@ class ForumTopic
 	 * @param ForumPost $lastPost
 	 * @return ForumTopic
 	 */
-	public function setLastPost(ForumPost $lastPost = null)
+	public function setLastPost($lastPost = null)
 	{
 		$this->lastPost = $lastPost;
-		$this->topicGroup->setLastPost($lastPost);
-		return $this;
 	}
 
 	/**
 	 * Get lastPost
 	 *
-	 * @return ForumPost 
+	 * @return ForumPost
 	 */
 	public function getLastPost()
 	{
 		return $this->lastPost;
 	}
+
+	/**
+	 * @var ArrayCollection $topics;
+	 * @ORM\OneToMany(targetEntity="ForumPost", mappedBy="topic")
+	 */
+	private $posts;
+
+	/**
+	 * Add post
+	 *
+	 * @param ForumPost $post
+	 * @return ForumTopic
+	 */
+	public function addPost(ForumPost $post)
+	{
+		$this->posts[] = $post;
+		return $this;
+	}
+
+	/**
+	 * Get posts
+	 *
+	 * @return ArrayCollection
+	 */
+	public function getPosts()
+	{
+		return $this->posts;
+	}
 }
+

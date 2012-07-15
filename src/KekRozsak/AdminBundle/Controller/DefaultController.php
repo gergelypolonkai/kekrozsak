@@ -2,8 +2,9 @@
 
 namespace KekRozsak\AdminBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
  * @Route("/admin")
@@ -11,14 +12,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class DefaultController extends Controller
 {
 	/**
-	 * @Route("/jelentkezok", name="KekRozsakAdminBundle_manage_reg")
+	 * @Route("/manage_regs", name="KekRozsakAdminBundle_manage_regs")
+	 * @Template()
 	 */
 	public function manageRegsAction()
 	{
-		$users = $this->getDoctrine()->getEntityManager()->createQuery('SELECT u FROM KekRozsakFrontBundle:User u WHERE u.acceptedBy IS NULL')->getResult();
+		$users = $this->getDoctrine()->getEntityManager()->createQuery('SELECT u FROM KekRozsakSecurityBundle:User u WHERE u.acceptedBy IS NULL')->getResult();
 
-		return $this->render('KekRozsakAdminBundle:Default:manage_regs.html.twig', array (
+		return array(
 			'users' => $users,
-		));
+		);
 	}
 }

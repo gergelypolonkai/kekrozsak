@@ -4,7 +4,7 @@ namespace KekRozsak\FrontBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use KekRozsak\FrontBundle\Entity\User;
+use \KekRozsak\SecurityBundle\Entity\User;
 
 /**
  * KekRozsak\FrontBundle\Entity\UserData
@@ -13,31 +13,40 @@ use KekRozsak\FrontBundle\Entity\User;
  */
 class UserData
 {
+	public function __construct()
+	{
+		$this->emailPublic = false;
+		$this->realNamePublic = false;
+		$this->msnAddressPublic = false;
+		$this->googleTalkPublic = false;
+		$this->skypePublic = false;
+		$this->phoneNumberPublic = false;
+	}
+
 	/**
-	 * @var User $user
+	 * @var KekRozsak\SecurityBundle\Entity\User $user
 	 * @ORM\Id
-	 * @ORM\OneToOne(targetEntity="User", inversedBy="userData")
-	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+	 * @ORM\OneToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User", inversedBy="userData")
+	 * @ORM\JoinColumn(name="user_id")
 	 */
 	protected $user;
 
 	/**
 	 * Set user
 	 *
-	 * @param User $user
+	 * @param KekRozsak\SecurityBundle\Entity\User $user
 	 * @return UserData
 	 */
-	public function setUser(User $user = null)
+	public function setUser(\KekRozsak\SecurityBundle\Entity\User $user)
 	{
 		$this->user = $user;
-		$this->userId = $user->getId();
 		return $this;
 	}
 
 	/**
 	 * Get user
 	 *
-	 * @return User 
+	 * @return KekRozsak\SecurityBundle\Entity\User
 	 */
 	public function getUser()
 	{
@@ -65,7 +74,7 @@ class UserData
 	/**
 	 * Get emailPublic
 	 *
-	 * @return boolean 
+	 * @return boolean
 	 */
 	public function getEmailPublic()
 	{
@@ -74,7 +83,7 @@ class UserData
 
 	/**
 	 * @var string $realName
-	 * @ORM\Column(name="real_name", type="string", length=100, nullable=true)
+	 * @ORM\Column(type="string", length=100, nullable=true, name="real_name")
 	 */
 	protected $realName;
 
@@ -84,7 +93,7 @@ class UserData
 	 * @param string $realName
 	 * @return UserData
 	 */
-	public function setRealName($realName)
+	public function setRealName($realName = null)
 	{
 		$this->realName = $realName;
 		return $this;
@@ -93,7 +102,7 @@ class UserData
 	/**
 	 * Get realName
 	 *
-	 * @return string 
+	 * @return string
 	 */
 	public function getRealName()
 	{
@@ -102,7 +111,7 @@ class UserData
 
 	/**
 	 * @var boolean $realNamePublic
-	 * @ORM\Column(name="real_name_public", type="boolean", nullable=false)
+	 * @ORM\Column(type="boolean", name="real_name_public")
 	 */
 	protected $realNamePublic;
 
@@ -112,7 +121,7 @@ class UserData
 	 * @param boolean $realNamePublic
 	 * @return UserData
 	 */
-	public function setRealNamePublic($realNamePublic)
+	public function setRealNamePublic($realNamePublic = false)
 	{
 		$this->realNamePublic = $realNamePublic;
 		return $this;
@@ -121,7 +130,7 @@ class UserData
 	/**
 	 * Get realNamePublic
 	 *
-	 * @return boolean 
+	 * @return boolean
 	 */
 	public function getRealNamePublic()
 	{
@@ -129,18 +138,18 @@ class UserData
 	}
 
 	/**
-	 * @var text $selfDescription
-	 * @ORM\Column(name="self_description", type="text", nullable=true)
+	 * @var string $selfDescription
+	 * @ORM\Column(type="text", nullable=true, name="self_description")
 	 */
 	protected $selfDescription;
 
 	/**
 	 * Set selfDescription
 	 *
-	 * @param text $selfDescription
+	 * @param string $selfDescription
 	 * @return UserData
 	 */
-	public function setSelfDescription($selfDescription)
+	public function setSelfDescription($selfDescription = null)
 	{
 		$this->selfDescription = $selfDescription;
 		return $this;
@@ -149,7 +158,7 @@ class UserData
 	/**
 	 * Get selfDescription
 	 *
-	 * @return text 
+	 * @return string
 	 */
 	public function getSelfDescription()
 	{
@@ -158,7 +167,7 @@ class UserData
 
 	/**
 	 * @var string $msnAddress
-	 * @ORM\Column(type="string", length=100, name="msn_address", nullable=true)
+	 * @ORM\Column(type="string", length=100, nullable=true, name="msn_address")
 	 */
 	protected $msnAddress;
 
@@ -168,7 +177,7 @@ class UserData
 	 * @param string $msnAddress
 	 * @return UserData
 	 */
-	public function setMsnAddress($msnAddress)
+	public function setMsnAddress($msnAddress = null)
 	{
 		$this->msnAddress = $msnAddress;
 		return $this;
@@ -177,7 +186,7 @@ class UserData
 	/**
 	 * Get msnAddress
 	 *
-	 * @return string 
+	 * @return string
 	 */
 	public function getMsnAddress()
 	{
@@ -186,7 +195,7 @@ class UserData
 
 	/**
 	 * @var boolean $msnAddressPublic
-	 * @ORM\Column(type="boolean", name="msn_address_public", nullable=false)
+	 * @ORM\Column(type="boolean", name="msn_address_public")
 	 */
 	protected $msnAddressPublic;
 
@@ -205,7 +214,7 @@ class UserData
 	/**
 	 * Get msnAddressPublic
 	 *
-	 * @return boolean 
+	 * @return boolean
 	 */
 	public function getMsnAddressPublic()
 	{
@@ -214,7 +223,7 @@ class UserData
 
 	/**
 	 * @var string $googleTalk
-	 * @ORM\Column(type="string", length=100, name="google_talk", nullable=true)
+	 * @ORM\Column(type="string", length=100, nullable=true, name="google_talk")
 	 */
 	protected $googleTalk;
 
@@ -224,7 +233,7 @@ class UserData
 	 * @param string $googleTalk
 	 * @return UserData
 	 */
-	public function setGoogleTalk($googleTalk)
+	public function setGoogleTalk($googleTalk = null)
 	{
 		$this->googleTalk = $googleTalk;
 		return $this;
@@ -242,7 +251,7 @@ class UserData
 
 	/**
 	 * @var boolean $googleTalkPublic
-	 * @ORM\Column(type="boolean", name="google_talk_public", nullable=false)
+	 * @ORM\Column(type="boolean", name="google_talk_public")
 	 */
 	protected $googleTalkPublic;
 
@@ -261,7 +270,7 @@ class UserData
 	/**
 	 * Get googleTalkPublic
 	 *
-	 * @return boolean 
+	 * @return boolean
 	 */
 	public function getGoogleTalkPublic()
 	{
@@ -270,7 +279,7 @@ class UserData
 
 	/**
 	 * @var string $skype
-	 * @ORM\Column(type="string", length=100, nullable=true)
+	 * @ORM\Column(type="string", length=100, nullable=true, name="skype")
 	 */
 	protected $skype;
 
@@ -280,7 +289,7 @@ class UserData
 	 * @param string $skype
 	 * @return UserData
 	 */
-	public function setSkype($skype)
+	public function setSkype($skype = null)
 	{
 		$this->skype = $skype;
 		return $this;
@@ -289,7 +298,7 @@ class UserData
 	/**
 	 * Get skype
 	 *
-	 * @return string 
+	 * @return string
 	 */
 	public function getSkype()
 	{
@@ -298,7 +307,7 @@ class UserData
 
 	/**
 	 * @var boolean $skypePublic
-	 * @ORM\Column(type="boolean", name="skype_public", nullable=false)
+	 * @ORM\Column(type="boolean", name="skype_public")
 	 */
 	protected $skypePublic;
 
@@ -317,7 +326,7 @@ class UserData
 	/**
 	 * Get skypePublic
 	 *
-	 * @return boolean 
+	 * @return boolean
 	 */
 	public function getSkypePublic()
 	{
@@ -326,7 +335,7 @@ class UserData
 
 	/**
 	 * @var string $phoneNumber
-	 * @ORM\Column(type="string", length=30, name="phone_number", nullable=true)
+	 * @ORM\Column(type="string", length=30, nullable=true, name="phone_number")
 	 */
 	protected $phoneNumber;
 
@@ -345,7 +354,7 @@ class UserData
 	/**
 	 * Get phoneNumber
 	 *
-	 * @return string 
+	 * @return string
 	 */
 	public function getPhoneNumber()
 	{
@@ -354,7 +363,7 @@ class UserData
 
 	/**
 	 * @var boolean $phoneNumberPublic
-	 * @ORM\Column(type="boolean", name="phone_number_public", nullable=false)
+	 * @ORM\Column(type="boolean", name="phone_number_public")
 	 */
 	protected $phoneNumberPublic;
 
@@ -373,7 +382,7 @@ class UserData
 	/**
 	 * Get phoneNumberPublic
 	 *
-	 * @return boolean 
+	 * @return boolean
 	 */
 	public function getPhoneNumberPublic()
 	{

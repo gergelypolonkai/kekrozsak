@@ -53,6 +53,11 @@ class UnmodifiableFormConfig implements FormConfigInterface
     private $virtual;
 
     /**
+     * @var Boolean
+     */
+    private $compound;
+
+    /**
      * @var array
      */
     private $types;
@@ -60,12 +65,12 @@ class UnmodifiableFormConfig implements FormConfigInterface
     /**
      * @var array
      */
-    private $clientTransformers;
+    private $viewTransformers;
 
     /**
      * @var array
      */
-    private $normTransformers;
+    private $modelTransformers;
 
     /**
      * @var DataMapperInterface
@@ -135,9 +140,10 @@ class UnmodifiableFormConfig implements FormConfigInterface
         $this->mapped = $config->getMapped();
         $this->byReference = $config->getByReference();
         $this->virtual = $config->getVirtual();
+        $this->compound = $config->getCompound();
         $this->types = $config->getTypes();
-        $this->clientTransformers = $config->getViewTransformers();
-        $this->normTransformers = $config->getModelTransformers();
+        $this->viewTransformers = $config->getViewTransformers();
+        $this->modelTransformers = $config->getModelTransformers();
         $this->dataMapper = $config->getDataMapper();
         $this->validators = $config->getValidators();
         $this->required = $config->getRequired();
@@ -201,6 +207,14 @@ class UnmodifiableFormConfig implements FormConfigInterface
     /**
      * {@inheritdoc}
      */
+    public function getCompound()
+    {
+        return $this->compound;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getTypes()
     {
         return $this->types;
@@ -211,7 +225,7 @@ class UnmodifiableFormConfig implements FormConfigInterface
      */
     public function getViewTransformers()
     {
-        return $this->clientTransformers;
+        return $this->viewTransformers;
     }
 
     /**
@@ -219,7 +233,7 @@ class UnmodifiableFormConfig implements FormConfigInterface
      */
     public function getModelTransformers()
     {
-        return $this->normTransformers;
+        return $this->modelTransformers;
     }
 
     /**

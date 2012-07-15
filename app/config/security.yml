@@ -5,7 +5,7 @@ jms_security_extra:
 security:
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
-        KekRozsak\FrontBundle\Entity\User:
+        KekRozsak\SecurityBundle\Entity\User:
             id: kek_rozsak_security.encoder.crypt
 
     role_hierarchy:
@@ -15,7 +15,7 @@ security:
     providers:
         user_db:
             entity:
-                class: KekRozsak\FrontBundle\Entity\User
+                class: KekRozsak\SecurityBundle\Entity\User
                 property: username
 
     firewalls:
@@ -29,6 +29,7 @@ security:
 
         members:
             pattern:    ^/
+
             form_login:
                 check_path: /login_check
                 login_path: /login
@@ -42,7 +43,7 @@ security:
         - { path: ^/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/cikk/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/jelentkezes, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/most-varj, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/most_varj, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: [ IS_AUTHENTICATED_FULLY, IS_AUTHENTICATED_REMEMBERED ] }
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
         #- { path: ^/_internal/secure, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }

@@ -4,10 +4,9 @@ namespace KekRozsak\FrontBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use KekRozsak\FrontBundle\Entity\User;
+use KekRozsak\SecurityBundle\Entity\User;
 
-/**
- * KekRozsak\FrontBundle\Entity\Article
+/** 
  * @ORM\Entity
  * @ORM\Table(name="articles")
  */
@@ -17,14 +16,14 @@ class Article
 	 * @var integer $id
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="AUTO")
-	 * @ORM\Column(type="integer", name="id")
+	 * @ORM\Column(type="integer")
 	 */
 	private $id;
 
 	/**
 	 * Get id
 	 *
-	 * @return integer 
+	 * @return integer
 	 */
 	public function getId()
 	{
@@ -32,8 +31,65 @@ class Article
 	}
 
 	/**
+	 * @var KekRozsak\SecurityBundle\Entity\User $createdBy
+	 * @ORM\ManyToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User")
+	 * @ORM\JoinColumn(name="created_by_id")
+	 */
+	private $createdBy;
+
+	/**
+	 * Set createdBy
+	 *
+	 * @param KekRozsak\SecurityBundle\Entity\User $createdBy
+	 * @return Article
+	 */
+	public function setCreatedBy(\KekRozsak\SecurityBundle\Entity\User $createdBy)
+	{
+		$this->createdBy = $createdBy;
+		return $this;
+	}
+
+	/**
+	 * Get createdBy
+	 *
+	 * @return KekRozsak\SecurityBundle\Entity\User
+	 */
+	public function getCreatedBy()
+	{
+		return $this->createdBy;
+	}
+
+	/**
+	 * @var DateTime $createdAt
+	 * @ORM\Column(type="datetime", name="created_at", nullable=false)
+	 */
+	private $createdAt;
+
+	/**
+	 * Set createdAt
+	 *
+	 * @param DateTime $createdAt
+	 * @return Article
+	 */
+	public function setCreatedAt(\DateTime $createdAt)
+	{
+		$this->createdAt = $createdAt;
+		return $this;
+	}
+
+	/**
+	 * Get createdAt
+	 *
+	 * @return DateTime
+	 */
+	public function getCreatedAt()
+	{
+		return $this->createdAt;
+	}
+
+	/**
 	 * @var string $title
-	 * @ORM\Column(type="string", length=100, nullable=false)
+	 * @ORM\Column(type="string", length=100, nullable=false, unique=true)
 	 */
 	private $title;
 
@@ -52,7 +108,7 @@ class Article
 	/**
 	 * Get title
 	 *
-	 * @return string 
+	 * @return string
 	 */
 	public function getTitle()
 	{
@@ -80,7 +136,7 @@ class Article
 	/**
 	 * Get slug
 	 *
-	 * @return string 
+	 * @return string
 	 */
 	public function getSlug()
 	{
@@ -88,7 +144,7 @@ class Article
 	}
 
 	/**
-	 * @var text $text
+	 * @var string $text
 	 * @ORM\Column(type="text", nullable=false)
 	 */
 	private $text;
@@ -96,7 +152,7 @@ class Article
 	/**
 	 * Set text
 	 *
-	 * @param text $text
+	 * @param string $text
 	 * @return Article
 	 */
 	public function setText($text)
@@ -108,7 +164,7 @@ class Article
 	/**
 	 * Get text
 	 *
-	 * @return text 
+	 * return string
 	 */
 	public function getText()
 	{
@@ -116,178 +172,8 @@ class Article
 	}
 
 	/**
-	 * @var string $source
-	 * @ORM\Column(type="string", length=255, nullable=true)
-	 */
-	private $source;
-
-	/**
-	 * Set source
-	 *
-	 * @param string $source
-	 * @return Article
-	 */
-	public function setSource($source)
-	{
-		$this->source = $source;
-		return $this;
-	}
-
-	/**
-	 * Get source
-	 *
-	 * @return string 
-	 */
-	public function getSource()
-	{
-		return $this->source;
-	}
-
-	/**
-	 * @var DateTime $createdAt
-	 * @ORM\Column(type="datetime", nullable=false, name="created_at")
-	 */
-	private $createdAt;
-
-	/**
-	 * Set createdAt
-	 *
-	 * @param DateTime $createdAt
-	 * @return Article
-	 */
-	public function setCreatedAt(\DateTime $createdAt)
-	{
-		$this->createdAt = $createdAt;
-		return $this;
-	}
-
-	/**
-	 * Get createdAt
-	 *
-	 * @return DateTime 
-	 */
-	public function getCreatedAt()
-	{
-		return $this->createdAt;
-	}
-
-	/**
-	 * @var User $createdBy
-	 * @ORM\ManyToOne(targetEntity="User", inversedBy="articles")
-	 * @ORM\JoinColumn(name="created_by_id", referencedColumnName="id")
-	 */
-	private $createdBy;
-
-	/**
-	 * Set createdBy
-	 *
-	 * @param User $createdBy
-	 * @return Article
-	 */
-	public function setCreatedBy(User $createdBy = null)
-	{
-		$this->createdBy = $createdBy;
-		return $this;
-	}
-
-	/**
-	 * Get createdBy
-	 *
-	 * @return User 
-	 */
-	public function getCreatedBy()
-	{
-		return $this->createdBy;
-	}
-
-	/**
-	 * @var DateTime $updatedAt
-	 * @ORM\Column(type="datetime", nullable=true, name="updated_at")
-	 */
-	private $updatedAt;
-
-	/**
-	 * Set updatedAt
-	 *
-	 * @param DateTime $updatedAt
-	 * @return Article
-	 */
-	public function setUpdatedAt(\DateTime $updatedAt)
-	{
-		$this->updatedAt = $updatedAt;
-		return $this;
-	}
-
-	/**
-	 * Get updatedAt
-	 *
-	 * @return DateTime 
-	 */
-	public function getUpdatedAt()
-	{
-		return $this->updatedAt;
-	}
-
-	/**
-	 * @var User $updatedBy
-	 * @ORM\ManyToOne(targetEntity="User")
-	 * @ORM\JoinColumn(name="updated_by_id", referencedColumnName="id")
-	 */
-	private $updatedBy;
-
-	/**
-	 * Set updatedBy
-	 *
-	 * @param User $updatedBy
-	 * @return Article
-	 */
-	public function setUpdatedBy(User $updatedBy = null)
-	{
-		$this->updatedBy = $updatedBy;
-		return $this;
-	}
-
-	/**
-	 * Get updatedBy
-	 *
-	 * @return User 
-	 */
-	public function getUpdatedBy()
-	{
-		return $this->updatedBy;
-	}
-
-	/**
-	 * @var text $updateReason
-	 * @ORM\Column(type="text", nullable=true, name="update_reason")
-	 */
-	private $updateReason;
-
-	/**
-	 * Set updateReason
-	 *
-	 * @param text $updateReason
-	 * @return Article
-	 */
-	public function setUpdateReason($updateReason)
-	{
-		$this->updateReason = $updateReason;
-		return $this;
-	}
-
-	/**
-	 * Get updateReason
-	 *
-	 * @return text 
-	 */
-	public function getUpdateReason()
-	{
-		return $this->updateReason;
-	}
-
-	/**
 	 * @var boolean $mainPage
-	 * @ORM\Column(type="boolean", name="main_page", nullable=true)
+	 * @ORM\Column(type="boolean", name="main_page")
 	 */
 	private $mainPage;
 
@@ -306,7 +192,7 @@ class Article
 	/**
 	 * Get mainPage
 	 *
-	 * @return boolean 
+	 * @return boolean
 	 */
 	public function getMainPage()
 	{
@@ -314,7 +200,7 @@ class Article
 	}
 
 	/**
-	 * @var boolean $public
+	 * @var boolean public
 	 * @ORM\Column(type="boolean", nullable=false)
 	 */
 	private $public;
@@ -325,7 +211,7 @@ class Article
 	 * @param boolean $public
 	 * @return Article
 	 */
-	public function setPublic($public)
+	public function setPublic($public = false)
 	{
 		$this->public = $public;
 		return $this;
@@ -334,10 +220,39 @@ class Article
 	/**
 	 * Get public
 	 *
-	 * @return boolean 
+	 * @return boolean
 	 */
-	public function getPublic()
+	public function isPublic()
 	{
 		return $this->public;
 	}
+
+	/**
+	 * @var string $source
+	 * @ORM\Column(type="string", nullable=true)
+	 */
+	private $source;
+
+	/**
+	 * Set source
+	 *
+	 * @param string $source
+	 * @return Article
+	 */
+	public function setSource($source = null)
+	{
+		$this->source = $source;
+		return $this;
+	}
+
+	/**
+	 * Get source
+	 *
+	 * @return string
+	 */
+	public function getSource()
+	{
+		return $this->source;
+	}
 }
+
