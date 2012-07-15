@@ -128,6 +128,8 @@ class ForumPost
 	public function setTopic(ForumTopic $topic)
 	{
 		$this->topic = $topic;
+		if ($topic->getLastPost()->getCreatedAt() < $this->createdAt)
+			$topic->setLastPost($this);
 		return $this;
 	}
 
