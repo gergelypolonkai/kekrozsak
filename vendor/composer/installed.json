@@ -3,7 +3,7 @@
         "name": "jms/metadata",
         "version": "1.1.1",
         "version_normalized": "1.1.1.0",
-        "time": "2011-12-29 22:32:49",
+        "time": "2011-12-29 20:32:49",
         "source": {
             "type": "git",
             "url": "https://github.com/schmittjoh/metadata",
@@ -47,7 +47,7 @@
         "name": "jms/cg",
         "version": "1.0.0",
         "version_normalized": "1.0.0.0",
-        "time": "2011-12-29 21:40:52",
+        "time": "2011-12-29 19:40:52",
         "source": {
             "type": "git",
             "url": "git://github.com/schmittjoh/cg-library.git",
@@ -89,7 +89,7 @@
         "version": "1.0.0",
         "version_normalized": "1.0.0.0",
         "target-dir": "JMS/AopBundle",
-        "time": "2011-12-29 21:50:26",
+        "time": "2011-12-29 19:50:26",
         "source": {
             "type": "git",
             "url": "https://github.com/schmittjoh/JMSAopBundle",
@@ -133,7 +133,7 @@
         "version": "1.1.0",
         "version_normalized": "1.1.0.0",
         "target-dir": "JMS/SecurityExtraBundle",
-        "time": "2011-12-30 01:38:12",
+        "time": "2011-12-29 23:38:12",
         "source": {
             "type": "git",
             "url": "https://github.com/schmittjoh/JMSSecurityExtraBundle",
@@ -178,7 +178,7 @@
         "version": "1.0.1",
         "version_normalized": "1.0.1.0",
         "target-dir": "JMS/DiExtraBundle",
-        "time": "2012-02-24 17:01:54",
+        "time": "2012-02-24 15:01:54",
         "source": {
             "type": "git",
             "url": "https://github.com/schmittjoh/JMSDiExtraBundle",
@@ -221,7 +221,7 @@
         "name": "doctrine/common",
         "version": "2.2.2",
         "version_normalized": "2.2.2.0",
-        "time": "2012-04-07 03:46:44",
+        "time": "2012-04-06 23:46:44",
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/common",
@@ -287,7 +287,7 @@
         "name": "monolog/monolog",
         "version": "1.1.0",
         "version_normalized": "1.1.0.0",
-        "time": "2012-04-17 14:27:40",
+        "time": "2012-04-17 10:27:40",
         "source": {
             "type": "git",
             "url": "https://github.com/Seldaek/monolog.git",
@@ -337,7 +337,7 @@
         "name": "twig/extensions",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
-        "time": "2012-05-15 21:28:19",
+        "time": "2012-05-15 17:28:19",
         "source": {
             "type": "git",
             "url": "https://github.com/fabpot/Twig-extensions",
@@ -382,7 +382,7 @@
         "name": "kriswallsmith/assetic",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
-        "time": "2012-06-07 01:41:54",
+        "time": "2012-06-06 21:41:54",
         "source": {
             "type": "git",
             "url": "http://github.com/kriswallsmith/assetic.git",
@@ -442,7 +442,7 @@
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "target-dir": "Doctrine/Bundle/DoctrineBundle",
-        "time": "2012-07-02 10:42:17",
+        "time": "2012-07-02 06:42:17",
         "source": {
             "type": "git",
             "url": "git://github.com/doctrine/DoctrineBundle.git",
@@ -516,7 +516,7 @@
         "name": "doctrine/orm",
         "version": "2.2.x-dev",
         "version_normalized": "2.2.9999999.9999999-dev",
-        "time": "2012-07-06 07:48:00",
+        "time": "2012-07-06 03:48:00",
         "source": {
             "type": "git",
             "url": "git://github.com/doctrine/doctrine2.git",
@@ -581,7 +581,7 @@
         "name": "doctrine/dbal",
         "version": "2.2.x-dev",
         "version_normalized": "2.2.9999999.9999999-dev",
-        "time": "2012-07-07 18:30:35",
+        "time": "2012-07-07 14:30:35",
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/dbal",
@@ -647,7 +647,7 @@
         "version": "2.0.x-dev",
         "version_normalized": "2.0.9999999.9999999-dev",
         "target-dir": "Ivory/CKEditorBundle",
-        "time": "2012-05-16 18:38:27",
+        "time": "2012-05-16 14:38:27",
         "source": {
             "type": "git",
             "url": "https://github.com/egeloen/IvoryCKEditorBundle",
@@ -691,7 +691,7 @@
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "target-dir": "Sensio/Bundle/GeneratorBundle",
-        "time": "2012-07-13 00:04:48",
+        "time": "2012-07-12 20:04:48",
         "source": {
             "type": "git",
             "url": "https://github.com/sensio/SensioGeneratorBundle",
@@ -744,7 +744,7 @@
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "target-dir": "Symfony/Bundle/AsseticBundle",
-        "time": "2012-07-12 06:51:17",
+        "time": "2012-07-12 02:51:17",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/AsseticBundle",
@@ -800,7 +800,7 @@
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "target-dir": "Symfony/Bundle/MonologBundle",
-        "time": "2012-06-30 05:48:07",
+        "time": "2012-06-30 01:48:07",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/MonologBundle",
@@ -860,7 +860,7 @@
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "target-dir": "Sensio/Bundle/FrameworkExtraBundle",
-        "time": "2012-07-11 23:13:52",
+        "time": "2012-07-11 19:13:52",
         "source": {
             "type": "git",
             "url": "https://github.com/sensio/SensioFrameworkExtraBundle",
@@ -909,7 +909,7 @@
         "name": "twig/twig",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
-        "time": "2012-07-15 23:42:44",
+        "time": "2012-07-15 19:42:44",
         "source": {
             "type": "git",
             "url": "git://github.com/fabpot/Twig.git",
@@ -964,7 +964,7 @@
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "target-dir": "Symfony/Bundle/SwiftmailerBundle",
-        "time": "2012-07-05 11:33:34",
+        "time": "2012-07-05 07:33:34",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/SwiftmailerBundle",
@@ -1022,7 +1022,7 @@
         "name": "swiftmailer/swiftmailer",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
-        "time": "2012-07-13 12:47:17",
+        "time": "2012-07-13 08:47:17",
         "source": {
             "type": "git",
             "url": "git://github.com/swiftmailer/swiftmailer.git",
@@ -1077,7 +1077,7 @@
         "name": "symfony/symfony",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
-        "time": "2012-07-15 16:27:15",
+        "time": "2012-07-15 12:27:15",
         "source": {
             "type": "git",
             "url": "git://github.com/symfony/symfony.git",
@@ -1179,7 +1179,7 @@
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "target-dir": "Sensio/Bundle/DistributionBundle",
-        "time": "2012-07-15 10:24:10",
+        "time": "2012-07-15 06:24:10",
         "source": {
             "type": "git",
             "url": "https://github.com/sensio/SensioDistributionBundle",
