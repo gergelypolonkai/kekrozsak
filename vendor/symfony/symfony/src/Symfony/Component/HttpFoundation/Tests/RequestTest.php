@@ -11,7 +11,6 @@
 
 namespace Symfony\Component\HttpFoundation\Tests;
 
-
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
@@ -619,6 +618,11 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 
         $request->setMethod('POST');
         $request->request->set('_method', 'purge');
+        $this->assertEquals('PURGE', $request->getMethod(), '->getMethod() returns the method from _method if defined and POST');
+
+        $request->setMethod('POST');
+        $request->request->remove('_method');
+        $request->query->set('_method', 'purge');
         $this->assertEquals('PURGE', $request->getMethod(), '->getMethod() returns the method from _method if defined and POST');
 
         $request->setMethod('POST');

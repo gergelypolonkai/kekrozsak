@@ -58,12 +58,12 @@ abstract class Kernel implements KernelInterface, TerminableInterface
     protected $classes;
     protected $errorReportingLevel;
 
-    const VERSION         = '2.1.0-BETA2';
+    const VERSION         = '2.1.0-DEV';
     const VERSION_ID      = '20100';
     const MAJOR_VERSION   = '2';
     const MINOR_VERSION   = '1';
     const RELEASE_VERSION = '0';
-    const EXTRA_VERSION   = 'BETA';
+    const EXTRA_VERSION   = 'DEV';
 
     /**
      * Constructor.
@@ -79,7 +79,7 @@ abstract class Kernel implements KernelInterface, TerminableInterface
         $this->debug = (Boolean) $debug;
         $this->booted = false;
         $this->rootDir = $this->getRootDir();
-        $this->name = preg_replace('/[^a-zA-Z0-9_]+/', '', basename($this->rootDir));
+        $this->name = $this->getName();
         $this->classes = array();
 
         if ($this->debug) {
@@ -354,6 +354,10 @@ abstract class Kernel implements KernelInterface, TerminableInterface
      */
     public function getName()
     {
+        if (null === $this->name) {
+            $this->name = preg_replace('/[^a-zA-Z0-9_]+/', '', basename($this->rootDir));
+        }
+
         return $this->name;
     }
 
@@ -748,7 +752,7 @@ abstract class Kernel implements KernelInterface, TerminableInterface
      *
      * @return string The PHP string with the comments removed
      */
-    static public function stripComments($source)
+    public static function stripComments($source)
     {
         if (!function_exists('token_get_all')) {
             return $source;

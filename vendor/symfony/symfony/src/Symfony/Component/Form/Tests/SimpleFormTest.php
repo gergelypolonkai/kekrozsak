@@ -15,22 +15,18 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\Form\Util\PropertyPath;
 use Symfony\Component\Form\FormConfig;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\Exception\TransformationFailedException;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Tests\Fixtures\FixedDataTransformer;
 use Symfony\Component\Form\Tests\Fixtures\FixedFilterListener;
 
 class SimpleFormTest extends AbstractFormTest
 {
-    public function testDataIsInitializedEmpty()
+    public function testDataIsInitializedToConfiguredValue()
     {
         $model = new FixedDataTransformer(array(
-            '' => 'foo',
+            'default' => 'foo',
         ));
         $view = new FixedDataTransformer(array(
             'foo' => 'bar',
@@ -39,9 +35,10 @@ class SimpleFormTest extends AbstractFormTest
         $config = new FormConfig('name', null, $this->dispatcher);
         $config->addViewTransformer($view);
         $config->addModelTransformer($model);
+        $config->setData('default');
         $form = new Form($config);
 
-        $this->assertNull($form->getData());
+        $this->assertSame('default', $form->getData());
         $this->assertSame('foo', $form->getNormData());
         $this->assertSame('bar', $form->getViewData());
     }
@@ -380,6 +377,18 @@ class SimpleFormTest extends AbstractFormTest
         $this->assertSame('', $form->getViewData());
     }
 
+    public function testSetDataIsIgnoredIfDataIsLocked()
+    {
+        $form = $this->getBuilder()
+            ->setData('default')
+            ->setDataLocked(true)
+            ->getForm();
+
+        $form->setData('foobar');
+
+        $this->assertSame('default', $form->getData());
+    }
+
     public function testBindConvertsEmptyToNullIfNoTransformer()
     {
         $form = $this->getBuilder()->getForm();
@@ -416,7 +425,7 @@ class SimpleFormTest extends AbstractFormTest
         )))
             ->getForm();
 
-        $form->setData('app');
+        $form->bind('client');
 
         $this->assertEquals('app', $form->getData());
         $this->assertEquals('filterednorm', $form->getNormData());
@@ -471,7 +480,7 @@ class SimpleFormTest extends AbstractFormTest
         $this->assertTrue($this->form->isSynchronized());
     }
 
-    public function testNotSynchronizedIfTransformationFailed()
+    public function testNotSynchronizedIfViewReverseTransformationFailed()
     {
         $transformer = $this->getDataTransformer();
         $transformer->expects($this->once())
@@ -480,6 +489,22 @@ class SimpleFormTest extends AbstractFormTest
 
         $form = $this->getBuilder()
             ->addViewTransformer($transformer)
+            ->getForm();
+
+        $form->bind('foobar');
+
+        $this->assertFalse($form->isSynchronized());
+    }
+
+    public function testNotSynchronizedIfModelReverseTransformationFailed()
+    {
+        $transformer = $this->getDataTransformer();
+        $transformer->expects($this->once())
+            ->method('reverseTransform')
+            ->will($this->throwException(new TransformationFailedException()));
+
+        $form = $this->getBuilder()
+            ->addModelTransformer($transformer)
             ->getForm();
 
         $form->bind('foobar');
@@ -552,13 +577,54 @@ class SimpleFormTest extends AbstractFormTest
         $this->assertSame(array(), $this->form->getErrors());
     }
 
-    public function testCreateViewAcceptsParent()
+    public function testCreateView()
     {
-        $parent = new FormView('form');
+        $type = $this->getMock('Symfony\Component\Form\ResolvedFormTypeInterface');
+        $view = $this->getMock('Symfony\Component\Form\Tests\FormViewInterface');
+        $form = $this->getBuilder()->setType($type)->getForm();
 
-        $view = $this->form->createView($parent);
+        $type->expects($this->once())
+            ->method('createView')
+            ->with($form)
+            ->will($this->returnValue($view));
 
-        $this->assertSame($parent, $view->getParent());
+        $this->assertSame($view, $form->createView());
+    }
+
+    public function testCreateViewWithParent()
+    {
+        $type = $this->getMock('Symfony\Component\Form\ResolvedFormTypeInterface');
+        $view = $this->getMock('Symfony\Component\Form\Tests\FormViewInterface');
+        $parentForm = $this->getMock('Symfony\Component\Form\Tests\FormInterface');
+        $parentView = $this->getMock('Symfony\Component\Form\Tests\FormViewInterface');
+        $form = $this->getBuilder()->setType($type)->getForm();
+        $form->setParent($parentForm);
+
+        $parentForm->expects($this->once())
+            ->method('createView')
+            ->will($this->returnValue($parentView));
+
+        $type->expects($this->once())
+            ->method('createView')
+            ->with($form, $parentView)
+            ->will($this->returnValue($view));
+
+        $this->assertSame($view, $form->createView());
+    }
+
+    public function testCreateViewWithExplicitParent()
+    {
+        $type = $this->getMock('Symfony\Component\Form\ResolvedFormTypeInterface');
+        $view = $this->getMock('Symfony\Component\Form\Tests\FormViewInterface');
+        $parentView = $this->getMock('Symfony\Component\Form\Tests\FormViewInterface');
+        $form = $this->getBuilder()->setType($type)->getForm();
+
+        $type->expects($this->once())
+            ->method('createView')
+            ->with($form, $parentView)
+            ->will($this->returnValue($view));
+
+        $this->assertSame($view, $form->createView($parentView));
     }
 
     public function testGetErrorsAsString()

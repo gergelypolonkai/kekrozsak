@@ -144,6 +144,28 @@ class RoutingTest extends \PHPUnit_Framework_TestCase
         $router->getRouteCollection()->get('foo');
     }
 
+    /**
+     * @dataProvider getNonStringValues
+     */
+    public function testDefaultValuesAsNonStrings($value)
+    {
+        $routes = new RouteCollection();
+        $routes->add('foo', new Route('foo', array('foo' => $value), array('foo' => '\d+')));
+
+        $sc = $this->getServiceContainer($routes);
+
+        $router = new Router($sc, 'foo');
+
+        $route = $router->getRouteCollection()->get('foo');
+
+        $this->assertSame($value, $route->getDefault('foo'));
+    }
+
+    public function getNonStringValues()
+    {
+        return array(array(null), array(false), array(true), array(new \stdClass()), array(array('foo', 'bar')));
+    }
+
     private function getServiceContainer(RouteCollection $routes)
     {
         $loader = $this->getMock('Symfony\Component\Config\Loader\LoaderInterface');

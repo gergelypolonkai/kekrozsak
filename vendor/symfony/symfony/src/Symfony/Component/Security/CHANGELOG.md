@@ -20,3 +20,8 @@ CHANGELOG
  * `ObjectIdentity::fromDomainObject`, `UserSecurityIdentity::fromAccount` and
    `UserSecurityIdentity::fromToken` now return correct identities for proxies
    objects (e.g. Doctrine proxies)
+ * [BC BREAK] moved the default authentication success and failure handling to
+   seperate classes. The order of arguments in the constructor of the
+   `AbstractAuthenticationListener` has changed.
+ * [BC BREAK] moved the default logout sucess handling to a seperate class. The
+   order of arguments in the constructor of `LogoutListener` has changed.

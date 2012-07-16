@@ -13,6 +13,15 @@
     configuration (i.e. `config.yml`), merging could yield a set of base URL's
     for multiple environments.
 
+ * The priorities for the built-in listeners have changed:
+
+                                       2.0         2.1
+   security.firewall   request         64          8
+   locale listener     early_request   253         255
+                       request         -1          16
+   router listener     early_request   255         128
+                       request         10          32
+
 ### Doctrine
 
   * The DoctrineBundle is moved from the Symfony repository to the Doctrine repository.
@@ -67,7 +76,7 @@
 
 ### HttpFoundation
 
- * [BC BREAK] The current locale for the user is not stored anymore in the session
+ * The current locale for the user is not stored anymore in the session
 
    You can simulate the old behavior by registering a listener that looks like the following, if the paramater which handle locale value in the request is `_locale`:
 
@@ -134,7 +143,7 @@
         public function equals(UserInterface $user) { /* ... */ }
         // ...
     }
-```
+    ```
 
     After:
 
@@ -146,6 +155,7 @@
         // ...
     }
     ```
+
   * The custom factories for the firewall configuration are now
     registered during the build method of bundles instead of being registered
     by the end-user. This means that you will you need to remove the 'factories'
@@ -190,7 +200,7 @@
     implementations of this interface to reflect this change.
 
   * The `UserPassword` constraint has moved from the Security Bundle to the Security Component:
-    
+
      Before:
 
      ```
@@ -238,6 +248,16 @@
     public function buildView(FormViewInterface $view, FormInterface $form, array $options)
     public function finishView(FormViewInterface $view, FormInterface $form, array $options)
     ```
+
+  * The method `createBuilder` was removed from `FormTypeInterface` for performance
+    reasons. It is now not possible anymore to use custom implementations of
+    `FormBuilderInterface` for specific form types.
+
+    If you are in such a situation, you can subclass `FormRegistry` instead and override
+    `resolveType` to return a custom `ResolvedFormTypeInterface` implementation, within
+    which you can create your own `FormBuilderInterface` implementation. You should
+    register this custom registry class under the service name "form.registry" in order
+    to replace the default implementation.
 
   * If you previously inherited from `FieldType`, you should now inherit from
     `FormType`. You should also set the option `compound` to `false` if your field
@@ -556,6 +576,30 @@
     {% endblock %}
     ````
 
+  * Custom styling of individual rows of a collection form has been removed for
+    performance reasons. Instead, all rows now have the same block name, where
+    the word "entry" replaces the previous occurence of the row index.
+
+    Before:
+
+    ```
+    {% block _author_tags_0_label %}
+        {# ... #}
+    {% endblock %}
+
+    {% block _author_tags_1_label %}
+        {# ... #}
+    {% endblock %}
+    ```
+
+    After:
+
+    ```
+    {% block _author_tags_entry_label %}
+        {# ... #}
+    {% endblock %}
+    ```
+
 #### Other BC Breaks
 
   * The order of the first two arguments of the methods `createNamed` and
@@ -634,6 +678,20 @@
     removed or made private. Instead of the first two, you can now use
     `getChoices()` and `getChoicesByValues()`. For the latter two, no
     replacement exists.
+
+  * HTML attributes are now passed in the `label_attr` variable for the `form_label` function.
+
+    Before:
+
+    ```
+    {{ form_label(form.name, 'Your Name', { 'attr': {'class': 'foo'} }) }}
+    ```
+
+    After:
+
+    ```
+    {{ form_label(form.name, 'Your Name', { 'label_attr': {'class': 'foo'} }) }}
+    ```
 
   * `EntitiesToArrayTransformer` and `EntityToIdTransformer` were removed.
     The former was replaced by `CollectionToArrayTransformer` in combination
@@ -860,6 +918,7 @@
       * `getClientData`
       * `getChildren`
       * `hasChildren`
+      * `bindRequest`
 
     Before:
 
@@ -891,6 +950,20 @@
     if (count($form) > 0) {
     ```
 
+    Instead of `bindRequest`, you should now simply call `bind`:
+
+    Before:
+
+    ```
+    $form->bindRequest($request);
+    ```
+
+    After:
+
+    ```
+    $form->bind($request);
+    ```
+
   * The option "validation_constraint" was deprecated and will be removed
     in Symfony 2.3. You should use the option "constraints" instead,
     where you can pass one or more constraints for a form.
@@ -920,6 +993,64 @@
             new MinLength(3),
         ),
     ));
+    ```
+
+    Be aware that constraints will now only be validated if they belong
+    to the validated group! So if you validate a form in group "Custom"
+    and previously did:
+
+    ```
+    $builder->add('name', 'text', array(
+        'validation_constraint' => new NotBlank(),
+    ));
+    ```
+
+    Then you need to add the constraint to the group "Custom" now:
+
+    ```
+    $builder->add('name', 'text', array(
+        'constraints' => new NotBlank(array('groups' => 'Custom')),
+    ));
+    ```
+
+  * The options "data_timezone" and "user_timezone" in `DateType`,
+    `DateTimeType` and `TimeType` were deprecated and will be removed in
+    Symfony 2.3. They were renamed to "model_timezone" and "view_timezone".
+
+    Before:
+
+    ```
+    $builder->add('scheduledFor', 'date', array(
+        'data_timezone' => 'UTC',
+        'user_timezone' => 'America/New_York',
+    ));
+    ```
+
+    After:
+
+    ```
+    $builder->add('scheduledFor', 'date', array(
+        'model_timezone' => 'UTC',
+        'view_timezone' => 'America/New_York',
+    ));
+    ```
+
+  * The methods `addType`, `hasType` and `getType` in `FormFactory` are deprecated
+    and will be removed in Symfony 2.3. You should use the methods with the same
+    name on the `FormRegistry` instead.
+
+    Before:
+
+    ```
+    $this->get('form.factory')->addType(new MyFormType());
+    ```
+
+    After:
+
+    ```
+    $registry = $this->get('form.registry');
+
+    $registry->addType($registry->resolveType(new MyFormType()));
     ```
 
 ### Validator
@@ -1055,6 +1186,54 @@
     ```
     /** @Assert\Valid(deep = true) */
     private $recursiveCollection;
+    ```
+
+  * The `Size`, `Min` and `Max` constraints were deprecated and will be removed in
+    Symfony 2.3. You should use the new constraint `Range` instead.
+
+    Before:
+
+    ```
+    /** @Assert\Size(min = 2, max = 16) */
+    private $numberOfCpus;
+    ```
+
+    After:
+
+    ```
+    /** @Assert\Range(min = 2, max = 16) */
+    private $numberOfCpus;
+    ```
+
+    Before:
+
+    ```
+    /** @Assert\Min(2) */
+    private $numberOfCpus;
+    ```
+
+    After:
+
+    ```
+    /** @Assert\Range(min = 2) */
+    private $numberOfCpus;
+    ```
+
+  * The `MinLength` and `MaxLength` constraints were deprecated and will be
+    removed in Symfony 2.3. You should use the new constraint `Length` instead.
+
+    Before:
+
+    ```
+    /** @Assert\MinLength(8) */
+    private $password;
+    ```
+
+    After:
+
+    ```
+    /** @Assert\Length(min = 8) */
+    private $password;
     ```
 
 ### Session

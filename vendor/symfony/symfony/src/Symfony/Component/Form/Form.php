@@ -18,7 +18,6 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Util\FormUtil;
 use Symfony\Component\Form\Util\PropertyPath;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Form represents a form.
@@ -196,11 +195,17 @@ class Form implements \IteratorAggregate, FormInterface
      * @return array An array of FormTypeInterface
      *
      * @deprecated Deprecated since version 2.1, to be removed in 2.3. Use
-     *             {@link getConfig()} and {@link FormConfigInterface::getTypes()} instead.
+     *             {@link getConfig()} and {@link FormConfigInterface::getType()} instead.
      */
     public function getTypes()
     {
-        return $this->config->getTypes();
+        $types = array();
+
+        for ($type = $this->config->getType(); null !== $type; $type = $type->getParent()) {
+            array_unshift($types, $type->getInnerType());
+        }
+
+        return $types;
     }
 
     /**
@@ -330,6 +335,11 @@ class Form implements \IteratorAggregate, FormInterface
     {
         if ($this->bound) {
             throw new AlreadyBoundException('You cannot change the data of a bound form');
+        }
+
+        // Don't allow modifications of the configured data if the data is locked
+        if ($this->config->getDataLocked() && $modelData !== $this->config->getData()) {
+            return $this;
         }
 
         if (is_object($modelData) && !$this->config->getByReference()) {
@@ -540,11 +550,7 @@ class Form implements \IteratorAggregate, FormInterface
         try {
             // Normalize data to unified representation
             $normData = $this->viewToNorm($viewData);
-            $synchronized = true;
-        } catch (TransformationFailedException $e) {
-        }
 
-        if ($synchronized) {
             // Hook to change content of the data into the normalized
             // representation
             $event = new FormEvent($this, $normData);
@@ -556,6 +562,9 @@ class Form implements \IteratorAggregate, FormInterface
             // Synchronize representations - must not change the content!
             $modelData = $this->normToModel($normData);
             $viewData = $this->normToView($normData);
+            
+            $synchronized = true;
+        } catch (TransformationFailedException $e) {
         }
 
         $this->bound = true;
@@ -586,44 +595,13 @@ class Form implements \IteratorAggregate, FormInterface
      * @return Form This form
      *
      * @throws FormException if the method of the request is not one of GET, POST or PUT
+     *
+     * @deprecated Deprecated since version 2.1, to be removed in 2.3. Use
+     *             {@link FormConfigInterface::bind()} instead.
      */
     public function bindRequest(Request $request)
     {
-        $name = $this->config->getName();
-
-        // Store the bound data in case of a post request
-        switch ($request->getMethod()) {
-            case 'POST':
-            case 'PUT':
-            case 'DELETE':
-            case 'PATCH':
-                if ('' === $name) {
-                    // Form bound without name
-                    $params = $request->request->all();
-                    $files = $request->files->all();
-                } elseif ($this->config->getCompound()) {
-                    // Form bound with name and children
-                    $params = $request->request->get($name, array());
-                    $files = $request->files->get($name, array());
-                } else {
-                    // Form bound with name, but without children
-                    $params = $request->request->get($name, null);
-                    $files = $request->files->get($name, null);
-                }
-                if (is_array($params) && is_array($files)) {
-                    $data = array_replace_recursive($params, $files);
-                } else {
-                    $data = $params ?: $files;
-                }
-                break;
-            case 'GET':
-                $data = '' === $name ? $request->query->all() : $request->query->get($name, array());
-                break;
-            default:
-                throw new FormException(sprintf('The request method "%s" is not supported', $request->getMethod()));
-        }
-
-        return $this->bind($data);
+        return $this->bind($request);
     }
 
     /**
@@ -976,34 +954,7 @@ class Form implements \IteratorAggregate, FormInterface
             $parent = $this->parent->createView();
         }
 
-        $view = new FormView($this->config->getName());
-
-        $view->setParent($parent);
-
-        $types = (array) $this->config->getTypes();
-        $options = $this->config->getOptions();
-
-        foreach ($types as $type) {
-            $type->buildView($view, $this, $options);
-
-            foreach ($type->getExtensions() as $typeExtension) {
-                $typeExtension->buildView($view, $this, $options);
-            }
-        }
-
-        foreach ($this->children as $child) {
-            $view->add($child->createView($view));
-        }
-
-        foreach ($types as $type) {
-            $type->finishView($view, $this, $options);
-
-            foreach ($type->getExtensions() as $typeExtension) {
-                $typeExtension->finishView($view, $this, $options);
-            }
-        }
-
-        return $view;
+        return $this->config->getType()->createView($this, $parent);
     }
 
     /**

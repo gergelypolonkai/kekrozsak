@@ -18,8 +18,8 @@ namespace Symfony\Component\ClassLoader;
  */
 class ClassCollectionLoader
 {
-    static private $loaded;
-    static private $seen;
+    private static $loaded;
+    private static $seen;
 
     /**
      * Loads a list of classes and caches them in one big file.
@@ -33,7 +33,7 @@ class ClassCollectionLoader
      *
      * @throws \InvalidArgumentException When class can't be loaded
      */
-    static public function load($classes, $cacheDir, $name, $autoReload, $adaptive = false, $extension = '.php')
+    public static function load($classes, $cacheDir, $name, $autoReload, $adaptive = false, $extension = '.php')
     {
         // each $name can only be loaded once per PHP process
         if (isset(self::$loaded[$name])) {
@@ -133,7 +133,7 @@ class ClassCollectionLoader
      *
      * @return string Namespaces with brackets
      */
-    static public function fixNamespaceDeclarations($source)
+    public static function fixNamespaceDeclarations($source)
     {
         if (!function_exists('token_get_all')) {
             return $source;
@@ -188,7 +188,7 @@ class ClassCollectionLoader
      *
      * @throws \RuntimeException when a cache file cannot be written
      */
-    static private function writeCacheFile($file, $content)
+    private static function writeCacheFile($file, $content)
     {
         $tmpFile = tempnam(dirname($file), basename($file));
         if (false !== @file_put_contents($tmpFile, $content) && @rename($tmpFile, $file)) {
@@ -210,7 +210,7 @@ class ClassCollectionLoader
      *
      * @return string The PHP string with the comments removed
      */
-    static private function stripComments($source)
+    private static function stripComments($source)
     {
         if (!function_exists('token_get_all')) {
             return $source;
@@ -240,7 +240,7 @@ class ClassCollectionLoader
      *
      * @throws \InvalidArgumentException When a class can't be loaded
      */
-    static private function getOrderedClasses(array $classes)
+    private static function getOrderedClasses(array $classes)
     {
         $map = array();
         self::$seen = array();
@@ -257,7 +257,7 @@ class ClassCollectionLoader
         return $map;
     }
 
-    static private function getClassHierarchy(\ReflectionClass $class)
+    private static function getClassHierarchy(\ReflectionClass $class)
     {
         if (isset(self::$seen[$class->getName()])) {
             return array();
@@ -283,18 +283,27 @@ class ClassCollectionLoader
             }
         }
 
-        foreach ($class->getInterfaces() as $interface) {
-            if ($interface->isUserDefined() && !isset(self::$seen[$interface->getName()])) {
-                self::$seen[$interface->getName()] = true;
+        return array_merge(self::getInterfaces($class), $classes);
+    }
 
-                array_unshift($classes, $interface);
-            }
+    private static function getInterfaces(\ReflectionClass $class)
+    {
+        $classes = array();
+
+        foreach ($class->getInterfaces() as $interface) {
+            $classes = array_merge($classes, self::getInterfaces($interface));
+        }
+
+        if ($class->isUserDefined() && $class->isInterface() && !isset(self::$seen[$class->getName()])) {
+            self::$seen[$class->getName()] = true;
+
+            $classes[] = $class;
         }
 
         return $classes;
     }
 
-    static private function getTraits(\ReflectionClass $class)
+    private static function getTraits(\ReflectionClass $class)
     {
         $traits = $class->getTraits();
         $classes = array();

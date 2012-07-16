@@ -245,7 +245,7 @@ class FormExtension extends \Twig_Extension
             $this->varStack[$rendering]['variables'] = array_replace_recursive($this->varStack[$rendering]['variables'], $variables);
         } else {
             $types = $view->getVar('types');
-            $types[] = $custom;
+            $types[] = $view->getVar('full_block_name');
             $typeIndex = count($types) - 1;
             $this->varStack[$rendering] = array(
                 'variables' => array_replace_recursive($view->getVars(), $variables),
@@ -259,9 +259,11 @@ class FormExtension extends \Twig_Extension
             if (isset($blocks[$types[$typeIndex]])) {
                 $this->varStack[$rendering]['typeIndex'] = $typeIndex;
 
+                $context = $this->environment->mergeGlobals($this->varStack[$rendering]['variables']);
+
                 // we do not call renderBlock here to avoid too many nested level calls (XDebug limits the level to 100 by default)
                 ob_start();
-                $this->template->displayBlock($types[$typeIndex], $this->varStack[$rendering]['variables'], $blocks);
+                $this->template->displayBlock($types[$typeIndex], $context, $blocks);
                 $html = ob_get_clean();
 
                 if ($mainTemplate) {
