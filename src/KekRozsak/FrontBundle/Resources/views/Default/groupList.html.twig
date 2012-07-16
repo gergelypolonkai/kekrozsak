@@ -1,0 +1,61 @@
+{% extends '::main_template.html.twig' %}
+{% block title %} - Csoportok{% endblock %}
+{% block content %}
+<h3>Csoportok</h3>
+<p>Az alábbi lista tartalmazza a Kék Rózsák összes jelenlegi csoportját. Bármelyikbe szabadon jelentkezhetsz, de az [ikon] ikonnal jelzettek esetén szükség van a csoport vezetőjének jóváhagyására is, míg a többi csoport esetén azonnal taggá válsz.</p>
+<p>Amennyiben nem találsz az érdeklődésednek megfelelő csoportot, létre is hozhatsz egyet Kérünk azonban, hogy tartsd szem előtt, hogy a hosszú ideig csak egy tagot számláló csoportokat a Vének bezárhatják, így a csoport létrehozása előtt mindenképpen tájékozódj, hogy van-e igény rá.</p>
+<p>Szintén fontos, hogy egy új csoport létrehozása nem tesz azonnal annak vezetőjévé, azt a csoport tagjainak meg kell szavazniuk, vagy a Véneknek jóváhagyniuk, hiszen a Kék Rózsák, ezáltal annak csoportjai is az egyenlőség elvén működnek.</p>
+<p>Amennyiben látni szeretnéd egy csoport leírását, kattints a csoport nevére!</p>
+<table>
+	<thead>
+		<tr>
+			<td colspan="2">Csoport neve</td>
+			<td>Státusz</td>
+			<td>Vezető</td>
+		</tr>
+	</thead>
+	<tbody>
+{% for group in groups %}
+		<tr>
+			<td>[ikon]</td>
+			<td class="csoport" title="{{ group.description }}">{{ group.name }}</td>
+			<td>
+				{% if group.isMember(app.user) %}
+					<span title="Már tag vagy" class="ikon">[tag ikon]</span>
+				{% elseif group.isRequested(app.user) %}
+					<span title="Már jelentkeztél, de a jelentkezésedet a csoport vezetője még nem fogadta el" class="ikon">[jelentkeztél ikon]</span>
+				{% else %}
+					{% if group.isOpen %}
+						<a href="{{ path('KekRozsakFrontBundle_groupJoin, { groupSlug: group.slug }') }}"><span title="Nyílt csoport, kattints a belépéshez!" class="ikon">[nyílt ikon]</span></a>
+					{% else %}
+						<a href="{{ path('KekRozsakFrontBundle_groupJoin', { groupSlug: group.slug }) }}"><span title="Zárt csoport, kattints a jelentkezéshez!" class="ikon">[zárt ikon]</span></a>
+					{% endif %}
+				{% endif %}
+			</td>
+			<td>{% if group.leader %}{{ group.leader.displayName }}{% else %}Nincs{% endif %}</td>
+		</tr>
+{% endfor %}
+	</tbody>
+</table>
+Új csoport létrehozása
+{% endblock content %}
+{% block bottomscripts %}
+		<script type="text/javascript">
+			$('.csoport').tooltip({
+				track: true,
+				delay: 0,
+				fade: 250
+			});
+			$('.ikon').tooltip({
+				track: true,
+				delay: 0,
+				fade: 250
+			});
+		</script>
+{% endblock bottomscripts %}
+
+
+
+
+
+

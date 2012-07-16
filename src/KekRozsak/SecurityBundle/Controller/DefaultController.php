@@ -91,8 +91,10 @@ class DefaultController extends Controller
 
 				$message = \Swift_Message::newInstance()
 					->setSubject('Új jelentkező')
+					// TODO: Make this a config parameter!
 					->setFrom('info@blueroses.hu')
-					->setTo('info@blueroses.hu')
+					// TODO: Make this a config parameter!
+					->setTo('jelentkezes@blueroses.hu')
 					->setBody($this->renderView('KekRozsakSecurityBundle:Email:new_registration.txt.twig', array('user' => $user)));
 				$this->get('mailer')->send($message);
 

@@ -3,7 +3,11 @@
 	<head>
 		<title>Kék Rózsák{% block title %}{% endblock %}</title>
 		<link rel="stylesheet" type="text/css" href="{{ asset('css/kekrozsak_front.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.tooltip.css') }}" />
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script type="text/javascript" src="{{ asset('js/jquery.bgiframe.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/jquery.dimensions.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/jquery.tooltip.min.js') }}"></script>
 	</head>
 	<body>
 		<div id="top-line-wrapper">
@@ -50,6 +54,11 @@
 					<li><a href="{{ path('KekRozsakSecurityBundle_registration') }}">Jelentkezés</a></li>
 {% endif %}
 				</ul>
+{% if app.user %}
+				<ul>
+					<li><a href="{{ path('KekRozsakFrontBundle_groupList') }}">Csoportok</a></li>
+				</ul>
+{% endif %}
 			</div>
 			<div id="header">
 				<h1><a href="{{ path('KekRozsakFrontBundle_homepage') }}"><img src="{{ asset('images/kek_rozsak_felirat.jpg') }}" alt="Kék Rózsák" /></a></h1>
@@ -91,6 +100,7 @@
 				}
 			});
 		</script>
+{% block bottomscripts %}{% endblock %}
 	</body>
 </html>
 

@@ -90,4 +90,89 @@ class UserGroupMembership
 	{
 		return $this->group;
 	}
+
+	/**
+	 * @var DateTime $membershipRequestedAt
+	 * @ORM\Column(type="datetime", name="membership_requested_at")
+	 */
+	protected $membershipRequestedAt;
+
+	/**
+	 * Set membershipRequestedAt
+	 *
+	 * @param DateTime $membershipRequestedAt
+	 * @return UserGroupMembership
+	 */
+	public function setMembershipRequestedAt(\DateTime $membershipRequestedAt)
+	{
+		$this->membershipRequestedAt = $membershipRequestedAt;
+		return $this;
+	}
+
+	/**
+	 * Get membershipRequestedAt
+	 *
+	 * @return DateTime
+	 */
+	public function getMembershipRequestedAt()
+	{
+		return $this->membershipRequestedAt;
+	}
+
+	/**
+	 * @var DateTime membershipAcceptedAt
+	 * @ORM\Column(type="datetime", nullable=true, name="membership_accepted_at")
+	 */
+	protected $membershipAcceptedAt;
+
+	/**
+	 * Set membershipAcceptedAt
+	 *
+	 * @param DateTime $membershipAcceptedAt
+	 * @return UserGroupMembership
+	 */
+	public function setMembershipAcceptedAt(\DateTime $membershipAcceptedAt = null)
+	{
+		$this->membershipAcceptedAt = $membershipAcceptedAt;
+		return $this;
+	}
+
+	/**
+	 * Get membershipAcceptedAt
+	 *
+	 * @return DateTime
+	 */
+	public function getMembershipAcceptedAt()
+	{
+		return $this->membershipAcceptedAt;
+	}
+
+	/**
+	 * @var KekRozsak\SecurityBundle\Entity\User $membershipAcceptedBy
+	 * @ORM\ManyToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User")
+	 * @ORM\JoinColumn(name="membership_accepted_by_id")
+	 */
+	protected $membershipAcceptedBy;
+	
+	/**
+	 * Set membershipAcceptedBy
+	 *
+	 * @param KekRozsak\SecurityBundle\Entity\User
+	 * @return UserGroupMembership
+	 */
+	public function setMembershipAcceptedBy(\KekRozsak\SecurityBundle\Entity\User $membershipAcceptedBy = null)
+	{
+		$this->membershipAcceptedBy = $membershipAcceptedBy;
+		return $this;
+	}
+
+	/**
+	 * Get membershipAcceptedBy
+	 *
+	 * @return KekRozsak\SecurityBundle\Entity\User
+	 */
+	public function getMembershipAcceptedBy()
+	{
+		return $this->membershipAcceptedBy;
+	}
 }

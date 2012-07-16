@@ -205,4 +205,99 @@ class Group
 	{
 		return $this->members;
 	}
+
+	/**
+	 * Check if user is a member of this Group
+	 *
+	 * @param KekRozsak\SecurityBundle\Entity\User $user
+	 * @return boolean
+	 */
+	public function isMember(\KekRozsak\SecurityBundle\Entity\User $user)
+	{
+		return ($this->members->filter(
+				function ($groupMembership) use ($user) {
+					return (
+						($groupMembership->getUser() == $user)
+						&& (
+							$groupMembership->getGroup()->isOpen()
+							|| ($groupMembership->getMembershipAcceptedAt() !== null)
+						)
+					);
+				}
+			)->count() > 0);
+	}
+
+	/**
+	 * Check if user already requested a membership in this Group
+	 *
+	 * @param KekRozsak\SecurityBundle\Entity\User $user
+	 * @return boolean
+	 */
+	public function isRequested(\KekRozsak\SecurityBundle\Entity\User $user)
+	{
+		return ($this->members->filter(
+				function ($groupMembership) use ($user) {
+					return (
+						($groupMembership->getUser() == $user)
+						&& ($groupMembership->getMembershipRequestedAt() !== null)
+					);
+				}
+			)->count() > 0);
+	}
+
+	/**
+	 * @var string description
+	 * @ORM\Column(type="text", nullable=true)
+	 */
+	protected $description;
+
+	/**
+	 * Set description
+	 *
+	 * @param string $description
+	 * @return Group
+	 */
+	public function setDescription($description = null)
+	{
+		$this->description = $description;
+		return $this;
+	}
+
+	/**
+	 * Get description
+	 *
+	 * @return string
+	 */
+	public function getDescription()
+	{
+		return $this->description;
+	}
+
+	/**
+	 * @var boolean open
+	 * @ORM\Column(type="boolean", nullable=false)
+	 */
+	protected $open;
+
+	/**
+	 * Set open
+	 *
+	 * @param boolean $open
+	 * @ return Group
+	 */
+	public function setOpen($open = false)
+	{
+		$this->open = $open;
+		return $this;
+	}
+
+	/**
+	 * Get open
+	 *
+	 * @return boolean
+	 */
+	public function isOpen()
+	{
+		return $this->open;
+	}
 }

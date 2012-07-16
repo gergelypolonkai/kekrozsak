@@ -6,7 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+use KekRozsak\FrontBundle\Entity\UserGroupMembership;
 use KekRozsak\FrontBundle\Entity\UserData;
+
 use KekRozsak\SecurityBundle\Form\Type\UserType;
 
 class DefaultController extends Controller
@@ -74,5 +76,78 @@ class DefaultController extends Controller
 			'form'        => $form->createView(),
 			'saveSuccess' => $saveSuccess,
 		);
+	}
+
+	/**
+	 * @Route("/csoportok", name="KekRozsakFrontBundle_groupList")
+	 * @Template()
+	 */
+	public function groupListAction()
+	{
+		$groupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:Group');
+		$groups = $groupRepo->findAll(array('name' => 'DESC'));
+		return array(
+			'groups' => $groups,
+		);
+	}
+
+	/**
+	 * @Route("/csoport/{groupSlug}/belepes", name="KekRozsakFrontBundle_groupJoin")
+	 * @Template()
+	 */
+	public function groupJoinAction($groupSlug)
+	{
+		$user = $this->get('security.context')->getToken()->getUser();
+		$groupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:Group');
+		if (!($group = $groupRepo->findOneBySlug($groupSlug)))
+			throw $this->createNotFoundException('A kért csoport nem létezik!');
+
+		if ($group->isMember($user))
+		{
+			return $this->redirect($this->generateUrl('KekRozsakFrontBundle_groupView', array($groupSlug => $group->getSlug())));
+		}
+
+		if ($group->isRequested($user))
+		{
+			return array(
+				'isRequested'  => true,
+				'needApproval' => false,
+				'group'        => $group,
+			);
+		}
+
+		$membership = new UserGroupMembership();
+		$membership->setUser($user);
+		$membership->setGroup($group);
+		$membership->setMembershipRequestedAt(new \DateTime('now'));
+		if ($group->isOpen())
+		{
+			$membership->setMembershipAcceptedAt(new \DateTime('now'));
+		}
+
+		$em = $this->getDoctrine()->getEntityManager();
+		$em->persist($membership);
+		$em->flush();
+
+		if ($group->isOpen())
+		{
+			return $this->redirect($this->generateUrl('KekRozsakFrontBundle_groupView', array($groupSlug => $group->getSlug())));
+		}
+		else
+		{
+			$message = \Swift_Message::newInstance()
+				->setSubject('Új jelentkező a csoportodban (' . $group->getName() . '): ' . $user->getDisplayName())
+				// TODO: Make this a config parameter!
+				->setFrom('info@blueroses.hu')
+				->setTo($group->getLeader()->getEmail())
+				->setBody($this->renderView('KekRozsakFrontBundle:Email:groupJoinRequest.txt.twig', array('user' => $user, 'group' => $group)));
+			$this->get('mailer')->send($message);
+
+			return array(
+				'isRequested'  => false,
+				'needApproval' => true,
+				'group'        => $group,
+			);
+		}
 	}
 }
