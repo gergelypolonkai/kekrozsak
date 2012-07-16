@@ -92,6 +92,51 @@ class DefaultController extends Controller
 	}
 
 	/**
+	 * @Route("/csoport/{groupSlug}", name="KekRozsakFrontBundle_groupView")
+	 * @Template()
+	 */
+	public function groupViewAction($groupSlug)
+	{
+		$groupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:Group');
+		if (!($group = $groupRepo->findOneBySlug($groupSlug)))
+			throw $this->createNotFoundException('A kért csoport nem létezik!');
+
+		return array(
+			'group' => $group,
+		);
+	}
+
+	/**
+	 * @Route("/csoport/{groupSlug}/tagok", name="KekRozsakFrontBundle_groupMembers")
+	 * @Template()
+	 */
+	public function groupMembersAction($groupSlug)
+	{
+		$groupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:Group');
+		if (!($group = $groupRepo->findOneBySlug($groupSlug)))
+			throw $this->createNotFoundException('A kért csoport nem létezik!');
+
+		return array(
+			'group' => $group,
+		);
+	}
+
+	/**
+	 * @Route("/csoport/{groupSlug}/dokumentumok", name="KekRozsakFrontBundle_groupDocuments")
+	 * @Template()
+	 */
+	public function groupDocumentsAction($groupSlug)
+	{
+		$groupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:Group');
+		if (!($group = $groupRepo->findOneBySlug($groupSlug)))
+			throw $this->createNotFoundException('A kért csoport nem létezik!');
+
+		return array(
+			'group' => $group,
+		);
+	}
+
+	/**
 	 * @Route("/csoport/{groupSlug}/belepes", name="KekRozsakFrontBundle_groupJoin")
 	 * @Template()
 	 */

@@ -4,10 +4,12 @@
 		<title>Kék Rózsák{% block title %}{% endblock %}</title>
 		<link rel="stylesheet" type="text/css" href="{{ asset('css/kekrozsak_front.css') }}" />
 		<link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.tooltip.css') }}" />
+{% block additional_css %}{% endblock %}
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script type="text/javascript" src="{{ asset('js/jquery.bgiframe.js') }}"></script>
 		<script type="text/javascript" src="{{ asset('js/jquery.dimensions.js') }}"></script>
 		<script type="text/javascript" src="{{ asset('js/jquery.tooltip.min.js') }}"></script>
+{% block additional_js %}{% endblock %}
 	</head>
 	<body>
 		<div id="top-line-wrapper">
@@ -22,6 +24,12 @@
 							Jogosultság<br />
 							<dl>
 								<dt>Csoportjaim</dt>
+{% for group in app.user.groups %}
+{% if group.group.open or group.membershipAcceptedAt %}
+								<dl><a href="{{ path('KekRozsakFrontBundle_groupView', {groupSlug: group.group.slug}) }}">{{ group.group.name }}</a></dl>
+{% endif %}
+								<dl><a href="{{ path('KekRozsakFrontBundle_groupList') }}">További csoportok</a></dl>
+{% endfor %}
 
 								<dt>Kedvenc Fórum-témáim</dt>
 

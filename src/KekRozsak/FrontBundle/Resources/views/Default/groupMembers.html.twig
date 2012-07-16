@@ -1,0 +1,19 @@
+{% extends '::main_template.html.twig' %}
+{% block title %} - {{ group.name }}{% endblock %}
+{% block additional_css %}
+		<link rel="stylesheet" href="{{ asset('css/group.css') }}" type="text/css" />
+{% endblock additional_css %}
+{% block content %}
+<ul id="submenu">
+	<li><a href="{{ path('KekRozsakFrontBundle_groupView', {groupSlug: group.slug }) }}">Leírás</a></li>
+	<li><a href="{{ path('KekRozsakFrontBundle_groupDocuments', {groupSlug: group.slug }) }}">Dokumentumok</a></li>
+</ul>
+<h3>{{ group.name }} - Tagok</h3>
+<ul>
+{% for user in group.members %}
+{% if group.isMember(user.user) %}
+	<li>{{ user.user.displayName }}</li>
+{% endif %}
+{% endfor %}
+</ul>
+{% endblock %}
