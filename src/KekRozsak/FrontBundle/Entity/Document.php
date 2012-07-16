@@ -3,8 +3,10 @@
 namespace KekRozsak\FrontBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
-use KekRozsak\FrontBundle\Entity\User;
+use KekRozsak\SecurityBundle\Entity\User;
+use KekRozsak\FrontBundle\Entity\Group;
 
 /**
  * KekRozsak\FrontBundle\Entity\Document
@@ -13,12 +15,18 @@ use KekRozsak\FrontBundle\Entity\User;
  */
 class Document
 {
+	public function __construct()
+	{
+		$this->groups = new ArrayCollection();
+	}
+
 	/**
+	 * @var integer $id
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="AUTO")
 	 * @ORM\Column(type="integer")
 	 */
-	private $id;
+	protected $id;
 
 	/**
 	 * Get id
@@ -32,9 +40,9 @@ class Document
 
 	/**
 	 * @var string $title
-	 * @ORM\Column(type="string", length=150, nullable=false, unique=true)
+	 * @ORM\Column(type="string", length=150, unique=true, nullable=false)
 	 */
-	private $title;
+	protected $title;
 
 	/**
 	 * Set title
@@ -42,7 +50,7 @@ class Document
 	 * @param string $title
 	 * @return Document
 	 */
-	public function setTitle(string $title)
+	public function setTitle($title)
 	{
 		$this->title = $title;
 		return $this;
@@ -59,10 +67,10 @@ class Document
 	}
 
 	/**
-	 * @var string $slug;
-	 * @ORM\Column(type="string", length=150, nullable=false, unique=true)
+	 * @var string $slug
+	 * @ORM\Column(type="string", length=150, unique=true, nullable=false)
 	 */
-	private $slug;
+	protected $slug;
 
 	/**
 	 * Set slug
@@ -70,13 +78,14 @@ class Document
 	 * @param string $slug
 	 * @return Document
 	 */
-	public function setSlug(string $slug)
+	public function setSlug($slug)
 	{
 		$this->slug = $slug;
 		return $this;
 	}
 
-	/** Get slug
+	/**
+	 * Get slug
 	 *
 	 * @return string
 	 */
@@ -86,38 +95,40 @@ class Document
 	}
 
 	/**
-	 * @var string $text
-	 * @ORM\Column(type="text", nullable=false)
+	 * @var KekRozsak\SecurityBundle\Entity\User $createdBy
+	 * @ORM\ManyToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User")
+	 * @ORM\JoinColumn(name="created_by_id")
 	 */
-	private $text;
+	protected $createdBy;
 
 	/**
-	 * Set text
+	 * Set createdBy
 	 *
-	 * @param string $text
+	 * @param KekRozsak\SecurityBundle\Entity\User $createdBy
 	 * @return Document
 	 */
-	public function setText(string $text)
+	public function setCreatedBy(\KekRozsak\SecurityBundle\Entity\User $createdBy)
 	{
-		$this->text = $text;
+		$this->createdBy = $createdBy;
 		return $this;
 	}
 
+
 	/**
-	 * Get text
+	 * Get createdBy
 	 *
-	 * @return string
+	 * @return KekRozsak\SecurityBundle\Entity\User
 	 */
-	public function getText()
+	public function getCreatedBy()
 	{
-		return $this->text;
+		return $this->createdBy;
 	}
 
 	/**
-	 * @var DateTime $createdAt
-	 * @ORM\Column(type="datetime", name="created_at", nullable=false)
+	 * @var DateTime $createdat
+	 * @ORM\Column(type="datetime", nullable=false, name="created_at")
 	 */
-	private $createdAt;
+	protected $createdAt;
 
 	/**
 	 * Set createdAt
@@ -142,145 +153,58 @@ class Document
 	}
 
 	/**
-	 * @var User $createdBy
-	 * @ORM\ManyToOne(targetEntity="User", inversedBy="createdDocuments")
-	 * @ORM\JoinColumn(name="created_by_id", referencedColumnName="id")
+	 * @var string $content
+	 * @ORM\Column(type="text", nullable=false)
 	 */
-	private $createdBy;
+	protected $content;
 
 	/**
-	 * Set createdBy
+	 * Set content
 	 *
-	 * @param User $createdBy
+	 * @param string $content
 	 * @return Document
 	 */
-	public function setCreatedBy(User $createdBy)
+	public function setContent($content)
 	{
-		$this->createdBy = $createdBy;
+		$this->content = $content;
 		return $this;
 	}
 
 	/**
-	 * Get createdBy
-	 *
-	 * @return User
-	 */
-	public function getCreatedBy()
-	{
-		return $this->createdBy;
-	}
-
-	/**
-	 * @var DateTime $updatedAt
-	 * @ORM\Column(type="datetime", name="updated_at", nullable=true)
-	 */
-	private $updatedAt;
-
-	/**
-	 * Set updatedAt
-	 *
-	 * @param DateTime $updatedAt
-	 * @return Document
-	 */
-	public function setUpdatedAt(\DateTime $updatedAt = null)
-	{
-		$this->updatedAt = $updatedAt;
-		return $this;
-	}
-
-	/**
-	 * Get updatedAt
-	 *
-	 * @return DateTime
-	 */
-	public function getUpdatedAt()
-	{
-		return $this->updatedAt;
-	}
-
-	/**
-	 * @var User $updatedBy
-	 * @ORM\ManyToOne(targetEntity="User", inversedBy="updatedDocuments")
-	 * @ORM\JoinColumn(name="updated_by_id", referencedColumnName="id")
-	 */
-	private $updatedBy;
-
-	/**
-	 * Set updatedBy
-	 *
-	 * @param User $updatedBy
-	 * @return Document
-	 */
-	public function setUpdatedBy(User $updatedBy = null)
-	{
-		$this->updatedBy = $updatedBy;
-		return $this;
-	}
-
-	/**
-	 * Get updatedBy
-	 *
-	 * @return User
-	 */
-	public function getUpdatedBy()
-	{
-		return $this->updatedBy;
-	}
-
-	/**
-	 * @var string $updateReason
-	 * @ORM\Column(name="update_reason", type="text", nullable=true)
-	 */
-	private $updateReason;
-
-	/**
-	 * Set updateReason
-	 *
-	 * @param string $updateReason
-	 * @return Document
-	 */
-	public function setUpdateReason(string $updateReason = null)
-	{
-		$this->updateReason = $updateReason;
-		return $this;
-	}
-
-	/**
-	 * Get updateReason
+	 * Get content
 	 *
 	 * @return string
 	 */
-	public function getUpdateReason()
+	public function getContent()
 	{
-		return $this->updateReason;
+		return $this->content;
 	}
 
 	/**
-	 * @var Group $groups
-	 * @ORM\ManyToMany(targetEntity="Group", mappedBy="documents", fetch="EXTRA_LAZY")
+	 * @var Doctrine\Common\Collections\ArrayCollection $groups
+	 * @ORM\ManyToMany(targetEntity="KekRozsak\FrontBundle\Entity\Group", mappedBy="documents")
 	 */
-	private $groups;
+	protected $groups;
 
 	/**
-	 * Set groups
+	 * Add a group
 	 *
-	 * @param Group $groups
+	 * @param KekRozsak\FrontBundle\Entity\Group $group
 	 * @return Document
 	 */
-	public function setGroups(Group $groups = null)
+	public function addGroup(\KekRozsak\FrontBundle\Entity\Group $group)
 	{
-		$this->groups = $groups;
+		$this->groups[] = $group;
 		return $this;
 	}
 
 	/**
-	 * Get groups
+	 * Get all groups
 	 *
-	 * @return Group
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getGroups()
 	{
-		return $this->groups;
+		return $this->group;
 	}
 }
-
