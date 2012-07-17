@@ -18,7 +18,7 @@ class ForumPost
 	 * @ORM\GeneratedValue(strategy="AUTO")
 	 * @ORM\Column(type="integer")
 	 */
-	private $id;
+	protected $id;
 
 	/**
 	 * Get id
@@ -34,7 +34,7 @@ class ForumPost
 	 * @ORM\ManyToOne(targetEntity="\KekRozsak\SecurityBundle\Entity\User")
 	 * @ORM\JoinColumn(name="created_by_id")
 	 */
-	private $createdBy;
+	protected $createdBy;
 
 	/**
 	 * Set createdBy
@@ -62,7 +62,7 @@ class ForumPost
 	 * @var DateTime $createdAt
 	 * @ORM\Column(type="datetime", name="created_at")
 	 */
-	private $createdAt;
+	protected $createdAt;
 
 	/**
 	 * Set createdAt
@@ -89,7 +89,7 @@ class ForumPost
 	 * @var string $text
 	 * @ORM\Column(type="text", nullable=false)
 	 */
-	private $text;
+	protected $text;
 
 	/**
 	 * Set text
@@ -117,7 +117,7 @@ class ForumPost
 	 * @var ForumTopic $topic
 	 * @ORM\ManyToOne(targetEntity="ForumTopic", inversedBy="posts")
 	 */
-	private $topic;
+	protected $topic;
 
 	/**
 	 * Set topic

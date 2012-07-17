@@ -24,7 +24,7 @@ class ForumTopic
 	 * @ORM\GeneratedValue(strategy="AUTO")
 	 * @ORM\Column(type="integer")
 	 */
-	private $id;
+	protected $id;
 
 	/**
 	 * Get id
@@ -41,7 +41,7 @@ class ForumTopic
 	 * @ORM\ManyToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User")
 	 * @ORM\JoinColumn(name="created_by_id")
 	 */
-	private $createdBy;
+	protected $createdBy;
 
 	/**
 	 * Set createdBy
@@ -70,7 +70,7 @@ class ForumTopic
 	 * @var DateTime $createdAt
 	 * @ORM\Column(type="datetime", nullable=false, name="created_at")
 	 */
-	private $createdAt;
+	protected $createdAt;
 
 	/**
 	 * Set createdAt
@@ -99,7 +99,7 @@ class ForumTopic
 	 * @ORM\ManyToOne(targetEntity="ForumTopicGroup", inversedBy="topics")
 	 * @ORM\JoinColumn(name="topic_group_id")
 	 */
-	private $topicGroup;
+	protected $topicGroup;
 
 	/**
 	 * Set topicGroup
@@ -127,7 +127,7 @@ class ForumTopic
 	 * @var string $slug
 	 * @ORM\Column(type="string", length=100, nullable=false)
 	 */
-	private $slug;
+	protected $slug;
 
 	/**
 	 * Set slug
@@ -155,7 +155,7 @@ class ForumTopic
 	 * @var string $title
 	 * @ORM\Column(type="string", length=100, nullable=false)
 	 */
-	private $title;
+	protected $title;
 
 	/**
 	 * Set title
@@ -184,7 +184,7 @@ class ForumTopic
 	 * @ORM\OneToOne(targetEntity="ForumPost", cascade={"persist"})
 	 * @ORM\JoinColumn(name="last_post_id")
 	 */
-	private $lastPost;
+	protected $lastPost;
 
 	/**
 	 * Set lastPost
@@ -211,7 +211,7 @@ class ForumTopic
 	 * @var ArrayCollection $topics;
 	 * @ORM\OneToMany(targetEntity="ForumPost", mappedBy="topic")
 	 */
-	private $posts;
+	protected $posts;
 
 	/**
 	 * Add post

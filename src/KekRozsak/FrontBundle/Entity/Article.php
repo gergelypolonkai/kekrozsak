@@ -18,7 +18,7 @@ class Article
 	 * @ORM\GeneratedValue(strategy="AUTO")
 	 * @ORM\Column(type="integer")
 	 */
-	private $id;
+	protected $id;
 
 	/**
 	 * Get id
@@ -35,7 +35,7 @@ class Article
 	 * @ORM\ManyToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User")
 	 * @ORM\JoinColumn(name="created_by_id")
 	 */
-	private $createdBy;
+	protected $createdBy;
 
 	/**
 	 * Set createdBy
@@ -63,7 +63,7 @@ class Article
 	 * @var DateTime $createdAt
 	 * @ORM\Column(type="datetime", name="created_at", nullable=false)
 	 */
-	private $createdAt;
+	protected $createdAt;
 
 	/**
 	 * Set createdAt
@@ -91,7 +91,7 @@ class Article
 	 * @var string $title
 	 * @ORM\Column(type="string", length=100, nullable=false, unique=true)
 	 */
-	private $title;
+	protected $title;
 
 	/**
 	 * Set title
@@ -119,7 +119,7 @@ class Article
 	 * @var string $slug
 	 * @ORM\Column(type="string", length=100, nullable=false, unique=true)
 	 */
-	private $slug;
+	protected $slug;
 
 	/**
 	 * Set slug
@@ -147,7 +147,7 @@ class Article
 	 * @var string $text
 	 * @ORM\Column(type="text", nullable=false)
 	 */
-	private $text;
+	protected $text;
 
 	/**
 	 * Set text
@@ -175,7 +175,7 @@ class Article
 	 * @var boolean $mainPage
 	 * @ORM\Column(type="boolean", name="main_page")
 	 */
-	private $mainPage;
+	protected $mainPage;
 
 	/**
 	 * Set mainPage
@@ -203,7 +203,7 @@ class Article
 	 * @var boolean public
 	 * @ORM\Column(type="boolean", nullable=false)
 	 */
-	private $public;
+	protected $public;
 
 	/**
 	 * Set public
@@ -231,7 +231,7 @@ class Article
 	 * @var string $source
 	 * @ORM\Column(type="string", nullable=true)
 	 */
-	private $source;
+	protected $source;
 
 	/**
 	 * Set source

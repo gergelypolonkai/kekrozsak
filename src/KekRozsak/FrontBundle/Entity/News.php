@@ -16,7 +16,7 @@ class News
 	 * @ORM\GeneratedValue(strategy="AUTO")
 	 * @ORM\Column(type="integer")
 	 */
-	private $id;
+	protected $id;
 
 	/**
 	 * Get id
@@ -32,7 +32,7 @@ class News
 	 * @var string $title
 	 * @ORM\Column(type="string", length=100)
 	 */
-	private $title;
+	protected $title;
 
 	/**
 	 * Set title
@@ -60,7 +60,7 @@ class News
 	 * @var string $text
 	 * @ORM\Column(type="text", nullable=false)
 	 */
-	private $text;
+	protected $text;
 
 	/**
 	 * Set text
@@ -88,7 +88,7 @@ class News
 	 * @var DateTime $createdAt
 	 * @ORM\Column(type="datetime", name="created_at", nullable=false)
 	 */
-	private $createdAt;
+	protected $createdAt;
 
 	/**
 	 * Set createdAt
@@ -117,7 +117,7 @@ class News
 	 * @ORM\ManyToOne(targetEntity="\KekRozsak\SecurityBundle\Entity\User")
 	 * @ORM\JoinColumn(name="created_by_id")
 	 */
-	private $createdBy;
+	protected $createdBy;
 
 	/**
 	 * Set createdBy

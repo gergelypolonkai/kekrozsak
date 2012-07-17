@@ -25,7 +25,7 @@ class ForumTopicGroup
 	 * @ORM\GeneratedValue(strategy="AUTO")
 	 * @ORM\Column(type="integer")
 	 */
-	private $id;
+	protected $id;
 
 	/**
 	 * Get id
@@ -42,7 +42,7 @@ class ForumTopicGroup
 	 * @ORM\ManyToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User")
 	 * @ORM\JoinColumn(name="created_by_id")
 	 */
-	private $createdBy;
+	protected $createdBy;
 
 	/**
 	 * Set createdBy
@@ -70,7 +70,7 @@ class ForumTopicGroup
 	 * @var DateTime $createdAt
 	 * @ORM\Column(type="datetime", nullable=false)
 	 */
-	private $createdAt;
+	protected $createdAt;
 
 	/**
 	 * Set createdAt
@@ -98,7 +98,7 @@ class ForumTopicGroup
 	 * @var string $slug
 	 * @ORM\Column(type="string", length=100, nullable=false, unique=true)
 	 */
-	private $slug;
+	protected $slug;
 
 	/**
 	 * Set slug
@@ -126,7 +126,7 @@ class ForumTopicGroup
 	 * @var string $title
 	 * @ORM\Column(type="string", length=100, nullable=false, unique=true)
 	 */
-	private $title;
+	protected $title;
 
 	/**
 	 * Set title
@@ -154,7 +154,7 @@ class ForumTopicGroup
 	 * @var ArrayCollection $topics
 	 * @ORM\OneToMany(targetEntity="ForumTopic", mappedBy="topicGroup")
 	 */
-	private $topics;
+	protected $topics;
 
 	/**
 	 * Add topic
