@@ -28,8 +28,8 @@
 {% if group.group.open or group.membershipAcceptedAt %}
 								<dl><a href="{{ path('KekRozsakFrontBundle_groupView', {groupSlug: group.group.slug}) }}">{{ group.group.name }}</a></dl>
 {% endif %}
-								<dl><a href="{{ path('KekRozsakFrontBundle_groupList') }}">További csoportok</a></dl>
 {% endfor %}
+								<dl><a href="{{ path('KekRozsakFrontBundle_groupList') }}">További csoportok</a></dl>
 
 								<dt>Kedvenc Fórum-témáim</dt>
 
@@ -62,11 +62,6 @@
 					<li><a href="{{ path('KekRozsakSecurityBundle_registration') }}">Jelentkezés</a></li>
 {% endif %}
 				</ul>
-{% if app.user %}
-				<ul>
-					<li><a href="{{ path('KekRozsakFrontBundle_groupList') }}">Csoportok</a></li>
-				</ul>
-{% endif %}
 			</div>
 			<div id="header">
 				<h1><a href="{{ path('KekRozsakFrontBundle_homepage') }}"><img src="{{ asset('images/kek_rozsak_felirat.jpg') }}" alt="Kék Rózsák" /></a></h1>
