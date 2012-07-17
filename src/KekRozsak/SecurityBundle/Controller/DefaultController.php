@@ -77,8 +77,13 @@ class DefaultController extends Controller
 
 			if ($form->isValid(array('registration')))
 			{
+				$roleRepo = $this->getDoctrine()->getRepository('KekRozsakSecurityBundle:Role');
+				$defaultRoles = $roleRepo->findByDefault(true);
+
 				$user->setRegisteredAt(new \DateTime('now'));
 				$user->setPassword($this->get('security.encoder_factory')->getEncoder($user)->encodePassword($user->getPassword(), $user->getSalt()));
+				foreach ($defaultRoles as $role)
+					$user->addRole($role);
 				$em = $this->getDoctrine()->getEntityManager();
 				$em->persist($user);
 				$em->flush();

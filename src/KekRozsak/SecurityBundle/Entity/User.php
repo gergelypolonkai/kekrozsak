@@ -25,6 +25,7 @@ class User implements UserInterface, AdvancedUserInterface
 	public function __construct()
 	{
 		$this->groups = new ArrayCollection();
+		$this->roles = new ArrayCollection();
 	}
 
 	/**
@@ -33,7 +34,7 @@ class User implements UserInterface, AdvancedUserInterface
 	 * @ORM\GeneratedValue(strategy="AUTO")
 	 * @ORM\Column(type="integer")
 	 */
-	private $id;
+	protected $id;
 
 	/**
 	 * Get id
@@ -50,7 +51,7 @@ class User implements UserInterface, AdvancedUserInterface
 	 * @ORM\Column(type="string", length=50, nullable=false, unique=true)
 	 * @Assert\NotBlank(groups="registration")
 	 */
-	private $username;
+	protected $username;
 
 	/**
 	 * Set username
@@ -79,7 +80,7 @@ class User implements UserInterface, AdvancedUserInterface
 	 * @ORM\Column(type="string", length=50, nullable=false)
 	 * @Assert\NotBlank(groups="registration")
 	 */
-	private $password;
+	protected $password;
 
 	/**
 	 * Set password
@@ -107,7 +108,7 @@ class User implements UserInterface, AdvancedUserInterface
 	 * @var string $displayName
 	 * @ORM\Column(type="string", length=50, unique=true, name="display_name")
 	 */
-	private $displayName;
+	protected $displayName;
 
 	/**
 	 * Set displayName
@@ -135,7 +136,7 @@ class User implements UserInterface, AdvancedUserInterface
 	 * @var string $email
 	 * @ORM\Column(type="string", length=100, nullable=false, unique=true)
 	 */
-	private $email;
+	protected $email;
 
 	/**
 	 * Set email
@@ -163,7 +164,7 @@ class User implements UserInterface, AdvancedUserInterface
 	 * @var DateTime $registeredAt
 	 * @ORM\Column(type="datetime", nullable=false, name="registered_at")
 	 */
-	private $registeredAt;
+	protected $registeredAt;
 
 	/**
 	 * Set registeredAt
@@ -192,7 +193,7 @@ class User implements UserInterface, AdvancedUserInterface
 	 * @ORM\ManyToOne(targetEntity="User")
 	 * @ORM\JoinColumn(name="accepted_by_id")
 	 */
-	private $acceptedBy;
+	protected $acceptedBy;
 
 	/**
 	 * Set acceptedBy
@@ -220,7 +221,7 @@ class User implements UserInterface, AdvancedUserInterface
 	 * @var DateTime $lastLoginAt
 	 * @ORM\Column(type="datetime", nullable=true, name="last_login_at")
 	 */
-	private $lastLoginAt;
+	protected $lastLoginAt;
 
 	/**
 	 * Set lastLoginAt;
@@ -246,10 +247,10 @@ class User implements UserInterface, AdvancedUserInterface
 
 	/**
 	 * @var \KekRozsak\FrontBundle\Entity\UserData $userData
-	 * @ORM\OneToOne(targetEntity="KekRozsak\FrontBundle\Entity\UserData", mappedBy="user", fetch="LAZY", cascade={"persist"})
+	 * @ORM\OneToMany(targetEntity="KekRozsak\FrontBundle\Entity\UserData", fetch="LAZY", cascade={"persist"}, mappedBy="user")
 	 * @ORM\JoinColumn(name="id", referencedColumnName="user_id")
 	 */
-	private $userData;
+	protected $userData;
 
 
 	/**
@@ -260,7 +261,7 @@ class User implements UserInterface, AdvancedUserInterface
 	 */
 	public function setUserData(\KekRozsak\FrontBundle\Entity\UserData $userData = null)
 	{
-		$this->userData = $userData;
+		$this->userData = new ArrayCollection(array($userData));
 		$userData->setUser($this);
 		return $this;
 	}
@@ -272,7 +273,7 @@ class User implements UserInterface, AdvancedUserInterface
 	 */
 	public function getUserData()
 	{
-		return $this->userData;
+		return $this->userData->get(1);
 	}
 
 	/**
@@ -280,7 +281,7 @@ class User implements UserInterface, AdvancedUserInterface
 	 * @ORM\OneToMany(targetEntity="KekRozsak\FrontBundle\Entity\UserGroupMembership", mappedBy="user")
 	 * @ORM\JoinColumn(referencedColumnName="user_id")
 	 */
-	private $groups;
+	protected $groups;
 
 	/**
 	 * Add group
@@ -304,15 +305,35 @@ class User implements UserInterface, AdvancedUserInterface
 		return $this->groups;
 	}
 
-	/* Here comes the remaining part of UserInterface implementation */
+	/**
+	 * @var Doctrine\Common\Collections\ArrayCollection $roles
+	 * @ORM\ManyToMany(targetEntity="Role")
+	 */
+	protected $roles;
 
+	/**
+	 * Add a role
+	 *
+	 * @param KekRozsak\SecurityBundle\Entity\Role $role
+	 * @return User
+	 */
+	public function addRole(\KekRozsak\SecurityBundle\Entity\Role $role)
+	{
+		$this->roles[] = $role;
+		return $this;
+	}
+
+	/**
+	 * Get all roles
+	 *
+	 * @return array
+	 */
 	public function getRoles()
 	{
-		/* As we use ACLs instead of roles, every user get the
-		 * ROLE_USER role, and nothing else
-		 */
-		return array('ROLE_USER');
+		return $this->roles->toArray();
 	}
+
+	/* Here comes the remaining part of UserInterface implementation */
 
 	public function getSalt()
 	{
