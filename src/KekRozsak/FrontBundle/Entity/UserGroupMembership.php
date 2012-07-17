@@ -15,6 +15,14 @@ use KekRozsak\SecurityBundle\Entity\User;
  */
 class UserGroupMembership
 {
+	public function __construct(\KekRozsak\SecurityBundle\Entity\User $user, \KekRozsak\FrontBundle\Entity\Group $group)
+	{
+		$this->setUser($user);
+		$this->setGroup($group);
+		$this->setMembershipRequestedAt(new \DateTime('now'));
+		$this->setMembershipAcceptedAt(new \DateTime('now'));
+	}
+
 	/**
 	 * @var integer $id
 	 * @ORM\Id

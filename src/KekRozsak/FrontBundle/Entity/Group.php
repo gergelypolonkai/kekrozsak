@@ -4,6 +4,8 @@ namespace KekRozsak\FrontBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 
 use KekRozsak\SecurityBundle\Entity\User;
 use KekRozsak\FrontBundle\Entity\Document;
@@ -12,6 +14,8 @@ use KekRozsak\FrontBundle\Entity\Document;
  * KekRozsak\FrontBundle\Entity\Group
  * @ORM\Entity
  * @ORM\Table(name="groups")
+ * @DoctrineAssert\UniqueEntity(fields="name", message="Ilyen nevű csoport már létezik. Kérlek, válassz másikat!")
+ * @DoctrineAssert\UniqueEntity(fields="slug", message="Ilyen nevű csoport már létezik. Kérlek, válasz másikat!")
  */
 class Group
 {
@@ -70,6 +74,7 @@ class Group
 	/**
 	 * @var string $name
 	 * @ORM\Column(type="string", length=50, nullable=false, unique=true)
+	 * @Assert\NotBlank()
 	 */
 	protected $name;
 

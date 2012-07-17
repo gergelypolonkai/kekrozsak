@@ -26,7 +26,7 @@
 					<span title="Már jelentkeztél, de a jelentkezésedet a csoport vezetője még nem fogadta el" class="ikon">[jelentkeztél ikon]</span>
 				{% else %}
 					{% if group.isOpen %}
-						<a href="{{ path('KekRozsakFrontBundle_groupJoin, { groupSlug: group.slug }') }}"><span title="Nyílt csoport, kattints a belépéshez!" class="ikon">[nyílt ikon]</span></a>
+						<a href="{{ path('KekRozsakFrontBundle_groupJoin', { groupSlug: group.slug }) }}"><span title="Nyílt csoport, kattints a belépéshez!" class="ikon">[nyílt ikon]</span></a>
 					{% else %}
 						<a href="{{ path('KekRozsakFrontBundle_groupJoin', { groupSlug: group.slug }) }}"><span title="Zárt csoport, kattints a jelentkezéshez!" class="ikon">[zárt ikon]</span></a>
 					{% endif %}
@@ -37,7 +37,7 @@
 {% endfor %}
 	</tbody>
 </table>
-Új csoport létrehozása
+<a href="{{ path('KekRozsakFrontBundle_groupCreate') }}">Új csoport létrehozása</a>
 {% endblock content %}
 {% block bottomscripts %}
 		<script type="text/javascript">

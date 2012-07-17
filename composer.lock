@@ -1,5 +1,5 @@
 {
-    "hash": "0890891a613a13d9980307e458190353",
+    "hash": "ddad7f2ad3884b1f4190d2d1c04a7f63",
     "packages": [
         {
             "package": "doctrine/common",
@@ -22,9 +22,9 @@
         },
         {
             "package": "egeloen/ckeditor-bundle",
-            "version": "2.0.x-dev",
-            "source-reference": "ca9d4a631577d7195c6517dd89ae8a3cc02b85ba",
-            "commit-date": "1337272707"
+            "version": "dev-master",
+            "source-reference": "98c9771b3d2748af0052b5efc697d5c1403c6473",
+            "commit-date": "1338211007"
         },
         {
             "package": "jms/aop-bundle",
@@ -118,8 +118,8 @@
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "151b79a6ce3f459e2fa8815cd9f2786eef750993",
-            "commit-date": "1342376835"
+            "source-reference": "f52ce6178243e4b11aa09bde147f684d596fb120",
+            "commit-date": "1342516073"
         },
         {
             "package": "twig/extensions",
@@ -152,6 +152,7 @@
         "symfony/monolog-bundle": 20,
         "sensio/distribution-bundle": 20,
         "sensio/framework-extra-bundle": 20,
-        "sensio/generator-bundle": 20
+        "sensio/generator-bundle": 20,
+        "egeloen/ckeditor-bundle": 20
     }
 }

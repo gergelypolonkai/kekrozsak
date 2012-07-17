@@ -1,0 +1,10 @@
+{% extends '::main_template.html.twig' %}
+{% block title %} - Csoport létrehozása{% endblock %}
+{% block content %}
+<h3>Csoport létrehozása</h3>
+<p>Warning</p>
+<form method="post" action="{{ path('KekRozsakFrontBundle_groupCreate') }}">
+{{ form_widget(form) }}
+<button type="submit">Létrehozás</button>
+</form>
+{% endblock content %}

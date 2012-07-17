@@ -3,7 +3,7 @@
         "name": "jms/metadata",
         "version": "1.1.1",
         "version_normalized": "1.1.1.0",
-        "time": "2011-12-29 20:32:49",
+        "time": "2011-12-29 19:32:49",
         "source": {
             "type": "git",
             "url": "https://github.com/schmittjoh/metadata",
@@ -47,7 +47,7 @@
         "name": "jms/cg",
         "version": "1.0.0",
         "version_normalized": "1.0.0.0",
-        "time": "2011-12-29 19:40:52",
+        "time": "2011-12-29 18:40:52",
         "source": {
             "type": "git",
             "url": "git://github.com/schmittjoh/cg-library.git",
@@ -89,7 +89,7 @@
         "version": "1.0.0",
         "version_normalized": "1.0.0.0",
         "target-dir": "JMS/AopBundle",
-        "time": "2011-12-29 19:50:26",
+        "time": "2011-12-29 18:50:26",
         "source": {
             "type": "git",
             "url": "https://github.com/schmittjoh/JMSAopBundle",
@@ -133,7 +133,7 @@
         "version": "1.1.0",
         "version_normalized": "1.1.0.0",
         "target-dir": "JMS/SecurityExtraBundle",
-        "time": "2011-12-29 23:38:12",
+        "time": "2011-12-29 22:38:12",
         "source": {
             "type": "git",
             "url": "https://github.com/schmittjoh/JMSSecurityExtraBundle",
@@ -178,7 +178,7 @@
         "version": "1.0.1",
         "version_normalized": "1.0.1.0",
         "target-dir": "JMS/DiExtraBundle",
-        "time": "2012-02-24 15:01:54",
+        "time": "2012-02-24 14:01:54",
         "source": {
             "type": "git",
             "url": "https://github.com/schmittjoh/JMSDiExtraBundle",
@@ -221,7 +221,7 @@
         "name": "doctrine/common",
         "version": "2.2.2",
         "version_normalized": "2.2.2.0",
-        "time": "2012-04-06 23:46:44",
+        "time": "2012-04-06 21:46:44",
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/common",
@@ -287,7 +287,7 @@
         "name": "monolog/monolog",
         "version": "1.1.0",
         "version_normalized": "1.1.0.0",
-        "time": "2012-04-17 10:27:40",
+        "time": "2012-04-17 08:27:40",
         "source": {
             "type": "git",
             "url": "https://github.com/Seldaek/monolog.git",
@@ -337,7 +337,7 @@
         "name": "twig/extensions",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
-        "time": "2012-05-15 17:28:19",
+        "time": "2012-05-15 15:28:19",
         "source": {
             "type": "git",
             "url": "https://github.com/fabpot/Twig-extensions",
@@ -382,7 +382,7 @@
         "name": "kriswallsmith/assetic",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
-        "time": "2012-06-06 21:41:54",
+        "time": "2012-06-06 19:41:54",
         "source": {
             "type": "git",
             "url": "http://github.com/kriswallsmith/assetic.git",
@@ -442,7 +442,7 @@
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "target-dir": "Doctrine/Bundle/DoctrineBundle",
-        "time": "2012-07-02 06:42:17",
+        "time": "2012-07-02 04:42:17",
         "source": {
             "type": "git",
             "url": "git://github.com/doctrine/DoctrineBundle.git",
@@ -516,7 +516,7 @@
         "name": "doctrine/orm",
         "version": "2.2.x-dev",
         "version_normalized": "2.2.9999999.9999999-dev",
-        "time": "2012-07-06 03:48:00",
+        "time": "2012-07-06 01:48:00",
         "source": {
             "type": "git",
             "url": "git://github.com/doctrine/doctrine2.git",
@@ -581,7 +581,7 @@
         "name": "doctrine/dbal",
         "version": "2.2.x-dev",
         "version_normalized": "2.2.9999999.9999999-dev",
-        "time": "2012-07-07 14:30:35",
+        "time": "2012-07-07 12:30:35",
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/dbal",
@@ -643,55 +643,11 @@
         }
     },
     {
-        "name": "egeloen/ckeditor-bundle",
-        "version": "2.0.x-dev",
-        "version_normalized": "2.0.9999999.9999999-dev",
-        "target-dir": "Ivory/CKEditorBundle",
-        "time": "2012-05-16 14:38:27",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/egeloen/IvoryCKEditorBundle",
-            "reference": "ca9d4a631577d7195c6517dd89ae8a3cc02b85ba"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/egeloen/IvoryCKEditorBundle/zipball/ca9d4a631577d7195c6517dd89ae8a3cc02b85ba",
-            "reference": "ca9d4a631577d7195c6517dd89ae8a3cc02b85ba",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0",
-            "symfony/framework-bundle": "2.*"
-        },
-        "type": "symfony-bundle",
-        "installation-source": "source",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Eric GELOEN",
-                "email": "geloen.eric@gmail.com",
-                "homepage": null,
-                "role": null
-            }
-        ],
-        "description": "Provides a CKEditor integration for your Symfony2 Project.",
-        "keywords": [
-            "CKEditor"
-        ],
-        "autoload": {
-            "psr-0": {
-                "Ivory\\CKEditorBundle": ""
-            }
-        }
-    },
-    {
         "name": "sensio/generator-bundle",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "target-dir": "Sensio/Bundle/GeneratorBundle",
-        "time": "2012-07-12 20:04:48",
+        "time": "2012-07-12 18:04:48",
         "source": {
             "type": "git",
             "url": "https://github.com/sensio/SensioGeneratorBundle",
@@ -744,7 +700,7 @@
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "target-dir": "Symfony/Bundle/AsseticBundle",
-        "time": "2012-07-12 02:51:17",
+        "time": "2012-07-12 00:51:17",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/AsseticBundle",
@@ -800,7 +756,7 @@
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "target-dir": "Symfony/Bundle/MonologBundle",
-        "time": "2012-06-30 01:48:07",
+        "time": "2012-06-29 23:48:07",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/MonologBundle",
@@ -860,7 +816,7 @@
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "target-dir": "Sensio/Bundle/FrameworkExtraBundle",
-        "time": "2012-07-11 19:13:52",
+        "time": "2012-07-11 17:13:52",
         "source": {
             "type": "git",
             "url": "https://github.com/sensio/SensioFrameworkExtraBundle",
@@ -909,7 +865,7 @@
         "name": "twig/twig",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
-        "time": "2012-07-15 19:42:44",
+        "time": "2012-07-15 17:42:44",
         "source": {
             "type": "git",
             "url": "git://github.com/fabpot/Twig.git",
@@ -964,7 +920,7 @@
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "target-dir": "Symfony/Bundle/SwiftmailerBundle",
-        "time": "2012-07-05 07:33:34",
+        "time": "2012-07-05 05:33:34",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/SwiftmailerBundle",
@@ -1022,7 +978,7 @@
         "name": "swiftmailer/swiftmailer",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
-        "time": "2012-07-13 08:47:17",
+        "time": "2012-07-13 06:47:17",
         "source": {
             "type": "git",
             "url": "git://github.com/swiftmailer/swiftmailer.git",
@@ -1074,19 +1030,107 @@
         }
     },
     {
-        "name": "symfony/symfony",
+        "name": "sensio/distribution-bundle",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
-        "time": "2012-07-15 12:27:15",
+        "target-dir": "Sensio/Bundle/DistributionBundle",
+        "time": "2012-07-15 04:24:10",
         "source": {
             "type": "git",
-            "url": "git://github.com/symfony/symfony.git",
-            "reference": "151b79a6ce3f459e2fa8815cd9f2786eef750993"
+            "url": "https://github.com/sensio/SensioDistributionBundle",
+            "reference": "5886adae1613c0a72fbb95259a83ae798e86c0d3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/symfony/symfony/zipball/151b79a6ce3f459e2fa8815cd9f2786eef750993",
-            "reference": "151b79a6ce3f459e2fa8815cd9f2786eef750993",
+            "url": "https://github.com/sensio/SensioDistributionBundle/zipball/5886adae1613c0a72fbb95259a83ae798e86c0d3",
+            "reference": "5886adae1613c0a72fbb95259a83ae798e86c0d3",
+            "shasum": ""
+        },
+        "require": {
+            "symfony/framework-bundle": "2.1.*"
+        },
+        "type": "symfony-bundle",
+        "installation-source": "source",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com",
+                "homepage": null,
+                "role": null
+            }
+        ],
+        "description": "The base bundle for the Symfony Distributions",
+        "keywords": [
+            "distribution",
+            "configuration"
+        ],
+        "autoload": {
+            "psr-0": {
+                "Sensio\\Bundle\\DistributionBundle": ""
+            }
+        }
+    },
+    {
+        "name": "egeloen/ckeditor-bundle",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "target-dir": "Ivory/CKEditorBundle",
+        "time": "2012-05-28 13:16:47",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/egeloen/IvoryCKEditorBundle",
+            "reference": "98c9771b3d2748af0052b5efc697d5c1403c6473"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/egeloen/IvoryCKEditorBundle/zipball/98c9771b3d2748af0052b5efc697d5c1403c6473",
+            "reference": "98c9771b3d2748af0052b5efc697d5c1403c6473",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0",
+            "symfony/framework-bundle": "2.*"
+        },
+        "type": "symfony-bundle",
+        "installation-source": "source",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Eric GELOEN",
+                "email": "geloen.eric@gmail.com",
+                "homepage": null,
+                "role": null
+            }
+        ],
+        "description": "Provides a CKEditor integration for your Symfony2 Project.",
+        "keywords": [
+            "CKEditor"
+        ],
+        "autoload": {
+            "psr-0": {
+                "Ivory\\CKEditorBundle": ""
+            }
+        }
+    },
+    {
+        "name": "symfony/symfony",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "time": "2012-07-17 09:07:53",
+        "source": {
+            "type": "git",
+            "url": "git://github.com/symfony/symfony.git",
+            "reference": "f52ce6178243e4b11aa09bde147f684d596fb120"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/symfony/symfony/zipball/f52ce6178243e4b11aa09bde147f684d596fb120",
+            "reference": "f52ce6178243e4b11aa09bde147f684d596fb120",
             "shasum": ""
         },
         "require": {
@@ -1171,50 +1215,6 @@
             "psr-0": {
                 "Symfony": "src/",
                 "SessionHandlerInterface": "src/Symfony/Component/HttpFoundation/Resources/stubs"
-            }
-        }
-    },
-    {
-        "name": "sensio/distribution-bundle",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "target-dir": "Sensio/Bundle/DistributionBundle",
-        "time": "2012-07-15 06:24:10",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/sensio/SensioDistributionBundle",
-            "reference": "5886adae1613c0a72fbb95259a83ae798e86c0d3"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/sensio/SensioDistributionBundle/zipball/5886adae1613c0a72fbb95259a83ae798e86c0d3",
-            "reference": "5886adae1613c0a72fbb95259a83ae798e86c0d3",
-            "shasum": ""
-        },
-        "require": {
-            "symfony/framework-bundle": "2.1.*"
-        },
-        "type": "symfony-bundle",
-        "installation-source": "source",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com",
-                "homepage": null,
-                "role": null
-            }
-        ],
-        "description": "The base bundle for the Symfony Distributions",
-        "keywords": [
-            "distribution",
-            "configuration"
-        ],
-        "autoload": {
-            "psr-0": {
-                "Sensio\\Bundle\\DistributionBundle": ""
             }
         }
     }
