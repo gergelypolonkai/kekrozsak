@@ -182,12 +182,7 @@ class Document
 
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection $groups
-	 * @ORM\ManyToMany(targetEntity="KekRozsak\FrontBundle\Entity\Group")
-	 * @ORM\JoinTable(name="group_document", joinColumns={
-	 *     @ORM\JoinColumn(name="document_id", referencedColumnName="id"),
-	 * }, inverseJoinColumns={
-	 *     @ORM\JoinColumn(name="group_id", referencedColumnName="id")
-	 * })
+	 * @ORM\ManyToMany(targetEntity="KekRozsak\FrontBundle\Entity\Group", mappedBy="documents")
 	 */
 	protected $groups;
 

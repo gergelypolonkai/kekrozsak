@@ -305,7 +305,12 @@ class Group
 
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection $documents
-	 * @ORM\ManyToMany(targetEntity="Document")
+	 * @ORM\ManyToMany(targetEntity="Document", inversedBy="groups")
+	 * @ORM\JoinTable(name="group_document", inverseJoinColumns={
+	 *     @ORM\JoinColumn(name="document_id", referencedColumnName="id"),
+	 * }, joinColumns={
+	 *     @ORM\JoinColumn(name="group_id", referencedColumnName="id")
+	 * })
 	 */
 	protected $documents;
 
