@@ -61,7 +61,7 @@ class DefaultController extends Controller
 			$form->bindRequest($request);
 			if ($form->isValid())
 			{
-				if ($this->getPassword() == '')
+				if ($user->getPassword() == '')
 					$user->setPassword($oldPassword);
 				else
 					$user->setPassword($this->get('security.encoder_factory')->getEncoder($user)->encodePassword($user->getPassword(), $user->getSalt()));

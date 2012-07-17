@@ -26,7 +26,8 @@ class UserData
 	/**
 	 * @var KekRozsak\SecurityBundle\Entity\User $user
 	 * @ORM\Id
-	 * @ORM\OneToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User")
+	 * @ORM\GeneratedValue(strategy="NONE")
+	 * @ORM\OneToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User", inversedBy="userData")
 	 * @ORM\JoinColumn(name="user_id")
 	 */
 	protected $user;

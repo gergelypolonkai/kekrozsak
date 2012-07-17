@@ -247,8 +247,7 @@ class User implements UserInterface, AdvancedUserInterface
 
 	/**
 	 * @var \KekRozsak\FrontBundle\Entity\UserData $userData
-	 * @ORM\OneToMany(targetEntity="KekRozsak\FrontBundle\Entity\UserData", fetch="LAZY", cascade={"persist"}, mappedBy="user")
-	 * @ORM\JoinColumn(name="id", referencedColumnName="user_id")
+	 * @ORM\OneToOne(targetEntity="KekRozsak\FrontBundle\Entity\UserData", fetch="LAZY", cascade={"persist"}, mappedBy="user")
 	 */
 	protected $userData;
 
@@ -261,7 +260,7 @@ class User implements UserInterface, AdvancedUserInterface
 	 */
 	public function setUserData(\KekRozsak\FrontBundle\Entity\UserData $userData = null)
 	{
-		$this->userData = new ArrayCollection(array($userData));
+		$this->userData = $userData;
 		$userData->setUser($this);
 		return $this;
 	}
@@ -273,7 +272,7 @@ class User implements UserInterface, AdvancedUserInterface
 	 */
 	public function getUserData()
 	{
-		return $this->userData->get(1);
+		return $this->userData;
 	}
 
 	/**
