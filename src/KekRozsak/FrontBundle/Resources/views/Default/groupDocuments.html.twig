@@ -5,8 +5,13 @@
 {% endblock additional_css %}
 {% block content %}
 <ul id="submenu">
-	<li><a href="{{ path('KekRozsakFrontBundle_groupView', {groupSlug: group.slug }) }}">Leírás</a></li>
-	<li><a href="{{ path('KekRozsakFrontBundle_groupMembers', {groupSlug: group.slug }) }}">Tagok</a></li>
+	<li><a href="{{ path('KekRozsakFrontBundle_groupView', { groupSlug: group.slug }) }}">Leírás</a></li>
+	<li><a href="{{ path('KekRozsakFrontBundle_groupMembers', { groupSlug: group.slug }) }}">Tagok</a></li>
 </ul>
 <h3>{{ group.name }} - Dokumentumok</h3>
+<ul>
+{% for document in group.documents %}
+	<li><a href="{{ path('KekRozsakFrontBundle_documentView', { documentSlug: document.slug }) }}">{{ document.title }}</a></li>
+{% endfor %}
+</ul>
 {% endblock %}

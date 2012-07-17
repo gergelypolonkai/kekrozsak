@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 use KekRozsak\SecurityBundle\Entity\User;
+use KekRozsak\FrontBundle\Entity\Document;
 
 /**
  * KekRozsak\FrontBundle\Entity\Group
@@ -17,6 +18,7 @@ class Group
 	public function __construct()
 	{
 		$this->members = new ArrayCollection();
+		$this->documents = new ArrayCollection();
 	}
 
 	/**
@@ -299,5 +301,33 @@ class Group
 	public function isOpen()
 	{
 		return $this->open;
+	}
+
+	/**
+	 * @var Doctrine\Common\Collections\ArrayCollection $documents
+	 * @ORM\ManyToMany(targetEntity="Document")
+	 */
+	protected $documents;
+
+	/**
+	 * Add document
+	 *
+	 * @param KekRozsak\FrontBundle\Entity\Document $document
+	 * @return Group
+	 */
+	public function addDocument(\KekRozsak\FrontBundle\Entity\Document $document)
+	{
+		$this->documents[] = $document;
+		return $this;
+	}
+	
+	/**
+	 * Get all documents
+	 *
+	 * @return Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getDocuments()
+	{
+		return $this->documents;
 	}
 }
