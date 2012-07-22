@@ -9,9 +9,25 @@
 	<li><a href="{{ path('KekRozsakFrontBundle_groupMembers', { groupSlug: group.slug }) }}">Tagok</a></li>
 </ul>
 <h3>{{ group.name }} - Dokumentumok</h3>
-<ul>
+<table>
+	<thead>
+		<tr>
+			<td colspan="2">Cím</td>
+			<td>Készítette</td>
+		</tr>
+	</thead>
+	<tbody>
 {% for document in group.documents %}
-	<li><a href="{{ path('KekRozsakFrontBundle_documentView', { documentSlug: document.slug }) }}">{{ document.title }}</a></li>
+		<tr>
+			<td>[ikon]</td>
+			<td><a href="{{ path('KekRozsakFrontBundle_documentView', { documentSlug: document.slug }) }}">{{ document.title }}</a></td>
+			<td>
+				{{ document.createdBy.displayName }}<br />
+				{{ document.createdAt|date('Y-m-d H:i') }}
+			</td>
+		</tr>
 {% endfor %}
-</ul>
+	</tbody>
+</table>
+<a href="{{ path('KekRozsakFrontBundle_documentCreate', { groupSlug: group.slug }) }}">Új dokumentum</a>
 {% endblock %}

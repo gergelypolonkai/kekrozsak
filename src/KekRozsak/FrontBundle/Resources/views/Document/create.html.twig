@@ -1,0 +1,9 @@
+{% extends '::main_template.html.twig' %}
+{% block title %} - Dokumentum létrehozása{% endblock %}
+{% block content %}
+<h3>Új dokumentum létrehozása</h3>
+<form method="post" action="{{ path('KekRozsakFrontBundle_documentCreate', { groupSlug: defaultGroup }) }}">
+	{{ form_widget(form) }}
+	<button type="submit">Mentés</button>
+</form>
+{% endblock content %}

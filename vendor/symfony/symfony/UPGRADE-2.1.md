@@ -13,14 +13,15 @@
     configuration (i.e. `config.yml`), merging could yield a set of base URL's
     for multiple environments.
 
- * The priorities for the built-in listeners have changed:
-
-                                       2.0         2.1
-   security.firewall   request         64          8
-   locale listener     early_request   253         255
-                       request         -1          16
-   router listener     early_request   255         128
-                       request         10          32
+  * The priorities for the built-in listeners have changed.
+ 
+    ```
+                                            2.0         2.1
+        security.firewall   kernel.request  64          8
+        locale listener     kernel.request  0           16
+        router listener     early_request   255         n/a
+                            request         0           32
+   ```
 
 ### Doctrine
 
@@ -106,7 +107,7 @@
            if ($locale = $request->attributes->get('_locale')) {
                $request->getSession()->set('_locale', $locale);
            } else {
-               $request->setDefaultLocale($request->getSession()->get('_locale', $this->defaultLocale));
+               $request->setLocale($request->getSession()->get('_locale', $this->defaultLocale));
            }
        }
 
@@ -1053,10 +1054,25 @@
     $registry->addType($registry->resolveType(new MyFormType()));
     ```
 
+  * The method `renderBlock()` of the helper for the PHP Templating component was
+    deprecated and will be removed in Symfony 2.3. You should use `block()` instead.
+
+    Before:
+
+    ```
+    <?php echo $view['form']->renderBlock('widget_attributes') ?>
+    ```
+
+    After:
+
+    ```
+    <?php echo $view['form']->block('widget_attributes') ?>
+    ```
+
 ### Validator
 
   * The methods `setMessage()`, `getMessageTemplate()` and
-    `getMessageParameters()` in the Constraint class were deprecated and will
+    `getMessageParameters()` in the `ConstraintValidator` class were deprecated and will
     be removed in Symfony 2.3.
 
     If you have implemented custom validators, you should use the

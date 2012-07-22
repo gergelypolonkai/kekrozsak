@@ -15,9 +15,11 @@ use Symfony\Bundle\FrameworkBundle\Templating\Helper\FormHelper;
 use Symfony\Bundle\FrameworkBundle\Templating\Helper\TranslatorHelper;
 use Symfony\Bundle\FrameworkBundle\Tests\Templating\Helper\Fixtures\StubTemplateNameParser;
 use Symfony\Bundle\FrameworkBundle\Tests\Templating\Helper\Fixtures\StubTranslator;
-use Symfony\Component\Form\FormView;
 use Symfony\Component\Templating\PhpEngine;
 use Symfony\Component\Templating\Loader\FilesystemLoader;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\Form\FormRenderer;
+use Symfony\Component\Form\Extension\Templating\TemplatingRendererEngine;
 use Symfony\Component\Form\Tests\AbstractDivLayoutTest;
 
 class FormHelperDivLayoutTest extends AbstractDivLayoutTest
@@ -26,6 +28,8 @@ class FormHelperDivLayoutTest extends AbstractDivLayoutTest
 
     protected function setUp()
     {
+        ini_set('xdebug.max_nesting_level', 120);
+
         parent::setUp();
 
         $root = realpath(__DIR__.'/../../../Resources/views');
@@ -34,8 +38,10 @@ class FormHelperDivLayoutTest extends AbstractDivLayoutTest
         $loader = new FilesystemLoader(array());
         $engine = new PhpEngine($templateNameParser, $loader);
         $engine->addGlobal('global', '');
+        $rendererEngine = new TemplatingRendererEngine($engine, array('FrameworkBundle:Form'));
+        $renderer = new FormRenderer($rendererEngine, $this->getMock('Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface'));
 
-        $this->helper = new FormHelper($engine, $this->getMock('Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface'), array('FrameworkBundle:Form'));
+        $this->helper = new FormHelper($renderer);
 
         $engine->setHelpers(array(
             $this->helper,

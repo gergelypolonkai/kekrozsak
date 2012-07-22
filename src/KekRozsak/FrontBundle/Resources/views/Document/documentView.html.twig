@@ -1,7 +1,0 @@
-{% extends '::main_template.html.twig' %}
-{% block title %} - Dokumentum - {{ document.title }}{% endblock %}
-{% block content %}
-<h3>{{ document.title }}</h3>
-{{ document.content }}
-<div class="szerzo">{{ document.createdBy.displayName }}</div>
-{% endblock content %}

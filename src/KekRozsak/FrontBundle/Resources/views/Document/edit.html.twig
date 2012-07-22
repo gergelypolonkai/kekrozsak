@@ -1,0 +1,9 @@
+{% extends '::main_template.html.twig' %}
+{% block title %} - Dokumentum szerkesztése - {{ document.title }}{% endblock %}
+{% block content %}
+<h3>Dokumentum szerkesztése - {{ document.title }}</h3>
+<form method="post" action="{{ path('KekRozsakFrontBundle_documentEdit', { documentSlug: document.slug }) }}">
+	{{ form_widget(form) }}
+	<button type="submit">Mentés</button>
+</form>
+{% endblock content %}

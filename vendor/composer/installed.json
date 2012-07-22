@@ -3,7 +3,7 @@
         "name": "jms/metadata",
         "version": "1.1.1",
         "version_normalized": "1.1.1.0",
-        "time": "2011-12-29 19:32:49",
+        "time": "2011-12-29 14:32:49",
         "source": {
             "type": "git",
             "url": "https://github.com/schmittjoh/metadata",
@@ -47,7 +47,7 @@
         "name": "jms/cg",
         "version": "1.0.0",
         "version_normalized": "1.0.0.0",
-        "time": "2011-12-29 18:40:52",
+        "time": "2011-12-29 13:40:52",
         "source": {
             "type": "git",
             "url": "git://github.com/schmittjoh/cg-library.git",
@@ -89,7 +89,7 @@
         "version": "1.0.0",
         "version_normalized": "1.0.0.0",
         "target-dir": "JMS/AopBundle",
-        "time": "2011-12-29 18:50:26",
+        "time": "2011-12-29 13:50:26",
         "source": {
             "type": "git",
             "url": "https://github.com/schmittjoh/JMSAopBundle",
@@ -133,7 +133,7 @@
         "version": "1.1.0",
         "version_normalized": "1.1.0.0",
         "target-dir": "JMS/SecurityExtraBundle",
-        "time": "2011-12-29 22:38:12",
+        "time": "2011-12-29 17:38:12",
         "source": {
             "type": "git",
             "url": "https://github.com/schmittjoh/JMSSecurityExtraBundle",
@@ -178,7 +178,7 @@
         "version": "1.0.1",
         "version_normalized": "1.0.1.0",
         "target-dir": "JMS/DiExtraBundle",
-        "time": "2012-02-24 14:01:54",
+        "time": "2012-02-24 09:01:54",
         "source": {
             "type": "git",
             "url": "https://github.com/schmittjoh/JMSDiExtraBundle",
@@ -221,7 +221,7 @@
         "name": "doctrine/common",
         "version": "2.2.2",
         "version_normalized": "2.2.2.0",
-        "time": "2012-04-06 21:46:44",
+        "time": "2012-04-06 11:46:44",
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/common",
@@ -287,7 +287,7 @@
         "name": "monolog/monolog",
         "version": "1.1.0",
         "version_normalized": "1.1.0.0",
-        "time": "2012-04-17 08:27:40",
+        "time": "2012-04-16 22:27:40",
         "source": {
             "type": "git",
             "url": "https://github.com/Seldaek/monolog.git",
@@ -337,7 +337,7 @@
         "name": "twig/extensions",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
-        "time": "2012-05-15 15:28:19",
+        "time": "2012-05-15 05:28:19",
         "source": {
             "type": "git",
             "url": "https://github.com/fabpot/Twig-extensions",
@@ -379,70 +379,11 @@
         }
     },
     {
-        "name": "kriswallsmith/assetic",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "time": "2012-06-06 19:41:54",
-        "source": {
-            "type": "git",
-            "url": "http://github.com/kriswallsmith/assetic.git",
-            "reference": "d6f89a3170c5280ad554347dc113eb25fdf00ad7"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/kriswallsmith/assetic/zipball/d6f89a3170c5280ad554347dc113eb25fdf00ad7",
-            "reference": "d6f89a3170c5280ad554347dc113eb25fdf00ad7",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0",
-            "symfony/process": "2.1.*"
-        },
-        "require-dev": {
-            "twig/twig": ">=1.6.0,<2.0",
-            "leafo/lessphp": "*"
-        },
-        "suggest": {
-            "twig/twig": "Assetic provides the integration with the Twig templating engine",
-            "leafo/lessphp": "Assetic provides the integration with the lessphp LESS compiler"
-        },
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.1-dev"
-            }
-        },
-        "installation-source": "source",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Kris Wallsmith",
-                "email": "kris.wallsmith@gmail.com",
-                "homepage": "http://kriswallsmith.net/",
-                "role": null
-            }
-        ],
-        "description": "Asset Management for PHP",
-        "homepage": "https://github.com/kriswallsmith/assetic",
-        "keywords": [
-            "assets",
-            "compression",
-            "minification"
-        ],
-        "autoload": {
-            "psr-0": {
-                "Assetic": "src/"
-            }
-        }
-    },
-    {
         "name": "doctrine/doctrine-bundle",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "target-dir": "Doctrine/Bundle/DoctrineBundle",
-        "time": "2012-07-02 04:42:17",
+        "time": "2012-07-01 18:42:17",
         "source": {
             "type": "git",
             "url": "git://github.com/doctrine/DoctrineBundle.git",
@@ -516,7 +457,7 @@
         "name": "doctrine/orm",
         "version": "2.2.x-dev",
         "version_normalized": "2.2.9999999.9999999-dev",
-        "time": "2012-07-06 01:48:00",
+        "time": "2012-07-05 15:48:00",
         "source": {
             "type": "git",
             "url": "git://github.com/doctrine/doctrine2.git",
@@ -581,7 +522,7 @@
         "name": "doctrine/dbal",
         "version": "2.2.x-dev",
         "version_normalized": "2.2.9999999.9999999-dev",
-        "time": "2012-07-07 12:30:35",
+        "time": "2012-07-07 02:30:35",
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/dbal",
@@ -647,7 +588,7 @@
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "target-dir": "Sensio/Bundle/GeneratorBundle",
-        "time": "2012-07-12 18:04:48",
+        "time": "2012-07-12 08:04:48",
         "source": {
             "type": "git",
             "url": "https://github.com/sensio/SensioGeneratorBundle",
@@ -696,67 +637,11 @@
         }
     },
     {
-        "name": "symfony/assetic-bundle",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "target-dir": "Symfony/Bundle/AsseticBundle",
-        "time": "2012-07-12 00:51:17",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/AsseticBundle",
-            "reference": "ed933dcfa45f00b6bc6d7727007403f3ff429e5a"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/symfony/AsseticBundle/zipball/ed933dcfa45f00b6bc6d7727007403f3ff429e5a",
-            "reference": "ed933dcfa45f00b6bc6d7727007403f3ff429e5a",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0",
-            "symfony/framework-bundle": "2.1.*",
-            "kriswallsmith/assetic": "1.1.*"
-        },
-        "suggest": {
-            "symfony/twig-bundle": "2.1.*"
-        },
-        "type": "symfony-bundle",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.1.x-dev"
-            }
-        },
-        "installation-source": "source",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Kris Wallsmith",
-                "email": "kris.wallsmith@gmail.com",
-                "homepage": "http://kriswallsmith.net/",
-                "role": null
-            }
-        ],
-        "description": "Integrates Assetic into Symfony2",
-        "homepage": "https://github.com/symfony/AsseticBundle",
-        "keywords": [
-            "assets",
-            "compression",
-            "minification"
-        ],
-        "autoload": {
-            "psr-0": {
-                "Symfony\\Bundle\\AsseticBundle": ""
-            }
-        }
-    },
-    {
         "name": "symfony/monolog-bundle",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "target-dir": "Symfony/Bundle/MonologBundle",
-        "time": "2012-06-29 23:48:07",
+        "time": "2012-06-29 13:48:07",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/MonologBundle",
@@ -816,7 +701,7 @@
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "target-dir": "Sensio/Bundle/FrameworkExtraBundle",
-        "time": "2012-07-11 17:13:52",
+        "time": "2012-07-11 07:13:52",
         "source": {
             "type": "git",
             "url": "https://github.com/sensio/SensioFrameworkExtraBundle",
@@ -862,123 +747,10 @@
         }
     },
     {
-        "name": "twig/twig",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "time": "2012-07-15 17:42:44",
-        "source": {
-            "type": "git",
-            "url": "git://github.com/fabpot/Twig.git",
-            "reference": "d45664045194ef62573c153c424508527105041e"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/fabpot/Twig/zipball/d45664045194ef62573c153c424508527105041e",
-            "reference": "d45664045194ef62573c153c424508527105041e",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.2.4"
-        },
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.9-dev"
-            }
-        },
-        "installation-source": "source",
-        "license": [
-            "BSD-3"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com",
-                "homepage": null,
-                "role": null
-            },
-            {
-                "name": "Armin Ronacher",
-                "email": "armin.ronacher@active-4.com",
-                "homepage": null,
-                "role": null
-            }
-        ],
-        "description": "Twig, the flexible, fast, and secure template language for PHP",
-        "homepage": "http://twig.sensiolabs.org",
-        "keywords": [
-            "templating"
-        ],
-        "autoload": {
-            "psr-0": {
-                "Twig_": "lib/"
-            }
-        }
-    },
-    {
-        "name": "symfony/swiftmailer-bundle",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "target-dir": "Symfony/Bundle/SwiftmailerBundle",
-        "time": "2012-07-05 05:33:34",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/SwiftmailerBundle",
-            "reference": "v2.1.0-BETA3"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/symfony/SwiftmailerBundle/zipball/v2.1.0-BETA3",
-            "reference": "v2.1.0-BETA3",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.2",
-            "symfony/swiftmailer-bridge": "2.1.*",
-            "swiftmailer/swiftmailer": ">=4.2.0,<4.3-dev"
-        },
-        "require-dev": {
-            "symfony/dependency-injection": "2.1.*",
-            "symfony/http-kernel": "2.1.*",
-            "symfony/config": "2.1.*"
-        },
-        "type": "symfony-bundle",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.1-dev"
-            }
-        },
-        "installation-source": "source",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com",
-                "homepage": null,
-                "role": null
-            },
-            {
-                "name": "Symfony Community",
-                "email": null,
-                "homepage": "http://symfony.com/contributors",
-                "role": null
-            }
-        ],
-        "description": "Symfony SwiftmailerBundle",
-        "homepage": "http://symfony.com",
-        "autoload": {
-            "psr-0": {
-                "Symfony\\Bundle\\SwiftmailerBundle": ""
-            }
-        }
-    },
-    {
         "name": "swiftmailer/swiftmailer",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
-        "time": "2012-07-13 06:47:17",
+        "time": "2012-07-12 20:47:17",
         "source": {
             "type": "git",
             "url": "git://github.com/swiftmailer/swiftmailer.git",
@@ -1034,7 +806,7 @@
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "target-dir": "Sensio/Bundle/DistributionBundle",
-        "time": "2012-07-15 04:24:10",
+        "time": "2012-07-14 18:24:10",
         "source": {
             "type": "git",
             "url": "https://github.com/sensio/SensioDistributionBundle",
@@ -1074,11 +846,70 @@
         }
     },
     {
+        "name": "symfony/swiftmailer-bundle",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "target-dir": "Symfony/Bundle/SwiftmailerBundle",
+        "time": "2012-07-19 01:55:12",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/SwiftmailerBundle",
+            "reference": "65e6079443c3cd413012e146aa74307f18671f42"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/symfony/SwiftmailerBundle/zipball/65e6079443c3cd413012e146aa74307f18671f42",
+            "reference": "65e6079443c3cd413012e146aa74307f18671f42",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.2",
+            "symfony/swiftmailer-bridge": "2.1.*",
+            "swiftmailer/swiftmailer": ">=4.2.0,<4.3-dev"
+        },
+        "require-dev": {
+            "symfony/dependency-injection": "2.1.*",
+            "symfony/http-kernel": "2.1.*",
+            "symfony/config": "2.1.*"
+        },
+        "type": "symfony-bundle",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.1-dev"
+            }
+        },
+        "installation-source": "source",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com",
+                "homepage": null,
+                "role": null
+            },
+            {
+                "name": "Symfony Community",
+                "email": null,
+                "homepage": "http://symfony.com/contributors",
+                "role": null
+            }
+        ],
+        "description": "Symfony SwiftmailerBundle",
+        "homepage": "http://symfony.com",
+        "autoload": {
+            "psr-0": {
+                "Symfony\\Bundle\\SwiftmailerBundle": ""
+            }
+        }
+    },
+    {
         "name": "egeloen/ckeditor-bundle",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "target-dir": "Ivory/CKEditorBundle",
-        "time": "2012-05-28 13:16:47",
+        "time": "2012-05-28 11:16:47",
         "source": {
             "type": "git",
             "url": "https://github.com/egeloen/IvoryCKEditorBundle",
@@ -1118,19 +949,188 @@
         }
     },
     {
-        "name": "symfony/symfony",
+        "name": "kriswallsmith/assetic",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
-        "time": "2012-07-17 09:07:53",
+        "time": "2012-07-20 10:33:33",
         "source": {
             "type": "git",
-            "url": "git://github.com/symfony/symfony.git",
-            "reference": "f52ce6178243e4b11aa09bde147f684d596fb120"
+            "url": "http://github.com/kriswallsmith/assetic.git",
+            "reference": "5c1c9b658b732a980312e8f29cec4e175c2bb6b2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/symfony/symfony/zipball/f52ce6178243e4b11aa09bde147f684d596fb120",
-            "reference": "f52ce6178243e4b11aa09bde147f684d596fb120",
+            "url": "https://github.com/kriswallsmith/assetic/zipball/5c1c9b658b732a980312e8f29cec4e175c2bb6b2",
+            "reference": "5c1c9b658b732a980312e8f29cec4e175c2bb6b2",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0",
+            "symfony/process": "2.1.*"
+        },
+        "require-dev": {
+            "twig/twig": ">=1.6.0,<2.0",
+            "leafo/lessphp": "*"
+        },
+        "suggest": {
+            "twig/twig": "Assetic provides the integration with the Twig templating engine",
+            "leafo/lessphp": "Assetic provides the integration with the lessphp LESS compiler"
+        },
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.1-dev"
+            }
+        },
+        "installation-source": "source",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Kris Wallsmith",
+                "email": "kris.wallsmith@gmail.com",
+                "homepage": "http://kriswallsmith.net/",
+                "role": null
+            }
+        ],
+        "description": "Asset Management for PHP",
+        "homepage": "https://github.com/kriswallsmith/assetic",
+        "keywords": [
+            "assets",
+            "compression",
+            "minification"
+        ],
+        "autoload": {
+            "psr-0": {
+                "Assetic": "src/"
+            }
+        }
+    },
+    {
+        "name": "symfony/assetic-bundle",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "target-dir": "Symfony/Bundle/AsseticBundle",
+        "time": "2012-07-20 19:34:07",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/AsseticBundle",
+            "reference": "e5e9a56a872d9e1f305d14cd8296bf77888388af"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/symfony/AsseticBundle/zipball/e5e9a56a872d9e1f305d14cd8296bf77888388af",
+            "reference": "e5e9a56a872d9e1f305d14cd8296bf77888388af",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0",
+            "symfony/framework-bundle": "2.1.*",
+            "kriswallsmith/assetic": "1.1.*"
+        },
+        "suggest": {
+            "symfony/twig-bundle": "2.1.*"
+        },
+        "type": "symfony-bundle",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.1.x-dev"
+            }
+        },
+        "installation-source": "source",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Kris Wallsmith",
+                "email": "kris.wallsmith@gmail.com",
+                "homepage": "http://kriswallsmith.net/",
+                "role": null
+            }
+        ],
+        "description": "Integrates Assetic into Symfony2",
+        "homepage": "https://github.com/symfony/AsseticBundle",
+        "keywords": [
+            "assets",
+            "compression",
+            "minification"
+        ],
+        "autoload": {
+            "psr-0": {
+                "Symfony\\Bundle\\AsseticBundle": ""
+            }
+        }
+    },
+    {
+        "name": "twig/twig",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "time": "2012-07-20 12:41:38",
+        "source": {
+            "type": "git",
+            "url": "git://github.com/fabpot/Twig.git",
+            "reference": "8a84838798e45424c5fe2d87149db6855ae037bf"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/fabpot/Twig/zipball/8a84838798e45424c5fe2d87149db6855ae037bf",
+            "reference": "8a84838798e45424c5fe2d87149db6855ae037bf",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2.4"
+        },
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.9-dev"
+            }
+        },
+        "installation-source": "source",
+        "license": [
+            "BSD-3"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com",
+                "homepage": null,
+                "role": null
+            },
+            {
+                "name": "Armin Ronacher",
+                "email": "armin.ronacher@active-4.com",
+                "homepage": null,
+                "role": null
+            }
+        ],
+        "description": "Twig, the flexible, fast, and secure template language for PHP",
+        "homepage": "http://twig.sensiolabs.org",
+        "keywords": [
+            "templating"
+        ],
+        "autoload": {
+            "psr-0": {
+                "Twig_": "lib/"
+            }
+        }
+    },
+    {
+        "name": "symfony/symfony",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "time": "2012-07-21 11:16:18",
+        "source": {
+            "type": "git",
+            "url": "git://github.com/symfony/symfony.git",
+            "reference": "6c256b01b087f94a4ec04487d875fe81375eb6c1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/symfony/symfony/zipball/6c256b01b087f94a4ec04487d875fe81375eb6c1",
+            "reference": "6c256b01b087f94a4ec04487d875fe81375eb6c1",
             "shasum": ""
         },
         "require": {

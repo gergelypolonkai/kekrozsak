@@ -4,6 +4,8 @@ namespace KekRozsak\FrontBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 
 use KekRozsak\SecurityBundle\Entity\User;
 use KekRozsak\FrontBundle\Entity\Group;
@@ -12,6 +14,8 @@ use KekRozsak\FrontBundle\Entity\Group;
  * KekRozsak\FrontBundle\Entity\Document
  * @ORM\Entity
  * @ORM\Table(name="documents")
+ * @DoctrineAssert\UniqueEntity(fields={"title"}, message="Ilyen című dokumentum már létezik. Kérlek válassz másikat!")
+ * @DoctrineAssert\UniqueEntity(fields={"slug"}, message="Ilyen című dokumentum már létezik. Kérlek válassz másikat!")
  */
 class Document
 {
@@ -41,6 +45,7 @@ class Document
 	/**
 	 * @var string $title
 	 * @ORM\Column(type="string", length=150, unique=true, nullable=false)
+	 * @Assert\NotBlank()
 	 */
 	protected $title;
 
@@ -69,6 +74,7 @@ class Document
 	/**
 	 * @var string $slug
 	 * @ORM\Column(type="string", length=150, unique=true, nullable=false)
+	 * @Assert\NotBlank()
 	 */
 	protected $slug;
 
@@ -206,5 +212,89 @@ class Document
 	public function getGroups()
 	{
 		return $this->group;
+	}
+
+	/**
+	 * @var KekRozsak\SecurityBundle\Entity\User $updatedBy
+	 * @ORM\ManyToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User")
+	 */
+	protected $updatedBy;
+
+	/**
+	 * Set updatedBy
+	 *
+	 * @param KekRozsak\SecurityBundle\Entity\User $updatedBy
+	 * @return Document
+	 */
+	public function setUpdatedBy(\KekRozsak\SecurityBundle\Entity\User $updatedBy = null)
+	{
+		$this->updatedBy = $updatedBy;
+		return $this;
+	}
+
+	/**
+	 * Get updatedBy
+	 *
+	 * @return KekRozsak\SecurityBundle\Entity\User
+	 */
+	public function getUpdatedBy()
+	{
+		return $this->updatedBy;
+	}
+
+	/**
+	 * @var DateTime $updatedAt
+	 * @ORM\Column(type="datetime", nullable=true)
+	 */
+	protected $updatedAt;
+
+	/**
+	 * Set updatedAt
+	 *
+	 * @param DateTime $updatedAt
+	 * @return Document
+	 */
+	public function setUpdatedAt(\DateTime $updatedAt = null)
+	{
+		$this->updatedAt = $updatedAt;
+		return $this;
+	}
+	
+	/**
+	 * Get updatedAt
+	 *
+	 * @return DateTime
+	 */
+	public function getUpdatedAt()
+	{
+		return $this->updatedAt;
+	}
+
+	/**
+	 * @var string updateReason
+	 * @ORM\Column(type="text", nullable=true)
+	 */
+	protected $updateReason;
+	
+	/**
+	 * Set updateReason
+	 *
+	 * @param string $updateReason
+	 * @return Document
+	 */
+	public function setUpdateReason($updateReason = null)
+	{
+		$this->updateReason = $updateReason;
+		return $this;
+	}
+	
+	/**
+	 * Get updateReason
+	 *
+	 * @return string
+	 */
+	public function getUpdateReason()
+	{
+		return $this->updateReason;
 	}
 }

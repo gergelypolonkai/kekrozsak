@@ -25,6 +25,7 @@ use Symfony\Component\Process\ProcessBuilder;
 class CompassFilter implements FilterInterface
 {
     private $compassPath;
+    private $rubyPath;
     private $scss;
 
     // sass options
@@ -50,9 +51,10 @@ class CompassFilter implements FilterInterface
     private $generatedImagesPath;
     private $httpJavascriptsPath;
 
-    public function __construct($compassPath = '/usr/bin/compass')
+    public function __construct($compassPath = '/usr/bin/compass', $rubyPath = null)
     {
         $this->compassPath = $compassPath;
+        $this->rubyPath = $rubyPath;
         $this->cacheLocation = sys_get_temp_dir();
 
         if ('cli' !== php_sapi_name()) {
@@ -133,6 +135,11 @@ class CompassFilter implements FilterInterface
         $this->plugins[] = $plugin;
     }
 
+    public function setLoadPaths(array $loadPaths)
+    {
+        $this->loadPaths = $loadPaths;
+    }
+
     public function addLoadPath($loadPath)
     {
         $this->loadPaths[] = $loadPath;
@@ -171,11 +178,16 @@ class CompassFilter implements FilterInterface
         // compass does not seems to handle symlink, so we use realpath()
         $tempDir = realpath(sys_get_temp_dir());
 
-        $pb = new ProcessBuilder(array(
+        $compassProcessArgs = array(
             $this->compassPath,
             'compile',
             $tempDir,
-        ));
+        );
+        if (null !== $this->rubyPath) {
+            array_unshift($compassProcessArgs, $this->rubyPath);
+        }
+
+        $pb = new ProcessBuilder($compassProcessArgs);
         $pb->inheritEnvironmentVariables();
 
         if ($this->force) {
@@ -330,12 +342,12 @@ class CompassFilter implements FilterInterface
 
         // does we have an associative array ?
         if (count(array_filter(array_keys($array), "is_numeric")) != count($array)) {
-            foreach($array as $name => $value) {
+            foreach ($array as $name => $value) {
                 $output[] = sprintf('    :%s => "%s"', $name, addcslashes($value, '\\'));
             }
             $output = "{\n".implode(",\n", $output)."\n}";
         } else {
-            foreach($array as $name => $value) {
+            foreach ($array as $name => $value) {
                 $output[] = sprintf('    "%s"', addcslashes($value, '\\'));
             }
             $output = "[\n".implode(",\n", $output)."\n]";
