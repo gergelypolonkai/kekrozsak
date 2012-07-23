@@ -3,7 +3,7 @@ namespace KekRozsak\FrontBundle\Form\Extension;
 
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormViewInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class HelpMessageTypeExtension extends AbstractTypeExtension
@@ -13,9 +13,9 @@ class HelpMessageTypeExtension extends AbstractTypeExtension
 		$builder->setAttribute('help', $options['help']);
 	}
 
-	public function buildView(FormViewInterface $view, FormInterface $form, array $options)
+	public function buildView(FormView $view, FormInterface $form, array $options)
 	{
-		$view->setVar('help', $form->getAttribute('help'));
+		$view->set('help', $form->getAttribute('help'));
 	}
 
 	public function getDefaultOptions()

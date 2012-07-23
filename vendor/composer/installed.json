@@ -3,7 +3,7 @@
         "name": "jms/metadata",
         "version": "1.1.1",
         "version_normalized": "1.1.1.0",
-        "time": "2011-12-29 12:32:49",
+        "time": "2011-12-29 09:32:49",
         "source": {
             "type": "git",
             "url": "https://github.com/schmittjoh/metadata",
@@ -47,7 +47,7 @@
         "name": "jms/cg",
         "version": "1.0.0",
         "version_normalized": "1.0.0.0",
-        "time": "2011-12-29 11:40:52",
+        "time": "2011-12-29 08:40:52",
         "source": {
             "type": "git",
             "url": "git://github.com/schmittjoh/cg-library.git",
@@ -89,7 +89,7 @@
         "version": "1.0.0",
         "version_normalized": "1.0.0.0",
         "target-dir": "JMS/AopBundle",
-        "time": "2011-12-29 11:50:26",
+        "time": "2011-12-29 08:50:26",
         "source": {
             "type": "git",
             "url": "https://github.com/schmittjoh/JMSAopBundle",
@@ -133,7 +133,7 @@
         "version": "1.1.0",
         "version_normalized": "1.1.0.0",
         "target-dir": "JMS/SecurityExtraBundle",
-        "time": "2011-12-29 15:38:12",
+        "time": "2011-12-29 12:38:12",
         "source": {
             "type": "git",
             "url": "https://github.com/schmittjoh/JMSSecurityExtraBundle",
@@ -178,7 +178,7 @@
         "version": "1.0.1",
         "version_normalized": "1.0.1.0",
         "target-dir": "JMS/DiExtraBundle",
-        "time": "2012-02-24 07:01:54",
+        "time": "2012-02-24 04:01:54",
         "source": {
             "type": "git",
             "url": "https://github.com/schmittjoh/JMSDiExtraBundle",
@@ -221,7 +221,7 @@
         "name": "doctrine/common",
         "version": "2.2.2",
         "version_normalized": "2.2.2.0",
-        "time": "2012-04-06 07:46:44",
+        "time": "2012-04-06 01:46:44",
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/common",
@@ -287,7 +287,7 @@
         "name": "monolog/monolog",
         "version": "1.1.0",
         "version_normalized": "1.1.0.0",
-        "time": "2012-04-16 18:27:40",
+        "time": "2012-04-16 12:27:40",
         "source": {
             "type": "git",
             "url": "https://github.com/Seldaek/monolog.git",
@@ -337,7 +337,7 @@
         "name": "twig/extensions",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
-        "time": "2012-05-15 01:28:19",
+        "time": "2012-05-14 19:28:19",
         "source": {
             "type": "git",
             "url": "https://github.com/fabpot/Twig-extensions",
@@ -383,7 +383,7 @@
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "target-dir": "Doctrine/Bundle/DoctrineBundle",
-        "time": "2012-07-01 14:42:17",
+        "time": "2012-07-01 08:42:17",
         "source": {
             "type": "git",
             "url": "git://github.com/doctrine/DoctrineBundle.git",
@@ -457,7 +457,7 @@
         "name": "doctrine/orm",
         "version": "2.2.x-dev",
         "version_normalized": "2.2.9999999.9999999-dev",
-        "time": "2012-07-05 11:48:00",
+        "time": "2012-07-05 05:48:00",
         "source": {
             "type": "git",
             "url": "git://github.com/doctrine/doctrine2.git",
@@ -522,7 +522,7 @@
         "name": "doctrine/dbal",
         "version": "2.2.x-dev",
         "version_normalized": "2.2.9999999.9999999-dev",
-        "time": "2012-07-06 22:30:35",
+        "time": "2012-07-06 16:30:35",
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/dbal",
@@ -588,7 +588,7 @@
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "target-dir": "Sensio/Bundle/GeneratorBundle",
-        "time": "2012-07-12 04:04:48",
+        "time": "2012-07-11 22:04:48",
         "source": {
             "type": "git",
             "url": "https://github.com/sensio/SensioGeneratorBundle",
@@ -641,7 +641,7 @@
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "target-dir": "Symfony/Bundle/MonologBundle",
-        "time": "2012-06-29 09:48:07",
+        "time": "2012-06-29 03:48:07",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/MonologBundle",
@@ -701,7 +701,7 @@
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "target-dir": "Sensio/Bundle/FrameworkExtraBundle",
-        "time": "2012-07-11 03:13:52",
+        "time": "2012-07-10 21:13:52",
         "source": {
             "type": "git",
             "url": "https://github.com/sensio/SensioFrameworkExtraBundle",
@@ -750,7 +750,7 @@
         "name": "swiftmailer/swiftmailer",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
-        "time": "2012-07-12 16:47:17",
+        "time": "2012-07-12 10:47:17",
         "source": {
             "type": "git",
             "url": "git://github.com/swiftmailer/swiftmailer.git",
@@ -806,7 +806,7 @@
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "target-dir": "Sensio/Bundle/DistributionBundle",
-        "time": "2012-07-14 14:24:10",
+        "time": "2012-07-14 08:24:10",
         "source": {
             "type": "git",
             "url": "https://github.com/sensio/SensioDistributionBundle",
@@ -850,7 +850,7 @@
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "target-dir": "Symfony/Bundle/SwiftmailerBundle",
-        "time": "2012-07-18 21:55:12",
+        "time": "2012-07-18 15:55:12",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/SwiftmailerBundle",
@@ -905,54 +905,10 @@
         }
     },
     {
-        "name": "egeloen/ckeditor-bundle",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "target-dir": "Ivory/CKEditorBundle",
-        "time": "2012-05-28 07:16:47",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/egeloen/IvoryCKEditorBundle",
-            "reference": "98c9771b3d2748af0052b5efc697d5c1403c6473"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/egeloen/IvoryCKEditorBundle/zipball/98c9771b3d2748af0052b5efc697d5c1403c6473",
-            "reference": "98c9771b3d2748af0052b5efc697d5c1403c6473",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0",
-            "symfony/framework-bundle": "2.*"
-        },
-        "type": "symfony-bundle",
-        "installation-source": "source",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Eric GELOEN",
-                "email": "geloen.eric@gmail.com",
-                "homepage": null,
-                "role": null
-            }
-        ],
-        "description": "Provides a CKEditor integration for your Symfony2 Project.",
-        "keywords": [
-            "CKEditor"
-        ],
-        "autoload": {
-            "psr-0": {
-                "Ivory\\CKEditorBundle": ""
-            }
-        }
-    },
-    {
         "name": "kriswallsmith/assetic",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
-        "time": "2012-07-20 06:33:33",
+        "time": "2012-07-20 00:33:33",
         "source": {
             "type": "git",
             "url": "http://github.com/kriswallsmith/assetic.git",
@@ -1012,7 +968,7 @@
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "target-dir": "Symfony/Bundle/AsseticBundle",
-        "time": "2012-07-20 15:34:07",
+        "time": "2012-07-20 09:34:07",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/AsseticBundle",
@@ -1067,7 +1023,7 @@
         "name": "twig/twig",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
-        "time": "2012-07-22 08:32:58",
+        "time": "2012-07-22 02:32:58",
         "source": {
             "type": "git",
             "url": "git://github.com/fabpot/Twig.git",
@@ -1121,7 +1077,7 @@
         "name": "symfony/symfony",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
-        "time": "2012-07-22 06:03:04",
+        "time": "2012-07-22 00:03:04",
         "source": {
             "type": "git",
             "url": "git://github.com/symfony/symfony.git",
@@ -1215,6 +1171,103 @@
             "psr-0": {
                 "Symfony": "src/",
                 "SessionHandlerInterface": "src/Symfony/Component/HttpFoundation/Resources/stubs"
+            }
+        }
+    },
+    {
+        "name": "doctrine/migrations",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "time": "2012-05-06 14:52:39",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doctrine/migrations",
+            "reference": "fe98141b1e460baf5ab52f9139e1ae238101b28b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/doctrine/migrations/zipball/fe98141b1e460baf5ab52f9139e1ae238101b28b",
+            "reference": "fe98141b1e460baf5ab52f9139e1ae238101b28b",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.2",
+            "ext-pdo": "*",
+            "doctrine/common": ">=2.0",
+            "doctrine/dbal": ">=2.0"
+        },
+        "type": "library",
+        "installation-source": "source",
+        "license": [
+            "LGPL"
+        ],
+        "authors": [
+            {
+                "name": "Jonathan Wage",
+                "email": "jonwage@gmail.com",
+                "homepage": "http://www.jwage.com/",
+                "role": null
+            },
+            {
+                "name": "Benjamin Eberlei",
+                "email": "kontakt@beberlei.de",
+                "homepage": null,
+                "role": null
+            }
+        ],
+        "description": "Database Schema migrations using Doctrine DBAL",
+        "homepage": "http://www.doctrine-project.org",
+        "keywords": [
+            "database",
+            "migrations"
+        ],
+        "autoload": {
+            "psr-0": {
+                "Doctrine\\DBAL\\Migrations": "lib"
+            }
+        }
+    },
+    {
+        "name": "egeloen/ckeditor-bundle",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "target-dir": "Ivory/CKEditorBundle",
+        "time": "2012-07-23 06:42:37",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/egeloen/IvoryCKEditorBundle",
+            "reference": "98c4ddf260aaa663db1082a0cdd4302320cd0431"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/egeloen/IvoryCKEditorBundle/zipball/98c4ddf260aaa663db1082a0cdd4302320cd0431",
+            "reference": "98c4ddf260aaa663db1082a0cdd4302320cd0431",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0",
+            "symfony/framework-bundle": "2.*"
+        },
+        "type": "symfony-bundle",
+        "installation-source": "source",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Eric GELOEN",
+                "email": "geloen.eric@gmail.com",
+                "homepage": null,
+                "role": null
+            }
+        ],
+        "description": "Provides a CKEditor integration for your Symfony2 Project.",
+        "keywords": [
+            "CKEditor"
+        ],
+        "autoload": {
+            "psr-0": {
+                "Ivory\\CKEditorBundle": ""
             }
         }
     }

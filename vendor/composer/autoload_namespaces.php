@@ -23,6 +23,7 @@ return array(
     'JMS\\AopBundle' => $vendorDir . '/jms/aop-bundle/',
     'Ivory\\CKEditorBundle' => $vendorDir . '/egeloen/ckeditor-bundle/',
     'Doctrine\\ORM' => $vendorDir . '/doctrine/orm/lib/',
+    'Doctrine\\DBAL\\Migrations' => $vendorDir . '/doctrine/migrations/lib',
     'Doctrine\\DBAL' => $vendorDir . '/doctrine/dbal/lib/',
     'Doctrine\\Common' => $vendorDir . '/doctrine/common/lib/',
     'Doctrine\\Bundle\\DoctrineBundle' => $vendorDir . '/doctrine/doctrine-bundle/',

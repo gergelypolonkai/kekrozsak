@@ -1,5 +1,5 @@
 {
-    "hash": "ddad7f2ad3884b1f4190d2d1c04a7f63",
+    "hash": "62190826bf5af34ba9d190faabbf40b3",
     "packages": [
         {
             "package": "doctrine/common",
@@ -16,6 +16,12 @@
             "source-reference": "c9ea46d1f0c48bb88bb87b44214fe44e03c0c692"
         },
         {
+            "package": "doctrine/migrations",
+            "version": "dev-master",
+            "source-reference": "fe98141b1e460baf5ab52f9139e1ae238101b28b",
+            "commit-date": "1336330359"
+        },
+        {
             "package": "doctrine/orm",
             "version": "2.2.x-dev",
             "source-reference": "5d2a3bcb3b467f41ee58575764f3ba84937f76e4"
@@ -23,8 +29,8 @@
         {
             "package": "egeloen/ckeditor-bundle",
             "version": "dev-master",
-            "source-reference": "98c9771b3d2748af0052b5efc697d5c1403c6473",
-            "commit-date": "1338211007"
+            "source-reference": "98c4ddf260aaa663db1082a0cdd4302320cd0431",
+            "commit-date": "1343032957"
         },
         {
             "package": "jms/aop-bundle",
@@ -55,7 +61,7 @@
         {
             "package": "kriswallsmith/assetic",
             "version": "dev-master",
-            "source-reference": "d6f89a3170c5280ad554347dc113eb25fdf00ad7"
+            "source-reference": "5c1c9b658b732a980312e8f29cec4e175c2bb6b2"
         },
         {
             "package": "monolog/monolog",
@@ -94,8 +100,8 @@
         {
             "package": "symfony/assetic-bundle",
             "version": "dev-master",
-            "source-reference": "ed933dcfa45f00b6bc6d7727007403f3ff429e5a",
-            "commit-date": "1342126277"
+            "source-reference": "e5e9a56a872d9e1f305d14cd8296bf77888388af",
+            "commit-date": "1342820047"
         },
         {
             "package": "symfony/monolog-bundle",
@@ -106,8 +112,8 @@
         {
             "package": "symfony/swiftmailer-bundle",
             "version": "dev-master",
-            "source-reference": "v2.1.0-BETA3",
-            "commit-date": "1341509614"
+            "source-reference": "65e6079443c3cd413012e146aa74307f18671f42",
+            "commit-date": "1342684512"
         },
         {
             "package": "symfony/symfony",
@@ -118,8 +124,8 @@
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "f52ce6178243e4b11aa09bde147f684d596fb120",
-            "commit-date": "1342516073"
+            "source-reference": "c20c1d18dc0b588e10a8fab24264441f0e4a3e7c",
+            "commit-date": "1342944184"
         },
         {
             "package": "twig/extensions",
@@ -135,8 +141,8 @@
         {
             "package": "twig/twig",
             "version": "dev-master",
-            "source-reference": "d45664045194ef62573c153c424508527105041e",
-            "commit-date": "1342424564"
+            "source-reference": "657de7bdeb680815e0df95f63da9f81e1533d2ea",
+            "commit-date": "1342953178"
         }
     ],
     "packages-dev": null,
@@ -153,6 +159,7 @@
         "sensio/distribution-bundle": 20,
         "sensio/framework-extra-bundle": 20,
         "sensio/generator-bundle": 20,
+        "doctrine/migrations": 20,
         "egeloen/ckeditor-bundle": 20
     }
 }
