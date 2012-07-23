@@ -3,20 +3,28 @@
 namespace KekRozsak\FrontBundle\Twig;
 
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 
 class NewsExtension extends \Twig_Extension
 {
-	protected $doctrine;
+	protected $_doctrine;
+	protected $_securityContext;
 
-	public function __construct(RegistryInterface $doctrine)
+	public function __construct(RegistryInterface $doctrine, SecurityContextInterface $securityContext)
 	{
-		$this->doctrine = $doctrine;
+		$this->_doctrine = $doctrine;
+		$this->_securityContext = $securityContext;
 	}
 
 	public function getGlobals()
 	{
-		$newsRepo = $this->doctrine->getRepository('KekRozsakFrontBundle:News');
-		$news = $newsRepo->findBy(array(), array('createdAt' => 'DESC'), 4);
+		$newsRepo = $this->_doctrine->getRepository('KekRozsakFrontBundle:News');
+		$searchCriteria = array();
+		if (!$this->_securityContext->getToken() instanceof Symfony\Component\Security\Core\Authentication\Token\AnonymousToken)
+			$searchCriteria['public'] = true;
+
+		$news = $newsRepo->findBy($searchCriteria, array('createdAt' => 'DESC'), 4);
 
 		return array(
 			'recentNews' => $news,

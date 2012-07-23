@@ -140,4 +140,33 @@ class News
 	{
 		return $this->createdBy;
 	}
+
+	/**
+	 * @var boolean $public
+	 *
+	 * @ORM\Column(type="boolean", nullable=false)
+	 */
+	protected $public;
+
+	/**
+	 * Set public
+	 *
+	 * @param boolean $public
+	 * @return News
+	 */
+	public function setPublic($public)
+	{
+		$this->public = $public;
+		return $this;
+	}
+
+	/**
+	 * Get public
+	 *
+	 * @return boolean
+	 */
+	public function getPublic()
+	{
+		return $this->public;
+	}
 }

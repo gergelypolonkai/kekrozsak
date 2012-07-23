@@ -92,7 +92,9 @@
 					<div class="hir">
 						<p class="hir-cim">{{ news.title }}</p>
 						<p class="hir-szoveg">{{ news.text|raw }}</p>
+{% if app.user %}
 						<p class="hir-szerzo">{{ news.createdBy.displayName }}</p>
+{% endif %}
 						<p class="hir-datum">{{ news.createdAt|date('Y-m-d H:i') }}</p>
 					</div>
 {% endfor %}
