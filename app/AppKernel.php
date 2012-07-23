@@ -19,7 +19,10 @@ class AppKernel extends Kernel
             new JMS\AopBundle\JMSAopBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+	    // 3rd party bundles
 	    new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+	    new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+	    // Own bundles
             new KekRozsak\FrontBundle\KekRozsakFrontBundle(),
             new KekRozsak\SecurityBundle\KekRozsakSecurityBundle(),
             new KekRozsak\AdminBundle\KekRozsakAdminBundle(),

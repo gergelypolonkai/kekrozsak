@@ -26,6 +26,7 @@ return array(
     'Doctrine\\DBAL\\Migrations' => $vendorDir . '/doctrine/migrations/lib',
     'Doctrine\\DBAL' => $vendorDir . '/doctrine/dbal/lib/',
     'Doctrine\\Common' => $vendorDir . '/doctrine/common/lib/',
+    'Doctrine\\Bundle\\MigrationsBundle' => $vendorDir . '/doctrine/doctrine-migrations-bundle/',
     'Doctrine\\Bundle\\DoctrineBundle' => $vendorDir . '/doctrine/doctrine-bundle/',
     'CG\\' => $vendorDir . '/jms/cg/src/',
     'Assetic' => $vendorDir . '/kriswallsmith/assetic/src/',

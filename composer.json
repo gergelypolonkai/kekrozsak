@@ -18,7 +18,7 @@
         "sensio/generator-bundle": "dev-master",
         "jms/security-extra-bundle": "1.1.*",
         "jms/di-extra-bundle": "1.0.*",
-	"doctrine/migrations": "dev-master",
+	"doctrine/doctrine-migrations-bundle": "dev-master",
         "egeloen/ckeditor-bundle": "dev-master"
     },
     "scripts": {
