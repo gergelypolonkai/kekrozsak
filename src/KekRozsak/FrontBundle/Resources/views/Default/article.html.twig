@@ -5,4 +5,7 @@
 {% if article.source %}
 <p class="forras">Forrás: {{ article.source }}</p>
 {% endif %}
+{% if app.user %}
+<p class="szerzo">{{ article.createdBy.displayName }}</p>
+{% endif %}
 {% endblock content %}
