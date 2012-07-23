@@ -21,7 +21,7 @@ class NewsExtension extends \Twig_Extension
 	{
 		$newsRepo = $this->_doctrine->getRepository('KekRozsakFrontBundle:News');
 		$searchCriteria = array();
-		if (!$this->_securityContext->getToken() instanceof Symfony\Component\Security\Core\Authentication\Token\AnonymousToken)
+		if (!is_object($this->_securityContext->getToken()->getUser()))
 			$searchCriteria['public'] = true;
 
 		$news = $newsRepo->findBy($searchCriteria, array('createdAt' => 'DESC'), 4);
