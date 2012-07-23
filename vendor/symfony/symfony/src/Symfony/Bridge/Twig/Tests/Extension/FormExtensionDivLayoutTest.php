@@ -18,6 +18,7 @@ use Symfony\Bridge\Twig\Extension\TranslationExtension;
 use Symfony\Bridge\Twig\Tests\Extension\Fixtures\StubTranslator;
 use Symfony\Bridge\Twig\Tests\Extension\Fixtures\StubFilesystemLoader;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\Form\Extension\Core\View\ChoiceView;
 use Symfony\Component\Form\Tests\AbstractDivLayoutTest;
 
 class FormExtensionDivLayoutTest extends AbstractDivLayoutTest
@@ -105,34 +106,71 @@ class FormExtensionDivLayoutTest extends AbstractDivLayoutTest
         );
     }
 
+    public function isSelectedChoiceProvider()
+    {
+        // The commented cases should not be necessary anymore, because the
+        // choice lists should assure that both values passed here are always
+        // strings
+        return array(
+//             array(true, 0, 0),
+            array(true, '0', '0'),
+            array(true, '1', '1'),
+//             array(true, false, 0),
+//             array(true, true, 1),
+            array(true, '', ''),
+//             array(true, null, ''),
+            array(true, '1.23', '1.23'),
+            array(true, 'foo', 'foo'),
+            array(true, 'foo10', 'foo10'),
+            array(true, 'foo', array(1, 'foo', 'foo10')),
+
+            array(false, 10, array(1, 'foo', 'foo10')),
+            array(false, 0, array(1, 'foo', 'foo10')),
+        );
+    }
+
+    /**
+     * @dataProvider isSelectedChoiceProvider
+     */
+    public function testIsChoiceSelected($expected, $choice, $value)
+    {
+        $choice = new ChoiceView($choice, $choice . ' label');
+
+        $this->assertSame($expected, $this->extension->isSelectedChoice($choice, $value));
+    }
+
     protected function renderEnctype(FormView $view)
     {
-        return (string) $this->extension->renderer->renderEnctype($view);
+        return (string) $this->extension->renderer->searchAndRenderBlock($view, 'enctype');
     }
 
     protected function renderLabel(FormView $view, $label = null, array $vars = array())
     {
-        return (string) $this->extension->renderer->renderLabel($view, $label, $vars);
+        if ($label !== null) {
+            $vars += array('label' => $label);
+        }
+
+        return (string) $this->extension->renderer->searchAndRenderBlock($view, 'label', $vars);
     }
 
     protected function renderErrors(FormView $view)
     {
-        return (string) $this->extension->renderer->renderErrors($view);
+        return (string) $this->extension->renderer->searchAndRenderBlock($view, 'errors');
     }
 
     protected function renderWidget(FormView $view, array $vars = array())
     {
-        return (string) $this->extension->renderer->renderWidget($view, $vars);
+        return (string) $this->extension->renderer->searchAndRenderBlock($view, 'widget', $vars);
     }
 
     protected function renderRow(FormView $view, array $vars = array())
     {
-        return (string) $this->extension->renderer->renderRow($view, $vars);
+        return (string) $this->extension->renderer->searchAndRenderBlock($view, 'row', $vars);
     }
 
     protected function renderRest(FormView $view, array $vars = array())
     {
-        return (string) $this->extension->renderer->renderRest($view, $vars);
+        return (string) $this->extension->renderer->searchAndRenderBlock($view, 'rest', $vars);
     }
 
     protected function setTheme(FormView $view, array $themes)

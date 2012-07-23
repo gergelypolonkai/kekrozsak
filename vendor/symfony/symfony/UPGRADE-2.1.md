@@ -224,30 +224,23 @@
     `buildViewBottomUp()` in `FormTypeInterface` and `FormTypeExtensionInterface`.
     Furthermore, `buildViewBottomUp()` was renamed to `finishView()`. At last,
     all methods in these types now receive instances of `FormBuilderInterface`
-    and `FormViewInterface` where they received instances of `FormBuilder` and
-    `FormView` before. You need to change the method signatures in your
-     form types and extensions as shown below.
+    where they received instances of `FormBuilder` before. You need to change the
+    method signatures in your form types and extensions as shown below.
 
     Before:
 
     ```
     use Symfony\Component\Form\FormBuilder;
-    use Symfony\Component\Form\FormView;
 
     public function buildForm(FormBuilder $builder, array $options)
-    public function buildView(FormView $view, FormInterface $form)
-    public function buildViewBottomUp(FormView $view, FormInterface $form)
     ```
 
     After:
 
     ```
     use Symfony\Component\Form\FormBuilderInterface;
-    use Symfony\Component\Form\FormViewInterface;
 
     public function buildForm(FormBuilderInterface $builder, array $options)
-    public function buildView(FormViewInterface $view, FormInterface $form, array $options)
-    public function finishView(FormViewInterface $view, FormInterface $form, array $options)
     ```
 
   * The method `createBuilder` was removed from `FormTypeInterface` for performance
@@ -382,41 +375,6 @@
 
     If address is an object in this case, the code given in "Before"
     works without changes.
-
-  * The methods in class `FormView` were renamed to match the naming used in
-    `Form` and `FormBuilder`. The following list shows the old names on the
-    left and the new names on the right:
-
-      * `set`: `setVar`
-      * `has`: `hasVar`
-      * `get`: `getVar`
-      * `all`: `getVars`
-      * `addChild`: `add`
-      * `getChild`: `get`
-      * `getChildren`: `all`
-      * `removeChild`: `remove`
-      * `hasChild`: `has`
-
-    The new method `addVars` was added to make the definition of multiple
-    variables at once more convenient.
-
-    The method `hasChildren` was deprecated. You should use `count` instead.
-
-    Before:
-
-    ```
-    $view->set('help', 'A text longer than six characters');
-    $view->set('error_class', 'max_length_error');
-    ```
-
-    After:
-
-    ```
-    $view->addVars(array(
-        'help'        => 'A text longer than six characters',
-        'error_class' => 'max_length_error',
-    ));
-    ```
 
   * Form and field names must now start with a letter, digit or underscore
     and only contain letters, digits, underscores, hyphens and colons.
@@ -599,6 +557,22 @@
     {% block _author_tags_entry_label %}
         {# ... #}
     {% endblock %}
+    ```
+
+  * The method `renderBlock()` of the helper for the PHP Templating component was
+    renamed to `block()`. Its first argument is now expected to be a `FormView`
+    instance.
+
+    Before:
+
+    ```
+    <?php echo $view['form']->renderBlock('widget_attributes') ?>
+    ```
+
+    After:
+
+    ```
+    <?php echo $view['form']->block($form, 'widget_attributes') ?>
     ```
 
 #### Other BC Breaks
@@ -1054,19 +1028,65 @@
     $registry->addType($registry->resolveType(new MyFormType()));
     ```
 
-  * The method `renderBlock()` of the helper for the PHP Templating component was
-    deprecated and will be removed in Symfony 2.3. You should use `block()` instead.
+  * The following methods in class `FormView` were deprecated and will be
+    removed in Symfony 2.3:
+
+      * `set`
+      * `has`
+      * `get`
+      * `all`
+      * `getVars`
+      * `addChild`
+      * `getChild`
+      * `getChildren`
+      * `removeChild`
+      * `hasChild`
+      * `hasChildren`
+      * `getParent`
+      * `hasParent`
+      * `setParent`
+
+    You should access the public properties `vars`, `children` and `parent`
+    instead.
 
     Before:
 
     ```
-    <?php echo $view['form']->renderBlock('widget_attributes') ?>
+    $view->set('help', 'A text longer than six characters');
+    $view->set('error_class', 'max_length_error');
     ```
 
     After:
 
     ```
-    <?php echo $view['form']->block('widget_attributes') ?>
+    $view->vars = array_replace($view->vars, array(
+        'help'        => 'A text longer than six characters',
+        'error_class' => 'max_length_error',
+    ));
+    ```
+
+    Before:
+
+    ```
+    echo $view->get('error_class');
+    ```
+
+    After:
+
+    ```
+    echo $view->vars['error_class'];
+    ```
+
+    Before:
+
+    ```
+    if ($view->hasChildren()) { ...
+    ```
+
+    After:
+
+    ```
+    if (count($view->children)) { ...
     ```
 
 ### Validator

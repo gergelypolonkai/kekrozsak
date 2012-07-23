@@ -106,17 +106,14 @@ CHANGELOG
  * removed superfluous methods from DataMapperInterface
    * `mapFormToData`
    * `mapDataToForm`
- * [BC BREAK] FormType::getDefaultOptions() and FormType::getAllowedOptionValues()
-   don't receive an options array anymore.
  * added `setDefaultOptions` to FormTypeInterface and FormTypeExtensionInterface
    which accepts an OptionsResolverInterface instance
  * deprecated the methods `getDefaultOptions` and `getAllowedOptionValues`
    in FormTypeInterface and FormTypeExtensionInterface
  * options passed during construction can now be accessed from FormConfigInterface
- * added FormBuilderInterface, FormViewInterface and FormConfigEditorInterface
- * [BC BREAK] the methods in FormTypeInterface and FormTypeExtensionInterface now
-   receive FormBuilderInterface and FormViewInterface instead of FormBuilder and
-   FormView
+ * added FormBuilderInterface and FormConfigEditorInterface
+ * [BC BREAK] the method `buildForm` in FormTypeInterface and FormTypeExtensionInterface
+   now receives a FormBuilderInterface instead of a FormBuilder instance
  * [BC BREAK] the method `buildViewBottomUp` was renamed to `finishView` in
    FormTypeInterface and FormTypeExtensionInterface
  * [BC BREAK] the options array is now passed as last argument of the
@@ -134,8 +131,6 @@ CHANGELOG
    FormEvents::BIND_NORM_DATA
  * [BC BREAK] reversed the order of the first two arguments to `createNamed`
    and `createNamedBuilder` in `FormFactoryInterface`
- * [BC BREAK] adapted methods of FormView to match the naming used in
-   FormInterface and FormBuilder
  * deprecated `getChildren` in Form and FormBuilder in favor of `all`
  * deprecated `hasChildren` in Form and FormBuilder in favor of `count`
  * FormBuilder now implements \IteratorAggregate
@@ -178,4 +173,5 @@ CHANGELOG
    * `toArrayKeys`
    * `isChoiceGroup`
    * `isChoiceSelected`
- * added method `block` to FormHelper and deprecated `renderBlock` instead
+ * [BC BREAK] renamed method `renderBlock` in FormHelper to `block` and changed its signature
+ * made FormView properties public and deprecated their accessor methods

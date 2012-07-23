@@ -12,7 +12,7 @@
 namespace Symfony\Bridge\Twig\Form;
 
 use Symfony\Component\Form\AbstractRendererEngine;
-use Symfony\Component\Form\FormViewInterface;
+use Symfony\Component\Form\FormView;
 
 /**
  * @author Bernhard Schussek <bschussek@gmail.com>
@@ -40,9 +40,9 @@ class TwigRendererEngine extends AbstractRendererEngine implements TwigRendererE
     /**
      * {@inheritdoc}
      */
-    public function renderBlock(FormViewInterface $view, $resource, $block, array $variables = array())
+    public function renderBlock(FormView $view, $resource, $blockName, array $variables = array())
     {
-        $cacheKey = $view->getVar(self::CACHE_KEY_VAR);
+        $cacheKey = $view->vars[self::CACHE_KEY_VAR];
 
         $context = $this->environment->mergeGlobals($variables);
 
@@ -55,7 +55,7 @@ class TwigRendererEngine extends AbstractRendererEngine implements TwigRendererE
 
         // We do not call renderBlock here to avoid too many nested level calls
         // (XDebug limits the level to 100 by default)
-        $this->template->displayBlock($block, $context, $this->resources[$cacheKey]);
+        $this->template->displayBlock($blockName, $context, $this->resources[$cacheKey]);
 
         return ob_get_clean();
     }
@@ -70,13 +70,13 @@ class TwigRendererEngine extends AbstractRendererEngine implements TwigRendererE
      *
      * @see getResourceForBlock()
      *
-     * @param string            $cacheKey The cache key of the form view.
-     * @param FormViewInterface $view     The form view for finding the applying themes.
-     * @param string            $block    The name of the block to load.
+     * @param string   $cacheKey  The cache key of the form view.
+     * @param FormView $view      The form view for finding the applying themes.
+     * @param string   $blockName The name of the block to load.
      *
      * @return Boolean True if the resource could be loaded, false otherwise.
      */
-    protected function loadResourceForBlock($cacheKey, FormViewInterface $view, $block)
+    protected function loadResourceForBlockName($cacheKey, FormView $view, $blockName)
     {
         // The caller guarantees that $this->resources[$cacheKey][$block] is
         // not set, but it doesn't have to check whether $this->resources[$cacheKey]
@@ -86,7 +86,7 @@ class TwigRendererEngine extends AbstractRendererEngine implements TwigRendererE
             // As said in the previous, the caller guarantees that
             // $this->resources[$cacheKey][$block] is not set. Since the themes are
             // already loaded, it can only be a non-existing block.
-            $this->resources[$cacheKey][$block] = false;
+            $this->resources[$cacheKey][$blockName] = false;
 
             return false;
         }
@@ -105,7 +105,7 @@ class TwigRendererEngine extends AbstractRendererEngine implements TwigRendererE
         }
 
         // Check the default themes once we reach the root view without success
-        if (!$view->hasParent()) {
+        if (!$view->parent) {
             for ($i = count($this->defaultThemes) - 1; $i >= 0; --$i) {
                 $this->loadResourcesFromTheme($cacheKey, $this->defaultThemes[$i]);
                 // CONTINUE LOADING (see doc comment)
@@ -113,29 +113,29 @@ class TwigRendererEngine extends AbstractRendererEngine implements TwigRendererE
         }
 
         // Proceed with the themes of the parent view
-        if ($view->hasParent()) {
-            $parentCacheKey = $view->getParent()->getVar(self::CACHE_KEY_VAR);
+        if ($view->parent) {
+            $parentCacheKey = $view->parent->vars[self::CACHE_KEY_VAR];
 
             if (!isset($this->resources[$parentCacheKey])) {
-                $this->loadResourceForBlock($parentCacheKey, $view->getParent(), $block);
+                $this->loadResourceForBlockName($parentCacheKey, $view->parent, $blockName);
             }
 
             // EAGER CACHE POPULATION (see doc comment)
-            foreach ($this->resources[$parentCacheKey] as $blockName => $resource) {
-                if (!isset($this->resources[$cacheKey][$blockName])) {
-                    $this->resources[$cacheKey][$blockName] = $resource;
+            foreach ($this->resources[$parentCacheKey] as $nestedBlockName => $resource) {
+                if (!isset($this->resources[$cacheKey][$nestedBlockName])) {
+                    $this->resources[$cacheKey][$nestedBlockName] = $resource;
                 }
             }
         }
 
         // Even though we loaded the themes, it can happen that none of them
         // contains the searched block
-        if (!isset($this->resources[$cacheKey][$block])) {
+        if (!isset($this->resources[$cacheKey][$blockName])) {
             // Cache that we didn't find anything to speed up further accesses
-            $this->resources[$cacheKey][$block] = false;
+            $this->resources[$cacheKey][$blockName] = false;
         }
 
-        return false !== $this->resources[$cacheKey][$block];
+        return false !== $this->resources[$cacheKey][$blockName];
     }
 
     /**
