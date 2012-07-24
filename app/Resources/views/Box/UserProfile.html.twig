@@ -1,0 +1,26 @@
+				<div id="profil-gomb">
+					<span id="profil-mutato">[avatar] {{ app.user.displayName }}</span>
+					<div id="profil-box">
+						<div id="profil-belso">
+							[avatar]
+							{{ app.user.displayName }}<br />
+							Jogosultság<br />
+							<dl>
+								<dt>Csoportjaim</dt>
+{% for group in app.user.groups %}
+{% if group.group.open or group.membershipAcceptedAt %}
+								<dl><a href="{{ path('KekRozsakFrontBundle_groupView', {groupSlug: group.group.slug}) }}">{{ group.group.name }}</a></dl>
+{% endif %}
+{% endfor %}
+								<dl><a href="{{ path('KekRozsakFrontBundle_groupList') }}">További csoportok</a></dl>
+
+								<dt>Kedvenc Fórum-témáim</dt>
+
+								<dl><a href="{{ path('KekRozsakFrontBundle_forum_main') }}">Fórum</a></dl>
+
+								<dt>Üzenetek</dt>
+							</dl>
+						</div>
+						<div id="profil-szerkesztes"><a href="{{ path('KekRozsakFrontBundle_profile_edit') }}">Profil szerkesztése</a></div>
+					</div>
+				</div>

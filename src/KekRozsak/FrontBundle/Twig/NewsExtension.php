@@ -4,7 +4,6 @@ namespace KekRozsak\FrontBundle\Twig;
 
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
-use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 
 class NewsExtension extends \Twig_Extension
 {
