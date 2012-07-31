@@ -1,22 +1,24 @@
 {# vim: ft=htmljinja
 #}
 {% extends '::main_template.html.twig' %}
-{% block title %} - Fórum - {{ topicGroup.title }}{% endblock %}
+{% block title %} - Fórum{% endblock %}
 {% block content %}
-<h3><a href="{{ path('KekRozsakFrontBundle_forum_main') }}">Fórum</a> - {{ topicGroup.title }}</h3>
-{% if topicGroup.topics|length > 0 %}
+<h3>Fórum</h3>
+{% for topicGroup in topicGroups %}
 <table class="forum-lista">
 	<thead>
 		<tr>
-			<td></td>
+			<td colspan="2"><a href="{{ path('KekRozsakFrontBundle_forumTopicList', {slug: topicGroup.slug}) }}">{{ topicGroup.title }}</a></td>
 			<td>Hozzászólások száma</td>
 			<td>Utolsó hozzászólás</td>
 		</tr>
 	</thead>
 	<tbody>
+{% if topicGroup.topics|length > 0 %}
 {% for topic in topicGroup.topics %}
 		<tr class="{{ cycle(['odd', 'even'], loop.index0) }}">
-			<td><a href="{{ path('KekRozsakFrontBundle_forum_post_list', { topicGroupSlug: topicGroup.slug, topicSlug: topic.slug }) }}">{{ topic.title }}</a></td>
+			<td>[ikon]</td>
+			<td><a href="{{ path('KekRozsakFrontBundle_forumPostList', {topicGroupSlug: topicGroup.slug, topicSlug: topic.slug}) }}">{{ topic.title }}</a></td>
 			<td></td>
 			<td>
 {% if topic.lastPost %}
@@ -28,9 +30,12 @@
 			</td>
 		</tr>
 {% endfor %}
+{% else %}
+		<tr>
+			<td colspan="4">Ebben a kategóriában nincsenek témák</td>
+		</tr>
+{% endif %}
 	</tbody>
 </table>
-{% else %}
-Ebben a témakörben nincsenek témák.
-{% endif %}
+{% endfor %}
 {% endblock content %}

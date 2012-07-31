@@ -18,10 +18,10 @@ use KekRozsak\FrontBundle\Form\Type\ForumPostType;
 class ForumController extends Controller
 {
 	/**
-	 * @Route("", name="KekRozsakFrontBundle_forum_main")
-	 * @Template("KekRozsakFrontBundle:Forum:topic_group_list.html.twig")
+	 * @Route("", name="KekRozsakFrontBundle_forumTopicGroupList")
+	 * @Template()
 	 */
-	public function mainAction()
+	public function topicGroupListAction()
 	{
 		$groupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:ForumTopicGroup');
 
@@ -34,8 +34,8 @@ class ForumController extends Controller
 	}
 
 	/**
-	 * @Route("/{slug}", name="KekRozsakFrontBundle_forum_topic_list")
-	 * @Template("KekRozsakFrontBundle:Forum:topic_list.html.twig")
+	 * @Route("/{slug}", name="KekRozsakFrontBundle_forumTopicList")
+	 * @Template()
 	 * @ParamConverter("topicGroup")
 	 */
 	public function topicListAction(ForumTopicgRoup $topicGroup)
@@ -46,8 +46,8 @@ class ForumController extends Controller
 	}
 
 	/**
-	 * @Route("/{topicGroupSlug}/{topicSlug}", name="KekRozsakFrontBundle_forum_post_list")
-	 * @Template("KekRozsakFrontBundle:Forum:post_list.html.twig")
+	 * @Route("/{topicGroupSlug}/{topicSlug}", name="KekRozsakFrontBundle_forumPostList")
+	 * @Template()
 	 * @ParamConverter("topic", options={"mapping"={"topicGroup"="topicGroup", "topicSlug"="slug"}})
 	 * @ParamConverter("topicGroup", options={"mapping"={"topicGroupSlug"="slug"}})
 	 */
@@ -76,7 +76,7 @@ class ForumController extends Controller
 				$em->persist($topic);
 				$em->flush();
 
-				return $this->redirect($this->generateUrl('KekRozsakFrontBundle_forum_post_list', array(
+				return $this->redirect($this->generateUrl('KekRozsakFrontBundle_forumPostList', array(
 					'topicGroupSlug' => $topicGroup->getSlug(),
 					'topicSlug'      => $topic->getSlug(),
 				)));
