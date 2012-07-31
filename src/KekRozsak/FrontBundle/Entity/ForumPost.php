@@ -2,12 +2,13 @@
 
 namespace KekRozsak\FrontBundle\Entity;
 
-use Doctrine\Orm\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM;
 
 use KekRozsak\FrontBundle\Entity\ForumTopic;
 
 /**
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="forum_posts")
  */
 class ForumPost
@@ -128,7 +129,7 @@ class ForumPost
 	public function setTopic(ForumTopic $topic)
 	{
 		$this->topic = $topic;
-		if ($topic->getLastPost()->getCreatedAt() < $this->createdAt)
+		if (!$topic->getLastPost() || ($topic->getLastPost()->getCreatedAt() < $this->createdAt))
 			$topic->setLastPost($this);
 		return $this;
 	}
@@ -141,6 +142,17 @@ class ForumPost
 	public function getTopic()
 	{
 		return $this->topic;
+	}
+
+	/**
+	 * Set createdAt before persisting
+	 *
+	 * @ORM\PrePersist
+	 */
+	public function setCreationTime()
+	{
+		if ($this->createdAt === null)
+			$this->createdAt = new \DateTime('now');
 	}
 }
 

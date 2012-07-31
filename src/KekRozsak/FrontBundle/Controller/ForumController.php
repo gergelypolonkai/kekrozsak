@@ -7,6 +7,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
+use KekRozsak\FrontBundle\Entity\ForumTopicGroup;
+use KekRozsak\FrontBundle\Entity\ForumTopic;
 use KekRozsak\FrontBundle\Entity\ForumPost;
 use KekRozsak\FrontBundle\Form\Type\ForumPostType;
 
@@ -32,16 +34,12 @@ class ForumController extends Controller
 	}
 
 	/**
-	 * @Route("/{topicGroupSlug}", name="KekRozsakFrontBundle_forum_topic_list")
+	 * @Route("/{slug}", name="KekRozsakFrontBundle_forum_topic_list")
 	 * @Template("KekRozsakFrontBundle:Forum:topic_list.html.twig")
+	 * @ParamConverter("topicGroup")
 	 */
-	public function topicListAction($topicGroupSlug)
+	public function topicListAction(ForumTopicgRoup $topicGroup)
 	{
-		$groupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:ForumTopicGroup');
-
-		if (!($topicGroup = $groupRepo->findOneBySlug($topicGroupSlug)))
-			throw $this->createNotFoundException('A kért témakör nem létezik!');
-
 		return array(
 			'topicGroup' => $topicGroup,
 		);
@@ -50,19 +48,11 @@ class ForumController extends Controller
 	/**
 	 * @Route("/{topicGroupSlug}/{topicSlug}", name="KekRozsakFrontBundle_forum_post_list")
 	 * @Template("KekRozsakFrontBundle:Forum:post_list.html.twig")
+	 * @ParamConverter("topic", options={"mapping"={"topicGroup"="topicGroup", "topicSlug"="slug"}})
+	 * @ParamConverter("topicGroup", options={"mapping"={"topicGroupSlug"="slug"}})
 	 */
-	public function postListAction($topicGroupSlug, $topicSlug)
+	public function postListAction(ForumTopicGroup $topicGroup, ForumTopic $topic)
 	{
-		// Get the topic group based on slug
-		$groupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:ForumTopicGroup');
-		if (!($topicGroup = $groupRepo->findOneBySlug($topicGroupSlug)))
-			throw $this->createNotFoundException('A kért témakör nem létezik!');
-
-		// Get the topic based on slug
-		$topicRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:ForumTopic');
-		if (!($topic = $topicRepo->findOneBy(array('topicGroup' => $topicGroup, 'slug' => $topicSlug))))
-			throw $this->createNotFoundException('A kért téma nem létezik!');
-
 		// Get the list of posts in the requested topic
 		$postRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:ForumPost');
 		$posts = $postRepo->findBy(array('topic' => $topic), array('createdAt' => 'DESC') /* TODO: , limit, offset */);
@@ -87,8 +77,8 @@ class ForumController extends Controller
 				$em->flush();
 
 				return $this->redirect($this->generateUrl('KekRozsakFrontBundle_forum_post_list', array(
-					'topicGroupSlug' => $topicGroupSlug,
-					'topicSlug'      => $topicSlug,
+					'topicGroupSlug' => $topicGroup->getSlug(),
+					'topicSlug'      => $topic->getSlug(),
 				)));
 			}
 		}

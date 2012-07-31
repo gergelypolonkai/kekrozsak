@@ -3,6 +3,7 @@ namespace KekRozsak\SecurityBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 use KekRozsak\FrontBundle\Form\Type\UserDataType;
 
@@ -61,7 +62,7 @@ class UserType extends AbstractType
 		return 'user';
 	}
 
-	public function getDefaultOptions()
+	public function setDefaultOptions(OptionsResolverInterface $resolver)
 	{
 		$opts = array(
 			'data_class' => 'KekRozsak\SecurityBundle\Entity\User',
@@ -69,7 +70,7 @@ class UserType extends AbstractType
 		if ($this->_registration)
 			$opts['validation_groups'] = array('registration');
 
-		return $opts;
+		$resolver->setDefaults($opts);
 	}
 }
 

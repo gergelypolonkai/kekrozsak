@@ -19,8 +19,12 @@
 			<td><a href="{{ path('KekRozsakFrontBundle_forum_post_list', { topicGroupSlug: topicGroup.slug, topicSlug: topic.slug }) }}">{{ topic.title }}</a></td>
 			<td></td>
 			<td>
+{% if topic.lastPost %}
 				{{ topic.lastPost.createdBy.displayName }}<br />
 				{{ topic.lastPost.createdAt|date('Y-m-d H:i') }}
+{% else %}
+				&nbsp;<br />&nbsp;
+{% endif %}
 			</td>
 		</tr>
 {% endfor %}

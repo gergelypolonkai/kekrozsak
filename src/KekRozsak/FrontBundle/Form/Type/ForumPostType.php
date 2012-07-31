@@ -3,6 +3,7 @@ namespace KekRozsak\FrontBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ForumPostType extends AbstractType
 {
@@ -31,13 +32,11 @@ class ForumPostType extends AbstractType
 		return 'forum_post';
 	}
 
-	public function getDefaultOptions()
+	public function setDefaultOptions(OptionsResolverInterface $resolver)
 	{
-		$opts = array(
+		$resolver->setDefaults(array(
 			'data_class' => 'KekRozsak\FrontBundle\Entity\ForumPost',
-		);
-
-		return $opts;
+		));
 	}
 }
 

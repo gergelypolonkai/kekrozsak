@@ -3,7 +3,7 @@
 {% extends '::main_template.html.twig' %}
 {% block title %} - Fórum - {{ topicGroup.title }} - {{ topic.title }}{% endblock %}
 {% block content %}
-<h3><a href="{{ path('KekRozsakFrontBundle_forum_main') }}">Fórum</a> - <a href="{{ path('KekRozsakFrontBundle_forum_topic_list', { topicGroupSlug: topicGroup.slug }) }}">{{ topicGroup.title }}</a> - {{ topic.title }}</h3>
+<h3><a href="{{ path('KekRozsakFrontBundle_forum_main') }}">Fórum</a> - <a href="{{ path('KekRozsakFrontBundle_forum_topic_list', {slug: topicGroup.slug}) }}">{{ topicGroup.title }}</a> - {{ topic.title }}</h3>
 <table class="post-lista">
 	<tbody>
 		<tr>
