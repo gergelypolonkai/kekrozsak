@@ -19,6 +19,7 @@
 			<div id="top-line">
 {% if app.user %}
 {% include ':Box:UserProfile.html.twig' %}
+{% include ':Box:Events.html.twig' %}
 {% else %}
 {% include ':Box:Login.html.twig' %}
 {% endif %}
@@ -90,6 +91,16 @@
 				track: true,
 				delay: 0,
 				fade: 250
+			});
+			$('#esemeny-mutato').click(function() {
+				if ($('#esemeny-box').is(':visible'))
+				{
+					$('#esemeny-box').hide();
+				}
+				else
+				{
+					$('#esemeny-box').show();
+				}
 			});
 {% else %}
 			$('#login-mutato').click(function() {

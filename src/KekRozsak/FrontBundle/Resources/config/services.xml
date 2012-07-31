@@ -7,6 +7,11 @@
 			<argument type="service" id="security.context" />
 			<tag name="twig.extension" />
 		</service>
+		<service id="kek_rozsak_front.twig_extension.events" class="KekRozsak\FrontBundle\Twig\EventsExtension">
+			<argument type="service" id="doctrine" />
+			<argument type="service" id="security.context" />
+			<tag name="twig.extension" />
+		</service>
 		<service id="form.type_extension.help_message" class="KekRozsak\FrontBundle\Form\Extension\HelpMessageTypeExtension">
 			<tag name="form.type_extension" alias="field" />
 		</service>

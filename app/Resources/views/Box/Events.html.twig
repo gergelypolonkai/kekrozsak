@@ -1,0 +1,75 @@
+{# vim: ft=htmljinja
+#}
+				<div id="esemenyek-gomb">
+					<span id="esemeny-mutato">[események gomb]</span>
+					<div id="esemeny-box">
+						<div id="esemeny-belso">
+							<p class="honap">{{ firstDay|date('Y-m') }}</p>
+							<table>
+								<thead>
+									<tr>
+										<td></td>
+										<td>H</td>
+										<td>K</td>
+										<td>Sze</td>
+										<td>Cs</td>
+										<td>P</td>
+										<td>Szo</td>
+										<td>V</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="woy">{{ firstDay|date('W') }}</td>
+{% set curDow = 0 %}
+{% if firstDayWeekday != 1 %}
+{% for i in 1..(firstDayWeekday - 1) %}
+{% set curDow = curDow + 1 %}{% if curDow == 8 %}{% set curDow = 1 %}{% endif %}
+										<td></td>
+{% endfor %}
+{% endif %}
+{% set cur = firstDayWeekday - 1 %}
+{% for i in 1..numDays %}
+{% set cur = cur + 1 %}
+{% set curDow = curDow + 1 %}{% if curDow == 8 %}{% set curDow = 1 %}{% endif %}
+{% set eventCount = 0 %}
+{# TODO Check if an event occurs on this date:
+(event.startDate = this day AND event.endDate is NULL)
+OR (event.startDate <= this day AND evend.endDate >= this day)
+#}
+										<td id="event-calendar-{{ i }}"{% if eventList[i].events|length > 0 %} class="program"{% endif %}>
+											<a href="{{ path('KekRozsakFrontBundle_eventList', { date: eventList[i].date|date('Y-m-d')}) }}">{{ eventList[i].date|date('d') }}</a>
+{% if eventList[i].events|length > 0 %}
+											<script type="text/javascript">
+												$('#event-calendar-{{ i }}').tooltip({
+													bodyHandler: function() {
+														eventList = '';
+{% for event in eventList[i].events %}
+														eventList += '{{ event.title }}<br />';
+{% endfor %}
+														return ((eventList == '') ? false : eventList);
+													}
+												});
+											</script>
+{% endif %}
+										</td>
+{% if cur is divisibleby(7) %}
+									</tr>
+{% if cur != numDays %}
+									<tr>
+										<td class="woy">{{ eventList[i + 1].date|date('W') }}</td>
+{% endif %}
+{% endif %}
+{% endfor %}
+{% if curDow != 7 %}
+{% for i in (curDow + 1)..7 %}
+										<td></td>
+{% endfor %}
+{% endif %}
+									</tr>
+								</tbody>
+							</table>
+							<a href="">További események</a>
+						</div>
+					</div>
+				</div>

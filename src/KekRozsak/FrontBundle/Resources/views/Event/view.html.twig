@@ -1,0 +1,21 @@
+{# vim: ft=htmljinja
+#}
+{% extends '::main_template.html.twig' %}
+{% block title %} - Esemény - {{ event.title }}{% endblock %}
+{% block content %}
+<h3>Esemény - {{ event.title }}</h3>
+<p class="esemeny-idopont">{{ event.startDate|date('Y-m-d') }} {{ event.startTime|date('H:i') }}{% if event.endDate or event.endTime %} - {% endif %}{% if event.endDate is not null %} {{ event.endDate|date('Y-m-d') }}{% endif %}{% if event.endTime is not null %} {{ event.endTime|date('H:i') }}{% endif %}</p>
+<p class="esemeny-szervezo">Az eseményt szervezi: {{ event.createdBy.displayName }}</p>
+<p>
+	{{ event.description }}
+</p>
+<h4>Eddigi résztvevők</h4>
+<ul>
+{% for attendee in event.attendees %}
+	<li>{{ attendee.displayName }}</li>
+{% endfor %}
+</ul>
+{% if not event.isAttending(app.user) %}
+<a href="{{ path('KekRozsakFrontBundle_eventJoin', { eventDate: event.startDate|date('Y-m-d'), eventSlug: event.slug }) }}">Megyek</a>
+{% endif %}
+{% endblock content %}

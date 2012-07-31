@@ -1,0 +1,16 @@
+{# vim: ft=htmljinja
+#}
+{% extends '::main_template.html.twig' %}
+{% block title %} - Események - {{ day|date('Y-m-d') }}{% endblock %}
+{% block content %}
+<h3>Események - {{ day|date('Y-m-d') }}</h3>
+{% if events %}
+<ul>
+{% for event in events %}
+	<li><a href="{{ path('KekRozsakFrontBundle_eventView', {startDate: event.startDate|date('Y-m-d'), eventSlug: event.slug}) }}">{{ event.title }}</a></li>
+{% endfor %}
+</ul>
+{% else %}
+<p>Erre a napra nincsenek kiírva események.</p>
+{% endif %}
+{% endblock content %}

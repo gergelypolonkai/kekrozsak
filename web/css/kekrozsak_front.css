@@ -86,8 +86,54 @@ body {
 	display: none;
 }
 
+#esemeny-box {
+	position: fixed;
+	left: 5px;
+	top: 32px;
+	width: 250px;
+	height: 200px;
+	background-color: #c4d3ff;
+	border: 2px solid #152967;
+	color: #152967;
+	display: none;
+}
+
+#esemeny-box td {
+	text-align: center;
+	vertical-align: middle;
+}
+
+#esemeny-box td.woy {
+	font-size: 60%;
+}
+
+#esemeny-box td.program {
+	background-color: green;
+}
+
+#esemeny-belso p.honap {
+	text-align: center;
+	margin: 0 5px;
+	font-weight: bold;
+}
+
+#esemeny-belso table {
+	margin-left: auto;
+	margin-right: auto;
+}
+
 #login-belso {
 	position: relative;
+	padding: 5px;
+}
+
+#esemeny-belso {
+	position: relative;
+	padding: 5px;
+}
+
+#esemenyek-gomb {
+	float: left;
 	padding: 5px;
 }
 
