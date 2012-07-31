@@ -63,7 +63,7 @@ class ParamConverterListener
 
         // automatically apply conversion for non-configured objects
         foreach ($r->getParameters() as $param) {
-            if (!$param->getClass()) {
+            if (!$param->getClass() || $param->getClass()->isInstance($request)) {
                 continue;
             }
 
@@ -75,6 +75,8 @@ class ParamConverterListener
                 $configuration->setClass($param->getClass()->getName());
 
                 $configurations[$name] = $configuration;
+            } elseif (null === $configurations[$name]->getClass()) {
+                $configurations[$name]->setClass($param->getClass()->getName());
             }
 
             $configurations[$name]->setIsOptional($param->isOptional());

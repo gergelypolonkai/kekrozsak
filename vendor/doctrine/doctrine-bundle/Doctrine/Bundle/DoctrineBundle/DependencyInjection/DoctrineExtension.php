@@ -119,6 +119,12 @@ class DoctrineExtension extends AbstractDoctrineExtension
             }
         }
         unset($connection['profiling']);
+        
+        if (isset($connection['schema_filter']) && $connection['schema_filter']) {
+            $configuration->addMethodCall('setFilterSchemaAssetsExpression', array($connection['schema_filter']));
+        }
+        
+        unset($connection['schema_filter']);
 
         if ($logger) {
             $configuration->addMethodCall('setSQLLogger', array($logger));
@@ -282,6 +288,12 @@ class DoctrineExtension extends AbstractDoctrineExtension
             'setClassMetadataFactoryName' => $entityManager['class_metadata_factory_name'],
             'setDefaultRepositoryClassName' => $entityManager['default_repository_class'],
         );
+        // check for version to keep BC
+        if (version_compare(\Doctrine\ORM\Version::VERSION, "2.3.0-DEV") >= 0) {
+            $methods = array_merge($methods, array(
+                'setNamingStrategy'       => new Reference($entityManager['naming_strategy']),
+            ));
+        }
         foreach ($methods as $method => $arg) {
             $ormConfigDef->addMethodCall($method, array($arg));
         }

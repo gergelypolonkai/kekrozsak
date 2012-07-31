@@ -20,8 +20,8 @@
 namespace Doctrine\ORM\Tools;
 
 use Doctrine\ORM\Mapping\ClassMetadataInfo,
-    Doctrine\ORM\Mapping\AssociationMapping,
-    Doctrine\Common\Util\Inflector;
+    Doctrine\Common\Util\Inflector,
+    Doctrine\DBAL\Types\Type;
 
 /**
  * Generic class used to generate PHP5 entity classes from ClassMetadataInfo instances
@@ -143,7 +143,7 @@ public function <methodName>(<methodTypeHint>$<variableName>)
 '/**
  * <description>
  *
- * @param <variableType$<variableName>
+ * @param <variableType>$<variableName>
  */
 public function <methodName>(<methodTypeHint>$<variableName>)
 {

@@ -30,6 +30,7 @@ Configuration Reference
                         charset:              UTF8
                         logging:              %kernel.debug%
                         platform_service:     MyOwnDatabasePlatformService
+                        schema_filter:        ^sf2_
                         mapping_types:
                             enum: string
                     conn1:
@@ -64,6 +65,7 @@ Configuration Reference
                                 test_numeric: Acme\HelloBundle\DQL\NumericFunction
                             datetime_functions:
                                 test_datetime: Acme\HelloBundle\DQL\DatetimeFunction
+                        naming_strategy:    doctrine.orm.naming_strategy.default # Service Reference
                     em2:
                         # ...
 
@@ -93,6 +95,7 @@ Configuration Reference
                         charset="UTF8"
                         logging="%kernel.debug%"
                         platform-service="MyOwnDatabasePlatformService"
+                        schema-filter="^sf2_"
                     >
                         <doctrine:option key="foo">bar</doctrine:option>
                         <doctrine:mapping-type name="enum">string</doctrine:mapping-type>
@@ -102,7 +105,7 @@ Configuration Reference
                 </doctrine:dbal>
 
                 <doctrine:orm default-entity-manager="default" auto-generate-proxy-classes="false" proxy-namespace="Proxies" proxy-dir="%kernel.cache_dir%/doctrine/orm/Proxies">
-                    <doctrine:entity-manager name="default" query-cache-driver="array" result-cache-driver="array" connection="conn1" class-metadata-factory-name="Doctrine\ORM\Mapping\ClassMetadataFactory">
+                    <doctrine:entity-manager name="default" query-cache-driver="array" result-cache-driver="array" connection="conn1" class-metadata-factory-name="Doctrine\ORM\Mapping\ClassMetadataFactory" naming-strategy="doctrine.orm.naming_strategy.default">
                         <doctrine:metadata-cache-driver type="memcache" host="localhost" port="11211" instance-class="Memcache" class="Doctrine\Common\Cache\MemcacheCache" />
                         <doctrine:mapping name="AcmeHelloBundle" />
                         <doctrine:dql>
@@ -241,6 +244,7 @@ can configure. The following block shows all possible configuration keys:
                 charset:              UTF8
                 logging:              %kernel.debug%
                 platform_service:     MyOwnDatabasePlatformService
+                schema_filter:        ^sf2_
                 mapping_types:
                     enum: string
                 types:
@@ -268,6 +272,7 @@ can configure. The following block shows all possible configuration keys:
                 charset="UTF8"
                 logging="%kernel.debug%"
                 platform-service="MyOwnDatabasePlatformService"
+                schema-filter="^sf2_"
             >
                 <doctrine:option key="foo">bar</doctrine:option>
                 <doctrine:mapping-type name="enum">string</doctrine:mapping-type>

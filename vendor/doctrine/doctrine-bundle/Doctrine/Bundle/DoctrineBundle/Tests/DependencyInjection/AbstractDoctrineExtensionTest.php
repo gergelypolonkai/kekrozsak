@@ -194,6 +194,10 @@ abstract class AbstractDoctrineExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('doctrine.orm.default_query_cache', (string) $calls[2][1][0]);
         $this->assertEquals('doctrine.orm.default_result_cache', (string) $calls[3][1][0]);
 
+        if (version_compare(\Doctrine\ORM\Version::VERSION, "2.3.0-DEV") >= 0) {
+            $this->assertEquals('doctrine.orm.naming_strategy.default', (string) $calls[10][1][0]);
+        }
+
         $definition = $container->getDefinition('doctrine.orm.default_metadata_cache');
         $this->assertEquals('%doctrine.orm.cache.array.class%', $definition->getClass());
 
@@ -701,6 +705,25 @@ abstract class AbstractDoctrineExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertDICDefinitionMethodCallOnce($definition, 'addCustomDatetimeFunction', array('test_datetime', 'Symfony\Bundle\DoctrineBundle\Tests\DependencyInjection\TestDatetimeFunction'));
     }
 
+    public function testSetNamingStrategy()
+    {
+        if (version_compare(\Doctrine\ORM\Version::VERSION, "2.3.0-DEV") < 0) {
+            $this->markTestSkipped('Naming Strategies are not available');
+        }
+        $container = $this->getContainer(array('YamlBundle'));
+
+        $loader = new DoctrineExtension();
+        $container->registerExtension($loader);
+        $this->loadFromFile($container, 'orm_namingstrategy');
+        $this->compileContainer($container);
+
+        $def1 = $container->getDefinition('doctrine.orm.em1_configuration');
+        $def2 = $container->getDefinition('doctrine.orm.em2_configuration');
+
+        $this->assertDICDefinitionMethodCallOnce($def1, 'setNamingStrategy', array(0 => new Reference('doctrine.orm.naming_strategy.default')));
+        $this->assertDICDefinitionMethodCallOnce($def2, 'setNamingStrategy', array(0 => new Reference('doctrine.orm.naming_strategy.underscore')));
+    }
+
     public function testSingleEMSetCustomFunctions()
     {
         $container = $this->getContainer(array('YamlBundle'));
@@ -762,6 +785,20 @@ abstract class AbstractDoctrineExtensionTest extends \PHPUnit_Framework_TestCase
         $definition = $container->getDefinition('doctrine.orm.listeners.resolve_target_entity');
         $this->assertDICDefinitionMethodCallOnce($definition, 'addResolveTargetEntity', array('Symfony\Component\Security\Core\User\UserInterface', 'MyUserClass', array()));
         $this->assertEquals(array('doctrine.event_listener' => array( array('event' => 'loadClassMetadata') ) ), $definition->getTags());
+    }
+    
+    public function testDbalSchemaFilter()
+    {
+        $container = $this->getContainer();
+        $loader = new DoctrineExtension();
+        $container->registerExtension($loader);
+    
+        $this->loadFromFile($container, 'dbal_schema_filter');
+    
+        $this->compileContainer($container);
+        
+        $definition = $container->getDefinition('doctrine.dbal.default_connection.configuration');
+        $this->assertDICDefinitionMethodCallOnce($definition, 'setFilterSchemaAssetsExpression', array('^sf2_'));
     }
 
     protected function getContainer($bundles = 'YamlBundle', $vendor = null)

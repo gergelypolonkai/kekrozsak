@@ -247,11 +247,10 @@
     reasons. It is now not possible anymore to use custom implementations of
     `FormBuilderInterface` for specific form types.
 
-    If you are in such a situation, you can subclass `FormRegistry` instead and override
-    `resolveType` to return a custom `ResolvedFormTypeInterface` implementation, within
-    which you can create your own `FormBuilderInterface` implementation. You should
-    register this custom registry class under the service name "form.registry" in order
-    to replace the default implementation.
+    If you are in such a situation, you can implement a custom `ResolvedFormTypeInterface`
+    where you create your own `FormBuilderInterface` implementation. You also need to
+    register a custom `ResolvedFormTypeFactoryInterface` implementation under the service
+    name "form.resolved_type_factory" in order to replace the default implementation.
 
   * If you previously inherited from `FieldType`, you should now inherit from
     `FormType`. You should also set the option `compound` to `false` if your field
@@ -1199,8 +1198,8 @@
     }
     ```
 
-  * Core translation messages are changed. Dot is added at the end of each message.
-    Overwritten core translations should be fixed if any. More info here.
+  * Core translation messages changed. A dot is added at the end of each message.
+    Overwritten core translations need to be fixed.
 
   * Collections (arrays or instances of `\Traversable`) in properties
     annotated with `Valid` are not traversed recursively by default anymore.
@@ -1352,6 +1351,11 @@
   * The UrlMatcher urldecodes the route parameters only once, they were
     decoded twice before. Note that the `urldecode()` calls have been changed for a
     single `rawurldecode()` in order to support `+` for input paths.
+
+  * Two new parameters have been added to the DIC: `router.request_context.host`
+    and `router.request_context.scheme`.  You can customize them for your
+    functional tests or for generating urls with the right host and scheme
+    when your are in the cli context.
 
 ### FrameworkBundle
 
