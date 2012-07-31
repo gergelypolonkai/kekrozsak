@@ -9,7 +9,7 @@
 								<dt>Csoportjaim</dt>
 {% for group in app.user.groups %}
 {% if group.group.open or group.membershipAcceptedAt %}
-								<dl><a href="{{ path('KekRozsakFrontBundle_groupView', {groupSlug: group.group.slug}) }}">{{ group.group.name }}</a></dl>
+								<dl><a href="{{ path('KekRozsakFrontBundle_groupView', {slug: group.group.slug}) }}">{{ group.group.name }}</a></dl>
 {% endif %}
 {% endfor %}
 								<dl><a href="{{ path('KekRozsakFrontBundle_groupList') }}">További csoportok</a></dl>

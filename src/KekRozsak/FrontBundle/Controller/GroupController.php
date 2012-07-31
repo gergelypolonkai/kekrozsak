@@ -5,6 +5,7 @@ namespace KekRozsak\FrontBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 use KekRozsak\FrontBundle\Entity\UserGroupMembership;
 use KekRozsak\FrontBundle\Entity\Group;
@@ -19,74 +20,64 @@ class GroupController extends Controller
 	 * @Route("/csoportok", name="KekRozsakFrontBundle_groupList")
 	 * @Template()
 	 */
-	public function groupListAction()
+	public function listAction()
 	{
 		$groupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:Group');
-		$groups = $groupRepo->findAll(array('name' => 'DESC'));
+		$groups = $groupRepo->findAll(array('name' => 'ASC'));
+
 		return array(
 			'groups' => $groups,
 		);
 	}
 
 	/**
-	 * @Route("/csoport/{groupSlug}", name="KekRozsakFrontBundle_groupView")
+	 * @Route("/csoport/{slug}", name="KekRozsakFrontBundle_groupView")
 	 * @Template()
+	 * @ParamConverter("group")
 	 */
-	public function groupViewAction($groupSlug)
+	public function viewAction(Group $group)
 	{
-		$groupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:Group');
-		if (!($group = $groupRepo->findOneBySlug($groupSlug)))
-			throw $this->createNotFoundException('A kért csoport nem létezik!');
-
 		return array(
 			'group' => $group,
 		);
 	}
 
 	/**
-	 * @Route("/csoport/{groupSlug}/tagok", name="KekRozsakFrontBundle_groupMembers")
+	 * @Route("/csoport/{slug}/tagok", name="KekRozsakFrontBundle_groupMembers")
 	 * @Template()
+	 * @ParamConverter("group")
 	 */
-	public function groupMembersAction($groupSlug)
+	public function membersAction(Group $group)
 	{
-		$groupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:Group');
-		if (!($group = $groupRepo->findOneBySlug($groupSlug)))
-			throw $this->createNotFoundException('A kért csoport nem létezik!');
-
 		return array(
 			'group' => $group,
 		);
 	}
 
 	/**
-	 * @Route("/csoport/{groupSlug}/dokumentumok", name="KekRozsakFrontBundle_groupDocuments")
+	 * @Route("/csoport/{slug}/dokumentumok", name="KekRozsakFrontBundle_groupDocuments")
 	 * @Template()
+	 * @ParamConverter("group")
 	 */
-	public function groupDocumentsAction($groupSlug)
+	public function documentsAction(Group $group)
 	{
-		$groupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:Group');
-		if (!($group = $groupRepo->findOneBySlug($groupSlug)))
-			throw $this->createNotFoundException('A kért csoport nem létezik!');
-
 		return array(
 			'group' => $group,
 		);
 	}
 
 	/**
-	 * @Route("/csoport/{groupSlug}/belepes", name="KekRozsakFrontBundle_groupJoin")
+	 * @Route("/csoport/{slug}/belepes", name="KekRozsakFrontBundle_groupJoin")
 	 * @Template()
+	 * @ParamConverter("group")
 	 */
-	public function groupJoinAction($groupSlug)
+	public function joinAction(Group $group)
 	{
 		$user = $this->get('security.context')->getToken()->getUser();
-		$groupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:Group');
-		if (!($group = $groupRepo->findOneBySlug($groupSlug)))
-			throw $this->createNotFoundException('A kért csoport nem létezik!');
 
 		if ($group->isMember($user))
 		{
-			return $this->redirect($this->generateUrl('KekRozsakFrontBundle_groupView', array($groupSlug => $group->getSlug())));
+			return $this->redirect($this->generateUrl('KekRozsakFrontBundle_groupView', array('slug' => $group->getSlug())));
 		}
 
 		if ($group->isRequested($user))
@@ -113,7 +104,7 @@ class GroupController extends Controller
 
 		if ($group->isOpen())
 		{
-			return $this->redirect($this->generateUrl('KekRozsakFrontBundle_groupView', array($groupSlug => $group->getSlug())));
+			return $this->redirect($this->generateUrl('KekRozsakFrontBundle_groupView', array('slug' => $group->getSlug())));
 		}
 		else
 		{
@@ -137,7 +128,7 @@ class GroupController extends Controller
 	 * @Route("/csoportok/uj", name="KekRozsakFrontBundle_groupCreate")
 	 * @Template()
 	 */
-	public function groupCreateAction()
+	public function createAction()
 	{
 		$group = new Group();
 		$form = $this->createForm(new GroupType(), $group);
