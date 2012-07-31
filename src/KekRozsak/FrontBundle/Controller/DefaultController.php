@@ -5,9 +5,11 @@ namespace KekRozsak\FrontBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 use KekRozsak\FrontBundle\Entity\UserGroupMembership;
 use KekRozsak\FrontBundle\Entity\UserData;
+use KekRozsak\FrontBundle\Entity\Article;
 
 use KekRozsak\SecurityBundle\Form\Type\UserType;
 
@@ -22,25 +24,7 @@ class DefaultController extends Controller
 		if (!$mainPageArticle)
 			throw $this->createNotFoundException('A keresett cikk nem létezik!');
 
-		return $this->forward('KekRozsakFrontBundle:Default:article', array('articleSlug' => $mainPageArticle->getSlug()));
-	}
-
-	/**
-	 * @Route("/cikk/{articleSlug}", name="KekRozsakFrontBundle_article")
-	 * @Template()
-	 *
-	 * @param string $articleSlug
-	 */
-	public function articleAction($articleSlug)
-	{
-		$article = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:Article')->findOneBySlug($articleSlug);
-
-		if (!$article)
-			throw $this->createNotFoundException('A keresett cikk nem létezik!');
-
-		return array(
-			'article' => $article,
-		);
+		return $this->forward('KekRozsakFrontBundle:Article:view', array('slug' => $mainPageArticle->getSlug()));
 	}
 
 	/**
