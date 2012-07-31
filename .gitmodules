@@ -1,0 +1,3 @@
+[submodule "web/js/jquery-cluetip"]
+	path = web/js/jquery-cluetip
+	url = git://github.com/kswedberg/jquery-cluetip.git
