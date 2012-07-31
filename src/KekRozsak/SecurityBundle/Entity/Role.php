@@ -168,5 +168,36 @@ class Role implements RoleInterface
 	{
 		return $this->name;
 	}
+
+	/**
+	 * Short description
+	 *
+	 * @var string shortDescription
+	 *
+	 * @ORM\Column(type="string", length=50, nullable=false, unique=true, name="short_description")
+	 */
+	protected $shortDescription;
+
+	/**
+	 * Set shortDescription
+	 *
+	 * @param string $shortDescription
+	 * @return Role
+	 */
+	public function setShortDescription($shortDescription)
+	{
+		$this->shortDescription = $shortDescription;
+		return $this;
+	}
+
+	/**
+	 * Get shortDescription
+	 *
+	 * @return string
+	 */
+	public function getShortDescription()
+	{
+		return $this->shortDescription;
+	}
 }
 

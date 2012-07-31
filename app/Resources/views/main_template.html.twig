@@ -86,6 +86,11 @@
 					$('#profil-box').show();
 				}
 			});
+			$('#jog-lista').tooltip({
+				track: true,
+				delay: 0,
+				fade: 250
+			});
 {% else %}
 			$('#login-mutato').click(function() {
 				if ($('#login-box').is(':visible'))

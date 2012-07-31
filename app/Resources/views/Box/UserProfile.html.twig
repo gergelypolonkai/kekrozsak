@@ -6,7 +6,7 @@
 						<div id="profil-belso">
 							[avatar]
 							{{ app.user.displayName }}<br />
-							Jogosultság<br />
+							<span id="jog-lista" title="{% for role in app.user.roles %}{{ role.shortDescription }}<br />{% endfor %}">Jogosultság{% if app.user.roles|length > 1 %}ok{% endif %}</span><br />
 							<dl>
 								<dt>Csoportjaim</dt>
 {% for group in app.user.groups %}
