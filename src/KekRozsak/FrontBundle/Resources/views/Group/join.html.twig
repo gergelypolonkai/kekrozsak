@@ -5,9 +5,9 @@
 {% block content %}
 <h3>Jelentkezés</h3>
 {% if isRequested %}
-Már jelentkeztél ebbe a csoportba ({{ group.name }}), de {{ group.leader.displayName }} még nem hagyta jóvá a belépésedet.
+Már jelentkeztél ebbe a csoportba ({{ group.name }}), de {{ group.leader|userdataspan }} még nem hagyta jóvá a belépésedet.
 {% endif %}
 {% if needApproval %}
-A csoportba való jelentkezésedről a csoport vezetőjét ({{ group.leader.displayName }}) értesítettük.
+A csoportba való jelentkezésedről a csoport vezetőjét ({{ group.leader|userdataspan }}) értesítettük.
 {% endif %}
 {% endblock content %}

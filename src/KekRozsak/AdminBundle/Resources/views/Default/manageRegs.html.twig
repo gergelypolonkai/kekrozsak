@@ -19,7 +19,7 @@
 		<tr>
 			<td>{{ user.username }}</td>
 			<td>{{ user.email }}</td>
-			<td>{{ user.displayName }}</td>
+			<td>{{ user|userdataspan }}</td>
 			<td>{{ user.registeredAt|date('Y-m-d H:i') }}</td>
 			<td>
 				<form method="post" action="">

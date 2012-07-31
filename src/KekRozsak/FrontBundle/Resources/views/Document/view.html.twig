@@ -7,5 +7,5 @@
 	{{ document.title }}{% if document.createdBy == app.user %} [ <a href="{{ path('KekRozsakFrontBundle_documentEdit', {slug: document.slug}) }}">Szerkesztés</a> ] {% endif %}
 </h3>
 {{ document.content|raw }}
-<div class="szerzo">{{ document.createdBy.displayName }}</div>
+<div class="szerzo">{{ document.createdBy|userdataspan }}</div>
 {% endblock content %}

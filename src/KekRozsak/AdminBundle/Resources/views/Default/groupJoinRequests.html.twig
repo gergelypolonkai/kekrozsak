@@ -21,7 +21,7 @@
 {% for request in group.members %}
 {% if not group.isMember(request.user) %}
 		<tr>
-			<td colspan="2">{{ request.user.displayName }}</td>
+			<td colspan="2">{{ request.user|userdataspan }}</td>
 			<td>
 				<form method="post" action="{{ path('KekRozsakAdminBundle_groupJoinRequests') }}">
 					<input type="hidden" name="user" value="{{ request.user.id }}" />

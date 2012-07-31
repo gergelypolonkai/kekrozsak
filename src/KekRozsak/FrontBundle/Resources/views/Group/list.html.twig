@@ -34,7 +34,7 @@
 					{% endif %}
 				{% endif %}
 			</td>
-			<td>{% if group.leader %}{{ group.leader.displayName }}{% else %}Nincs{% endif %}</td>
+			<td>{% if group.leader %}{{ group.leader|userdataspan }}{% else %}Nincs{% endif %}</td>
 		</tr>
 {% endfor %}
 	</tbody>

@@ -14,7 +14,7 @@
 <ul>
 {% for user in group.members %}
 {% if group.isMember(user.user) %}
-	<li>{{ user.user.displayName }}</li>
+	<li>{{ user.user|userdataspan }}</li>
 {% endif %}
 {% endfor %}
 </ul>

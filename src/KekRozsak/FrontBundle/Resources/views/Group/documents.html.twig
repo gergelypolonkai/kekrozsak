@@ -23,7 +23,7 @@
 			<td>[ikon]</td>
 			<td><a href="{{ path('KekRozsakFrontBundle_documentView', {slug: document.slug}) }}">{{ document.title }}</a></td>
 			<td>
-				{{ document.createdBy.displayName }}<br />
+				{{ document.createdBy|userdataspan }}<br />
 				{{ document.createdAt|date('Y-m-d H:i') }}
 			</td>
 		</tr>

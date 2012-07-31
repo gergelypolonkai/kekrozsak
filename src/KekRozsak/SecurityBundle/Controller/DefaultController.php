@@ -4,7 +4,9 @@ namespace KekRozsak\SecurityBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -119,6 +121,19 @@ class DefaultController extends Controller
 	public function regSuccessAction()
 	{
 		return array(
+		);
+	}
+
+	/**
+	 * @Route("/profil/{id}/ajax-felhasznalo-info.{_format}", name="KekRozsakSecurityBundle_ajaxUserdata", requirements={"_format": "html"})
+	 * @Method({"GET"})
+	 * @Template()
+	 * @ParamConverter("user")
+	 */
+	public function ajaxUserdataAction(User $user)
+	{
+		return array(
+			'user' => $user,
 		);
 	}
 }

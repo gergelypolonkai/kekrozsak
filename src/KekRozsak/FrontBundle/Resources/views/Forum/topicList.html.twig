@@ -20,7 +20,7 @@
 			<td></td>
 			<td>
 {% if topic.lastPost %}
-				{{ topic.lastPost.createdBy.displayName }}<br />
+				{{ topic.lastPost.createdBy|userdataspan }}<br />
 				{{ topic.lastPost.createdAt|date('Y-m-d H:i') }}
 {% else %}
 				&nbsp;<br />&nbsp;

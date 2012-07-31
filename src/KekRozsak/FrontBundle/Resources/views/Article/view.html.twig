@@ -8,6 +8,6 @@
 <p class="forras">Forrás: {{ article.source }}</p>
 {% endif %}
 {% if app.user %}
-<p class="szerzo">{{ article.createdBy.displayName }}</p>
+<p class="szerzo">{{ article.createdBy|userdataspan }}</p>
 {% endif %}
 {% endblock content %}
