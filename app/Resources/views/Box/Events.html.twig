@@ -37,21 +37,8 @@
 (event.startDate = this day AND event.endDate is NULL)
 OR (event.startDate <= this day AND evend.endDate >= this day)
 #}
-										<td id="event-calendar-{{ i }}"{% if eventList[i].events|length > 0 %} class="program"{% endif %}>
-											<a href="{{ path('KekRozsakFrontBundle_eventList', { date: eventList[i].date|date('Y-m-d')}) }}">{{ eventList[i].date|date('d') }}</a>
-{% if eventList[i].events|length > 0 %}
-											<script type="text/javascript">
-												$('#event-calendar-{{ i }}').tooltip({
-													bodyHandler: function() {
-														eventList = '';
-{% for event in eventList[i].events %}
-														eventList += '{{ event.title }}<br />';
-{% endfor %}
-														return ((eventList == '') ? false : eventList);
-													}
-												});
-											</script>
-{% endif %}
+										<td id="event-calendar-{{ i }}"{% if eventList[i].events|length > 0 %} class="program" rel="{{ path('KekRozsakFrontBundle_eventAjaxList', {date: eventList[i].date|date('Y-m-d'), _format: 'html'}) }}"{% endif %}>
+											<a href="{{ path('KekRozsakFrontBundle_eventList', { date: eventList[i].date|date('Y-m-d'), _format: 'html'}) }}">{{ eventList[i].date|date('d') }}</a>
 										</td>
 {% if cur is divisibleby(7) %}
 									</tr>

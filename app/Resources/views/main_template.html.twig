@@ -6,12 +6,11 @@
 		<title>Kék Rózsák{% block title %}{% endblock %}</title>
 		<meta charset="utf8" />
 		<link rel="stylesheet" type="text/css" href="{{ asset('css/kekrozsak_front.css') }}" />
-		<link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.tooltip.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ asset('js/jquery-cluetip/jquery.cluetip.css') }}" />
 {% block additional_css %}{% endblock %}
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-		<script type="text/javascript" src="{{ asset('js/jquery.bgiframe.js') }}"></script>
-		<script type="text/javascript" src="{{ asset('js/jquery.dimensions.js') }}"></script>
-		<script type="text/javascript" src="{{ asset('js/jquery.tooltip.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/jquery-cluetip/lib/jquery.hoverIntent.js')}}"></script>
+		<script type="text/javascript" src="{{ asset('js/jquery-cluetip/jquery.cluetip.js') }}"></script>
 {% block additional_js %}{% endblock %}
 	</head>
 	<body>
@@ -62,7 +61,7 @@
 						<p class="hir-cim">{{ news.title }}</p>
 						<p class="hir-szoveg">{{ news.text|raw }}</p>
 {% if app.user %}
-						<p class="hir-szerzo">{{ news.createdBy.displayName }}</p>
+						<p class="hir-szerzo">{{ news.createdBy|userdataspan }}</p>
 {% endif %}
 						<p class="hir-datum">{{ news.createdAt|date('Y-m-d H:i') }}</p>
 					</div>
@@ -87,10 +86,12 @@
 					$('#profil-box').show();
 				}
 			});
-			$('#jog-lista').tooltip({
-				track: true,
-				delay: 0,
-				fade: 250
+			$('#jog-lista').cluetip({
+				splitTitle: '|',
+				showTitle:  false
+			});
+			$('.program').cluetip({
+				cluezIndex: 1000
 			});
 			$('#esemeny-mutato').click(function() {
 				if ($('#esemeny-box').is(':visible'))
@@ -101,6 +102,11 @@
 				{
 					$('#esemeny-box').show();
 				}
+			});
+			$('.userdata').cluetip();
+			$('.userdata-secret').cluetip({
+				splitTitle: '|',
+				showTitle: false
 			});
 {% else %}
 			$('#login-mutato').click(function() {

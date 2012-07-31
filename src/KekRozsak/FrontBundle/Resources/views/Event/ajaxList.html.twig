@@ -1,0 +1,16 @@
+{# vim: ft=htmljinja
+#}
+<html>
+	<head>
+		<title>Események</title>
+	</head>
+	<body>
+{% if events|length > 0 %}
+		<ul>
+{% for event in events %}
+			<li>{{ event.title }}</li>
+{% endfor %}
+		</ul>
+{% endif %}
+	</body>
+</html>

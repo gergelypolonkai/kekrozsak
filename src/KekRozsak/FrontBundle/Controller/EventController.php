@@ -59,9 +59,26 @@ class EventController extends Controller
 	/**
 	 * @Route("/esemenyek/{date}", name="KekRozsakFrontBundle_eventList")
 	 * @Template()
-	 * @ParamConverter("date", class="DateTime", options={"format": "Y-m-d"})
+	 * @ParamConverter("date", options={"format": "Y-m-d"})
 	 */
 	public function listAction(\DateTime $date)
+	{
+		$query = $this->getDoctrine()->getEntityManager()->createQuery('SELECT e FROM KekRozsakFrontBundle:Event e WHERE e.cancelled = FALSE AND ((e.startDate < :day AND e.endDate >= :day) OR e.startDate = :day)');
+		$query->setParameter('day', $date, \Doctrine\DBAL\Types\Type::DATE);
+		$events = $query->getResult();
+
+		return array(
+			'day'    => $date,
+			'events' => $events,
+		);
+	}
+
+	/**
+	 * @Route("/esemenyek/{date}/ajax-lista.{_format}", name="KekRozsakFrontBundle_eventAjaxList", requirements={=_format": "html"})
+	 * @Template()
+	 * @ParamConverter("date", options={"format": "Y-m-d"})
+	 */
+	public function ajaxListAction(\DateTime $date)
 	{
 		$query = $this->getDoctrine()->getEntityManager()->createQuery('SELECT e FROM KekRozsakFrontBundle:Event e WHERE e.cancelled = FALSE AND ((e.startDate < :day AND e.endDate >= :day) OR e.startDate = :day)');
 		$query->setParameter('day', $date, \Doctrine\DBAL\Types\Type::DATE);

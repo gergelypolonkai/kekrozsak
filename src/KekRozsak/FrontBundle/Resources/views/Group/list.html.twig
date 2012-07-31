@@ -20,17 +20,17 @@
 {% for group in groups %}
 		<tr>
 			<td>[ikon]</td>
-			<td class="csoport" title="{{ group.description }}"><a href="{{ path('KekRozsakFrontBundle_groupView', {slug: group.slug}) }}">{{ group.name }}</a></td>
+			<td class="csoport" title="|Csoport leírás|{{ group.description }}"><a href="{{ path('KekRozsakFrontBundle_groupView', {slug: group.slug}) }}">{{ group.name }}</a></td>
 			<td>
 				{% if group.isMember(app.user) %}
-					<span title="Már tag vagy" class="ikon">[tag ikon]</span>
+					<span title="|Állapot|Már tag vagy" class="ikon">[tag ikon]</span>
 				{% elseif group.isRequested(app.user) %}
-					<span title="Már jelentkeztél, de a jelentkezésedet a csoport vezetője még nem fogadta el" class="ikon">[jelentkeztél ikon]</span>
+					<span title="|Állapot|Már jelentkeztél, de a jelentkezésedet a csoport vezetője még nem fogadta el" class="ikon">[jelentkeztél ikon]</span>
 				{% else %}
 					{% if group.isOpen %}
-						<a href="{{ path('KekRozsakFrontBundle_groupJoin', {slug: group.slug}) }}"><span title="Nyílt csoport, kattints a belépéshez!" class="ikon">[nyílt ikon]</span></a>
+						<a href="{{ path('KekRozsakFrontBundle_groupJoin', {slug: group.slug}) }}"><span title="|Állapot|Nyílt csoport, kattints a belépéshez!" class="ikon">[nyílt ikon]</span></a>
 					{% else %}
-						<a href="{{ path('KekRozsakFrontBundle_groupJoin', {slug: group.slug}) }}"><span title="Zárt csoport, kattints a jelentkezéshez!" class="ikon">[zárt ikon]</span></a>
+						<a href="{{ path('KekRozsakFrontBundle_groupJoin', {slug: group.slug}) }}"><span title="|Állapot|Zárt csoport, kattints a jelentkezéshez!" class="ikon">[zárt ikon]</span></a>
 					{% endif %}
 				{% endif %}
 			</td>
@@ -43,15 +43,13 @@
 {% endblock content %}
 {% block bottomscripts %}
 		<script type="text/javascript">
-			$('.csoport').tooltip({
-				track: true,
-				delay: 0,
-				fade: 250
+			$('.csoport').cluetip({
+				splitTitle: '|',
+				showTitle: false
 			});
 			$('.ikon').tooltip({
-				track: true,
-				delay: 0,
-				fade: 250
+				splitTitle: '|',
+				showTitle: false
 			});
 		</script>
 {% endblock bottomscripts %}
