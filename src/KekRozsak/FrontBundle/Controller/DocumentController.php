@@ -5,6 +5,7 @@ namespace KekRozsak\FrontBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 use KekRozsak\FrontBundle\Entity\Document;
 use KekRozsak\FrontBundle\Form\Type\DocumentType;
@@ -13,30 +14,23 @@ use KekRozsak\FrontBundle\Extensions\Slugifier;
 class DocumentController extends Controller
 {
 	/**
-	 * @Route("/dokumentum/{documentSlug}", name="KekRozsakFrontBundle_documentView")
+	 * @Route("/dokumentum/{slug}", name="KekRozsakFrontBundle_documentView")
 	 * @Template()
+	 * @ParamConverter("document")
 	 */
-	public function viewAction($documentSlug)
+	public function viewAction(Document $document)
 	{
-		$docRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:Document');
-		if (!($document = $docRepo->findOneBySlug($documentSlug)))
-			throw $this->createNotFoundException('A kért dokumentum nem létezik!');
-
 		return array(
 			'document' => $document,
 		);
 	}
 
 	/**
-	 * @Route("/dokumentumok/uj/{groupSlug}", name="KekRozsakFrontBundle_documentCreate", defaults={"groupslug"=""})
+	 * @Route("/dokumentumok/uj/", name="KekRozsakFrontBundle_documentCreate")
 	 * @Template()
 	 */
-	public function createAction($groupSlug = '')
+	public function createAction()
 	{
-		$groupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:Group');
-		$group = $groupRepo->findOneBySlug($groupSlug);
-		/* TODO: make group fully optional */
-
 		$document = new Document();
 		$document->setSlug('n-a');
 		$form = $this->createForm(new DocumentType(), $document);
@@ -48,41 +42,32 @@ class DocumentController extends Controller
 
 			if ($form->isValid())
 			{
+				/* TODO: move these lines into life cycle events */
 				$slugifier = new Slugifier();
 				$document->setSlug($slugifier->slugify($document->getTitle()));
 				$document->setCreatedAt(new \DateTime('now'));
 				$document->setCreatedBy($this->get('security.context')->getToken()->getUser());
 
-				if ($group)
-				{
-					$group->addDocument($document);
-					$document->addGroup($group);
-				}
-
 				$em = $this->getDoctrine()->getEntityManager();
 				$em->persist($document);
 				$em->flush();
 
-				/* TODO: return to group list if groupSlug is empty! */
-				return $this->redirect($this->generateUrl('KekRozsakFrontBundle_groupDocuments', array('groupSlug' => $group->getSlug())));
+				return $this->redirect($this->generateUrl('KekRozsakFrontBundle_documentView', array('slug' => $document->getSlug())));
 			}
 		}
 
 		return array(
-			'defaultGroup' => $groupSlug,
 			'form'         => $form->createView(),
 		);
 	}
 
 	/**
-	 * @Route("/dokumentum/{documentSlug}/szerkesztes", name="KekRozsakFrontBundle_documentEdit")
+	 * @Route("/dokumentum/{slug}/szerkesztes", name="KekRozsakFrontBundle_documentEdit")
 	 * @Template()
+	 * @ParamConverter("document")
 	 */
-	public function editAction($documentSlug)
+	public function editAction(Document $document)
 	{
-		$documentRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:Document');
-		if (!($document = $documentRepo->findOneBySlug($documentSlug)))
-			throw $this->createNotFoundException('A kért dokumentum nem létezik!');
 		$form = $this->createForm(new DocumentType(), $document);
 		$request = $this->getRequest();
 
@@ -91,6 +76,7 @@ class DocumentController extends Controller
 			$form->bindRequest($request);
 			if ($form->isValid())
 			{
+				/* TODO: move these lines into life cycle events */
 				$slugifier = new Slugifier();
 				$document->setSlug($slugifier->slugify($document->getTitle()));
 				// TODO: add updatedAt, updatedBy, updateReason, etc.
@@ -99,7 +85,7 @@ class DocumentController extends Controller
 				$em->persist($document);
 				$em->flush();
 
-				return $this->redirect($this->generateUrl('KekRozsakFrontBundle_documentView', array('documentSlug' => $document->getSlug())));
+				return $this->redirect($this->generateUrl('KekRozsakFrontBundle_documentView', array('slug' => $document->getSlug())));
 			}
 		}
 
