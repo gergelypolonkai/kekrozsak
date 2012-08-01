@@ -74,7 +74,7 @@ class EventController extends Controller
 	}
 
 	/**
-	 * @Route("/esemenyek/{date}/ajax-lista.{_format}", name="KekRozsakFrontBundle_eventAjaxList", requirements={=_format": "html"})
+	 * @Route("/esemenyek/{date}/ajax-lista.{_format}", name="KekRozsakFrontBundle_eventAjaxList", requirements={"_format": "html"})
 	 * @Template()
 	 * @ParamConverter("date", options={"format": "Y-m-d"})
 	 */
