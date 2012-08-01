@@ -1,5 +1,30 @@
-Polls (Entity already exists)
-Groups (Entity already exists)
+User
+	FavouriteForumTopics
+
+Poll
+	id
+	createdAt
+	createdBy
+	updatedAt
+	updatedBy
+	updateReason
+	endTime (timestamp/date?)
+	answers (ArrayCollection of PollAnswers)
+	text
+	anyoneCanAddAnswers
+	multiselect
+	voters (is it really required?)
+PollAnswer
+	id
+	createdAt
+	createdBy
+	updatedAt
+	updatedBy
+	updateReason
+	voters
+	poll (back-reference to Poll)
+	text
+
 Article check if public
 
 UserForumViewed
@@ -25,15 +50,10 @@ ForumTopic
 	locked
 
 ForumPost
-	id
-	forum topic
-	creator
-	timestamp
 	last edited by
 	last edited timestamp
 	last edit reason
 	edit count
-	text
 
 Library
 	id
@@ -47,15 +67,9 @@ Library
 	commentable
 
 Event
-	id
-	creator
-	created at
 	last edited by
 	last edited timestamp
 	last edit reason
-	start time
-	end time (may be null)
-	description
 	location
 	commentable
 
