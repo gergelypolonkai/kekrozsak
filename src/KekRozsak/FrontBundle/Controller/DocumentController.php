@@ -14,15 +14,23 @@ use KekRozsak\FrontBundle\Extensions\Slugifier;
 class DocumentController extends Controller
 {
 	/**
-	 * @Route("/dokumentum/{slug}", name="KekRozsakFrontBundle_documentView")
+	 * @Route("/dokumentum/{slug}.{_format}", name="KekRozsakFrontBundle_documentView", defaults={"_format": "html"}, requirements={"_format": "html|pdf"})
 	 * @Template()
 	 * @ParamConverter("document")
 	 */
-	public function viewAction(Document $document)
+	public function viewAction(Document $document, $_format)
 	{
-		return array(
+		$templateParams = array(
 			'document' => $document,
 		);
+
+		if ($_format == 'pdf')
+		{
+			$html = $this->renderView('KekRozsakFrontBundle:Document:pdfView.html.twig', $templateParams);
+			return $this->get('io_tcpdf')->quick_pdf($html);
+		}
+
+		return $templateParams;
 	}
 
 	/**
