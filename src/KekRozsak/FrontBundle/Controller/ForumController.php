@@ -64,7 +64,7 @@ class ForumController extends Controller
 		$request = $this->getRequest();
 		if ($request->getMethod() == 'POST')
 		{
-			$form->bindRequest($request);
+			$form->bind($request);
 			if ($form->isValid())
 			{
 				$post->setCreatedAt(new \DateTime('now'));

@@ -136,7 +136,7 @@ class GroupController extends Controller
 
 		if ($request->getMethod() == 'POST')
 		{
-			$form->bindRequest($request);
+			$form->bind($request);
 			if ($form->isValid())
 			{
 				$slugifier = new Slugifier();

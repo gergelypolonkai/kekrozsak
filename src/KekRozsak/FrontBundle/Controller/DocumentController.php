@@ -46,7 +46,7 @@ class DocumentController extends Controller
 
 		if ($request->getMethod() == 'POST')
 		{
-			$form->bindRequest($request);
+			$form->bind($request);
 
 			if ($form->isValid())
 			{
@@ -81,7 +81,7 @@ class DocumentController extends Controller
 
 		if ($request->getMethod() == 'POST')
 		{
-			$form->bindRequest($request);
+			$form->bind($request);
 			if ($form->isValid())
 			{
 				/* TODO: move these lines into life cycle events */
