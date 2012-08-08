@@ -23,6 +23,7 @@ class AppKernel extends Kernel
 	    new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
 	    new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
 	    new Io\TcpdfBundle\IoTcpdfBundle(),
+	    new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
 	    // Own bundles
             new KekRozsak\FrontBundle\KekRozsakFrontBundle(),
             new KekRozsak\SecurityBundle\KekRozsakSecurityBundle(),

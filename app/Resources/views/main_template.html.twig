@@ -11,14 +11,32 @@
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script type="text/javascript" src="{{ asset('js/jquery-cluetip/lib/jquery.hoverIntent.js')}}"></script>
 		<script type="text/javascript" src="{{ asset('js/jquery-cluetip/jquery.cluetip.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/jquery.tinyscrollbar.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+		<script type="text/javascript" src="{{ path('fos_js_routing_js', {callback: 'fos.Router.setData'}) }}"></script>
 {% block additional_js %}{% endblock %}
 	</head>
 	<body>
+		<div id="popup-container">
+			<div id="popup-close"></div>
+			<div id="popup-inside">
+				<div id="popup-title"></div>
+				<div id="popup-scrollable">
+					<div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
+					<div class="viewport">
+						<div class="overview" id="popup-content"></div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div id="top-line-wrapper">
 			<div id="top-line">
 {% if app.user %}
 {% include ':Box:UserProfile.html.twig' %}
 {% include ':Box:Events.html.twig' %}
+				<div id="konyvtar-gomb">
+					<a href="{{ path('KekRozsakFrontBundle_bookList') }}">[könyvtár gomb]</a>
+				</div>
 {% else %}
 {% include ':Box:Login.html.twig' %}
 {% endif %}
@@ -120,6 +138,40 @@
 				}
 			});
 {% endif %}
+			jQuery.fn.center = function() {
+				this.css('top', Math.max(0, (($(window).height() - this.outerHeight()) / 2) + $(window).scrollTop()) + 'px');
+				this.css('left', Math.max(0, (($(window).width() - this.outerWidth()) / 2) + $(window).scrollLeft()) + 'px');
+				return this;
+			};
+
+			$('#popup-close').click(function() { $('#popup-container').fadeOut(); });
+			$('#popup-scrollable').tinyscrollbar();
+			function doPopup(title, content, url, w, h, callback)
+			{
+				$('#popup-title').html(title);
+				$('#popup-content').html(content);
+				$('#popup-container').css('width', w + 'px');
+				$('#popup-container').css('height', h + 'px');
+				$('#popup-inside').css('width', (w - 8) + 'px');
+				$('#popup-inside').css('height', (h - 8) + 'px');
+				$('#popup-scrollable').css('width', (w - 8) + 'px');
+				$('#popup-scrollable .viewport').css('width', (w - 28) + 'px');
+				$('#popup-scrollable .viewport').css('height', (h - 54) + 'px');
+				$('#popup-container').center();
+				$('#popup-container').fadeIn();
+				$.ajax({
+					method: 'GET',
+					url:    url
+				}).done(function(data) {
+					$('#popup-content').html(data);
+					$('#popup-scrollable').tinyscrollbar();
+					$('.userdata').cluetip();
+					if (callback != null)
+						callback();
+				}).error(function() {
+					$('#popup-content').html('Nem sikerült betölteni a könyv adatait.');
+				});
+			}
 		</script>
 {% block bottomscripts %}{% endblock %}
 	</body>

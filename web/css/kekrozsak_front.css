@@ -137,6 +137,16 @@ body {
 	padding: 5px;
 }
 
+#konyvtar-gomb {
+	float: left;
+	padding: 5px;
+}
+
+#konyvtar-gomb a {
+	color: inherit;
+	text-decoration: none;
+}
+
 #bottom-line {
 	position: fixed;
 	left: 0;
@@ -356,5 +366,104 @@ td.uj-post p .kuldes-gomb {
 
 .i {
 	font-style: italic;
+}
+
+#popup-container {
+	display: none;
+	position: fixed;
+	height: 300px;
+	width: 200px;
+	background: #ffffff;
+	z-index: 80;
+}
+
+#popup-close {
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	top: -5px;
+	right: -5px;
+	background-image: url('../images/no.png');
+}
+
+#popup-inside {
+	border: 1px solid black;
+	height: 292px;
+	width: 192px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 3px;
+}
+
+#popup-title {
+	font-weight: bold;
+	padding: 5px;
+}
+
+#popup-content {
+	padding: 3px;
+}
+
+#popup-scrollable {
+	width: 192px;
+	clear: both;
+	margin: 20px 0 10px;
+}
+
+#popup-scrollable .viewport {
+	width: 172px;
+	height: 246px;
+	overflow: hidden;
+	position: relative;
+}
+
+#popup-scrollable .overview {
+	list-style: none;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+#popup-scrollable .thumb .end, #popup-scrollable .thumb {
+	background-color: #003D5D;
+}
+
+#popup-scrollable .scrollbar {
+	position: relative;
+	float: right;
+	width: 15px;
+}
+
+#popup-scrollable .track {
+	background-color: #D8EEFD;
+	height: 100%;
+	width: 13px;
+	position: relative;
+	padding: 0 1px;
+}
+
+#popup-scrollable .thumb {
+	height: 20px;
+	width: 13px;
+	cursor: pointer;
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+}
+
+#popup-scrollable .thumb .end {
+	overflow: hidden;
+	height: 5px;
+	width: 13px;
+}
+
+#popup-scrollable .disable {
+	display: none;
+}
+
+.gomb {
+	background-color: #cccccc;
+	color: black;
+	white-space: nowrap;
 }
 

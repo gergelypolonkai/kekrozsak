@@ -1,0 +1,133 @@
+{# vim: ft=htmljinja
+#}
+{% extends '::main_template.html.twig' %}
+{% block title %} - Könyvtár{% endblock %}
+{% block content %}
+<h3>Könyvtár</h3>
+[Saját könyveim] [Nálam lévő kölcsönzött könyvek]
+{% if books|length > 0 %}
+<table>
+	<thead>
+		<tr>
+			<td>Szerző</td>
+			<td>Cím</td>
+			<td>Év</td>
+			<td>Összes</td>
+			<td>Kölcsönözhető</td>
+			<td>Saját</td>
+			<td>Nálam (Vissza)</td>
+		</tr>
+	</thead>
+	<tbody>
+{% for book in books %}
+		<tr class="book-row popup-opener" id="book-{{ book.id }}">
+			<td class="popup-opener">{{ book.author }}</td>
+			<td>{{ book.title }}</td>
+			<td>{{ book.year }}</td>
+			<td>{{ book.copies|length }}</td>
+			<td>{{ book.copiesBorrowable|length }}</td>
+			<td>{{ book.usersCopies(app.user)|length }}</td>
+			<td>{{ book.copiesBorrowedByUser(app.user)|length }} ({{ book.copiesBorrowedReturnedByUser(app.user)|length }})</td>
+		</tr>
+{% endfor %}
+	</tbody>
+</table>
+{% endif %}
+{% endblock %}
+{% block bottomscripts %}
+<script type="text/javascript">
+$('.book-row').click(function() {
+	bookid = 0;
+	if (!$(this).attr('id').match(/^book-\d+$/))
+		return false;
+	bookid = $(this).attr('id').replace(/^book-/, '');
+	bookUrl = Routing.generate('KekRozsakFrontBundle_bookAjaxData', { id: bookid, _format: 'html' });
+	bookCallback = function() {
+		// TODO: Change alert() calls to HTML flashes
+		$('.delete-copy-button').click(function() {
+			bookid = 0;
+			if (!$(this).attr('id').match(/^delete-copy-button-\d+$/))
+				return false;
+			bookid = $(this).attr('id').replace(/^delete-copy-button-/, '');
+			url = Routing.generate('KekRozsakFrontBundle_bookDeleteCopy', { id: bookid });
+			$.ajax({
+				method: 'GET',
+				url:    url
+			}).done(function() {
+				doPopup('', 'Betöltés...', bookUrl, 400, 300, bookCallback);
+			}).error(function() {
+				alert('Nem sikerült törölni');
+			});
+		});
+
+		$('.add-copy-button').click(function() {
+			bookid = 0;
+			if (!$(this).attr('id').match(/^add-copy-button-\d+$/))
+				return false;
+			bookid = $(this).attr('id').replace(/^add-copy-button-/, '');
+			url = Routing.generate('KekRozsakFrontBundle_bookAddCopy', { id: bookid });
+			$.ajax({
+				method: 'GET',
+				url:    url
+			}).done(function() {
+				doPopup('', 'Betöltés...', bookUrl, 400, 300, bookCallback);
+			}).error(function() {
+				alert('Nem sikerült bejegyezni ezt a példányt');
+			});
+		});
+
+		$('.mine-is-borrowable-button, .mine-is-not-borrowable-button').click(function() {
+			bookid = 0;
+			if (!$(this).attr('id').match(/^mine-is-(not-)?borrowable-button-\d+$/))
+				return false;
+			isBorrowable = ($(this).attr('id').match(/^mine-is-not-borrowable-button-\d+$/)) ? 0 : 1;
+			bookid = $(this).attr('id').replace(/^mine-is-(not-)?borrowable-button-/, '');
+			url = Routing.generate('KekRozsakFrontBundle_bookSetCopyBorrowable', { id: bookid, newValue: isBorrowable });
+			$.ajax({
+				method: 'GET',
+				url:    url
+			}).done(function() {
+				doPopup('', 'Betöltés...', bookUrl, 400, 300, bookCallback);
+			}).error(function() {
+				alert('Nem sikerült bejegyezni ezt a példányt');
+			});
+		});
+
+		$('.mine-is-for-sale-button, .mine-is-not-for-sale-button').click(function() {
+			bookid = 0;
+			if (!$(this).attr('id').match(/^mine-is-(not-)?for-sale-button-\d+$/))
+				return false;
+			isForSale = ($(this).attr('id').match(/^mine-is-not-for-sale-button-\d+$/)) ? 0 : 1;
+			bookid = $(this).attr('id').replace(/^mine-is-(not-)?for-sale-button-/, '');
+			url = Routing.generate('KekRozsakFrontBundle_bookSetCopyForSale', { id: bookid, newValue: isForSale });
+			$.ajax({
+				method: 'GET',
+				url:    url
+			}).done(function() {
+				doPopup('', 'Betöltés...', bookUrl, 400, 300, bookCallback);
+			}).error(function() {
+				alert('Nem sikerült bejegyezni ezt a példányt');
+			});
+		});
+
+		$('.want-to-buy-button, .want-to-borrow-button').click(function() {
+			bookid = 0;
+			if (!$(this).attr('id').match(/^want-to-(buy|borrow)-button-\d+$/))
+				return false;
+			toBuy = ($(this).attr('id').match(/^want-to-buy-button-\d+$/)) ? 1 : 0;
+			bookid = $(this).attr('id').replace(/^want-to-(buy|borrow)-button-/, '');
+			url = Routing.generate('KekRozsakFrontBundle_bookWantOne', { id: bookid, wantToBuy: toBuy });
+			$.ajax({
+				method: 'GET',
+				url:    url
+			}).done(function() {
+				doPopup('', 'Betöltés...', bookUrl, 400, 300, bookCallback);
+			}).error(function() {
+				alert('Nem sikerült bejegyezni a kérést');
+			});
+		});
+	};
+	doPopup('', 'Betöltés...', bookUrl, 400, 300, bookCallback);
+});
+</script>
+{% endblock bottomscripts %}

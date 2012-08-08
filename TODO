@@ -1,3 +1,5 @@
+PDF header fix
+
 User
 	FavouriteForumTopics
 
@@ -28,7 +30,9 @@ PollAnswer
 Article check if public
 
 UserForumViewed
-	it should contain records that show the last viewed post in each forum topic
+	User
+	ForumTopic
+	timestamp of last visit
 
 BlogPost
 	id
@@ -54,17 +58,6 @@ ForumPost
 	last edited timestamp
 	last edit reason
 	edit count
-
-Library
-	id
-	owner
-	author
-	title
-	year
-	borrowable
-	borrowed by
-	borrower returned
-	commentable
 
 Event
 	last edited by
