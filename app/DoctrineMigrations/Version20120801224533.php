@@ -16,7 +16,7 @@ class Version20120801224533 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != "mysql");
         
         $this->addSql("CREATE TABLE books (id INT AUTO_INCREMENT NOT NULL, author VARCHAR(100) NOT NULL, title VARCHAR(100) NOT NULL, year INT NOT NULL, commentable TINYINT(1) NOT NULL, PRIMARY KEY(id)) ENGINE = InnoDB");
-        $this->addSql("CREATE TABLE book_copies (id INT AUTO_INCREMENT NOT NULL, book_id INT NOT NULL, owner_id INT NOT NULL, borrower_id INT DEFAULT NULL, owner_comment LONGTEXT NOT NULL, borrowable TINYINT(1) NOT NULL, borrower_returned TINYINT(1) NOT NULL, INDEX IDX_F0A8D81116A2B381 (book_id), INDEX IDX_F0A8D8117E3C61F9 (owner_id), UNIQUE INDEX UNIQ_F0A8D81111CE312B (borrower_id), UNIQUE INDEX UNIQ_F0A8D8117E3C61F916A2B381 (owner_id, book_id), PRIMARY KEY(id)) ENGINE = InnoDB");
+        $this->addSql("CREATE TABLE book_copies (id INT AUTO_INCREMENT NOT NULL, book_id INT NOT NULL, owner_id INT NOT NULL, borrower_id INT DEFAULT NULL, owner_comment LONGTEXT DEFAULT NULL, borrowable TINYINT(1) NOT NULL, buyable TINYINT(1) NOT NULL, borrower_returned TINYINT(1) NOT NULL, INDEX IDX_F0A8D81116A2B381 (book_id), INDEX IDX_F0A8D8117E3C61F9 (owner_id), UNIQUE INDEX UNIQ_F0A8D81111CE312B (borrower_id), UNIQUE INDEX UNIQ_F0A8D8117E3C61F916A2B381 (owner_id, book_id), PRIMARY KEY(id)) ENGINE = InnoDB");
         $this->addSql("ALTER TABLE book_copies ADD CONSTRAINT FK_F0A8D81116A2B381 FOREIGN KEY (book_id) REFERENCES books (id)");
         $this->addSql("ALTER TABLE book_copies ADD CONSTRAINT FK_F0A8D8117E3C61F9 FOREIGN KEY (owner_id) REFERENCES users (id)");
         $this->addSql("ALTER TABLE book_copies ADD CONSTRAINT FK_F0A8D81111CE312B FOREIGN KEY (borrower_id) REFERENCES users (id)");
