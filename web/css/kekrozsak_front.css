@@ -465,5 +465,15 @@ td.uj-post p .kuldes-gomb {
 	background-color: #cccccc;
 	color: black;
 	white-space: nowrap;
+	cursor: pointer;
+}
+
+#top-line .gomb {
+	background-color: transparent;
+	color: #c4d3ff;
+}
+
+.gomb a {
+	color: inherit !important;
 }
 

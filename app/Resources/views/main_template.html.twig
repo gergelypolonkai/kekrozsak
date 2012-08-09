@@ -35,15 +35,17 @@
 {% include ':Box:UserProfile.html.twig' %}
 {% include ':Box:Events.html.twig' %}
 				<div id="konyvtar-gomb">
-					<a href="{{ path('KekRozsakFrontBundle_bookList') }}">[könyvtár gomb]</a>
+					<span class="gomb"><a href="{{ path('KekRozsakFrontBundle_bookList') }}">[könyvtár gomb]</a></span>
 				</div>
 {% else %}
 {% include ':Box:Login.html.twig' %}
 {% endif %}
+{#
 				<div id="search-box">
 					<input type="text" />
 					<button type="submit">Keresés</button>
 				</div>
+#}
 			</div>
 			<div id="top-line-padding"></div>
 		</div>
