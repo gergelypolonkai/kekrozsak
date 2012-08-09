@@ -1,17 +1,29 @@
-* PDF header fix
-* draft flag for Document and Article: only writer and administrators see it from the Document/Article list, in preview mode
-* site-based theme for ckeditor (both ui and the editor)
-* full Document/Article list for administrators
+* book creation
+
+* event creation
+
+* "sticky" news flag
+
 * news editor for administrators
 
-Document
-	draft
+* PDF header fix
 
-News
-	sticky
+* draft flag for Document and Article: only writer and administrators see it
+    from the Document/Article list, in preview mode
 
-User
-	FavouriteForumTopics
+* full Document/Article list for administrators
+
+* polls
+
+* chat
+
+* Users' favourite forum topics
+
+* article categories
+
+* blog
+
+* site-based theme for ckeditor (both ui and the editor)
 
 Poll
 	id
@@ -36,11 +48,6 @@ PollAnswer
 	voters
 	poll (back-reference to Poll)
 	text
-
-Article
-* check if public
-	draft
-	category (new entity)
 
 UserForumViewed
 	User
@@ -89,4 +96,10 @@ GroupChatMessage
 	id
 	from user
 	to group
+	timestamp
+
+PublicChatMessage
+	id
+	from user
+	to channel (ChatChannel class with id and name fields)
 	timestamp
