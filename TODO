@@ -1,4 +1,12 @@
-PDF header fix
+* PDF header fix
+* draft flag for Document and Article: only writer and administrators see it from the Document/Article list, in preview mode
+* site-based theme for ckeditor (both ui and the editor)
+* full Document/Article list for administrators
+* news editor for administrators
+
+Document
+	draft
+
 News
 	sticky
 
@@ -29,7 +37,10 @@ PollAnswer
 	poll (back-reference to Poll)
 	text
 
-Article check if public
+Article
+* check if public
+	draft
+	category (new entity)
 
 UserForumViewed
 	User
