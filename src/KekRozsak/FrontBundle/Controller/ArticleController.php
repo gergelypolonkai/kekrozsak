@@ -20,6 +20,9 @@ class ArticleController extends Controller
 	 */
 	public function viewAction(Article $article)
 	{
+		if ((!is_object($this->_securityContext->getToken()) || !is_object($this->_securityContext->getToken()->getUser())) && !$article->isPublic())
+			throw new AccessDeniedException('A cikk megtekintéséhez be kell jelentkezned!');
+
 		return array(
 			'article' => $article,
 		);
