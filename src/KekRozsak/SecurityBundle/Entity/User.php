@@ -323,7 +323,18 @@ class User implements UserInterface, AdvancedUserInterface
 	}
 
 	/**
-	 * Get all roles
+	 * Get all roles as an ArrayCollection
+	 *
+	 * @return Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getRolesCollection()
+	{
+		return $this->roles;
+	}
+
+	/**
+	 * Get all roles, for UserInterface implementation. To get the
+	 * collection, use getRolesCollection() instead
 	 *
 	 * @return array
 	 */

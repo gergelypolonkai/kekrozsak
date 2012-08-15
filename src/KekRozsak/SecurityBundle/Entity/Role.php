@@ -79,62 +79,6 @@ class Role implements RoleInterface
 	}
 
 	/**
-	 * @var boolean $admin
-	 * @ORM\Column(type="boolean", nullable=false)
-	 */
-	protected $admin;
-
-	/**
-	 * Set admin
-	 *
-	 * @param boolean $admin
-	 * @return Role
-	 */
-	public function setAdmin($admin)
-	{
-		$this->admin = $admin;
-		return $this;
-	}
-
-	/**
-	 * Get admin
-	 *
-	 * @return boolean
-	 */
-	public function isAdmin()
-	{
-		return $this->admin;
-	}
-
-	/**
-	 * @var boolean $superadmin
-	 * @ORM\Column(type="boolean", nullable=false)
-	 */
-	protected $superAdmin;
-
-	/**
-	 * Set superadmin
-	 *
-	 * @param boolean $superadmin
-	 * @return Role
-	 */
-	public function setSuperadmin($superadmin)
-	{
-		$this->superadmin = $superadmin;
-		return $this;
-	}
-
-	/**
-	 * Get superadmin
-	 *
-	 * @return boolean
-	 */
-	public function getSuperadmin()
-	{
-		return $this->superadmin;
-	}
-
-	/**
 	 * @var text description
 	 * @ORM\Column(type="string", length=150, nullable=true)
 	 */
@@ -198,6 +142,28 @@ class Role implements RoleInterface
 	public function getShortDescription()
 	{
 		return $this->shortDescription;
+	}
+
+	/**
+	 * List of inherited Roles
+	 *
+	 * @ORM\ManyToMany(targetEntity="Role", fetch="LAZY")
+	 * @ORM\JoinTable(name="role_hierarchy", joinColumns={
+	 *     @ORM\JoinColumn(name="parent_role_id", referencedColumnName="id")
+	 * }, inverseJoinColumns={
+	 *     @ORM\JoinColumn(name="child_role_id", referencedColumnName="id")
+	 * })
+	 */
+	protected $inheritedRoles;
+
+	/**
+	 * Get all inherited roles
+	 *
+	 * @return Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getInheritedRoles()
+	{
+		return $this->inheritedRoles;
 	}
 }
 
