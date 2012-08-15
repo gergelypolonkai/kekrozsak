@@ -82,7 +82,7 @@ a {
 
 #header {
     height: 270px;
-    background-image: url('../images/fejlec.jpg');
+    background-image: url('../images/header.png');
 }
 
 #header h1 {
@@ -96,7 +96,7 @@ a {
 #content-outline {
     color: #3366ff;
     text-align: justify;
-    width: 955px;
+    width: 960px;
     float: left;
     background-color: #c6ecfe;
 }
@@ -111,7 +111,7 @@ a {
     background-image: url('../images/news-button.png');
     width: 20px;
     height: 57px;
-    left: 955px;
+    left: 960px;
     z-index: 150;
     cursor: pointer;
 }
