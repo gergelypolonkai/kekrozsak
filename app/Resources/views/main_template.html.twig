@@ -7,16 +7,7 @@
         <meta charset="utf8" />
         <link rel="stylesheet" type="text/css" href="{{ asset('css/kekrozsak_front.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('js/jquery-cluetip/jquery.cluetip.css') }}" />
-{% stylesheets
-    '../app/Resources/public/css/main.css'
-    '../app/Resources/public/css/menu.css'
-    '../app/Resources/public/css/popup.css'
-    '../app/Resources/public/css/profilebox.css'
-    '../app/Resources/public/css/loginbox.css'
-    '../app/Resources/public/css/eventbox.css'
-    '../app/Resources/public/css/forum.css'
-    '../app/Resources/public/css/library.css'
-filter='cssrewrite' %}
+{% stylesheets 'bundles/kekrozsakfront/css/*' filter='cssrewrite' output='kekrozsak.css' %}
         <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
 {% endstylesheets %}
 {% block additional_css %}{% endblock %}

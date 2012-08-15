@@ -1,0 +1,175 @@
+/* 
+    Document   : main
+    Created on : 2012.08.15., 10:58:08
+    Author     : Gergely Polonkai
+    Description:
+        Main stylesheet
+*/
+
+* {
+	font-family: sans-serif;
+	font-size: 14px;
+}
+
+body {
+    margin: 0;
+    background-color: #001100;
+    background-image: url('../images/rose_bg.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: right bottom;
+}
+
+a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+#top-line {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: #152967;
+    color: #c4d3ff;
+    height: 32px;
+    border-bottom: 1px solid #1b3586;
+}
+
+#top-line-padding {
+    height: 33px;
+    clear: both;
+}
+
+#top-line #search-box {
+    float: right;
+    padding: 5px;
+}
+
+#top-line #login-gomb {
+    float: left;
+    padding: 5px;
+}
+
+#top-line #profil-gomb {
+    float: left;
+    padding: 5px;
+}
+
+#bottom-line-padding {
+    height: 33px;
+}
+
+#bottom-line {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #152967;
+    color: #c4d3ff;
+    height: 32px;
+    border-top: 1px solid #1b3586;
+}
+
+#wrapper {
+    background-color: #000000;
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#header {
+    height: 270px;
+    background-image: url('../images/fejlec.jpg');
+}
+
+#header h1 {
+    display: none;
+}
+
+#content-wrapper {
+    background-color: #0e0e0e;
+}
+
+#content-outline {
+    color: #3366ff;
+    text-align: justify;
+    width: 740px;
+    float: left;
+    background-color: #c6ecfe;
+}
+
+#content {
+    padding: 5px;
+}
+
+#hirek {
+    float: right;
+    color: #aaaacc;
+    width: 215px;
+}
+
+#hirek h3 {
+    padding: 10px;
+    margin: 15px 0 0 0;
+}
+
+div.hir {
+    padding: 5px;
+    font-size: 80%;
+    margin-bottom: 15px;
+}
+
+p.hir-cim {
+    font-weight: bold;
+    margin: 0 0 5px 0;
+}
+
+p.hir-szoveg {
+    text-align: justify;
+    margin: 10px 0;
+}
+
+p.hir-szerzo {
+    font-style: italic;
+    text-align: right;
+    margin: 0;
+}
+
+p.hir-datum {
+    text-align: right;
+    margin: 0;
+}
+
+h3 a {
+    color: #3366ff;
+    text-decoration: none;
+}
+
+.u {
+	text-decoration: underline;
+}
+
+.b {
+	font-weight: bold;
+}
+
+.i {
+	font-style: italic;
+}
+
+.gomb {
+	background-color: #cccccc;
+	color: black;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+#top-line .gomb {
+	background-color: transparent;
+	color: #c4d3ff;
+}
+
+.gomb a {
+	color: inherit !important;
+}
