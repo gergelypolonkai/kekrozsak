@@ -38,7 +38,7 @@
 OR (event.startDate <= this day AND evend.endDate >= this day)
 #}
 										<td id="event-calendar-{{ i }}"{% if eventList[i].events|length > 0 %} class="program" rel="{{ path('KekRozsakFrontBundle_eventAjaxList', {date: eventList[i].date|date('Y-m-d'), _format: 'html'}) }}"{% endif %}>
-											<a href="{{ path('KekRozsakFrontBundle_eventList', { date: eventList[i].date|date('Y-m-d'), _format: 'html'}) }}">{{ eventList[i].date|date('d') }}</a>
+											<a href="{{ path('KekRozsakFrontBundle_eventList', { date: eventList[i].date|date('Y-m-d')}) }}">{{ eventList[i].date|date('d') }}</a>
 										</td>
 {% if cur is divisibleby(7) %}
 									</tr>
@@ -56,7 +56,7 @@ OR (event.startDate <= this day AND evend.endDate >= this day)
 									</tr>
 								</tbody>
 							</table>
-							<a href="">További események</a>
+							<a href="{{ path('KekRozsakFrontBundle_eventList') }}">További események</a>
 						</div>
 					</div>
 				</div>

@@ -15,7 +15,7 @@
 	<li>{{ attendee|userdataspan }}</li>
 {% endfor %}
 </ul>
-{% if not event.isAttending(app.user) %}
-<a href="{{ path('KekRozsakFrontBundle_eventJoin', { eventDate: event.startDate|date('Y-m-d'), eventSlug: event.slug }) }}">Megyek</a>
+{% if not event.isAttending(app.user) and not event.isPast %}
+<a href="{{ path('KekRozsakFrontBundle_eventJoin', { startDate: event.startDate|date('Y-m-d'), eventSlug: event.slug }) }}">Megyek</a>
 {% endif %}
 {% endblock content %}

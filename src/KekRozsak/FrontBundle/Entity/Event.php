@@ -399,4 +399,20 @@ class Event
 			)
 		);
 	}
+
+        /**
+         * Check if the event happened before a given date
+         *
+         * @param DateTime $date
+         * @return boolean
+         */
+        public function isPast(\DateTime $date = null)
+        {
+            if ($date === null)
+            {
+                $date = new \DateTime('now');
+            }
+
+            return ($this->endDate < $date);
+        }
 }

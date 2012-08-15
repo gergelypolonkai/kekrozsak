@@ -34,7 +34,7 @@ class EventController extends Controller
 	/**
 	 * @Route("/esemeny/{startDate}/{eventSlug}/csatlakozas", name="KekRozsakFrontBundle_eventJoin")
 	 * @Template()
-	 * @ParamConverter("event", class="KekRozsakFrontBundle:Event", options={"mapping"={"eventSlug"="slug", "startDate"="startDate"}})
+	 * @ParamConverter("event", class="KekRozsakFrontBundle:Event", options={"mapping"={"eventSlug": "slug", "startDate": "startDate"}})
 	 * @ParamConverter("startDate", class="DateTime", options={"format"="Y-m-d"})
 	 */
 	public function joinAction(\DateTime $startDate, Event $event)
@@ -58,20 +58,27 @@ class EventController extends Controller
 	}
 
 	/**
-	 * @Route("/esemenyek/{date}", name="KekRozsakFrontBundle_eventList")
+	 * @Route("/esemenyek/{date}", name="KekRozsakFrontBundle_eventList", defaults={"date": null})
 	 * @Template()
-	 * @ParamConverter("date", options={"format": "Y-m-d"})
 	 */
-	public function listAction(\DateTime $date)
+	public function listAction($date = null)
 	{
-		$query = $this->getDoctrine()->getEntityManager()->createQuery('SELECT e FROM KekRozsakFrontBundle:Event e WHERE e.cancelled = FALSE AND ((e.startDate < :day AND e.endDate >= :day) OR e.startDate = :day)');
-		$query->setParameter('day', $date, \Doctrine\DBAL\Types\Type::DATE);
-		$events = $query->getResult();
+            $realDate = null;
 
-		return array(
-			'day'    => $date,
-			'events' => $events,
-		);
+            if ($date === null) {
+                $query = $this->getDoctrine()->getEntityManager()->createQuery('SELECT e FROM KekRozsakFrontBundle:Event e WHERE e.cancelled = FALSE AND (e.startDate >= :day OR (e.startDate <= :day AND e.endDate >= :day))');
+                $query->setParameter('day', new \DateTime('now'), \Doctrine\DBAL\Types\Type::DATE);
+            } else {
+                $realDate = \DateTime::createFromFormat('Y-m-d', $date);
+                $query = $this->getDoctrine()->getEntityManager()->createQuery('SELECT e FROM KekRozsakFrontBundle:Event e WHERE e.cancelled = FALSE AND ((e.startDate < :day AND e.endDate >= :day) OR e.startDate = :day)');
+                $query->setParameter('day', $realDate, \Doctrine\DBAL\Types\Type::DATE);
+            }
+            $events = $query->getResult();
+
+            return array(
+                'day'    => $realDate,
+                'events' => $events,
+            );
 	}
 
 	/**
