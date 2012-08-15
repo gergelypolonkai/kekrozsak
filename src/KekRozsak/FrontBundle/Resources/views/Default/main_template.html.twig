@@ -77,18 +77,11 @@
                     </div>
                 </div>
                 <div id="hirek">
+                    <div id="news-close-button"></div><br class="clear" />
                     <h3>Hírek</h3>
-{% for news in recentNews %}
-                    <div class="hir">
-                        <p class="hir-cim">{{ news.title }}</p>
-                        <p class="hir-szoveg">{{ news.text|raw }}</p>
-{% if app.user %}
-                        <p class="hir-szerzo">{{ news.createdBy|userdataspan }}</p>
-{% endif %}
-                        <p class="hir-datum">{{ news.createdAt|date('Y-m-d H:i') }}</p>
-                    </div>
-{% endfor %}
+                    <div id="news-list">Betöltés...</div>
                 </div>
+                <div id="news-button"></div>
             </div>{# div#content-wrapper #}
         </div>{# div#wrapper #}
         <div id="bottom-line-wrapper">
@@ -178,20 +171,53 @@
                 });
             }
 
-            $(document).ready(function() {
+            function resizeBoxes()
+            {
                 bottomLineTop = $('#bottom-line').position().top;
                 contentOutlineTop = $('#content-outline').position().top;
                 contentHeight = $('#content-outline').outerHeight();
                 newsHeight = $('#hirek').outerHeight();
                 minHeight = bottomLineTop - contentOutlineTop;
+                // TODO: Resize content to its original small size if news is
+                // hidden
 
                 height = Math.max(contentHeight, newsHeight, minHeight);
                 if ($('#content-outline').outerHeight() < height) {
                     $('#content-outline').css('height', height + 'px');
                 }
-                if ($('#hirek').outerHeight() < height) {
+                if ($('#hirek').is(':visible') && ($('#hirek').outerHeight() < height)) {
                     $('#hirek').css('height', height + 'px');
                 }
+            }
+
+            $(document).ready(function() {
+                resizeBoxes();
+
+                $('#news-button').click(function() {
+                    $('#news-button').hide();
+                    $('#content-outline').css('width', '740px');
+                    $('#hirek').show();
+                    $('#news-list').html('Betöltés...');
+
+                    $.ajax({
+                        method: 'GET',
+                        url: Routing.generate('KekRozsakFrontBundle_newsSideList')
+                    }).done(function(data) {
+                        $('#news-list').html(data);
+                        resizeBoxes();
+                    }).error(function() {
+                        $('#news-list').html('Nem sikerült betölteni a híreket!');
+                        resizeBoxes();
+                    });
+                });
+
+                $('#news-close-button').click(function() {
+                    $('#hirek').html('');
+                    $('#hirek').hide();
+                    $('#content-outline').css('width', '955px');
+                    $('#news-button').show();
+                    resizeBoxes();
+                });
             });
         </script>
 {% block bottomscripts %}{% endblock %}

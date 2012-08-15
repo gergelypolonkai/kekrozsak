@@ -34,6 +34,7 @@ a {
     color: #c4d3ff;
     height: 32px;
     border-bottom: 1px solid #1b3586;
+    z-index: 200;
 }
 
 #top-line-padding {
@@ -69,6 +70,7 @@ a {
     color: #c4d3ff;
     height: 32px;
     border-top: 1px solid #1b3586;
+    z-index: 200;
 }
 
 #wrapper {
@@ -94,7 +96,7 @@ a {
 #content-outline {
     color: #3366ff;
     text-align: justify;
-    width: 740px;
+    width: 955px;
     float: left;
     background-color: #c6ecfe;
 }
@@ -103,10 +105,30 @@ a {
     padding: 5px;
 }
 
+#news-button {
+    position: relative;
+    top: 7px;
+    background-image: url('../images/news-button.png');
+    width: 20px;
+    height: 57px;
+    left: 955px;
+    z-index: 150;
+    cursor: pointer;
+}
+
+#news-close-button {
+    background-image: url('../images/no.png');
+    width: 16px;
+    height: 16px;
+    float: right;
+    cursor: pointer;
+}
+
 #hirek {
     float: right;
     color: #aaaacc;
     width: 215px;
+    display: none;
 }
 
 #hirek h3 {
@@ -172,4 +194,9 @@ h3 a {
 
 .gomb a {
 	color: inherit !important;
+}
+
+.clear {
+    clear: both;
+    float: none;
 }
