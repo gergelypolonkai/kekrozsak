@@ -1,6 +1,6 @@
 {# vim: ft=htmljinja
 #}
-{% extends '::main_template.html.twig' %}
+{% extends 'KekRozsakFrontBundle:Default:main_template.html.twig' %}
 {% block title%} - {{ article.title }}{% endblock title %}
 {% block content %}
 {{ article.text|raw }}
