@@ -5,11 +5,10 @@
     <head>
         <title>Kék Rózsák{% block title %}{% endblock %}</title>
         <meta charset="utf8" />
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/kekrozsak_front.css') }}" />
-        <link rel="stylesheet" type="text/css" href="{{ asset('js/jquery-cluetip/jquery.cluetip.css') }}" />
 {% stylesheets 'bundles/kekrozsakfront/css/*' filter='cssrewrite' output='css/kekrozsak.css' %}
         <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
 {% endstylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('js/jquery-cluetip/jquery.cluetip.css') }}" />
 {% block additional_css %}{% endblock %}
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
         <script type="text/javascript" src="{{ asset('js/jquery-cluetip/lib/jquery.hoverIntent.js')}}"></script>

@@ -31,6 +31,10 @@ security:
             pattern:  \.css$
             security: false
 
+        news_side_list:
+            pattern:  ^/newsSideList.html$
+            security: false
+
         members:
             pattern:    ^/
 

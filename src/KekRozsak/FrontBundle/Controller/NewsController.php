@@ -32,7 +32,7 @@ class NewsController extends Controller
         $news = $newsRepo->findBy($searchCriteria, array('createdAt' => 'DESC'), 4);
         
         return array(
-            'news' => $news,
+            'recentNews' => $news,
         );
     }
 }
