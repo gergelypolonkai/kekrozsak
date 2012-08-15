@@ -2,20 +2,32 @@
 #}
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Kék Rózsák{% block title %}{% endblock %}</title>
-		<meta charset="utf8" />
-		<link rel="stylesheet" type="text/css" href="{{ asset('css/kekrozsak_front.css') }}" />
-		<link rel="stylesheet" type="text/css" href="{{ asset('js/jquery-cluetip/jquery.cluetip.css') }}" />
+    <head>
+        <title>Kék Rózsák{% block title %}{% endblock %}</title>
+        <meta charset="utf8" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/kekrozsak_front.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('js/jquery-cluetip/jquery.cluetip.css') }}" />
+{% stylesheets
+    '../app/Resources/public/css/main.css'
+    '../app/Resources/public/css/menu.css'
+    '../app/Resources/public/css/popup.css'
+    '../app/Resources/public/css/profilebox.css'
+    '../app/Resources/public/css/loginbox.css'
+    '../app/Resources/public/css/eventbox.css'
+    '../app/Resources/public/css/forum.css'
+    '../app/Resources/public/css/library.css'
+filter='cssrewrite' %}
+        <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+{% endstylesheets %}
 {% block additional_css %}{% endblock %}
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-		<script type="text/javascript" src="{{ asset('js/jquery-cluetip/lib/jquery.hoverIntent.js')}}"></script>
-		<script type="text/javascript" src="{{ asset('js/jquery-cluetip/jquery.cluetip.js') }}"></script>
-		<script type="text/javascript" src="{{ asset('js/jquery.tinyscrollbar.min.js') }}"></script>
-		<script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-		<script type="text/javascript" src="{{ path('fos_js_routing_js', {callback: 'fos.Router.setData'}) }}"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script type="text/javascript" src="{{ asset('js/jquery-cluetip/lib/jquery.hoverIntent.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('js/jquery-cluetip/jquery.cluetip.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/jquery.tinyscrollbar.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script type="text/javascript" src="{{ path('fos_js_routing_js', {callback: 'fos.Router.setData'}) }}"></script>
 {% block additional_js %}{% endblock %}
-	</head>
+    </head>
 	<body>
 		<div id="popup-container">
 			<div id="popup-close"></div>
@@ -65,8 +77,7 @@
 				</ul>
 			</div>
 			<div id="header">
-				<h1><a href="{{ path('KekRozsakFrontBundle_homepage') }}"><img src="{{ asset('images/kek_rozsak_felirat.jpg') }}" alt="Kék Rózsák" /></a></h1>
-				<h2><img src="{{ asset('images/okkultista_kor_felirat.jpg') }}" alt="A Kék Rózsa okkultista kör honlapja" /></h2>
+				<h1>Kék Rózsák</h1>
 			</div>
 			<div id="content-wrapper">
 				<div id="content-outline">
@@ -113,14 +124,14 @@
 			$('.program').cluetip({
 				cluezIndex: 1000
 			});
-			$('#esemeny-mutato').click(function() {
-				if ($('#esemeny-box').is(':visible'))
+			$('#event-shower').click(function() {
+				if ($('#event-box').is(':visible'))
 				{
-					$('#esemeny-box').hide();
+					$('#event-box').hide();
 				}
 				else
 				{
-					$('#esemeny-box').show();
+					$('#event-box').show();
 				}
 			});
 			$('.userdata').cluetip();
@@ -174,6 +185,20 @@
 					$('#popup-content').html('Nem sikerült betölteni a könyv adatait.');
 				});
 			}
+                        
+                        $(document).ready(function() {
+                            bottomLineTop = $('#bottom-line').position().top;
+                            contentOutlineTop = $('#content-outline').position().top;
+                            contentHeight = $('#content-outline').outerHeight();
+                            newsHeight = $('#hirek').outerHeight();
+                            minHeight = bottomLineTop - contentOutlineTop;
+                            
+                            height = Math.max(contentHeight, newsHeight, minHeight);
+                            if ($('#content-outline').outerHeight() < height)
+                                $('#content-outline').css('height', height + 'px');
+                            if ($('#hirek').outerHeight() < height)
+                                $('#hirek').css('height', height + 'px');
+                        });
 		</script>
 {% block bottomscripts %}{% endblock %}
 	</body>
