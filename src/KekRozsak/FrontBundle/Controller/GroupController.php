@@ -89,7 +89,7 @@ class GroupController extends Controller
 			);
 		}
 
-		$membership = new UserGroupMembership();
+		$membership = new UserGroupMembership($user, $group);
 		$membership->setUser($user);
 		$membership->setGroup($group);
 		$membership->setMembershipRequestedAt(new \DateTime('now'));

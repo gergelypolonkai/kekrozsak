@@ -20,7 +20,6 @@ class UserGroupMembership
 		$this->setUser($user);
 		$this->setGroup($group);
 		$this->setMembershipRequestedAt(new \DateTime('now'));
-		$this->setMembershipAcceptedAt(new \DateTime('now'));
 	}
 
 	/**
