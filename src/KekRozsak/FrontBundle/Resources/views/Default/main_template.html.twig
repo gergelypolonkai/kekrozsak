@@ -92,6 +92,7 @@
             </div>
         </div>
         <script type="text/javascript">
+            var environment = '{{ app.environment }}';
 {% if app.user %}
             $('#profil-mutato').click(function() {
                 if ($('#profil-box').is(':visible'))
@@ -121,10 +122,6 @@
                 }
             });
             $('.userdata').cluetip();
-            $('.userdata-secret').cluetip({
-                splitTitle: '|',
-                showTitle: false
-            });
 {% else %}
             $('#login-mutato').click(function() {
                 if ($('#login-box').is(':visible'))

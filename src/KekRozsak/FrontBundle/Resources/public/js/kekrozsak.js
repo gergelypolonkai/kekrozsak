@@ -35,16 +35,27 @@ function resizeBoxes()
     contentOutlineTop = $('#content-outline').position().top;
     contentHeight = $('#content-outline').outerHeight();
     newsHeight = $('#hirek').outerHeight();
-    minHeight = bottomLineTop - contentOutlineTop;
+    minContentHeight = bottomLineTop - contentOutlineTop + 33;
+    if (environment == 'dev') {
+        minContentHeight += 40;
+    }
     // TODO: Resize content to its original small size if news is hidden
 
-    height = Math.max(contentHeight, newsHeight, minHeight);
+    height = Math.max(contentHeight, newsHeight, minContentHeight);
     if ($('#content-outline').outerHeight() < height) {
         $('#content-outline').css('height', height + 'px');
     }
     if ($('#hirek').is(':visible') && ($('#hirek').outerHeight() < height)) {
         $('#hirek').css('height', height + 'px');
     }
+}
+
+function setupUserSpans()
+{
+    $('.userdata-secret').cluetip({
+        splitTitle: '|',
+        showTitle: false
+    });
 }
 
 jQuery.fn.center = function() {
@@ -56,6 +67,7 @@ jQuery.fn.center = function() {
 $(document).ready(function() {
     // Resize news and content boxes to correctly fill the page
     resizeBoxes();
+    setupUserSpans();
 
     $('#popup-close').click(function() { $('#popup-container').fadeOut(); });
     $('#popup-scrollable').tinyscrollbar();
@@ -79,6 +91,7 @@ $(document).ready(function() {
             $('#news-list').html('Nem sikerült betölteni a híreket!');
             resizeBoxes();
         });
+        setupUserSpans();
     });
 
     $('#news-close-button').click(function()
