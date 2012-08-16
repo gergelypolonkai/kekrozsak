@@ -11,7 +11,7 @@ use JMS\DiExtraBundle\Annotation as DI;
  */
 class TwigBBExtension extends \Twig_Extension
 {
-    private $assets;
+    private $container;
 
     /**
      * @DI\InjectParams({
@@ -21,7 +21,7 @@ class TwigBBExtension extends \Twig_Extension
      */
     public function __construct(ContainerInterface $container)
     {
-        $this->assets = $container->get('templating.helper.assets');
+        $this->container = $container;
     }
 
     public function getFilters()
@@ -78,7 +78,8 @@ class TwigBBExtension extends \Twig_Extension
                         $sentence,
                         '<img src="'
                                 . $this
-                                    ->assets
+                                    ->container
+                                    ->get('templating.helper.assets')
                                     ->getUrl(
                                             'upload/images/'
                                             . (($ns == '') ? '' : $ns . '/')
