@@ -7,7 +7,7 @@
 */
 
 #menu {
-    background-color: #29140d;
+    background-color: black;
     border-radius: 15px 15px 0 0;
     border-color: #29140d;
     font-size: 80%;
@@ -28,4 +28,4 @@
     color: #ffffff;
     margin-right: 5px;
     padding: 0 15px;
-}
+    text-decoration: none;

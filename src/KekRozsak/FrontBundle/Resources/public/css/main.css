@@ -25,54 +25,6 @@ a {
     text-decoration: underline;
 }
 
-#top-line {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    background-color: #152967;
-    color: #c4d3ff;
-    height: 32px;
-    border-bottom: 1px solid #1b3586;
-    z-index: 200;
-}
-
-#top-line-padding {
-    height: 33px;
-    clear: both;
-}
-
-#top-line #search-box {
-    float: right;
-    padding: 5px;
-}
-
-#top-line #login-gomb {
-    float: left;
-    padding: 5px;
-}
-
-#top-line #profil-gomb {
-    float: left;
-    padding: 5px;
-}
-
-#bottom-line-padding {
-    height: 33px;
-}
-
-#bottom-line {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: #152967;
-    color: #c4d3ff;
-    height: 32px;
-    border-top: 1px solid #1b3586;
-    z-index: 200;
-}
-
 #wrapper {
     background-color: #000000;
     width: 960px;
@@ -94,7 +46,7 @@ a {
 }
 
 #content-outline {
-    color: #3366ff;
+    color: #142965;
     text-align: justify;
     width: 960px;
     float: left;
@@ -105,62 +57,8 @@ a {
     padding: 5px;
 }
 
-#news-button {
-    position: relative;
-    top: 7px;
-    background-image: url('../images/news-button.png');
-    width: 20px;
-    height: 57px;
-    left: 960px;
-    z-index: 150;
-    cursor: pointer;
-}
-
-#news-close-button {
-    background-image: url('../images/no.png');
-    width: 16px;
-    height: 16px;
-    float: right;
-    cursor: pointer;
-}
-
-#hirek {
-    float: right;
-    color: #aaaacc;
-    width: 215px;
-    display: none;
-}
-
-#hirek h3 {
-    padding: 10px;
-    margin: 15px 0 0 0;
-}
-
-div.hir {
-    padding: 5px;
-    font-size: 80%;
-    margin-bottom: 15px;
-}
-
-p.hir-cim {
-    font-weight: bold;
-    margin: 0 0 5px 0;
-}
-
-p.hir-szoveg {
-    text-align: justify;
-    margin: 10px 0;
-}
-
-p.hir-szerzo {
-    font-style: italic;
-    text-align: right;
-    margin: 0;
-}
-
-p.hir-datum {
-    text-align: right;
-    margin: 0;
+#content img {
+    margin: 5px;
 }
 
 h3 a {
@@ -185,11 +83,6 @@ h3 a {
 	color: black;
 	white-space: nowrap;
 	cursor: pointer;
-}
-
-#top-line .gomb {
-	background-color: transparent;
-	color: #c4d3ff;
 }
 
 .gomb a {

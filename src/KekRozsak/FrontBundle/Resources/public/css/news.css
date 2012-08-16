@@ -1,0 +1,65 @@
+/* 
+    Document   : news
+    Created on : 2012.08.16., 16:26:16
+    Author     : Gergely Polonkai
+    Description:
+        CSS for styling news
+*/
+
+#news-button {
+    position: relative;
+    top: 7px;
+    background-image: url('../images/news-button.png');
+    width: 20px;
+    height: 57px;
+    left: 960px;
+    z-index: 150;
+    cursor: pointer;
+}
+
+#news-close-button {
+    background-image: url('../images/no.png');
+    width: 16px;
+    height: 16px;
+    float: right;
+    cursor: pointer;
+}
+
+#hirek {
+    float: right;
+    color: #aaaacc;
+    width: 215px;
+    display: none;
+}
+
+#hirek h3 {
+    padding: 10px;
+    margin: 15px 0 0 0;
+}
+
+div.hir {
+    padding: 5px;
+    font-size: 80%;
+    margin-bottom: 15px;
+}
+
+p.hir-cim {
+    font-weight: bold;
+    margin: 0 0 5px 0;
+}
+
+p.hir-szoveg {
+    text-align: justify;
+    margin: 10px 0;
+}
+
+p.hir-szerzo {
+    font-style: italic;
+    text-align: right;
+    margin: 0;
+}
+
+p.hir-datum {
+    text-align: right;
+    margin: 0;
+}

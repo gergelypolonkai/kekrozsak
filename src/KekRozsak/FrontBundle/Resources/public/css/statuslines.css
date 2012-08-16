@@ -1,0 +1,60 @@
+/* 
+    Document   : statuslines
+    Created on : 2012.08.16., 16:28:11
+    Author     : Gergely Polonkai
+    Description:
+        CSS for styling top and bottom status lines
+*/
+
+#top-line {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: #0c173a;
+    color: #c4d3ff;
+    height: 32px;
+    border-bottom: 1px solid #1b3586;
+    z-index: 200;
+}
+
+#top-line-padding {
+    height: 33px;
+    clear: both;
+}
+
+#top-line #search-box {
+    float: right;
+    padding: 5px;
+}
+
+#top-line #login-gomb {
+    float: left;
+    padding: 5px;
+}
+
+#top-line #profil-gomb {
+    float: left;
+    padding: 5px;
+}
+
+#bottom-line-padding {
+    height: 33px;
+}
+
+#bottom-line {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #0c173a;
+    color: #c4d3ff;
+    height: 32px;
+    border-top: 1px solid #1b3586;
+    z-index: 200;
+}
+
+#top-line .gomb {
+	background-color: transparent;
+	color: #c4d3ff;
+}
