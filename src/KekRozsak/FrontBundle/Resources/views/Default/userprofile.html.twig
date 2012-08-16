@@ -8,9 +8,9 @@
 <p>Az itt megadott adataidat szigorúan kezeljük, azt más számára kizárólag hatósági felszólításra adjuk ki.</p>
 <p>A publikusnak megjelölt adataidat csak a kör tagjai láthatják, míg a nem publikusnak megjelölteket kizárólag az oldal adminisztrátorai.</p>
 <form method="post" action="{{ path('KekRozsakFrontBundle_profile_edit') }}">
-	<table>
+    <table>
 {{ form_widget(form) }}
-	</table>
-	<button type="submit">Mentés</button>
+    </table>
+    <button type="submit">Mentés</button>
 </form>
 {% endblock content %}

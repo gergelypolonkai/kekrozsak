@@ -1,63 +1,63 @@
 {# vim: ft=htmljinja
 #}
 <p>
-	<strong>Szerző:</strong> {{ book.author }}<br />
-	<strong>Cím:</strong> {{ book.title }}<br />
-	<strong>Kiadás éve:</strong> {{ book.year }}<br />
+    <strong>Szerző:</strong> {{ book.author }}<br />
+    <strong>Cím:</strong> {{ book.title }}<br />
+    <strong>Kiadás éve:</strong> {{ book.year }}<br />
 </p>
 <p>
-	Nekem van <strong>{{ book.usersCopies(app.user)|length }}</strong>, ebből kölcsön van adva <strong>X</strong>.<br />
-	A teljes közösségnek összesen <strong>{{ book.copies|length }}</strong> példánya van.<br />
-	Kölcsönkérhető <strong>{{ book.copiesBorrowable|length }}</strong> példány, ebből <strong>{{ book.copiesBorrowedByUser(app.user)|length }}</strong> nálam van.<br />
+    Nekem van <strong>{{ book.usersCopies(app.user)|length }}</strong>, ebből kölcsön van adva <strong>X</strong>.<br />
+    A teljes közösségnek összesen <strong>{{ book.copies|length }}</strong> példánya van.<br />
+    Kölcsönkérhető <strong>{{ book.copiesBorrowable|length }}</strong> példány, ebből <strong>{{ book.copiesBorrowedByUser(app.user)|length }}</strong> nálam van.<br />
 </p>
 <p>
 {% if book.usersCopies(app.user)|length == 0 %}
-	<span class="gomb add-copy-button" id="add-copy-button-{{ book.id }}">[Nekem is van egy]</span>
+    <span class="gomb add-copy-button" id="add-copy-button-{{ book.id }}">[Nekem is van egy]</span>
 {% else %}
-	<span class="gomb delete-copy-button" id="delete-copy-button-{{ book.id }}">[Nincs már]</span>
+    <span class="gomb delete-copy-button" id="delete-copy-button-{{ book.id }}">[Nincs már]</span>
 {# TODO
-	<span class="gomb">[Eladtam valakinek a körben]</span>
+    <span class="gomb">[Eladtam valakinek a körben]</span>
 #}
 {% if book.usersCopiesBorrowable(app.user)|length == 0 %}
-	<span class="gomb mine-is-borrowable-button" id="mine-is-borrowable-button-{{ book.id }}">[Az enyém is kölcsönkérhető]</span>
+    <span class="gomb mine-is-borrowable-button" id="mine-is-borrowable-button-{{ book.id }}">[Az enyém is kölcsönkérhető]</span>
 {% else %}
-	<span class="gomb mine-is-not-borrowable-button" id="mine-is-not-borrowable-button-{{ book.id }}">[Nem szeretném kölcsönadni]</span>
+    <span class="gomb mine-is-not-borrowable-button" id="mine-is-not-borrowable-button-{{ book.id }}">[Nem szeretném kölcsönadni]</span>
 {% endif %}
 {% endif %}
 
 {% if book.usersCopies(app.user)|length > 0 %}
 {% if book.usersCopiesBuyable(app.user)|length == 0 %}
-	<span class="gomb mine-is-for-sale-button" id="mine-is-for-sale-button-{{ book.id }}">[Az enyém eladó]</span>
+    <span class="gomb mine-is-for-sale-button" id="mine-is-for-sale-button-{{ book.id }}">[Az enyém eladó]</span>
 {% else %}
-	<span class="gomb mine-is-not-for-sale-button" id="mine-is-not-for-sale-button-{{ book.id }}">[Nem szeretném eladni]</span>
+    <span class="gomb mine-is-not-for-sale-button" id="mine-is-not-for-sale-button-{{ book.id }}">[Nem szeretném eladni]</span>
 {% endif %}
 {% endif %}
 
 {% if book.copiesBorrowedByUser(app.user)|length == 0 and book.usersCopies(app.user)|length == 0 and not book.userWouldBorrow(app.user) %}
-	<span class="gomb want-to-borrow-button" id="want-to-borrow-button-{{ book.id }}">[Kérek egyet kölcsön]</span>
+    <span class="gomb want-to-borrow-button" id="want-to-borrow-button-{{ book.id }}">[Kérek egyet kölcsön]</span>
 {% endif %}
 
 {% if book.usersCopies(app.user)|length == 0 and not book.userWouldBuy(app.user) %}
-	<span class="gomb want-to-buy-button" id="want-to-buy-button-{{ book.id }}">[Vennék egyet]</span>
+    <span class="gomb want-to-buy-button" id="want-to-buy-button-{{ book.id }}">[Vennék egyet]</span>
 {% endif %}
 </p>
 {% if book.wouldBuy|length > 0 %}
 <p>
-	Ők szeretnének egyet kölcsönkérni:<br />
-	<ul>
+    Ők szeretnének egyet kölcsönkérni:<br />
+    <ul>
 {% for user in book.wouldBorrow %}
-		<li>{{ user|userdataspan }}</li>
+        <li>{{ user|userdataspan }}</li>
 {% endfor %}
-	</ul>
+    </ul>
 </p>
 {% endif %}
 {% if book.wouldBuy|length > 0 %}
 <p>
-	Ők szeretnének venni egyet:<br />
-	<ul>
+    Ők szeretnének venni egyet:<br />
+    <ul>
 {% for user in book.wouldBuy %}
-		<li>{{ user|userdataspan }}</li>
+        <li>{{ user|userdataspan }}</li>
 {% endfor %}
-	</ul>
+    </ul>
 </p>
 {% endif %}

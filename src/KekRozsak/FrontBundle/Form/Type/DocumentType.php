@@ -7,21 +7,23 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class DocumentType extends AbstractType
 {
-	public function buildForm(FormBuilderInterface $builder, array $options)
-	{
-		$builder->add('title', null, array(
-			'label' => 'A dokumentum címe',
-		));
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+         $builder->add('title', null, array(
+                    'label' => 'A dokumentum címe',
+                )
+            );
 
-		$builder->add('content', 'ckeditor', array(
-			'label' => ' ',
-		));
+        $builder->add('content', 'ckeditor', array(
+                    'label' => ' ',
+                )
+            );
 
-		/* TODO: possibility to add to other groups! */
-	}
+        // TODO: possibility to add to other groups!
+    }
 
-	public function getName()
-	{
-		return 'document';
-	}
+    public function getName()
+    {
+        return 'document';
+    }
 }

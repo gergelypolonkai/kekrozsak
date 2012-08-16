@@ -7,7 +7,7 @@
 {% if events %}
 <ul>
 {% for event in events %}
-	<li><a href="{{ path('KekRozsakFrontBundle_eventView', {startDate: event.startDate|date('Y-m-d'), eventSlug: event.slug}) }}">{{ event.title }}</a></li>
+    <li><a href="{{ path('KekRozsakFrontBundle_eventView', {startDate: event.startDate|date('Y-m-d'), eventSlug: event.slug}) }}">{{ event.title }}</a></li>
 {% endfor %}
 </ul>
 {% else %}

@@ -1,28 +1,27 @@
 {# vim: ft=htmljinja
 #}
-				<div id="profil-gomb">
-					<span id="profil-mutato" class="gomb">[avatar] {{ app.user.displayName }}</span>
-					<div id="profil-box">
-						<div id="profil-belso">
-							[avatar]
-							{{ app.user.displayName }}<br />
-							<span id="jog-lista" title="|Jogosultságok|{% for role in app.user.roles %}{{ role.shortDescription }}<br />{% endfor %}">Jogosultság{% if app.user.roles|length > 1 %}ok{% endif %}</span><br />
-							<dl>
-								<dt>Csoportjaim</dt>
+                <div id="profil-gomb">
+                    <span id="profil-mutato" class="gomb">[avatar] {{ app.user.displayName }}</span>
+                    <div id="profil-box">
+                        <div id="profil-belso">
+                            <span class="avatar">[avatar]</span>
+                            {{ app.user.displayName }}<br />
+                            <span id="jog-lista" title="|Jogosultságok|{% for role in app.user.roles %}{{ role.shortDescription }}<br />{% endfor %}">Jogosultság{% if app.user.roles|length > 1 %}ok{% endif %}</span><br />
+                            <dl>
+                                <dt>Csoportjaim</dt>
 {% for group in app.user.groups %}
 {% if group.group.open or group.membershipAcceptedAt %}
-								<dl><a href="{{ path('KekRozsakFrontBundle_groupView', {slug: group.group.slug}) }}">{{ group.group.name }}</a></dl>
+                                <dd><a href="{{ path('KekRozsakFrontBundle_groupView', {slug: group.group.slug}) }}">{{ group.group.name }}</a></dd>
 {% endif %}
 {% endfor %}
-								<dl><a href="{{ path('KekRozsakFrontBundle_groupList') }}">További csoportok</a></dl>
+                                <dd><a href="{{ path('KekRozsakFrontBundle_groupList') }}">További csoportok</a></dd>
 
-								<dt>Kedvenc Fórum-témáim</dt>
+                                <dt>Kedvenc Fórum-témáim</dt>
+                                <dd><a href="{{ path('KekRozsakFrontBundle_forumTopicGroupList') }}">Fórum</a></dd>
 
-								<dl><a href="{{ path('KekRozsakFrontBundle_forumTopicGroupList') }}">Fórum</a></dl>
-
-								<dt>Üzenetek</dt>
-							</dl>
-						</div>
-						<div id="profil-szerkesztes"><a href="{{ path('KekRozsakFrontBundle_profile_edit') }}">Profil szerkesztése</a></div>
-					</div>
-				</div>
+                                <dt>Üzenetek</dt>
+                            </dl>
+                        </div>
+                        <div id="profil-szerkesztes"><a href="{{ path('KekRozsakFrontBundle_profile_edit') }}">Profil szerkesztése</a></div>
+                    </div>
+                </div>

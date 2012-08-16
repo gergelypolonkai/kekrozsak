@@ -6,29 +6,29 @@
 <h3><a href="{{ path('KekRozsakFrontBundle_forumTopicGroupList') }}">Fórum</a> - {{ topicGroup.title }}</h3>
 {% if topicGroup.topics|length > 0 %}
 <table class="forum-lista">
-	<thead>
-		<tr>
-			<td></td>
-			<td>Hozzászólások száma</td>
-			<td>Utolsó hozzászólás</td>
-		</tr>
-	</thead>
-	<tbody>
+    <thead>
+        <tr>
+            <td></td>
+            <td>Hozzászólások száma</td>
+            <td>Utolsó hozzászólás</td>
+        </tr>
+    </thead>
+    <tbody>
 {% for topic in topicGroup.topics %}
-		<tr class="{{ cycle(['odd', 'even'], loop.index0) }}">
-			<td><a href="{{ path('KekRozsakFrontBundle_forumPostList', { topicGroupSlug: topicGroup.slug, topicSlug: topic.slug }) }}">{{ topic.title }}</a></td>
-			<td></td>
-			<td>
+        <tr class="{{ cycle(['odd', 'even'], loop.index0) }}">
+            <td><a href="{{ path('KekRozsakFrontBundle_forumPostList', { topicGroupSlug: topicGroup.slug, topicSlug: topic.slug }) }}">{{ topic.title }}</a></td>
+            <td></td>
+            <td>
 {% if topic.lastPost %}
-				{{ topic.lastPost.createdBy|userdataspan }}<br />
-				{{ topic.lastPost.createdAt|date('Y-m-d H:i') }}
+                {{ topic.lastPost.createdBy|userdataspan }}<br />
+                {{ topic.lastPost.createdAt|date('Y-m-d H:i') }}
 {% else %}
-				&nbsp;<br />&nbsp;
+                &nbsp;<br />&nbsp;
 {% endif %}
-			</td>
-		</tr>
+            </td>
+        </tr>
 {% endfor %}
-	</tbody>
+    </tbody>
 </table>
 {% else %}
 Ebben a témakörben nincsenek témák.

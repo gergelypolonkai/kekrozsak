@@ -19,147 +19,163 @@ use KekRozsak\SecurityBundle\Entity\User;
  */
 class BookCopy
 {
-	public function __construct(Book $book, User $owner)
-	{
-		$this->book = $book;
-		$this->owner = $owner;
-		$this->borrowable = false;
-		$this->buyable = false;
-		$this->borrower = null;
-		$this->borrowerReturned = true;
-	}
+    public function __construct(Book $book, User $owner)
+    {
+        $this->book = $book;
+        $this->owner = $owner;
+        $this->borrowable = false;
+        $this->buyable = false;
+        $this->borrower = null;
+        $this->borrowerReturned = true;
+    }
 
-	/**
-	 * @var integer $id
-	 *
-	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 * @ORM\Column(type="integer")
-	 */
-	protected $id;
+    /**
+     * The ID of the BookCopy
+     *
+     * @var integer $id
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
+     */
+    protected $id;
 
-	/**
-	 * @var KekRozsak\FrontBundle\Entity\Book $book
-	 *
-	 * @ORM\ManyToOne(targetEntity="Book", inversedBy="copies")
-	 * @ORM\JoinColumn(nullable=false)
-	 */
-	protected $book;
+    /**
+     * The Book this BookCopy belongs to
+     * @var KekRozsak\FrontBundle\Entity\Book $book
+     *
+     * @ORM\ManyToOne(targetEntity="Book", inversedBy="copies")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    protected $book;
 
-	/**
-	 * @var KekRozsak\SecurityBundle\Entity\User $owner
-	 *
-	 * @ORM\ManyToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User")
-	 * @ORM\JoinColumn(nullable=false)
-	 */
-	protected $owner;
+    /**
+     * The User this BookCopy belongs to
+     *
+     * @var KekRozsak\SecurityBundle\Entity\User $owner
+     *
+     * @ORM\ManyToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    protected $owner;
 
-	/**
-	 * Get owner
-	 *
-	 * @return KekRozsak\SecurityBundle\Entity\User
-	 */
-	public function getOwner()
-	{
-		return $this->owner;
-	}
+    /**
+     * Get owner
+     *
+     * @return KekRozsak\SecurityBundle\Entity\User
+     */
+    public function getOwner()
+    {
+        return $this->owner;
+    }
 
-	/**
-	 * @var string $ownerComment
-	 *
-	 * @ORM\Column(type="text", name="owner_comment", nullable=true)
-	 */
-	protected $ownerComment;
+    /**
+     * The owner's comment about this BookCopy's Book
+     *
+     * @var string $ownerComment
+     *
+     * @ORM\Column(type="text", name="owner_comment", nullable=true)
+     */
+    protected $ownerComment;
 
-	/**
-	 * @var boolean $borrowable
-	 *
-	 * @ORM\Column(type="boolean", nullable=false)
-	 */
-	protected $borrowable;
+    /**
+     * TRUE if this BookCopy is borrowable
+     *
+     * @var boolean $borrowable
+     *
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    protected $borrowable;
 
-	/**
-	 * Set borrowable
-	 *
-	 * @param boolean $borrowable
-	 * @return BookCopy
-	 */
-	public function setBorrowable($borrowable)
-	{
-		$this->borrowable = $borrowable;
-		return $this;
-	}
+    /**
+     * Set borrowable
+     *
+     * @param boolean $borrowable
+     * @return BookCopy
+     */
+    public function setBorrowable($borrowable)
+    {
+        // TODO: Check if parameter is boolean!
+        $this->borrowable = $borrowable;
+        return $this;
+    }
 
-	/**
-	 * Get borrowable
-	 *
-	 * @return boolean
-	 */
-	public function isBorrowable()
-	{
-		return $this->borrowable;
-	}
+    /**
+     * Get borrowable
+     *
+     * @return boolean
+     */
+    public function isBorrowable()
+    {
+        return $this->borrowable;
+    }
 
-	/**
-	 * @var boolean $buyable
-	 *
-	 * @ORM\Column(type="boolean", nullable=false)
-	 */
-	protected $buyable;
+    /**
+     * TRUE if this BookCopy is for sale
+     *
+     * @var boolean $buyable
+     *
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    protected $buyable;
 
-	/**
-	 * Set buyable
-	 *
-	 * @param boolean $buyable
-	 * @return BookCopy
-	 */
-	public function setBuyable($buyable)
-	{
-		$this->buyable = $buyable;
-		return $this;
-	}
+    /**
+     * Set buyable
+     *
+     * @param boolean $buyable
+     * @return BookCopy
+     */
+    public function setBuyable($buyable)
+    {
+        // Check if parameter is boolean!
+        $this->buyable = $buyable;
+        return $this;
+    }
 
-	/**
-	 * Get borrowable
-	 *
-	 * @return boolean
-	 */
-	public function isBuyable()
-	{
-		return $this->buyable;
-	}
+    /**
+     * Get buyable
+     *
+     * @return boolean
+     */
+    public function isBuyable()
+    {
+        return $this->buyable;
+    }
 
-	/**
-	 * @var KekRozsak\SecurityBundle\Entity\User $borrower
-	 *
-	 * @ORM\OneToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User")
-	 */
-	protected $borrower;
+    /**
+     * The User who is currently borrowing this BookCopy, or null
+     *
+     * @var KekRozsak\SecurityBundle\Entity\User $borrower
+     *
+     * @ORM\OneToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User")
+     */
+    protected $borrower;
 
-	/**
-	 * Get borrower
-	 *
-	 * @return KekRozsak\SecurityBundle\Entity\User
-	 */
-	public function getBorrower()
-	{
-		return $this->borrower;
-	}
+    /**
+     * Get borrower
+     *
+     * @return KekRozsak\SecurityBundle\Entity\User
+     */
+    public function getBorrower()
+    {
+        return $this->borrower;
+    }
 
-	/**
-	 * @var boolean $borrowerReturned
-	 *
-	 * @ORM\Column(type="boolean", nullable=false, name="borrower_returned")
-	 */
-	protected $borrowerReturned;
+    /**
+     * TRUE if borrower says he/she returned this Copy to the owner
+     * @var boolean $borrowerReturned
+     *
+     * @ORM\Column(type="boolean", nullable=false, name="borrower_returned")
+     */
+    protected $borrowerReturned;
 
-	/**
-	 * Get borrowerReturned
-	 *
-	 * @return boolean
-	 */
-	public function isBorrowerReturned()
-	{
-		return $this->borrowerReturned();
-	}
+    /**
+     * Get borrowerReturned
+     *
+     * @return boolean
+     */
+    public function isBorrowerReturned()
+    {
+        return $this->borrowerReturned();
+    }
 }

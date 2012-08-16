@@ -3,12 +3,12 @@
 {% extends 'KekRozsakFrontBundle:Default:main_template.html.twig' %}
 {% block title %} - {{ group.name }}{% endblock %}
 {% block additional_css %}
-		<link rel="stylesheet" href="{{ asset('css/group.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('css/group.css') }}" type="text/css" />
 {% endblock additional_css %}
 {% block content %}
 <ul id="submenu">
-	<li><a href="{{ path('KekRozsakFrontBundle_groupMembers', {slug: group.slug}) }}">Tagok</a></li>
-	<li><a href="{{ path('KekRozsakFrontBundle_groupDocuments', {slug: group.slug}) }}">Dokumentumok</a></li>
+    <li><a href="{{ path('KekRozsakFrontBundle_groupMembers', {slug: group.slug}) }}">Tagok</a></li>
+    <li><a href="{{ path('KekRozsakFrontBundle_groupDocuments', {slug: group.slug}) }}">Dokumentumok</a></li>
 </ul>
 <h3>{{ group.name }}</h3>
 {{ group.description|raw }}

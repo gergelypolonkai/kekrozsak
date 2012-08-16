@@ -5,7 +5,7 @@
 {% block content %}
 <h3>Dokumentum szerkesztése - {{ document.title }}</h3>
 <form method="post" action="{{ path('KekRozsakFrontBundle_documentEdit', {slug: document.slug}) }}">
-	{{ form_widget(form) }}
-	<button type="submit">Mentés</button>
+    {{ form_widget(form) }}
+    <button type="submit">Mentés</button>
 </form>
 {% endblock content %}

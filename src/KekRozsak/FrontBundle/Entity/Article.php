@@ -12,247 +12,273 @@ use KekRozsak\SecurityBundle\Entity\User;
  */
 class Article
 {
-	/**
-	 * @var integer $id
-	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 * @ORM\Column(type="integer")
-	 */
-	protected $id;
+    /**
+     * The ID of the Article
+     *
+     * @var integer $id
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
+     */
+    protected $id;
 
-	/**
-	 * Get id
-	 *
-	 * @return integer
-	 */
-	public function getId()
-	{
-		return $this->id;
-	}
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
-	/**
-	 * @var KekRozsak\SecurityBundle\Entity\User $createdBy
-	 * @ORM\ManyToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User")
-	 * @ORM\JoinColumn(name="created_by_id")
-	 */
-	protected $createdBy;
+    /**
+     * The User who created the Article
+     *
+     * @var KekRozsak\SecurityBundle\Entity\User $createdBy
+     *
+     * @ORM\ManyToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User")
+     * @ORM\JoinColumn(name="created_by_id")
+     */
+    protected $createdBy;
 
-	/**
-	 * Set createdBy
-	 *
-	 * @param KekRozsak\SecurityBundle\Entity\User $createdBy
-	 * @return Article
-	 */
-	public function setCreatedBy(\KekRozsak\SecurityBundle\Entity\User $createdBy)
-	{
-		$this->createdBy = $createdBy;
-		return $this;
-	}
+    /**
+     * Set createdBy
+     *
+     * @param KekRozsak\SecurityBundle\Entity\User $createdBy
+     * @return Article
+     */
+    public function setCreatedBy(\KekRozsak\SecurityBundle\Entity\User $createdBy)
+    {
+        $this->createdBy = $createdBy;
+        return $this;
+    }
 
-	/**
-	 * Get createdBy
-	 *
-	 * @return KekRozsak\SecurityBundle\Entity\User
-	 */
-	public function getCreatedBy()
-	{
-		return $this->createdBy;
-	}
+    /**
+     * Get createdBy
+     *
+     * @return KekRozsak\SecurityBundle\Entity\User
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
 
-	/**
-	 * @var DateTime $createdAt
-	 * @ORM\Column(type="datetime", name="created_at", nullable=false)
-	 */
-	protected $createdAt;
+    /**
+     * The timestamp when the Article was created
+     *
+     * @var DateTime $createdAt
+     *
+     * @ORM\Column(type="datetime", name="created_at", nullable=false)
+     */
+    protected $createdAt;
 
-	/**
-	 * Set createdAt
-	 *
-	 * @param DateTime $createdAt
-	 * @return Article
-	 */
-	public function setCreatedAt(\DateTime $createdAt)
-	{
-		$this->createdAt = $createdAt;
-		return $this;
-	}
+    /**
+     * Set createdAt
+     *
+     * @param DateTime $createdAt
+     * @return Article
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+        return $this;
+    }
 
-	/**
-	 * Get createdAt
-	 *
-	 * @return DateTime
-	 */
-	public function getCreatedAt()
-	{
-		return $this->createdAt;
-	}
+    /**
+     * Get createdAt
+     *
+     * @return DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
 
-	/**
-	 * @var string $title
-	 * @ORM\Column(type="string", length=100, nullable=false, unique=true)
-	 */
-	protected $title;
+    /**
+     * The title of the Article
+     *
+     * @var string $title
+     *
+     * @ORM\Column(type="string", length=100, nullable=false, unique=true)
+     */
+    protected $title;
 
-	/**
-	 * Set title
-	 *
-	 * @param string $title
-	 * @return Article
-	 */
-	public function setTitle($title)
-	{
-		$this->title = $title;
-		return $this;
-	}
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Article
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+        return $this;
+    }
 
-	/**
-	 * Get title
-	 *
-	 * @return string
-	 */
-	public function getTitle()
-	{
-		return $this->title;
-	}
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
 
-	/**
-	 * @var string $slug
-	 * @ORM\Column(type="string", length=100, nullable=false, unique=true)
-	 */
-	protected $slug;
+    /**
+     * The slugified title of the Article
+     *
+     * @var string $slug
+     *
+     * @ORM\Column(type="string", length=100, nullable=false, unique=true)
+     */
+    protected $slug;
 
-	/**
-	 * Set slug
-	 *
-	 * @param string $slug
-	 * @return Article
-	 */
-	public function setSlug($slug)
-	{
-		$this->slug = $slug;
-		return $this;
-	}
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Article
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+        return $this;
+    }
 
-	/**
-	 * Get slug
-	 *
-	 * @return string
-	 */
-	public function getSlug()
-	{
-		return $this->slug;
-	}
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
 
-	/**
-	 * @var string $text
-	 * @ORM\Column(type="text", nullable=false)
-	 */
-	protected $text;
+    /**
+     * The content of the Article
+     *
+     * @var string $text
+     *
+     * @ORM\Column(type="text", nullable=false)
+     */
+    protected $text;
 
-	/**
-	 * Set text
-	 *
-	 * @param string $text
-	 * @return Article
-	 */
-	public function setText($text)
-	{
-		$this->text = $text;
-		return $this;
-	}
+    /**
+     * Set text
+     *
+     * @param string $text
+     * @return Article
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+        return $this;
+    }
 
-	/**
-	 * Get text
-	 *
-	 * return string
-	 */
-	public function getText()
-	{
-		return $this->text;
-	}
+    /**
+     * Get text
+     *
+     * return string
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
 
-	/**
-	 * @var boolean $mainPage
-	 * @ORM\Column(type="boolean", name="main_page")
-	 */
-	protected $mainPage;
+    /**
+     * TRUE if the article should display on the main mage
+     *
+     * @var boolean $mainPage
+     *
+     * @ORM\Column(type="boolean", name="main_page")
+     */
+    protected $mainPage;
 
-	/**
-	 * Set mainPage
-	 *
-	 * @param boolean $mainPage
-	 * @return Article
-	 */
-	public function setMainPage($mainPage)
-	{
-		$this->mainPage = $mainPage;
-		return $this;
-	}
+    /**
+     * Set mainPage
+     *
+     * @param boolean $mainPage
+     * @return Article
+     */
+    public function setMainPage($mainPage)
+    {
+        $this->mainPage = $mainPage;
+        return $this;
+    }
 
-	/**
-	 * Get mainPage
-	 *
-	 * @return boolean
-	 */
-	public function getMainPage()
-	{
-		return $this->mainPage;
-	}
+    /**
+     * Get mainPage
+     *
+     * @return boolean
+     */
+    public function getMainPage()
+    {
+        return $this->mainPage;
+    }
 
-	/**
-	 * @var boolean public
-	 * @ORM\Column(type="boolean", nullable=false)
-	 */
-	protected $public;
+    /**
+     * TRUE if the article is viewable by anyone
+     *
+     * @var boolean public
+     *
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    protected $public;
 
-	/**
-	 * Set public
-	 *
-	 * @param boolean $public
-	 * @return Article
-	 */
-	public function setPublic($public = false)
-	{
-		$this->public = $public;
-		return $this;
-	}
+    /**
+     * Set public
+     *
+     * @param boolean $public
+     * @return Article
+     */
+    public function setPublic($public = false)
+    {
+        $this->public = $public;
+        return $this;
+    }
 
-	/**
-	 * Get public
-	 *
-	 * @return boolean
-	 */
-	public function isPublic()
-	{
-		return $this->public;
-	}
+    /**
+     * Get public
+     *
+     * @return boolean
+     */
+    public function isPublic()
+    {
+        return $this->public;
+    }
 
-	/**
-	 * @var string $source
-	 * @ORM\Column(type="string", nullable=true)
-	 */
-	protected $source;
+    /**
+     * The source of the Article, if any
+     *
+     * @var string $source
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $source;
 
-	/**
-	 * Set source
-	 *
-	 * @param string $source
-	 * @return Article
-	 */
-	public function setSource($source = null)
-	{
-		$this->source = $source;
-		return $this;
-	}
+    /**
+     * Set source
+     *
+     * @param string $source
+     * @return Article
+     */
+    public function setSource($source = null)
+    {
+        $this->source = $source;
+        return $this;
+    }
 
-	/**
-	 * Get source
-	 *
-	 * @return string
-	 */
-	public function getSource()
-	{
-		return $this->source;
-	}
+    /**
+     * Get source
+     *
+     * @return string
+     */
+    public function getSource()
+    {
+        return $this->source;
+    }
 }
-

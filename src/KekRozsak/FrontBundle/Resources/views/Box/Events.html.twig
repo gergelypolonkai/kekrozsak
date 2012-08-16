@@ -1,31 +1,31 @@
 {# vim: ft=htmljinja
 #}
-				<div id="events-button">
-					<span id="event-shower" class="gomb">[események gomb]</span>
-					<div id="event-box">
-						<div id="event-inside">
-							<p class="month">{{ firstDay|date('Y-m') }}</p>
-							<table>
-								<thead>
-									<tr>
-										<td></td>
-										<td>H</td>
-										<td>K</td>
-										<td>Sze</td>
-										<td>Cs</td>
-										<td>P</td>
-										<td>Szo</td>
-										<td>V</td>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td class="woy">{{ firstDay|date('W') }}</td>
+                <div id="events-button">
+                    <span id="event-shower" class="gomb">[események gomb]</span>
+                    <div id="event-box">
+                        <div id="event-inside">
+                            <p class="month">{{ firstDay|date('Y-m') }}</p>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <td></td>
+                                        <td>H</td>
+                                        <td>K</td>
+                                        <td>Sze</td>
+                                        <td>Cs</td>
+                                        <td>P</td>
+                                        <td>Szo</td>
+                                        <td>V</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="woy">{{ firstDay|date('W') }}</td>
 {% set curDow = 0 %}
 {% if firstDayWeekday != 1 %}
 {% for i in 1..(firstDayWeekday - 1) %}
 {% set curDow = curDow + 1 %}{% if curDow == 8 %}{% set curDow = 1 %}{% endif %}
-										<td></td>
+                                        <td></td>
 {% endfor %}
 {% endif %}
 {% set cur = firstDayWeekday - 1 %}
@@ -33,30 +33,26 @@
 {% set cur = cur + 1 %}
 {% set curDow = curDow + 1 %}{% if curDow == 8 %}{% set curDow = 1 %}{% endif %}
 {% set eventCount = 0 %}
-{# TODO Check if an event occurs on this date:
-(event.startDate = this day AND event.endDate is NULL)
-OR (event.startDate <= this day AND evend.endDate >= this day)
-#}
-										<td id="event-calendar-{{ i }}"{% if eventList[i].events|length > 0 %} class="program" rel="{{ path('KekRozsakFrontBundle_eventAjaxList', {date: eventList[i].date|date('Y-m-d'), _format: 'html'}) }}"{% endif %}>
-											<a href="{{ path('KekRozsakFrontBundle_eventList', { date: eventList[i].date|date('Y-m-d')}) }}">{{ eventList[i].date|date('d') }}</a>
-										</td>
+                                        <td id="event-calendar-{{ i }}"{% if eventList[i].events|length > 0 %} class="program" rel="{{ path('KekRozsakFrontBundle_eventAjaxList', {date: eventList[i].date|date('Y-m-d'), _format: 'html'}) }}"{% endif %}>
+                                            <a href="{{ path('KekRozsakFrontBundle_eventList', { date: eventList[i].date|date('Y-m-d')}) }}">{{ eventList[i].date|date('d') }}</a>
+                                        </td>
 {% if cur is divisibleby(7) %}
-									</tr>
+                                    </tr>
 {% if cur != numDays %}
-									<tr>
-										<td class="woy">{{ eventList[i + 1].date|date('W') }}</td>
+                                    <tr>
+                                        <td class="woy">{{ eventList[i + 1].date|date('W') }}</td>
 {% endif %}
 {% endif %}
 {% endfor %}
 {% if curDow != 7 %}
 {% for i in (curDow + 1)..7 %}
-										<td></td>
+                                        <td></td>
 {% endfor %}
 {% endif %}
-									</tr>
-								</tbody>
-							</table>
-							<a href="{{ path('KekRozsakFrontBundle_eventList') }}">További események</a>
-						</div>
-					</div>
-				</div>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a href="{{ path('KekRozsakFrontBundle_eventList') }}">További események</a>
+                        </div>
+                    </div>
+                </div>

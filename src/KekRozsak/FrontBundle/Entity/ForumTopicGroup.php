@@ -14,168 +14,189 @@ use KekRozsak\SecurityBundle\Entity\User;
  */
 class ForumTopicGroup
 {
-	public function __construct()
-	{
-		$this->topics = new ArrayCollection();
-	}
+    public function __construct()
+    {
+        $this->topics = new ArrayCollection();
+    }
 
-	/**
-	 * @var integer $id
-	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 * @ORM\Column(type="integer")
-	 */
-	protected $id;
+    /**
+     * The ID of the ForumTopicGroup
+     *
+     * @var integer $id
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
+     */
+    protected $id;
 
-	/**
-	 * Get id
-	 *
-	 * @return integer
-	 */
-	public function getId()
-	{
-		return $this->id;
-	}
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
-	/**
-	 * @var KekRozsak\SecurityBundle\Entity\User $createdBy
-	 * @ORM\ManyToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User")
-	 * @ORM\JoinColumn(name="created_by_id")
-	 */
-	protected $createdBy;
+    /**
+     * The User who created this ForumTopicGroup
+     *
+     * @var KekRozsak\SecurityBundle\Entity\User $createdBy
+     *
+     * @ORM\ManyToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User")
+     * @ORM\JoinColumn(name="created_by_id")
+     */
+    protected $createdBy;
 
-	/**
-	 * Set createdBy
-	 *
-	 * @param KekRozsak\SecurityBundle\Entity\User $createdBy
-	 * @return ForumTopicGroup
-	 */
-	public function setCreatedBy(\KekRozsak\SecurityBundle\Entity\User $createdBy)
-	{
-		$this->createdBy = $createdBy;
-		return $this;
-	}
+    /**
+     * Set createdBy
+     *
+     * @param KekRozsak\SecurityBundle\Entity\User $createdBy
+     * @return ForumTopicGroup
+     */
+    public function setCreatedBy(User $createdBy)
+    {
+        // TODO: Check if null!
+        $this->createdBy = $createdBy;
+        return $this;
+    }
 
-	/**
-	 * Get createdBy
-	 *
-	 * @return KekRozsak\SecurityBundle\Entity\User
-	 */
-	public function getCreatedBy()
-	{
-		return $this->createdBy;
-	}
+    /**
+     * Get createdBy
+     *
+     * @return KekRozsak\SecurityBundle\Entity\User
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
 
-	/**
-	 * @var DateTime $createdAt
-	 * @ORM\Column(type="datetime", nullable=false)
-	 */
-	protected $createdAt;
+    /**
+     * The timestamp when this ForumTopicGroup was created
+     *
+     * @var DateTime $createdAt
+     *
+     * @ORM\Column(type="datetime", nullable=false)
+     */
+    protected $createdAt;
 
-	/**
-	 * Set createdAt
-	 *
-	 * @param DateTime $createdAt
-	 * @return ForumTopicGroup
-	 */
-	public function setCreatedAt(\DateTime $createdAt)
-	{
-		$this->createdAt = $createdAt;
-		return $this;
-	}
+    /**
+     * Set createdAt
+     *
+     * @param DateTime $createdAt
+     * @return ForumTopicGroup
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        // TODO: Check if null!
+        $this->createdAt = $createdAt;
+        return $this;
+    }
 
-	/**
-	 * Get createdAt
-	 *
-	 * @return DateTime
-	 */
-	public function getCreatedAt()
-	{
-		return $this->createdAt;
-	}
+    /**
+     * Get createdAt
+     *
+     * @return DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
 
-	/**
-	 * @var string $slug
-	 * @ORM\Column(type="string", length=100, nullable=false, unique=true)
-	 */
-	protected $slug;
+    /**
+     * The slugified title of this ForumTopicGroup
+     *
+     * @var string $slug
+     *
+     * @ORM\Column(type="string", length=100, nullable=false, unique=true)
+     */
+    protected $slug;
 
-	/**
-	 * Set slug
-	 *
-	 * @param string $slug
-	 * @return ForumTopicGroup
-	 */
-	public function setSlug($slug)
-	{
-		$this->slug = $slug;
-		return $this;
-	}
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return ForumTopicGroup
+     */
+    public function setSlug($slug)
+    {
+        // TODO: Check if empty or null!
+        $this->slug = $slug;
+        return $this;
+    }
 
-	/**
-	 * Get slug
-	 *
-	 * @return string
-	 */
-	public function getSlug()
-	{
-		return $this->slug;
-	}
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
 
-	/**
-	 * @var string $title
-	 * @ORM\Column(type="string", length=100, nullable=false, unique=true)
-	 */
-	protected $title;
+    /**
+     * The title of this ForumTopicGroup
+     *
+     * @var string $title
+     *
+     * @ORM\Column(type="string", length=100, nullable=false, unique=true)
+     */
+    protected $title;
 
-	/**
-	 * Set title
-	 *
-	 * @param string $title
-	 * @return ForumTopicGroup
-	 */
-	public function setTitle($title)
-	{
-		$this->title = $title;
-		return $this;
-	}
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return ForumTopicGroup
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+        return $this;
+    }
 
-	/**
-	 * Get title
-	 *
-	 * @return string
-	 */
-	public function getTitle()
-	{
-		return $this->title;
-	}
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
 
-	/**
-	 * @var ArrayCollection $topics
-	 * @ORM\OneToMany(targetEntity="ForumTopic", mappedBy="topicGroup")
-	 */
-	protected $topics;
+    /**
+     * The ArrayCollection of ForumTopics that belong to this ForumTopicGroup
+     *
+     * @var ArrayCollection $topics
+     *
+     * @ORM\OneToMany(targetEntity="ForumTopic", mappedBy="topicGroup")
+     */
+    protected $topics;
 
-	/**
-	 * Add topic
-	 *
-	 * @param ForumTopic $topic
-	 * @return ForumTopicGroup
-	 */
-	public function addTopic(ForumTopic $topic)
-	{
-		$this->topics[] = $topic;
-		return $this;
-	}
+    /**
+     * Add topic
+     *
+     * @param ForumTopic $topic
+     * @return ForumTopicGroup
+     */
+    public function addTopic(ForumTopic $topic)
+    {
+        // TODO: Check if null!
+        $this->topics[] = $topic;
+        return $this;
+    }
 
-	/**
-	 * Get topics
-	 *
-	 * @return ArrayCollection
-	 */
-	public function getTopics()
-	{
-		return $this->topics;
-	}
+    /**
+     * Get topics
+     *
+     * @return ArrayCollection
+     */
+    public function getTopics()
+    {
+        return $this->topics;
+    }
 }
-

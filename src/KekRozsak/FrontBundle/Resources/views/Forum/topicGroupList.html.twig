@@ -6,36 +6,36 @@
 <h3>Fórum</h3>
 {% for topicGroup in topicGroups %}
 <table class="forum-lista">
-	<thead>
-		<tr>
-			<td colspan="2"><a href="{{ path('KekRozsakFrontBundle_forumTopicList', {slug: topicGroup.slug}) }}">{{ topicGroup.title }}</a></td>
-			<td>Hozzászólások száma</td>
-			<td>Utolsó hozzászólás</td>
-		</tr>
-	</thead>
-	<tbody>
+    <thead>
+        <tr>
+            <td colspan="2"><a href="{{ path('KekRozsakFrontBundle_forumTopicList', {slug: topicGroup.slug}) }}">{{ topicGroup.title }}</a></td>
+            <td>Hozzászólások száma</td>
+            <td>Utolsó hozzászólás</td>
+        </tr>
+    </thead>
+    <tbody>
 {% if topicGroup.topics|length > 0 %}
 {% for topic in topicGroup.topics %}
-		<tr class="{{ cycle(['odd', 'even'], loop.index0) }}">
-			<td>[ikon]</td>
-			<td><a href="{{ path('KekRozsakFrontBundle_forumPostList', {topicGroupSlug: topicGroup.slug, topicSlug: topic.slug}) }}">{{ topic.title }}</a></td>
-			<td></td>
-			<td>
+        <tr class="{{ cycle(['odd', 'even'], loop.index0) }}">
+            <td>[ikon]</td>
+            <td><a href="{{ path('KekRozsakFrontBundle_forumPostList', {topicGroupSlug: topicGroup.slug, topicSlug: topic.slug}) }}">{{ topic.title }}</a></td>
+            <td></td>
+            <td>
 {% if topic.lastPost %}
-				{{ topic.lastPost.createdBy|userdataspan }}<br />
-				{{ topic.lastPost.createdAt|date('Y-m-d H:i') }}
+                {{ topic.lastPost.createdBy|userdataspan }}<br />
+                {{ topic.lastPost.createdAt|date('Y-m-d H:i') }}
 {% else %}
-				&nbsp;<br />&nbsp;
+                &nbsp;<br />&nbsp;
 {% endif %}
-			</td>
-		</tr>
+            </td>
+        </tr>
 {% endfor %}
 {% else %}
-		<tr>
-			<td colspan="4">Ebben a kategóriában nincsenek témák</td>
-		</tr>
+        <tr>
+            <td colspan="4">Ebben a kategóriában nincsenek témák</td>
+        </tr>
 {% endif %}
-	</tbody>
+    </tbody>
 </table>
 {% endfor %}
 {% endblock content %}

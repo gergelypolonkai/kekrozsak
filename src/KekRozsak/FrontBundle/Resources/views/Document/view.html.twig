@@ -4,7 +4,7 @@
 {% block title %} - Dokumentum - {{ document.title }}{% endblock %}
 {% block content %}
 <h3>
-	{{ document.title }}{% if document.createdBy == app.user %} [ <a href="{{ path('KekRozsakFrontBundle_documentEdit', {slug: document.slug}) }}">Szerkesztés</a> ] {% endif %}
+    {{ document.title }}{% if document.createdBy == app.user %} [ <a href="{{ path('KekRozsakFrontBundle_documentEdit', {slug: document.slug}) }}">Szerkesztés</a> ] {% endif %}
 </h3>
 {{ document.content|raw }}
 <div class="szerzo">{{ document.createdBy|userdataspan }}</div>

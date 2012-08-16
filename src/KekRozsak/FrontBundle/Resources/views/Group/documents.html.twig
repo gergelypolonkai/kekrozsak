@@ -2,34 +2,31 @@
 #}
 {% extends 'KekRozsakFrontBundle:Default:main_template.html.twig' %}
 {% block title %} - {{ group.name }}{% endblock %}
-{% block additional_css %}
-		<link rel="stylesheet" href="{{ asset('css/group.css') }}" type="text/css" />
-{% endblock additional_css %}
 {% block content %}
 <ul id="submenu">
-	<li><a href="{{ path('KekRozsakFrontBundle_groupMembers', {slug: group.slug}) }}">Tagok</a></li>
-	<li><a href="{{ path('KekRozsakFrontBundle_groupView', {slug: group.slug}) }}">Leírás</a></li>
+    <li><a href="{{ path('KekRozsakFrontBundle_groupMembers', {slug: group.slug}) }}">Tagok</a></li>
+    <li><a href="{{ path('KekRozsakFrontBundle_groupView', {slug: group.slug}) }}">Leírás</a></li>
 </ul>
 <h3>{{ group.name }} - Dokumentumok</h3>
 <table>
-	<thead>
-		<tr>
-			<td colspan="2">Cím</td>
-			<td>Készítette</td>
-		</tr>
-	</thead>
-	<tbody>
+    <thead>
+        <tr>
+            <td colspan="2">Cím</td>
+            <td>Készítette</td>
+        </tr>
+    </thead>
+    <tbody>
 {% for document in group.documents %}
-		<tr>
-			<td>[ikon]</td>
-			<td><a href="{{ path('KekRozsakFrontBundle_documentView', {slug: document.slug}) }}">{{ document.title }}</a></td>
-			<td>
-				{{ document.createdBy|userdataspan }}<br />
-				{{ document.createdAt|date('Y-m-d H:i') }}
-			</td>
-		</tr>
+        <tr>
+            <td>[ikon]</td>
+            <td><a href="{{ path('KekRozsakFrontBundle_documentView', {slug: document.slug}) }}">{{ document.title }}</a></td>
+            <td>
+                {{ document.createdBy|userdataspan }}<br />
+                {{ document.createdAt|date('Y-m-d H:i') }}
+            </td>
+        </tr>
 {% endfor %}
-	</tbody>
+    </tbody>
 </table>
 <a href="{{ path('KekRozsakFrontBundle_documentCreate', {slug: group.slug}) }}">Új dokumentum</a>
 {% endblock %}

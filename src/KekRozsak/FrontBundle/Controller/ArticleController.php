@@ -12,21 +12,28 @@ use KekRozsak\FrontBundle\Entity\Article;
 
 class ArticleController extends Controller
 {
-	/**
-	 * @Route("/cikk/{slug}", name="KekRozsakFrontBundle_articleView")
-	 * @Template()
-	 * @ParamConverter("article")
-	 *
-	 * @param KekRozsak\FrontBundle\Entity\Article $article
-	 */
-	public function viewAction(Article $article)
-	{
-		$scontext = $this->get('security.context');
-		if ((!is_object($scontext->getToken()) || !is_object($scontext->getToken()->getUser())) && !$article->isPublic())
-			throw new AccessDeniedException('A cikk megtekintéséhez be kell jelentkezned!');
+    /**
+     * @Route("/cikk/{slug}", name="KekRozsakFrontBundle_articleView")
+     * @Template()
+     * @ParamConverter("article")
+     *
+     * @param KekRozsak\FrontBundle\Entity\Article $article
+     */
+    public function viewAction(Article $article)
+    {
+        $scontext = $this->get('security.context');
+        if (
+            (
+                !is_object($scontext->getToken())
+                || !is_object($scontext->getToken()->getUser())
+            )
+            && !$article->isPublic()
+        ) {
+            throw new AccessDeniedException('A cikk megtekintéséhez be kell jelentkezned!');
+        }
 
-		return array(
-			'article' => $article,
-		);
-	}
+        return array(
+            'article' => $article,
+        );
+    }
 }

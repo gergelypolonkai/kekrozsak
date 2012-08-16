@@ -9,53 +9,47 @@
 <p>Szintén fontos, hogy egy új csoport létrehozása nem tesz azonnal annak vezetőjévé, azt a csoport tagjainak meg kell szavazniuk, vagy a Véneknek jóváhagyniuk, hiszen a Kék Rózsák, ezáltal annak csoportjai is az egyenlőség elvén működnek.</p>
 <p>Amennyiben látni szeretnéd egy csoport leírását, kattints a csoport nevére!</p>
 <table>
-	<thead>
-		<tr>
-			<td colspan="2">Csoport neve</td>
-			<td>Státusz</td>
-			<td>Vezető</td>
-		</tr>
-	</thead>
-	<tbody>
+    <thead>
+        <tr>
+            <td colspan="2">Csoport neve</td>
+            <td>Státusz</td>
+            <td>Vezető</td>
+        </tr>
+    </thead>
+    <tbody>
 {% for group in groups %}
-		<tr>
-			<td>[ikon]</td>
-			<td class="csoport" title="|Csoport leírás|{{ group.description }}"><a href="{{ path('KekRozsakFrontBundle_groupView', {slug: group.slug}) }}">{{ group.name }}</a></td>
-			<td>
-				{% if group.isMember(app.user) %}
-					<span title="|Állapot|Már tag vagy" class="ikon">[tag ikon]</span>
-				{% elseif group.isRequested(app.user) %}
-					<span title="|Állapot|Már jelentkeztél, de a jelentkezésedet a csoport vezetője még nem fogadta el" class="ikon">[jelentkeztél ikon]</span>
-				{% else %}
-					{% if group.isOpen %}
-						<a href="{{ path('KekRozsakFrontBundle_groupJoin', {slug: group.slug}) }}"><span title="|Állapot|Nyílt csoport, kattints a belépéshez!" class="ikon">[nyílt ikon]</span></a>
-					{% else %}
-						<a href="{{ path('KekRozsakFrontBundle_groupJoin', {slug: group.slug}) }}"><span title="|Állapot|Zárt csoport, kattints a jelentkezéshez!" class="ikon">[zárt ikon]</span></a>
-					{% endif %}
-				{% endif %}
-			</td>
-			<td>{% if group.leader %}{{ group.leader|userdataspan }}{% else %}Nincs{% endif %}</td>
-		</tr>
+        <tr>
+            <td>[ikon]</td>
+            <td class="csoport" title="|Csoport leírás|{{ group.description }}"><a href="{{ path('KekRozsakFrontBundle_groupView', {slug: group.slug}) }}">{{ group.name }}</a></td>
+            <td>
+{% if group.isMember(app.user) %}
+                <span title="|Állapot|Már tag vagy" class="ikon">[tag ikon]</span>
+{% elseif group.isRequested(app.user) %}
+                <span title="|Állapot|Már jelentkeztél, de a jelentkezésedet a csoport vezetője még nem fogadta el" class="ikon">[jelentkeztél ikon]</span>
+{% else %}
+{% if group.isOpen %}
+                <a href="{{ path('KekRozsakFrontBundle_groupJoin', {slug: group.slug}) }}"><span title="|Állapot|Nyílt csoport, kattints a belépéshez!" class="ikon">[nyílt ikon]</span></a>
+{% else %}
+                <a href="{{ path('KekRozsakFrontBundle_groupJoin', {slug: group.slug}) }}"><span title="|Állapot|Zárt csoport, kattints a jelentkezéshez!" class="ikon">[zárt ikon]</span></a>
+{% endif %}
+{% endif %}
+            </td>
+            <td>{% if group.leader %}{{ group.leader|userdataspan }}{% else %}Nincs{% endif %}</td>
+        </tr>
 {% endfor %}
-	</tbody>
+    </tbody>
 </table>
 <a href="{{ path('KekRozsakFrontBundle_groupCreate') }}">Új csoport létrehozása</a>
 {% endblock content %}
 {% block bottomscripts %}
-		<script type="text/javascript">
-			$('.csoport').cluetip({
-				splitTitle: '|',
-				showTitle: false
-			});
-			$('.ikon').tooltip({
-				splitTitle: '|',
-				showTitle: false
-			});
-		</script>
+        <script type="text/javascript">
+            $('.csoport').cluetip({
+                splitTitle: '|',
+                showTitle: false
+            });
+            $('.ikon').tooltip({
+                splitTitle: '|',
+                showTitle: false
+            });
+        </script>
 {% endblock bottomscripts %}
-
-
-
-
-
-

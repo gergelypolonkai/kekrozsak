@@ -18,282 +18,348 @@ use KekRozsak\SecurityBundle\Entity\User;
  */
 class Book
 {
-	public function __construct()
-	{
-		$this->copies = new ArrayCollection();
-		$this->wouldBorrow = new ArrayCollection();
-		$this->wouldBuy = new ArrayCollection();
-	}
+    public function __construct()
+    {
+        $this->copies = new ArrayCollection();
+        $this->wouldBorrow = new ArrayCollection();
+        $this->wouldBuy = new ArrayCollection();
+    }
 
-	/**
-	 * @var integer $id
-	 *
-	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 * @ORM\Column(type="integer")
-	 */
-	protected $id;
+    /**
+     * The ID of the Book
+     *
+     * @var integer $id
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
+     */
+    protected $id;
 
-	/**
-	 * Get id
-	 *
-	 * @return integer
-	 */
-	public function getId()
-	{
-		return $this->id;
-	}
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
-	/**
-	 * @var Doctrine\Common\Collections\ArrayCollection $copies
-	 *
-	 * @ORM\OneToMany(targetEntity="BookCopy", mappedBy="book")
-	 */
-	protected $copies;
+    /**
+     * The copies available for this Book
+     *
+     * @var Doctrine\Common\Collections\ArrayCollection $copies
+     *
+     * @ORM\OneToMany(targetEntity="BookCopy", mappedBy="book")
+     */
+    protected $copies;
 
-	/**
-	 * Remove a copy
-	 *
-	 * @param KekRozsak\FrontBundle\Entity\BookCopy $copy
-	 * @return Book
-	 */
-	public function removeCopy(BookCopy $copy)
-	{
-		$this->copies->removeElement($copy);
-	}
+    /**
+     * Remove a copy
+     *
+     * @param KekRozsak\FrontBundle\Entity\BookCopy $copy
+     * @return Book
+     */
+    public function removeCopy(BookCopy $copy)
+    {
+        $this->copies->removeElement($copy);
+    }
 
-	/**
-	 * Get copies
-	 *
-	 * @return Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getCopies()
-	{
-		return $this->copies;
-	}
+    /**
+     * Get copies
+     *
+     * @return Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getCopies()
+    {
+        return $this->copies;
+    }
 
-	public function getCopiesBorrowed()
-	{
-		return $this->copies->filter(function($copy) {
-			return ($copy->getBorrower() !== null);
-		});
-	}
+    /**
+     * Get the copies of this Book those are borrowed by someone
+     *
+     * @return Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getCopiesBorrowed()
+    {
+        return $this->copies->filter(function($copy)
+            {
+                return ($copy->getBorrower() !== null);
+            });
+    }
 
-	public function getCopiesBorrowedByUser(User $user)
-	{
-		return $this->copies->filter(function($copy) use ($user) {
-			return ($copy->getBorrower() == $user);
-		});
-	}
+    /**
+     * Get the copies of this Book those are borrowed by $user
+     *
+     * @param \KekRozsak\SecurityBundle\Entity\User $user
+     * @return Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getCopiesBorrowedByUser(User $user)
+    {
+        return $this->copies->filter(function($copy) use ($user)
+            {
+                return ($copy->getBorrower() == $user);
+            });
+    }
 
-	public function getCopiesBorrowedReturnedByUser(User $user)
-	{
-		return $this->copies->filter(function($copy) use ($user) {
-			return ($copy->getBorrower() == $user) && ($copy->isBorrowerReturned());
-		});
-	}
+    /**
+     * Get the copies of this Book those are borrowed by $user, but marked as
+     * returned
+     *
+     * @param \KekRozsak\SecurityBundle\Entity\User $user
+     * @return Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getCopiesBorrowedReturnedByUser(User $user)
+    {
+        return $this->copies->filter(function($copy) use ($user)
+            {
+                return ($copy->getBorrower() == $user) && ($copy->isBorrowerReturned());
+            });
+    }
 
-	public function getCopiesBorrowable()
-	{
-		return $this->copies->filter(function($copy) {
-			return $copy->isBorrowable();
-		});
-	}
+    /**
+     * Get all the borrowable copies of this Book
+     *
+     * @return Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getCopiesBorrowable()
+    {
+        return $this->copies->filter(function($copy) {
+            return $copy->isBorrowable();
+        });
+    }
 
-	public function getUsersCopies(User $user)
-	{
-		return $this->copies->filter(function ($copy) use ($user) {
-			return ($copy->getOwner() == $user);
-		});
-	}
+    /**
+     * Get $user's copies of this Book
+     *
+     * @param \KekRozsak\SecurityBundle\Entity\User $user
+     * @return Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getUsersCopies(User $user)
+    {
+        return $this->copies->filter(function ($copy) use ($user)
+            {
+                return ($copy->getOwner() == $user);
+            });
+    }
 
-	public function getUsersCopiesBorrowable(User $user)
-	{
-		return $this->copies->filter(function($copy) use ($user) {
-			return (($copy->getOwner() == $user) && $copy->isBorrowable());
-		});
-	}
+    /**
+     * Get $user's borrowable copies of this Book
+     *
+     * @param \KekRozsak\SecurityBundle\Entity\User $user
+     * @return Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getUsersCopiesBorrowable(User $user)
+    {
+        return $this->copies->filter(function($copy) use ($user)
+            {
+                return (($copy->getOwner() == $user) && $copy->isBorrowable());
+            });
+    }
 
-	public function getUsersCopiesBuyable(User $user)
-	{
-		return $this->copies->filter(function($copy) use ($user) {
-			return (($copy->getOwner() == $user) && $copy->isBuyable());
-		});
-	}
+    /**
+     * Get $user's buyable copies of this Book
+     *
+     * @param \KekRozsak\SecurityBundle\Entity\User $user
+     * @return Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getUsersCopiesBuyable(User $user)
+    {
+        return $this->copies->filter(function($copy) use ($user)
+            {
+                return (($copy->getOwner() == $user) && $copy->isBuyable());
+            });
+    }
 
-	/**
-	 * @var string $author
-	 *
-	 * @ORM\Column(type="string", length=100, nullable=false)
-	 */
-	protected $author;
+    /**
+     * The author of the Book
+     *
+     * @var string $author
+     *
+     * @ORM\Column(type="string", length=100, nullable=false)
+     */
+    protected $author;
 
-	/**
-	 * Set author
-	 *
-	 * @param string $author
-	 * @return Book
-	 */
-	public function setAuthor($author)
-	{
-		$this->author = $author;
-		return $this;
-	}
+    /**
+     * Set author
+     *
+     * @param string $author
+     * @return Book
+     */
+    public function setAuthor($author)
+    {
+        // TODO: Check if null!
+        $this->author = $author;
+        return $this;
+    }
 
-	/**
-	 * Get author
-	 *
-	 * @return string
-	 */
-	public function getAuthor()
-	{
-		return $this->author;
-	}
+    /**
+     * Get author
+     *
+     * @return string
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
 
-	/**
-	 * @var string $title
-	 *
-	 * @ORM\Column(type="string", length=100, nullable=false)
-	 */
-	protected $title;
+    /**
+     * The title of the Book
+     *
+     * @var string $title
+     *
+     * @ORM\Column(type="string", length=100, nullable=false)
+     */
+    protected $title;
 
-	/**
-	 * Set title
-	 *
-	 * @param string $title
-	 * @return Book
-	 */
-	public function setTitle($title)
-	{
-		$this->title = $title;
-		return $this;
-	}
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Book
+     */
+    public function setTitle($title)
+    {
+        // TODO: Check if null!
+        $this->title = $title;
+        return $this;
+    }
 
-	/**
-	 * Get title
-	 *
-	 * @return string
-	 */
-	public function getTitle()
-	{
-		return $this->title;
-	}
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
 
-	/**
-	 * @var integer $year
-	 *
-	 * @ORM\Column(type="integer", nullable=false)
-	 */
-	protected $year;
+    /**
+     * The Book's year of publication
+     *
+     * @var integer $year
+     *
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    protected $year;
 
-	/**
-	 * Set year
-	 *
-	 * @param integer $year
-	 * @return Book
-	 */
-	public function setYear($year)
-	{
-		$this->year = $year;
-		return $this;
-	}
+    /**
+     * Set year
+     *
+     * @param integer $year
+     * @return Book
+     */
+    public function setYear($year)
+    {
+        // TODO: Check if null!
+        $this->year = $year;
+        return $this;
+    }
 
-	/**
-	 * Get year
-	 *
-	 * @return integer
-	 */
-	public function getYear()
-	{
-		return $this->year;
-	}
+    /**
+     * Get year
+     *
+     * @return integer
+     */
+    public function getYear()
+    {
+        return $this->year;
+    }
 
-	/**
-	 * @var boolean $commentable
-	 *
-	 * @ORM\Column(type="boolean", nullable=false)
-	 */
-	protected $commentable;
+    /**
+     * TRUE if comments can be written about the Book
+     * @var boolean $commentable
+     *
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    protected $commentable;
 
-	/**
-	 * @var Doctrine\Common\Collections\ArrayCollection $wouldBorrow
-	 *
-	 * @ORM\ManyToMany(targetEntity="KekRozsak\SecurityBundle\Entity\User")
-	 * @ORM\JoinTable(name="book_would_borrow")
-	 */
-	protected $wouldBorrow;
+    /**
+     * Collection of Users who would like to borrow a copy
+     *
+     * @var Doctrine\Common\Collections\ArrayCollection $wouldBorrow
+     *
+     * @ORM\ManyToMany(targetEntity="KekRozsak\SecurityBundle\Entity\User")
+     * @ORM\JoinTable(name="book_would_borrow")
+     */
+    protected $wouldBorrow;
 
-	/**
-	 * Add a user for want-to-borrowers
-	 *
-	 * @param KekRozsak\SecurityBundle\Entity\User $user
-	 * @return Book
-	 */
-	public function addWouldBorrow(User $user)
-	{
-		$this->wouldBorrow->add($user);
-		return $this;
-	}
+    /**
+     * Add a user for want-to-borrowers
+     *
+     * @param KekRozsak\SecurityBundle\Entity\User $user
+     * @return Book
+     */
+    public function addWouldBorrow(User $user)
+    {
+        // TODO: Check if null!
+        $this->wouldBorrow->add($user);
+        return $this;
+    }
 
-	/**
-	 * Get wouldBorrow list
-	 *
-	 * @return Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getWouldBorrow()
-	{
-		return $this->wouldBorrow;
-	}
+    /**
+     * Get wouldBorrow list
+     *
+     * @return Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getWouldBorrow()
+    {
+        return $this->wouldBorrow;
+    }
 
-	/**
-	 * Check if specified user would borrow this book
-	 *
-	 * @param KekRozsak\SecurityBundle\Entity\User $user
-	 * @return boolean
-	 */
-	public function userWouldBorrow(User $user)
-	{
-		return $this->wouldBorrow->contains($user);
-	}
+    /**
+     * Check if $user would like to borrow this book
+     *
+     * @param KekRozsak\SecurityBundle\Entity\User $user
+     * @return boolean
+     */
+    public function userWouldBorrow(User $user)
+    {
+        return $this->wouldBorrow->contains($user);
+    }
 
-	/**
-	 * @var Doctrine\Common\Collections\ArrayCollection $wouldBuy
-	 *
-	 * @ORM\ManyToMany(targetEntity="KekRozsak\SecurityBundle\Entity\User")
-	 * @ORM\JoinTable(name="book_would_buy")
-	 */
-	protected $wouldBuy;
+    /**
+     * Collection of Users who would like to buy a copy of this book
+     *
+     * @var Doctrine\Common\Collections\ArrayCollection $wouldBuy
+     *
+     * @ORM\ManyToMany(targetEntity="KekRozsak\SecurityBundle\Entity\User")
+     * @ORM\JoinTable(name="book_would_buy")
+     */
+    protected $wouldBuy;
 
-	/**
-	 * Add a user for want-to-buyers
-	 *
-	 * @param KekRozsak\SecurityBundle\Entity\User $user
-	 * @return Book
-	 */
-	public function addWouldBuy(User $user)
-	{
-		$this->wouldBuy->add($user);
-		return $this;
-	}
+    /**
+     * Add a user for want-to-buyers
+     *
+     * @param KekRozsak\SecurityBundle\Entity\User $user
+     * @return Book
+     */
+    public function addWouldBuy(User $user)
+    {
+        $this->wouldBuy->add($user);
+        return $this;
+    }
 
-	/**
-	 * Get wouldBuy list
-	 *
-	 * @return Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getWouldBuy()
-	{
-		return $this->wouldBuy;
-	}
+    /**
+     * Get wouldBuy list
+     *
+     * @return Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getWouldBuy()
+    {
+        return $this->wouldBuy;
+    }
 
-	/**
-	 * Check if specified user would buy this book
-	 *
-	 * @param KekRozsak\SecurityBundle\Entity\User $user
-	 * @return boolean
-	 */
-	public function userWouldBuy(User $user)
-	{
-		return $this->wouldBuy->contains($user);
-	}
+    /**
+     * Check if specified user would buy this book
+     *
+     * @param KekRozsak\SecurityBundle\Entity\User $user
+     * @return boolean
+     */
+    public function userWouldBuy(User $user)
+    {
+        return $this->wouldBuy->contains($user);
+    }
 }

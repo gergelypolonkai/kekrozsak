@@ -19,325 +19,357 @@ use KekRozsak\FrontBundle\Entity\Document;
  */
 class Group
 {
-	public function __construct()
-	{
-		$this->members = new ArrayCollection();
-		$this->documents = new ArrayCollection();
-	}
+    public function __construct()
+    {
+        $this->members = new ArrayCollection();
+        $this->documents = new ArrayCollection();
+    }
 
-	/**
-	 * @var integer $id
-	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 * @ORM\Column(type="integer")
-	 */
-	protected $id;
+    /**
+     * The ID of this Group
+     *
+     * @var integer $id
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
+     */
+    protected $id;
 
-	/**
-	 * Get id
-	 *
-	 * @return integer
-	 */
-	public function getId()
-	{
-		return $this->id;
-	}
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
-	/**
-	 * @var KekRozsak\SecurityBundle\Entity\User $leader
-	 * @ORM\ManyToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User")
-	 */
-	protected $leader;
+    /**
+     * @var KekRozsak\SecurityBundle\Entity\User $leader
+     * @ORM\ManyToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User")
+     */
+    protected $leader;
 
-	/**
-	 * Set leader
-	 *
-	 * @param KekRozsak\SecurityBundle\Entity\User $leader
-	 * @return Group
-	 */
-	public function setLeader(\KekRozsak\SecurityBundle\Entity\User $leader = null)
-	{
-		$this->leader = $leader;
-		return $this;
-	}
+    /**
+     * Set leader
+     *
+     * @param KekRozsak\SecurityBundle\Entity\User $leader
+     * @return Group
+     */
+    public function setLeader(User $leader = null)
+    {
+        $this->leader = $leader;
+        return $this;
+    }
 
-	/**
-	 * Get leader
-	 *
-	 * @return KekRozsak\SecurityBundle\Entity\User
-	 */
-	public function getLeader()
-	{
-		return $this->leader;
-	}
+    /**
+     * Get leader
+     *
+     * @return KekRozsak\SecurityBundle\Entity\User
+     */
+     public function getLeader()
+    {
+        return $this->leader;
+    }
 
-	/**
-	 * @var string $name
-	 * @ORM\Column(type="string", length=50, nullable=false, unique=true)
-	 * @Assert\NotBlank()
-	 */
-	protected $name;
+    /**
+     * The name of this Group
+     *
+     * @var string $name
+     *
+     * @ORM\Column(type="string", length=50, nullable=false, unique=true)
+     *
+     * @Assert\NotBlank()
+     */
+    protected $name;
 
-	/**
-	 * Set name
-	 *
-	 * @param string $name
-	 * @return Group
-	 */
-	public function setName($name)
-	{
-		$this->name = $name;
-		return $this;
-	}
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Group
+     */
+    public function setName($name)
+    {
+        // TODO: Check if empty or null!
+        $this->name = $name;
+        return $this;
+    }
 
-	/**
-	 * Get name
-	 *
-	 * @return string
-	 */
-	public function getName()
-	{
-		return $this->name;
-	}
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 
-	/**
-	 * @var string $slug
-	 * @ORM\Column(type="string", length=50, nullable=false, unique=true)
-	 */
-	protected $slug;
+    /**
+     * The slugified name of this Group
+     *
+     * @var string $slug
+     *
+     * @ORM\Column(type="string", length=50, nullable=false, unique=true)
+     */
+    protected $slug;
 
-	/**
-	 * Set slug
-	 *
-	 * @param string $slug
-	 * @return Group
-	 */
-	public function setSlug($slug)
-	{
-		$this->slug = $slug;
-		return $this;
-	}
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Group
+     */
+    public function setSlug($slug)
+    {
+        // TODO: Check if empty or null!
+        $this->slug = $slug;
+        return $this;
+    }
 
-	/**
-	 * Get slug
-	 *
-	 * @return string
-	 */
-	public function getSlug()
-	{
-		return $this->slug;
-	}
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
 
-	/**
-	 * @var KekRozsak\SecurityBundle\Entity\User $createdBy
-	 * @ORM\ManyToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User")
-	 * @ORM\JoinColumn(name="created_by_id")
-	 */
-	protected $createdBy;
+    /**
+     * The User who created this Group
+     *
+     * @var KekRozsak\SecurityBundle\Entity\User $createdBy
+     *
+     * @ORM\ManyToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User")
+     * @ORM\JoinColumn(name="created_by_id")
+     */
+    protected $createdBy;
 
-	/**
-	 * Set createdBy
-	 *
-	 * @param KekRozsak\SecurityBundle\Entity\User $createdBy
-	 * @return Group
-	 */
-	public function setCreatedBy(\KekRozsak\SecurityBundle\Entity\User $createdBy)
-	{
-		$this->createdBy = $createdBy;
-		return $this;
-	}
+    /**
+     * Set createdBy
+     *
+     * @param KekRozsak\SecurityBundle\Entity\User $createdBy
+     * @return Group
+     */
+    public function setCreatedBy(User $createdBy)
+    {
+        $this->createdBy = $createdBy;
+        return $this;
+    }
 
-	/**
-	 * Get createdBy
-	 *
-	 * @return KekRozsak\SecurityBundle\Entity\User
-	 */
-	public function getCreatedBy()
-	{
-		return $this->createdBy;
-	}
+    /**
+     * Get createdBy
+     *
+     * @return KekRozsak\SecurityBundle\Entity\User
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
 
-	/**
-	 * @var DateTime $createdAt
-	 * @ORM\Column(type="datetime", name="created_at", nullable=false)
-	 */
-	protected $createdAt;
+    /**
+     * The timestamp when this Group was created
+     *
+     * @var DateTime $createdAt
+     *
+     * @ORM\Column(type="datetime", name="created_at", nullable=false)
+     */
+    protected $createdAt;
 
-	/**
-	 * Set createdAt
-	 *
-	 * @param DateTime $createdAt
-	 * @return Group
-	 */
-	public function setCreatedAt(\DateTime $createdAt)
-	{
-		$this->createdAt = $createdAt;
-		return $this;
-	}
+    /**
+     * Set createdAt
+     *
+     * @param DateTime $createdAt
+     * @return Group
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        // TODO: Check if null!
+        $this->createdAt = $createdAt;
+        return $this;
+    }
 
-	/**
-	 * Get createdAt
-	 *
-	 * @return DateTime
-	 */
-	public function getCreatedAt()
-	{
-		return $this->createdAt;
-	}
+    /**
+     * Get createdAt
+     *
+     * @return DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
 
-	/**
-	 * @var Doctrine\Common\Collections\ArrayCollection $members
-	 * @ORM\OneToMany(targetEntity="UserGroupMembership", mappedBy="group")
-	 */
-	protected $members;
+    /**
+     * An ArrayCollection of UserGroupMemberships representing the Group's
+     * members
+     *
+     * @var Doctrine\Common\Collections\ArrayCollection $members
+     *
+     * @ORM\OneToMany(targetEntity="UserGroupMembership", mappedBy="group")
+     */
+    protected $members;
 
-	/**
-	 * Add member
-	 *
-	 * @param KekRozsak\FrontBundle\Entity\UserGroupMembership $member
-	 * @return Group
-	 */
-	public function addMember(\KekRozsak\FrontBundle\Entity\UserGroupMembership $member)
-	{
-		$this->members[] = $member;
-		return $this;
-	}
+    /**
+     * Add member
+     *
+     * @param KekRozsak\FrontBundle\Entity\UserGroupMembership $member
+     * @return Group
+     */
+    public function addMember(UserGroupMembership $member)
+    {
+        // TODO: Check if null!
+        $this->members[] = $member;
+        return $this;
+    }
 
-	/**
-	 * Get all members
-	 *
-	 * @return Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getMembers()
-	{
-		return $this->members;
-	}
+    /**
+     * Get all members
+     *
+     * @return Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getMembers()
+    {
+        return $this->members;
+    }
 
-	/**
-	 * Check if user is a member of this Group
-	 *
-	 * @param KekRozsak\SecurityBundle\Entity\User $user
-	 * @return boolean
-	 */
-	public function isMember(\KekRozsak\SecurityBundle\Entity\User $user)
-	{
-		return ($this->members->filter(
-				function ($groupMembership) use ($user) {
-					return (
-						($groupMembership->getUser() == $user)
-						&& (
-							$groupMembership->getGroup()->isOpen()
-							|| ($groupMembership->getMembershipAcceptedAt() !== null)
-						)
-					);
-				}
-			)->count() > 0);
-	}
+    /**
+     * Check if user is a member of this Group
+     *
+     * @param KekRozsak\SecurityBundle\Entity\User $user
+     * @return boolean
+     */
+    public function isMember(User $user)
+    {
+        return ($this->members->filter(function ($groupMembership) use ($user)
+        {
+            return (
+                    ($groupMembership->getUser() == $user)
+                    && (
+                        $groupMembership->getGroup()->isOpen()
+                        || ($groupMembership->getMembershipAcceptedAt() !== null)
+                    )
+                );
+        })->count() > 0);
+    }
 
-	/**
-	 * Check if user already requested a membership in this Group
-	 *
-	 * @param KekRozsak\SecurityBundle\Entity\User $user
-	 * @return boolean
-	 */
-	public function isRequested(\KekRozsak\SecurityBundle\Entity\User $user)
-	{
-		return ($this->members->filter(
-				function ($groupMembership) use ($user) {
-					return (
-						($groupMembership->getUser() == $user)
-						&& ($groupMembership->getMembershipRequestedAt() !== null)
-					);
-				}
-			)->count() > 0);
-	}
+    /**
+     * Check if user already requested a membership in this Group
+     *
+     * @param KekRozsak\SecurityBundle\Entity\User $user
+     * @return boolean
+     */
+    public function isRequested(User $user)
+    {
+        return ($this->members->filter(function ($groupMembership) use ($user)
+        {
+            return (
+                    ($groupMembership->getUser() == $user)
+                    && ($groupMembership->getMembershipRequestedAt() !== null)
+                );
+        })->count() > 0);
+    }
 
-	/**
-	 * @var string description
-	 * @ORM\Column(type="text", nullable=true)
-	 */
-	protected $description;
+    /**
+     * The description of the Group
+     *
+     * @var string description
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $description;
 
-	/**
-	 * Set description
-	 *
-	 * @param string $description
-	 * @return Group
-	 */
-	public function setDescription($description = null)
-	{
-		$this->description = $description;
-		return $this;
-	}
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Group
+     */
+    public function setDescription($description = null)
+    {
+        $this->description = $description;
+        return $this;
+    }
 
-	/**
-	 * Get description
-	 *
-	 * @return string
-	 */
-	public function getDescription()
-	{
-		return $this->description;
-	}
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
 
-	/**
-	 * @var boolean open
-	 * @ORM\Column(type="boolean", nullable=false)
-	 */
-	protected $open;
+    /**
+     * TRUE if this Group is open, and anyone can join
+     *
+     * @var boolean open
+     *
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    protected $open;
 
-	/**
-	 * Set open
-	 *
-	 * @param boolean $open
-	 * @ return Group
-	 */
-	public function setOpen($open = false)
-	{
-		$this->open = $open;
-		return $this;
-	}
+    /**
+     * Set open
+     *
+     * @param boolean $open
+     * @ return Group
+     */
+    public function setOpen($open = false)
+    {
+        $this->open = $open;
+        return $this;
+    }
 
-	/**
-	 * Get open
-	 *
-	 * @return boolean
-	 */
-	public function isOpen()
-	{
-		return $this->open;
-	}
+    /**
+     * Get open
+     *
+     * @return boolean
+     */
+    public function isOpen()
+    {
+        return $this->open;
+    }
 
-	/**
-	 * @var Doctrine\Common\Collections\ArrayCollection $documents
-	 * @ORM\ManyToMany(targetEntity="Document", inversedBy="groups")
-	 * @ORM\JoinTable(name="group_document", inverseJoinColumns={
-	 *     @ORM\JoinColumn(name="document_id", referencedColumnName="id"),
-	 * }, joinColumns={
-	 *     @ORM\JoinColumn(name="group_id", referencedColumnName="id")
-	 * })
-	 */
-	protected $documents;
+    /**
+     * An ArrayCollection of Documents that belong to this Group
+     *
+     * @var Doctrine\Common\Collections\ArrayCollection $documents
+     *
+     * @ORM\ManyToMany(targetEntity="Document", inversedBy="groups", fetch="LAZY")
+     * @ORM\JoinTable(name="group_document", inverseJoinColumns={
+     *     @ORM\JoinColumn(name="document_id", referencedColumnName="id"),
+     * }, joinColumns={
+     *     @ORM\JoinColumn(name="group_id", referencedColumnName="id")
+     * })
+     */
+    protected $documents;
 
-	/**
-	 * Add document
-	 *
-	 * @param KekRozsak\FrontBundle\Entity\Document $document
-	 * @return Group
-	 */
-	public function addDocument(\KekRozsak\FrontBundle\Entity\Document $document)
-	{
-		$this->documents[] = $document;
-		return $this;
-	}
+    /**
+     * Add document
+     *
+     * @param KekRozsak\FrontBundle\Entity\Document $document
+     * @return Group
+     */
+    public function addDocument(Document $document)
+    {
+        // TODO: Check if null!
+        $this->documents[] = $document;
+        return $this;
+    }
 	
-	/**
-	 * Get all documents
-	 *
-	 * @return Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getDocuments()
-	{
-		return $this->documents;
-	}
+    /**
+     * Get all documents
+     *
+     * @return Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getDocuments()
+    {
+        return $this->documents;
+    }
 }

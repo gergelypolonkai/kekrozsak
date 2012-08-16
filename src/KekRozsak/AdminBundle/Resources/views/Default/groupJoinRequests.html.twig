@@ -6,38 +6,38 @@
 <h3>Csoport jelentkezők</h3>
 <p>Az alábbi listán az általad vezetett csoportokba frissen jelentkezőket láthatod. A mellettük lévő ikonokra kattintva hagyhatod jóvá, illetve utasísthatod el a jelentkezésüket. Amennyiben ez utóbbi mellett döntesz, egy rövid üzenetet is írnod kell az elutasítás okáról.</p>
 <table>
-	<thead>
-		<tr>
-			<td colspan="2">Csoport / Jelentkező</td>
-			<td></td>
-		</tr>
-	</thead>
-	<tbody>
+    <thead>
+        <tr>
+            <td colspan="2">Csoport / Jelentkező</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
 {% for group in groups %}
-		<tr>
-			<td class="ikon">[ikon]</td>
-			<td colspan="2">{{ group.name }}</td>
-		</tr>
+        <tr>
+            <td class="ikon">[ikon]</td>
+            <td colspan="2">{{ group.name }}</td>
+        </tr>
 {% for request in group.members %}
 {% if not group.isMember(request.user) %}
-		<tr>
-			<td colspan="2">{{ request.user|userdataspan }}</td>
-			<td>
-				<form method="post" action="{{ path('KekRozsakAdminBundle_groupJoinRequests') }}">
-					<input type="hidden" name="user" value="{{ request.user.id }}" />
-					<input type="hidden" name="group" value="{{ group.id }}" />
-					<button type="submit">[jóváhagyó ikon]</button>
-				</form>
-				<form method="post" action="{{ path('KekRozsakAdminBundle_groupJoinDecline') }}">
-					<input type="hidden" name="user" value="{{ request.user.id }}" />
-					<input type="hidden" name="group" value="{{ group.id }}" />
-					<button type="submit">[elutasító ikon]</button>
-				</form>
-			</td>
-		</tr>
+        <tr>
+            <td colspan="2">{{ request.user|userdataspan }}</td>
+            <td>
+                <form method="post" action="{{ path('KekRozsakAdminBundle_groupJoinRequests') }}">
+                    <input type="hidden" name="user" value="{{ request.user.id }}" />
+                    <input type="hidden" name="group" value="{{ group.id }}" />
+                    <button type="submit">[jóváhagyó ikon]</button>
+                </form>
+                <form method="post" action="{{ path('KekRozsakAdminBundle_groupJoinDecline') }}">
+                    <input type="hidden" name="user" value="{{ request.user.id }}" />
+                    <input type="hidden" name="group" value="{{ group.id }}" />
+                    <button type="submit">[elutasító ikon]</button>
+                </form>
+            </td>
+        </tr>
 {% endif %}
 {% endfor %}
 {% endfor %}
-	</tbody>
+    </tbody>
 </table>
 {% endblock content %}

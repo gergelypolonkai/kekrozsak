@@ -16,124 +16,138 @@ use KekRozsak\FrontBundle\Entity\UserData;
 
 class DefaultController extends Controller
 {
-	/**
-	 * @Route("/login", name="KekRozsakSecurityBundle_login")
-	 * @Template()
-	 */
-	public function loginAction()
-	{
-		$request = $this->getRequest();
-		$session = $request->getSession();
+    /**
+     * @Route("/login", name="KekRozsakSecurityBundle_login")
+     * @Template()
+     */
+    public function loginAction()
+    {
+        $request = $this->getRequest();
+        $session = $request->getSession();
 
-		if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR))
-		{
-			$error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
-		}
-		else
-		{
-			$error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
-			$session->remove(SecurityContext::AUTHENTICATION_ERROR);
-		}
+        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+        } else {
+            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+            $session->remove(SecurityContext::AUTHENTICATION_ERROR);
+        }
 
-		return array(
-			'last_username' => $session->get(SecurityContext::LAST_USERNAME),
-			'error'         => $error,
-		);
-	}
+        return array(
+            'last_username' => $session->get(SecurityContext::LAST_USERNAME),
+            'error'         => $error,
+        );
+    }
 
-	/**
-	 * @Route("/login_check", name="KekRozsakSecurityBundle_login_check")
-	 */
-	public function loginCheckAction()
-	{
-		// The security layer will intercept this request. This method will never be called.
-	}
+    /**
+     * @Route("/login_check", name="KekRozsakSecurityBundle_login_check")
+     */
+    public function loginCheckAction()
+    {
+        // The security layer will intercept this request. This method will never be called.
+    }
 
-	/**
-	 * @Route("/logout", name="KekRozsakSecurityBundle_logout")
-	 */
-	public function logoutAction()
-	{
-		// The security layer will intercept this request. This method will never be called.
-	}
+    /**
+     * @Route("/logout", name="KekRozsakSecurityBundle_logout")
+     */
+    public function logoutAction()
+    {
+        // The security layer will intercept this request. This method will never be called.
+    }
 
-	/**
-	 * @Route("/jelentkezes", name="KekRozsakSecurityBundle_registration")
-	 * @Template()
-	 */
-	public function registrationAction()
-	{
-		$user = $this->get('security.context')->getToken()->getUser();
-		if ($user instanceof UserInterface)
-		{
-			return $this->redirect($this->generateUrl('KekRozsakFrontBundle_homepage'));
-		}
+    /**
+     * @Route("/jelentkezes", name="KekRozsakSecurityBundle_registration")
+     * @Template()
+     */
+    public function registrationAction()
+    {
+        $user = $this->get('security.context')->getToken()->getUser();
+        if ($user instanceof UserInterface) {
+            return $this->redirect($this->generateUrl('KekRozsakFrontBundle_homepage'));
+        }
 
-		$user = new User();
-		$form = $this->createForm(new UserType(true), $user);
-		$request = $this->getRequest();
+        $user = new User();
+        $form = $this->createForm(new UserType(true), $user);
+        $request = $this->getRequest();
 
-		if ($request->getMethod() == 'POST')
-		{
-			$form->bind($request);
+        if ($request->getMethod() == 'POST') {
+            $form->bind($request);
 
-			if ($form->isValid(array('registration')))
-			{
-				$roleRepo = $this->getDoctrine()->getRepository('KekRozsakSecurityBundle:Role');
-				$defaultRoles = $roleRepo->findByDefault(true);
+            if ($form->isValid(array('registration'))) {
+                $roleRepo = $this->getDoctrine()->getRepository('KekRozsakSecurityBundle:Role');
+                $defaultRoles = $roleRepo->findByDefault(true);
 
-				$user->setRegisteredAt(new \DateTime('now'));
-				$user->setPassword($this->get('security.encoder_factory')->getEncoder($user)->encodePassword($user->getPassword(), $user->getSalt()));
-				foreach ($defaultRoles as $role)
-					$user->addRole($role);
-				$em = $this->getDoctrine()->getEntityManager();
-				$em->persist($user);
-				$em->flush();
+                $user->setRegisteredAt(new \DateTime('now'));
+                $user->setPassword(
+                        $this
+                            ->get('security.encoder_factory')
+                            ->getEncoder($user)
+                            ->encodePassword(
+                                    $user->getPassword(),
+                                    $user->getSalt()
+                                )
+                    );
 
-				$userData = new UserData();
-				$user->setUserData($userData);
-				$em->persist($user);
-				$em->persist($userData);
-				$em->flush();
+                /* Add default Roles */
+                foreach ($defaultRoles as $role) {
+                    $user->addRole($role);
+                }
 
-				$message = \Swift_Message::newInstance()
-					->setSubject('Új jelentkező')
-					// TODO: Make this a config parameter!
-					->setFrom('info@blueroses.hu')
-					// TODO: Make this a config parameter!
-					->setTo('jelentkezes@blueroses.hu')
-					->setBody($this->renderView('KekRozsakSecurityBundle:Email:new_registration.txt.twig', array('user' => $user)));
-				$this->get('mailer')->send($message);
+                $em = $this->getDoctrine()->getEntityManager();
+                $em->persist($user);
+                $em->flush();
 
-				return $this->redirect($this->generateUrl('KekRozsakSecurityBundle_reg_success'));
-			}
-		}
+                $userData = new UserData();
+                $user->setUserData($userData);
+                $em->persist($user);
+                $em->persist($userData);
+                $em->flush();
 
-		return array(
-			'form' => $form->createView(),
-		);
-	}
+                $message = \Swift_Message::newInstance()
+                        ->setSubject('Új jelentkező')
+                        // TODO: Make the next two config parameters!
+                        ->setFrom('info@blueroses.hu')
+                        ->setTo('jelentkezes@blueroses.hu')
+                        ->setBody(
+                                $this->renderView(
+                                        'KekRozsakSecurityBundle:Email:new_registration.txt.twig',
+                                        array('user' => $user)
+                                    )
+                            );
+                $this->get('mailer')->send($message);
 
-	/**
-	 * @Route("/most_varj", name="KekRozsakSecurityBundle_reg_success")
-	 * @Template()
-	 */
-	public function regSuccessAction()
-	{
-		return array(
-		);
-	}
+                return $this->redirect(
+                        $this->generateUrl(
+                                'KekRozsakSecurityBundle_reg_success'
+                            )
+                    );
+            }
+        }
 
-	/**
-	 * @Route("/profil/{id}/ajax-felhasznalo-info.{_format}", name="KekRozsakSecurityBundle_ajaxUserdata", requirements={"_format": "html"})
-	 * @Method({"GET"})
-	 * @Template()
-	 * @ParamConverter("user")
-	 */
-	public function ajaxUserdataAction(User $user)
-	{
-		return array(
-			'user' => $user,
-		);
-	}
+        return array(
+            'form' => $form->createView(),
+        );
+    }
+
+    /**
+     * @Route("/most_varj", name="KekRozsakSecurityBundle_reg_success")
+     * @Template()
+     */
+    public function regSuccessAction()
+    {
+        return array(
+        );
+    }
+
+    /**
+     * @Route("/profil/{id}/ajax-felhasznalo-info.{_format}", name="KekRozsakSecurityBundle_ajaxUserdata", requirements={"_format": "html"})
+     * @Method({"GET"})
+     * @Template()
+     * @ParamConverter("user")
+     */
+    public function ajaxUserdataAction(User $user)
+    {
+        return array(
+            'user' => $user,
+        );
+    }
 }
