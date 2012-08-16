@@ -28,10 +28,11 @@
         </tr>
 {% for post in posts %}
         <tr>
-            <td class="szoveg"><div>{{ post.text|bbdecode }}</div></td>
-            <td class="felado">
-                {{ post.createdAt|date('Y-m-d') }}<br />
-                {{ post.createdAt|date('H:i') }}<br />
+            <td class="datum">
+                {{ post.createdAt|date('Y-m-d') }}
+                {{ post.createdAt|date('H:i') }}
+            </td>
+            <td class="felado" rowspan="2">
                 [avatar]<br />
                 {{ post.createdBy|userdataspan }}<br />
                 Szint<br />
@@ -39,6 +40,9 @@
                 Tagság kezdete:<br />
                 {{ post.createdBy.RegisteredAt|date('Y-m-d') }}
             </td>
+        </tr>
+        <tr>
+            <td class="szoveg"><div>{{ post.text|bbdecode }}</div></td>
         </tr>
 {% endfor %}
     </tbody>

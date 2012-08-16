@@ -21,7 +21,7 @@ body {
 }
 
 a {
-    color: inherit;
+    color: inherit !important;
     text-decoration: underline;
 }
 
@@ -62,7 +62,6 @@ a {
 }
 
 h3 a {
-    color: #3366ff;
     text-decoration: none;
 }
 
