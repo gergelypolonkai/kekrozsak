@@ -2,7 +2,11 @@
 namespace KekRozsak\SecurityBundle\Service;
 
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
+use JMS\DiExtraBundle\Annotation as DI;
 
+/**
+ * @DI\Service("kek_rozsak_security.encoder.crypt")
+ */
 class CryptEncoder implements PasswordEncoderInterface
 {
     function encodePassword($raw, $salt)
@@ -15,4 +19,3 @@ class CryptEncoder implements PasswordEncoderInterface
         return (crypt($raw, $salt) == $encoded);
     }
 }
-

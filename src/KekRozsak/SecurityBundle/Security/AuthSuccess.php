@@ -6,11 +6,26 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Security\Core\Event\AuthenticationEvent;
+use JMS\DiExtraBundle\Annotation as DI;
 
+/**
+ * @DI\Service
+ * @DI\Tag("kernel.event_listener", attributes={"event" = "security.authentication.success"})
+ */
 class AuthSuccess implements AuthenticationSuccessHandlerInterface
 {
+    /**
+     * The Doctrine interface
+     *
+     * @var Symfony\Bridge\Doctrine\RegistryInterface $doctrine
+     */
     private $doctrine;
 
+    /**
+     * @DI\InjectParams
+     *
+     * @param \Symfony\Bridge\Doctrine\RegistryInterface $doctrine
+     */
     public function __construct(RegistryInterface $doctrine)
     {
         $this->doctrine = $doctrine;
@@ -34,4 +49,3 @@ class AuthSuccess implements AuthenticationSuccessHandlerInterface
         $em->flush();
     }
 }
-

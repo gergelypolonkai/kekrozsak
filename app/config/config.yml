@@ -2,6 +2,12 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
 
+jms_di_extra:
+    locations:
+        all_bundles: false
+        bundles: [ KekRozsakFrontBundle, KekRozsakSecurityBundle ]
+        directories: [ "%kernel.root_dir%/../src" ]
+
 framework:
     #esi:             ~
     #translator:      { fallback: %locale% }

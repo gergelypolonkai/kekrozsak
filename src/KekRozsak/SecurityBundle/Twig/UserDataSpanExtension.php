@@ -4,14 +4,28 @@ namespace KekRozsak\SecurityBundle\Twig;
 
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use JMS\DiExtraBundle\Annotation as DI;
 
 use KekRozsak\SecurityBundle\Entity\User;
 
+/**
+ * @DI\Service
+ * @DI\Tag("twig.extension")
+ */
 class UserDataSpanExtension extends \Twig_Extension
 {
     protected $_securityContext;
     protected $_router;
 
+    /**
+     * @DI\InjectParams({
+     *     "router" = @DI\Inject("router"),
+     *     "security" = @DI\Inject("security.context")
+     * })
+     *
+     * @param \Symfony\Bundle\FrameworkBundle\Routing\Router $router
+     * @param \Symfony\Component\Security\Core\SecurityContextInterface $security
+     */
     public function __construct(Router $router, SecurityContextInterface $security)
     {
         $this->_router = $router;

@@ -2,15 +2,26 @@
 namespace KekRozsak\FrontBundle\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use JMS\DiExtraBundle\Annotation as DI;
 
+/**
+ * @DI\Service
+ * @DI\Tag("twig.extension")
+ * 
+ */
 class TwigBBExtension extends \Twig_Extension
 {
-    private $container;
     private $assets;
 
+    /**
+     * @DI\InjectParams({
+     *     "container" = @DI\Inject("service_container")
+     * })
+     * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+     */
     public function __construct(ContainerInterface $container)
     {
-        $this->container = $container;
+        $this->assets = $container->get('templating.helper.assets');
     }
 
     public function getFilters()
@@ -67,8 +78,7 @@ class TwigBBExtension extends \Twig_Extension
                         $sentence,
                         '<img src="'
                                 . $this
-                                    ->container
-                                    ->get('templating.helper.assets')
+                                    ->assets
                                     ->getUrl(
                                             'upload/images/'
                                             . (($ns == '') ? '' : $ns . '/')
