@@ -2,11 +2,20 @@
 #}
 {% extends 'KekRozsakFrontBundle:Default:main_template.html.twig' %}
 {% block title %} - Könyvtár{% endblock %}
+
+{% block buttonlist %}
+[Új könyv]
+{% if books|length > 0 %}
+[Saját könyveim]
+[Nálam lévő kölcsönzött könyvek]
+{% endif %}
+{% endblock buttonlist %}
+
 {% block content %}
 <h3>Könyvtár</h3>
-[Saját könyveim] [Nálam lévő kölcsönzött könyvek]
+{{ block('buttonlist') }}
 {% if books|length > 0 %}
-<table>
+<table id="book-list">
     <thead>
         <tr>
             <td>Szerző</td>
@@ -20,7 +29,7 @@
     </thead>
     <tbody>
 {% for book in books %}
-        <tr class="book-row popup-opener" id="book-{{ book.id }}">
+        <tr class="book-row popup-opener {{ cycle(['odd', 'even'], loop.index0) }}" id="book-{{ book.id }}">
             <td class="popup-opener">{{ book.author }}</td>
             <td>{{ book.title }}</td>
             <td>{{ book.year }}</td>
@@ -32,8 +41,10 @@
 {% endfor %}
     </tbody>
 </table>
+{{ block('buttonlist') }}
 {% endif %}
-{% endblock %}
+{% endblock content %}
+
 {% block bottomscripts %}
 <script type="text/javascript">
 $('.book-row').click(function() {
