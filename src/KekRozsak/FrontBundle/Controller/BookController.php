@@ -29,6 +29,15 @@ class BookController extends Controller
     }
 
     /**
+     * @Route("/sugo/konyvtar-lista.html", name="KekRozsakFrontBundle_bookListHelp")
+     * @Template()
+     */
+    public function listHelpAction()
+    {
+        return array();
+    }
+
+    /**
      * @Route("/konyvadat/{id}/ajax.{_format}", name="KekRozsakFrontBundle_bookAjaxData", defaults={"_format": "html"}, options={"expose": true})
      * @Template()
      * @ParamConverter("book")

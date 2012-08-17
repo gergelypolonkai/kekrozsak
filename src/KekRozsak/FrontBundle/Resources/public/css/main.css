@@ -92,3 +92,8 @@ h3 a {
     clear: both;
     float: none;
 }
+
+#help-button {
+    display: block;
+    float: right;
+}

@@ -25,7 +25,7 @@ function doPopup(title, content, url, w, h, callback)
         }
     }).error(function()
     {
-        $('#popup-content').html('Nem sikerült betölteni a könyv adatait.');
+        $('#popup-content').html('Szerver-oldali hiba!');
     });
 }
 
@@ -102,4 +102,12 @@ $(document).ready(function() {
         $('#news-button').show();
         resizeBoxes();
     });
+
+    $('#help-button a').click(function()
+    {
+        helpUrl = $(this).attr('href');
+        doPopup('Súgó', null, helpUrl, 400, 300, null);
+
+        return false;
+    })
 });

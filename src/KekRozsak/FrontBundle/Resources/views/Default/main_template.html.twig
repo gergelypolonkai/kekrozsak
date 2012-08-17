@@ -56,6 +56,7 @@
         </div>
         <div id="wrapper">
             <div id="menu">
+{# TODO: Dynamically generate menu #}
                 <ul>
                     <li><a href="{{ path('KekRozsakFrontBundle_homepage') }}">Főoldal - Aktuális</a></li>
                     <li><a href="{{ path('KekRozsakFrontBundle_articleView', { slug: 'rolunk' }) }}">Rólunk</a></li>
@@ -75,6 +76,9 @@
             <div id="content-wrapper">
                 <div id="content-outline">
                     <div id="content">
+{% if helpUrl is not null %}
+                            <span id="help-button"><a href="{{ helpUrl }}">[Súgó]</a></span><br class="clear" />
+{% endif %}
 {% block content %}{% endblock %}
                     </div>
                 </div>
