@@ -4,7 +4,7 @@ namespace KekRozsak\FrontBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use \KekRozsak\SecurityBundle\Entity\User;
+use KekRozsak\SecurityBundle\Entity\User;
 
 /**
  * KekRozsak\FrontBundle\Entity\UserData
@@ -38,12 +38,13 @@ class UserData
     /**
      * Set user
      *
-     * @param KekRozsak\SecurityBundle\Entity\User $user
+     * @param  KekRozsak\SecurityBundle\Entity\User $user
      * @return UserData
      */
-    public function setUser(\KekRozsak\SecurityBundle\Entity\User $user)
+    public function setUser(User $user)
     {
         $this->user = $user;
+
         return $this;
     }
 
@@ -69,13 +70,14 @@ class UserData
     /**
      * Set emailPublic
      *
-     * @param boolean $emailPublic
+     * @param  boolean  $emailPublic
      * @return UserData
      */
     public function setEmailPublic($emailPublic)
     {
         // TODO: Check if parameter is boolean!
         $this->emailPublic = $emailPublic;
+
         return $this;
     }
 
@@ -101,13 +103,14 @@ class UserData
     /**
      * Set realName
      *
-     * @param string $realName
+     * @param  string   $realName
      * @return UserData
      */
     public function setRealName($realName = null)
     {
         // TODO: Check if empty!
         $this->realName = $realName;
+
         return $this;
     }
 
@@ -133,13 +136,14 @@ class UserData
     /**
      * Set realNamePublic
      *
-     * @param boolean $realNamePublic
+     * @param  boolean  $realNamePublic
      * @return UserData
      */
     public function setRealNamePublic($realNamePublic = false)
     {
         // TODO: Check if parameter is boolean!
         $this->realNamePublic = $realNamePublic;
+
         return $this;
     }
 
@@ -165,12 +169,13 @@ class UserData
     /**
      * Set selfDescription
      *
-     * @param string $selfDescription
+     * @param  string   $selfDescription
      * @return UserData
      */
     public function setSelfDescription($selfDescription = null)
     {
         $this->selfDescription = $selfDescription;
+
         return $this;
     }
 
@@ -196,13 +201,14 @@ class UserData
     /**
      * Set msnAddress
      *
-     * @param string $msnAddress
+     * @param  string   $msnAddress
      * @return UserData
      */
     public function setMsnAddress($msnAddress = null)
     {
         // TODO: Check if empty!
         $this->msnAddress = $msnAddress;
+
         return $this;
     }
 
@@ -228,13 +234,14 @@ class UserData
     /**
      * Set msnAddressPublic
      *
-     * @param boolean $msnAddressPublic
+     * @param  boolean  $msnAddressPublic
      * @return UserData
      */
     public function setMsnAddressPublic($msnAddressPublic)
     {
         // TODO: Check if parameter is boolean!
         $this->msnAddressPublic = $msnAddressPublic;
+
         return $this;
     }
 
@@ -260,13 +267,14 @@ class UserData
     /**
      * Set googleTalk
      *
-     * @param string $googleTalk
+     * @param  string   $googleTalk
      * @return UserData
      */
     public function setGoogleTalk($googleTalk = null)
     {
         // TODO: Check if empty!
         $this->googleTalk = $googleTalk;
+
         return $this;
     }
 
@@ -292,13 +300,14 @@ class UserData
     /**
      * Set googleTalkPublic
      *
-     * @param boolean $googleTalkPublic
+     * @param  boolean  $googleTalkPublic
      * @return UserData
      */
     public function setGoogleTalkPublic($googleTalkPublic)
     {
         // TODO: Check if parameter is boolean!
         $this->googleTalkPublic = $googleTalkPublic;
+
         return $this;
     }
 
@@ -324,13 +333,14 @@ class UserData
     /**
      * Set skype
      *
-     * @param string $skype
+     * @param  string   $skype
      * @return UserData
      */
     public function setSkype($skype = null)
     {
         // TODO: Check if empty!
         $this->skype = $skype;
+
         return $this;
     }
 
@@ -356,13 +366,14 @@ class UserData
     /**
      * Set skypePublic
      *
-     * @param boolean $skypePublic
+     * @param  boolean  $skypePublic
      * @return UserData
      */
     public function setSkypePublic($skypePublic)
     {
         // TODO: Check if parameter is boolean!
         $this->skypePublic = $skypePublic;
+
         return $this;
     }
 
@@ -388,13 +399,14 @@ class UserData
     /**
      * Set phoneNumber
      *
-     * @param string $phoneNumber
+     * @param  string   $phoneNumber
      * @return UserData
      */
     public function setPhoneNumber($phoneNumber = null)
     {
         // TODO: Check if empty!
         $this->phoneNumber = $phoneNumber;
+
         return $this;
     }
 
@@ -420,13 +432,14 @@ class UserData
     /**
      * Set phoneNumberPublic
      *
-     * @param boolean $phoneNumberPublic
+     * @param  boolean  $phoneNumberPublic
      * @return UserData
      */
     public function setPhoneNumberPublic($phoneNumberPublic)
     {
         // TODO: Check if parameter is boolean!
         $this->phoneNumberPublic = $phoneNumberPublic;
+
         return $this;
     }
 

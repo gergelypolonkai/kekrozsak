@@ -69,7 +69,6 @@ class DefaultController extends Controller
     public function groupJoinDeclineAction()
     {
         // TODO: A reason must be written to decline a join request!
-
         return array(
         );
     }

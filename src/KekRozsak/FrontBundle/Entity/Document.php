@@ -58,12 +58,13 @@ class Document
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string   $title
      * @return Document
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -90,12 +91,13 @@ class Document
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string   $slug
      * @return Document
      */
     public function setSlug($slug)
     {
         $this->slug = $slug;
+
         return $this;
     }
 
@@ -122,12 +124,13 @@ class Document
     /**
      * Set createdBy
      *
-     * @param KekRozsak\SecurityBundle\Entity\User $createdBy
+     * @param  KekRozsak\SecurityBundle\Entity\User $createdBy
      * @return Document
      */
     public function setCreatedBy(User $createdBy)
     {
         $this->createdBy = $createdBy;
+
         return $this;
     }
 
@@ -153,12 +156,13 @@ class Document
     /**
      * Set createdAt
      *
-     * @param DateTime $createdAt
+     * @param  DateTime $createdAt
      * @return Document
      */
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
@@ -184,12 +188,13 @@ class Document
     /**
      * Set content
      *
-     * @param string $content
+     * @param  string   $content
      * @return Document
      */
     public function setContent($content)
     {
         $this->content = $content;
+
         return $this;
     }
 
@@ -212,12 +217,13 @@ class Document
     /**
      * Add a group
      *
-     * @param KekRozsak\FrontBundle\Entity\Group $group
+     * @param  KekRozsak\FrontBundle\Entity\Group $group
      * @return Document
      */
     public function addGroup(Group $group)
     {
         $this->groups[] = $group;
+
         return $this;
     }
 
@@ -243,12 +249,13 @@ class Document
     /**
      * Set updatedBy
      *
-     * @param KekRozsak\SecurityBundle\Entity\User $updatedBy
+     * @param  KekRozsak\SecurityBundle\Entity\User $updatedBy
      * @return Document
      */
     public function setUpdatedBy(User $updatedBy = null)
     {
         $this->updatedBy = $updatedBy;
+
         return $this;
     }
 
@@ -274,15 +281,16 @@ class Document
     /**
      * Set updatedAt
      *
-     * @param DateTime $updatedAt
+     * @param  DateTime $updatedAt
      * @return Document
      */
     public function setUpdatedAt(\DateTime $updatedAt = null)
     {
         $this->updatedAt = $updatedAt;
+
         return $this;
     }
-	
+
     /**
      * Get updatedAt
      *
@@ -298,19 +306,20 @@ class Document
      * @ORM\Column(type="text", nullable=true)
      */
     protected $updateReason;
-	
+
     /**
      * Set updateReason
      *
-     * @param string $updateReason
+     * @param  string   $updateReason
      * @return Document
      */
     public function setUpdateReason($updateReason = null)
     {
         $this->updateReason = $updateReason;
+
         return $this;
     }
-	
+
     /**
      * Get updateReason
      *

@@ -5,8 +5,6 @@ namespace KekRozsak\SecurityBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\Role\RoleInterface;
 
-use KekRozsak\SecurityBundle\Entity\User;
-
 /**
  * KekRozsak\SecurityBundle\Entity\Role
  *
@@ -48,13 +46,14 @@ class Role implements RoleInterface
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return Role
      */
     public function setName($name)
     {
         // TODO: Check if null or empty!
         $this->name = $name;
+
         return $this;
     }
 
@@ -86,6 +85,7 @@ class Role implements RoleInterface
     {
         // TODO: Check if parameter is boolean!
         $this->default = $default;
+
         return $this;
     }
 
@@ -101,12 +101,13 @@ class Role implements RoleInterface
     /**
      * Set description
      *
-     * @param string $description
+     * @param  string $description
      * @return Role
      */
     public function setDescription($description = null)
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -139,13 +140,14 @@ class Role implements RoleInterface
     /**
      * Set shortDescription
      *
-     * @param string $shortDescription
+     * @param  string $shortDescription
      * @return Role
      */
     public function setShortDescription($shortDescription)
     {
         // TODO: Check if empty or null!
         $this->shortDescription = $shortDescription;
+
         return $this;
     }
 

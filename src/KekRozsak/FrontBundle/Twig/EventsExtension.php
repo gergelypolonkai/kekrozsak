@@ -21,7 +21,7 @@ class EventsExtension extends \Twig_Extension
      *     "securityContext" = @DI\Inject("security.context")
      * })
      *
-     * @param \Symfony\Bridge\Doctrine\RegistryInterface $doctrine
+     * @param \Symfony\Bridge\Doctrine\RegistryInterface                $doctrine
      * @param \Symfony\Component\Security\Core\SecurityContextInterface $securityContext
      */
     public function __construct(RegistryInterface $doctrine, SecurityContextInterface $securityContext)
@@ -56,7 +56,7 @@ class EventsExtension extends \Twig_Extension
                 );
             $eventList[$i]['date'] = $date;
             $eventList[$i]['events'] = array();
-            foreach ($events as $event)  {
+            foreach ($events as $event) {
                 if ($event->isOnDate($date)) {
                     $eventList[$i]['events'][] = $event;
                 }

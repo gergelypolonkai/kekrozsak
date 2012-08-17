@@ -10,15 +10,15 @@ class RoleHierarchy implements RoleHierarchyInterface
     private $hierarchy;
     private $roleRepo;
     private $map;
-    
+
     public function __construct(RegistryInterface $doctrine)
     {
         $this->hierarchy = array();
         $this->roleRepo = $doctrine->getRepository('KekRozsakSecurityBundle:Role');
-        
+
         $this->buildRoleMap();
     }
-    
+
     public function getReachableRoles(array $roles)
     {
         $reachableRoles = array();
@@ -26,17 +26,17 @@ class RoleHierarchy implements RoleHierarchyInterface
             if (!isset($this->map[$role->getRole()])) {
                 continue;
             }
-            
+
             foreach ($this->map[$role->getRole()] as $r) {
                 if (($childRole = $this->roleRepo->findOneByName($r)) !== null) {
                     $reachableRoles[] = $childRole;
                 }
             }
         }
-        
+
         return $reachableRoles;
     }
-    
+
     private function buildRoleMap()
     {
         $this->map = array();

@@ -13,13 +13,13 @@ class GroupType extends AbstractType
                     'label' => 'A csoport neve',
                 )
             );
-		
+
         $builder->add('description', 'ckeditor', array(
                     'label'   => 'A csoport leírása',
                 )
             );
     }
-	
+
     public function getName()
     {
         return 'group';

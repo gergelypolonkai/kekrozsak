@@ -7,7 +7,7 @@ use JMS\DiExtraBundle\Annotation as DI;
 /**
  * @DI\Service
  * @DI\Tag("twig.extension")
- * 
+ *
  */
 class TwigBBExtension extends \Twig_Extension
 {

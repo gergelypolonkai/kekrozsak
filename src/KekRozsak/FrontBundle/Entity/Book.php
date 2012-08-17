@@ -58,7 +58,7 @@ class Book
     /**
      * Remove a copy
      *
-     * @param KekRozsak\FrontBundle\Entity\BookCopy $copy
+     * @param  KekRozsak\FrontBundle\Entity\BookCopy $copy
      * @return Book
      */
     public function removeCopy(BookCopy $copy)
@@ -83,8 +83,7 @@ class Book
      */
     public function getCopiesBorrowed()
     {
-        return $this->copies->filter(function($copy)
-            {
+        return $this->copies->filter(function($copy) {
                 return ($copy->getBorrower() !== null);
             });
     }
@@ -92,13 +91,12 @@ class Book
     /**
      * Get the copies of this Book those are borrowed by $user
      *
-     * @param \KekRozsak\SecurityBundle\Entity\User $user
+     * @param  KekRozsak\SecurityBundle\Entity\User        $user
      * @return Doctrine\Common\Collections\ArrayCollection
      */
     public function getCopiesBorrowedByUser(User $user)
     {
-        return $this->copies->filter(function($copy) use ($user)
-            {
+        return $this->copies->filter(function($copy) use ($user) {
                 return ($copy->getBorrower() == $user);
             });
     }
@@ -107,13 +105,12 @@ class Book
      * Get the copies of this Book those are borrowed by $user, but marked as
      * returned
      *
-     * @param \KekRozsak\SecurityBundle\Entity\User $user
+     * @param  KekRozsak\SecurityBundle\Entity\User        $user
      * @return Doctrine\Common\Collections\ArrayCollection
      */
     public function getCopiesBorrowedReturnedByUser(User $user)
     {
-        return $this->copies->filter(function($copy) use ($user)
-            {
+        return $this->copies->filter(function($copy) use ($user) {
                 return ($copy->getBorrower() == $user) && ($copy->isBorrowerReturned());
             });
     }
@@ -133,13 +130,12 @@ class Book
     /**
      * Get $user's copies of this Book
      *
-     * @param \KekRozsak\SecurityBundle\Entity\User $user
+     * @param  KekRozsak\SecurityBundle\Entity\User        $user
      * @return Doctrine\Common\Collections\ArrayCollection
      */
     public function getUsersCopies(User $user)
     {
-        return $this->copies->filter(function ($copy) use ($user)
-            {
+        return $this->copies->filter(function ($copy) use ($user) {
                 return ($copy->getOwner() == $user);
             });
     }
@@ -147,13 +143,12 @@ class Book
     /**
      * Get $user's borrowable copies of this Book
      *
-     * @param \KekRozsak\SecurityBundle\Entity\User $user
+     * @param  KekRozsak\SecurityBundle\Entity\User        $user
      * @return Doctrine\Common\Collections\ArrayCollection
      */
     public function getUsersCopiesBorrowable(User $user)
     {
-        return $this->copies->filter(function($copy) use ($user)
-            {
+        return $this->copies->filter(function($copy) use ($user) {
                 return (($copy->getOwner() == $user) && $copy->isBorrowable());
             });
     }
@@ -161,13 +156,12 @@ class Book
     /**
      * Get $user's buyable copies of this Book
      *
-     * @param \KekRozsak\SecurityBundle\Entity\User $user
+     * @param  KekRozsak\SecurityBundle\Entity\User        $user
      * @return Doctrine\Common\Collections\ArrayCollection
      */
     public function getUsersCopiesBuyable(User $user)
     {
-        return $this->copies->filter(function($copy) use ($user)
-            {
+        return $this->copies->filter(function($copy) use ($user) {
                 return (($copy->getOwner() == $user) && $copy->isBuyable());
             });
     }
@@ -184,13 +178,14 @@ class Book
     /**
      * Set author
      *
-     * @param string $author
+     * @param  string $author
      * @return Book
      */
     public function setAuthor($author)
     {
         // TODO: Check if null!
         $this->author = $author;
+
         return $this;
     }
 
@@ -216,13 +211,14 @@ class Book
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string $title
      * @return Book
      */
     public function setTitle($title)
     {
         // TODO: Check if null!
         $this->title = $title;
+
         return $this;
     }
 
@@ -248,13 +244,14 @@ class Book
     /**
      * Set year
      *
-     * @param integer $year
+     * @param  integer $year
      * @return Book
      */
     public function setYear($year)
     {
         // TODO: Check if null!
         $this->year = $year;
+
         return $this;
     }
 
@@ -289,13 +286,14 @@ class Book
     /**
      * Add a user for want-to-borrowers
      *
-     * @param KekRozsak\SecurityBundle\Entity\User $user
+     * @param  KekRozsak\SecurityBundle\Entity\User $user
      * @return Book
      */
     public function addWouldBorrow(User $user)
     {
         // TODO: Check if null!
         $this->wouldBorrow->add($user);
+
         return $this;
     }
 
@@ -312,7 +310,7 @@ class Book
     /**
      * Check if $user would like to borrow this book
      *
-     * @param KekRozsak\SecurityBundle\Entity\User $user
+     * @param  KekRozsak\SecurityBundle\Entity\User $user
      * @return boolean
      */
     public function userWouldBorrow(User $user)
@@ -333,12 +331,13 @@ class Book
     /**
      * Add a user for want-to-buyers
      *
-     * @param KekRozsak\SecurityBundle\Entity\User $user
+     * @param  KekRozsak\SecurityBundle\Entity\User $user
      * @return Book
      */
     public function addWouldBuy(User $user)
     {
         $this->wouldBuy->add($user);
+
         return $this;
     }
 
@@ -355,7 +354,7 @@ class Book
     /**
      * Check if specified user would buy this book
      *
-     * @param KekRozsak\SecurityBundle\Entity\User $user
+     * @param  KekRozsak\SecurityBundle\Entity\User $user
      * @return boolean
      */
     public function userWouldBuy(User $user)

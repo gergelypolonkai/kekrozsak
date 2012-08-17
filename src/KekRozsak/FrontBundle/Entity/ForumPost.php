@@ -40,7 +40,7 @@ class ForumPost
      *
      * @var KekRozsak\SecurityBundle\Entity\User $createBy
      *
-     * @ORM\ManyToOne(targetEntity="\KekRozsak\SecurityBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User")
      * @ORM\JoinColumn(name="created_by_id")
      */
     protected $createdBy;
@@ -48,20 +48,21 @@ class ForumPost
     /**
      * Set createdBy
      *
-     * @param \KekRozsak\SecurityBundle\Entity\User $createdBy
+     * @param  KekRozsak\SecurityBundle\Entity\User $createdBy
      * @return ForumPost
      */
     public function setCreatedBy(User $createdBy)
     {
         // TODO: Check if null!
         $this->createdBy = $createdBy;
+
         return $this;
     }
 
     /**
      * Get createdBy
      *
-     * @return \KekRozsak\SecurityBundle\Entity\User
+     * @return KekRozsak\SecurityBundle\Entity\User
      */
     public function getCreatedBy()
     {
@@ -80,7 +81,7 @@ class ForumPost
     /**
      * Set createdAt
      *
-     * @param DateTime $createdAt
+     * @param  DateTime  $createdAt
      * @return ForumPost
      */
     public function setCreatedAt(\DateTime $createdAt)
@@ -111,13 +112,14 @@ class ForumPost
     /**
      * Set text
      *
-     * @param string $text
+     * @param  string    $text
      * @return ForumPost
      */
     public function setText($text)
     {
         // TODO: Check if empty or null!
         $this->text = $text;
+
         return $this;
     }
 
@@ -143,7 +145,7 @@ class ForumPost
     /**
      * Set topic
      *
-     * @param ForumTopic $topic
+     * @param  ForumTopic $topic
      * @return ForumPost
      */
     public function setTopic(ForumTopic $topic)
@@ -180,6 +182,6 @@ class ForumPost
     {
         if ($this->createdAt === null) {
             $this->createdAt = new \DateTime('now');
-	}
+    }
     }
 }

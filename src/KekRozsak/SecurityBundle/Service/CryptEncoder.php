@@ -9,12 +9,12 @@ use JMS\DiExtraBundle\Annotation as DI;
  */
 class CryptEncoder implements PasswordEncoderInterface
 {
-    function encodePassword($raw, $salt)
+    public function encodePassword($raw, $salt)
     {
         return crypt($raw);
     }
 
-    function isPasswordValid($encoded, $raw, $salt)
+    public function isPasswordValid($encoded, $raw, $salt)
     {
         return (crypt($raw, $salt) == $encoded);
     }

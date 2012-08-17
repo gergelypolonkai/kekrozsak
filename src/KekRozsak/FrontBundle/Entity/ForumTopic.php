@@ -59,6 +59,7 @@ class ForumTopic
     {
         // TODO: Check if null!
         $this->createdBy = $createdBy;
+
         return $this;
     }
 
@@ -84,13 +85,14 @@ class ForumTopic
     /**
      * Set createdAt
      *
-     * @param DateTime $createdAt
+     * @param  DateTime   $createdAt
      * @return ForumTopic
      */
     public function setCreatedAt(\DateTime $createdAt)
     {
         // TODO: Check if not null!
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
@@ -117,13 +119,14 @@ class ForumTopic
     /**
      * Set topicGroup
      *
-     * @param ForumTopicGroup $topicGroup
+     * @param  ForumTopicGroup $topicGroup
      * @return ForumTopic
      */
     public function setTopicGroup(ForumTopicGroup $topicGroup)
     {
         // TODO: Check if not null!
         $this->topicGroup = $topicGroup;
+
         return $this;
     }
 
@@ -149,13 +152,14 @@ class ForumTopic
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string     $slug
      * @return ForumTopic
      */
     public function setSlug($slug)
     {
         // TODO: Check if empty or null!
         $this->slug = $slug;
+
         return $this;
     }
 
@@ -181,13 +185,14 @@ class ForumTopic
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string     $title
      * @return ForumTopic
      */
     public function setTitle($title)
     {
         // TODO: Check if empty or null!
         $this->title = $title;
+
         return $this;
     }
 
@@ -214,7 +219,7 @@ class ForumTopic
     /**
      * Set lastPost
      *
-     * @param ForumPost $lastPost
+     * @param  ForumPost  $lastPost
      * @return ForumTopic
      */
     public function setLastPost($lastPost = null)
@@ -244,13 +249,14 @@ class ForumTopic
     /**
      * Add post
      *
-     * @param ForumPost $post
+     * @param  ForumPost  $post
      * @return ForumTopic
      */
     public function addPost(ForumPost $post)
     {
         // TODO: Check if null!
         $this->posts[] = $post;
+
         return $this;
     }
 

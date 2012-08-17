@@ -63,13 +63,14 @@ class User implements UserInterface, AdvancedUserInterface
     /**
      * Set username
      *
-     * @param string $username
+     * @param  string $username
      * @return User
      */
     public function setUsername($username)
     {
         // TODO: check if null or empty!
         $this->username = $username;
+
         return $this;
     }
 
@@ -96,12 +97,13 @@ class User implements UserInterface, AdvancedUserInterface
     /**
      * Set password
      *
-     * @param string $password
+     * @param  string $password
      * @return User
      */
     public function setPassword($password)
     {
         $this->password = $password;
+
         return $this;
     }
 
@@ -127,13 +129,14 @@ class User implements UserInterface, AdvancedUserInterface
     /**
      * Set displayName
      *
-     * @param string $displayName
+     * @param  string $displayName
      * @return User
      */
     public function setDisplayName($displayName)
     {
         // TODO: Check if empty or null!
         $this->displayName = $displayName;
+
         return $this;
     }
 
@@ -159,13 +162,14 @@ class User implements UserInterface, AdvancedUserInterface
     /**
      * Set email
      *
-     * @param string $email
+     * @param  string $email
      * @return User
      */
     public function setEmail($email)
     {
         // TODO: Check if empty or null!
         $this->email = $email;
+
         return $this;
     }
 
@@ -191,12 +195,13 @@ class User implements UserInterface, AdvancedUserInterface
     /**
      * Set registeredAt
      *
-     * @param DateTime $registeredAt
+     * @param  DateTime $registeredAt
      * @return User
      */
     public function setRegisteredAt(\DateTime $registeredAt)
     {
         $this->registeredAt = $registeredAt;
+
         return $this;
     }
 
@@ -223,12 +228,13 @@ class User implements UserInterface, AdvancedUserInterface
     /**
      * Set acceptedBy
      *
-     * @param User $acceptedBy
+     * @param  User $acceptedBy
      * @return User
      */
     public function setAcceptedBy(User $acceptedBy = null)
     {
         $this->acceptedBy = $acceptedBy;
+
         return $this;
     }
 
@@ -254,12 +260,13 @@ class User implements UserInterface, AdvancedUserInterface
     /**
      * Set lastLoginAt;
      *
-     * @param DateTime $lastLoginAt
+     * @param  DateTime $lastLoginAt
      * @return User
      */
     public function setLastLoginAt(\DateTime $lastLoginAt = null)
     {
         $this->lastLoginAt = $lastLoginAt;
+
         return $this;
     }
 
@@ -276,7 +283,7 @@ class User implements UserInterface, AdvancedUserInterface
     /**
      * The UserData object for this User
      *
-     * @var \KekRozsak\FrontBundle\Entity\UserData $userData
+     * @var KekRozsak\FrontBundle\Entity\UserData $userData
      *
      * @ORM\OneToOne(targetEntity="KekRozsak\FrontBundle\Entity\UserData", fetch="LAZY", cascade={"persist"}, mappedBy="user")
      */
@@ -285,20 +292,21 @@ class User implements UserInterface, AdvancedUserInterface
     /**
      * Set userData
      *
-     * @param \KekRozsak\FrontBundle\Entity\UserData $userData
+     * @param  KekRozsak\FrontBundle\Entity\UserData $userData
      * @return User
      */
-    public function setUserData(\KekRozsak\FrontBundle\Entity\UserData $userData = null)
+    public function setUserData(UserData $userData = null)
     {
         $this->userData = $userData;
         $userData->setUser($this);
+
         return $this;
     }
 
     /**
      * Get userData
      *
-     * @return \KekRozsak\FrontBundle\Entity\UserData
+     * @return KekRozsak\FrontBundle\Entity\UserData
      */
     public function getUserData()
     {
@@ -319,13 +327,14 @@ class User implements UserInterface, AdvancedUserInterface
     /**
      * Add group
      *
-     * @param KekRozsak\FrontBundle\Entity\UserGroupMembership $group
+     * @param  KekRozsak\FrontBundle\Entity\UserGroupMembership $group
      * @return User
      */
     public function addGroup(UserGroupMembership $group)
     {
         // TODO: Check if null!
         $this->groups[] = $group;
+
         return $this;
     }
 
@@ -351,13 +360,14 @@ class User implements UserInterface, AdvancedUserInterface
     /**
      * Add a role
      *
-     * @param KekRozsak\SecurityBundle\Entity\Role $role
+     * @param  KekRozsak\SecurityBundle\Entity\Role $role
      * @return User
      */
     public function addRole(Role $role)
     {
         // TODO: Check if null!
         $this->roles[] = $role;
+
         return $this;
     }
 
@@ -390,6 +400,7 @@ class User implements UserInterface, AdvancedUserInterface
          * As we use crypt() to encode passwords, salt is always the same as the
          * password
          */
+
         return $this->password;
     }
 
@@ -402,24 +413,28 @@ class User implements UserInterface, AdvancedUserInterface
     public function isAccountNonExpired()
     {
         /* Currently, accounts never expire */
+
         return true;
     }
 
     public function isAccountNonLocked()
     {
         /* Currently, accounts cannot be locked */
+
         return true;
     }
 
     public function isCredentialsNonExpired()
     {
         /* Currently, credentials never expire */
+
         return true;
     }
 
     public function isEnabled()
     {
         /* Account is enabled if it is accepted by someone */
+
         return ($this->acceptedBy !== null);
     }
 }

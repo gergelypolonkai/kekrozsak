@@ -55,12 +55,13 @@ class Group
     /**
      * Set leader
      *
-     * @param KekRozsak\SecurityBundle\Entity\User $leader
+     * @param  KekRozsak\SecurityBundle\Entity\User $leader
      * @return Group
      */
     public function setLeader(User $leader = null)
     {
         $this->leader = $leader;
+
         return $this;
     }
 
@@ -88,13 +89,14 @@ class Group
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return Group
      */
     public function setName($name)
     {
         // TODO: Check if empty or null!
         $this->name = $name;
+
         return $this;
     }
 
@@ -120,13 +122,14 @@ class Group
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string $slug
      * @return Group
      */
     public function setSlug($slug)
     {
         // TODO: Check if empty or null!
         $this->slug = $slug;
+
         return $this;
     }
 
@@ -153,12 +156,13 @@ class Group
     /**
      * Set createdBy
      *
-     * @param KekRozsak\SecurityBundle\Entity\User $createdBy
+     * @param  KekRozsak\SecurityBundle\Entity\User $createdBy
      * @return Group
      */
     public function setCreatedBy(User $createdBy)
     {
         $this->createdBy = $createdBy;
+
         return $this;
     }
 
@@ -184,13 +188,14 @@ class Group
     /**
      * Set createdAt
      *
-     * @param DateTime $createdAt
+     * @param  DateTime $createdAt
      * @return Group
      */
     public function setCreatedAt(\DateTime $createdAt)
     {
         // TODO: Check if null!
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
@@ -217,13 +222,14 @@ class Group
     /**
      * Add member
      *
-     * @param KekRozsak\FrontBundle\Entity\UserGroupMembership $member
+     * @param  KekRozsak\FrontBundle\Entity\UserGroupMembership $member
      * @return Group
      */
     public function addMember(UserGroupMembership $member)
     {
         // TODO: Check if null!
         $this->members[] = $member;
+
         return $this;
     }
 
@@ -240,13 +246,12 @@ class Group
     /**
      * Check if user is a member of this Group
      *
-     * @param KekRozsak\SecurityBundle\Entity\User $user
+     * @param  KekRozsak\SecurityBundle\Entity\User $user
      * @return boolean
      */
     public function isMember(User $user)
     {
-        return ($this->members->filter(function ($groupMembership) use ($user)
-        {
+        return ($this->members->filter(function ($groupMembership) use ($user) {
             return (
                     ($groupMembership->getUser() == $user)
                     && (
@@ -260,13 +265,12 @@ class Group
     /**
      * Check if user already requested a membership in this Group
      *
-     * @param KekRozsak\SecurityBundle\Entity\User $user
+     * @param  KekRozsak\SecurityBundle\Entity\User $user
      * @return boolean
      */
     public function isRequested(User $user)
     {
-        return ($this->members->filter(function ($groupMembership) use ($user)
-        {
+        return ($this->members->filter(function ($groupMembership) use ($user) {
             return (
                     ($groupMembership->getUser() == $user)
                     && ($groupMembership->getMembershipRequestedAt() !== null)
@@ -286,12 +290,13 @@ class Group
     /**
      * Set description
      *
-     * @param string $description
+     * @param  string $description
      * @return Group
      */
     public function setDescription($description = null)
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -323,6 +328,7 @@ class Group
     public function setOpen($open = false)
     {
         $this->open = $open;
+
         return $this;
     }
 
@@ -353,16 +359,17 @@ class Group
     /**
      * Add document
      *
-     * @param KekRozsak\FrontBundle\Entity\Document $document
+     * @param  KekRozsak\FrontBundle\Entity\Document $document
      * @return Group
      */
     public function addDocument(Document $document)
     {
         // TODO: Check if null!
         $this->documents[] = $document;
+
         return $this;
     }
-	
+
     /**
      * Get all documents
      *

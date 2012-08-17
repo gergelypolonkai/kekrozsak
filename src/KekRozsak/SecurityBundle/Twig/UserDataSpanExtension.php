@@ -23,7 +23,7 @@ class UserDataSpanExtension extends \Twig_Extension
      *     "security" = @DI\Inject("security.context")
      * })
      *
-     * @param \Symfony\Bundle\FrameworkBundle\Routing\Router $router
+     * @param \Symfony\Bundle\FrameworkBundle\Routing\Router            $router
      * @param \Symfony\Component\Security\Core\SecurityContextInterface $security
      */
     public function __construct(Router $router, SecurityContextInterface $security)

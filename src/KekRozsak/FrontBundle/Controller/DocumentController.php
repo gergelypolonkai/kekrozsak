@@ -17,6 +17,9 @@ class DocumentController extends Controller
      * @Route("/dokumentum/{slug}.{_format}", name="KekRozsakFrontBundle_documentView", defaults={"_format": "html"}, requirements={"_format": "html|pdf"})
      * @Template()
      * @ParamConverter("document")
+     *
+     * @param KekRozsak\FrontBundle\Entity\Document $document
+     * @param string                                $_format
      */
     public function viewAction(Document $document, $_format)
     {
@@ -29,6 +32,7 @@ class DocumentController extends Controller
                     'KekRozsakFrontBundle:Document:pdfView.html.twig',
                     $templateParams
                 );
+
             return $this->get('io_tcpdf')->quick_pdf($html);
         }
 
@@ -78,6 +82,8 @@ class DocumentController extends Controller
      * @Route("/dokumentum/{slug}/szerkesztes", name="KekRozsakFrontBundle_documentEdit")
      * @Template()
      * @ParamConverter("document")
+     *
+     * @param KekRozsak\FrontBundle\Entity\Document $document
      */
     public function editAction(Document $document)
     {

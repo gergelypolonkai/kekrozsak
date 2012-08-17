@@ -16,7 +16,7 @@ use KekRozsak\FrontBundle\Entity\Group;
  */
 class UserGroupMembership
 {
-    public function __construct(\KekRozsak\SecurityBundle\Entity\User $user, \KekRozsak\FrontBundle\Entity\Group $group)
+    public function __construct(User $user, Group $group)
     {
         $this->setUser($user);
         $this->setGroup($group);
@@ -57,13 +57,14 @@ class UserGroupMembership
     /**
      * Set user
      *
-     * @param KekRozsak\SecurityBundle\Entity\User $user
+     * @param  KekRozsak\SecurityBundle\Entity\User $user
      * @return UserGroupMembership
      */
     public function setUser(User $user)
     {
         // TODO: Check if not null!
         $this->user = $user;
+
         return $this;
     }
 
@@ -96,6 +97,7 @@ class UserGroupMembership
     public function setGroup(Group $group)
     {
         $this->group = $group;
+
         return $this;
     }
 
@@ -121,13 +123,14 @@ class UserGroupMembership
     /**
      * Set membershipRequestedAt
      *
-     * @param DateTime $membershipRequestedAt
+     * @param  DateTime            $membershipRequestedAt
      * @return UserGroupMembership
      */
     public function setMembershipRequestedAt(\DateTime $membershipRequestedAt)
     {
         // TODO: Check if null!
         $this->membershipRequestedAt = $membershipRequestedAt;
+
         return $this;
     }
 
@@ -153,12 +156,13 @@ class UserGroupMembership
     /**
      * Set membershipAcceptedAt
      *
-     * @param DateTime $membershipAcceptedAt
+     * @param  DateTime            $membershipAcceptedAt
      * @return UserGroupMembership
      */
     public function setMembershipAcceptedAt(\DateTime $membershipAcceptedAt = null)
     {
         $this->membershipAcceptedAt = $membershipAcceptedAt;
+
         return $this;
     }
 
@@ -188,9 +192,10 @@ class UserGroupMembership
      * @param KekRozsak\SecurityBundle\Entity\User
      * @return UserGroupMembership
      */
-    public function setMembershipAcceptedBy(\KekRozsak\SecurityBundle\Entity\User $membershipAcceptedBy = null)
+    public function setMembershipAcceptedBy(User $membershipAcceptedBy = null)
     {
         $this->membershipAcceptedBy = $membershipAcceptedBy;
+
         return $this;
     }
 

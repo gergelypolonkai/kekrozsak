@@ -7,7 +7,7 @@ class Slugifier
     /**
      * Slugify string
      *
-     * @param string $text
+     * @param  string $text
      * @return string
      */
     public function slugify($text)

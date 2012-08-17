@@ -29,7 +29,7 @@ class Event
      * @ORM\Column(type="integer")
      */
     protected $id;
-	
+
     /**
      * Get id
      *
@@ -39,7 +39,7 @@ class Event
     {
         return $this->id;
     }
-	
+
     /**
      * The User who created the Event
      *
@@ -49,19 +49,20 @@ class Event
      * @ORM\JoinColumn(name="created_by_id")
      */
     protected $createdBy;
-	
+
     /**
      * Set createdBy
      *
-     * @param KekRozsak\SecurityBundle\Entity\User $createdBy
+     * @param  KekRozsak\SecurityBundle\Entity\User $createdBy
      * @return Event
      */
     public function setCreatedBy(User $createdBy)
     {
         $this->createdBy = $createdBy;
+
         return $this;
     }
-	
+
     /**
      * Get createdBy
      *
@@ -71,7 +72,7 @@ class Event
     {
         return $this->createdBy;
     }
-	
+
     /**
      * The date on which the Event starts
      *
@@ -80,19 +81,20 @@ class Event
      * @ORM\Column(type="date", nullable=true, name="start_date", nullable=false)
      */
     protected $startDate;
-	
+
     /**
      * Set startDate
      *
-     * @param DateTime $startDate
+     * @param  DateTime $startDate
      * @return Event
      */
     public function setStartDate(\DateTime $startDate = null)
     {
         $this->startDate = $startDate;
+
         return $this;
     }
-	
+
     /**
      * Get startDate
      *
@@ -102,7 +104,7 @@ class Event
     {
         return $this->startDate;
     }
-	
+
     /**
      * The date on which the Event ends. May be null if same as $startDate
      *
@@ -115,13 +117,14 @@ class Event
     /**
      * Set endDate
      *
-     * @param DateTime $endDate
+     * @param  DateTime $endDate
      * @return Event
      */
     public function setEndDate(\DateTime $endDate = null)
     {
         // TODO: Check if endDate is later than startDate
         $this->endDate = $endDate;
+
         return $this;
     }
 
@@ -148,12 +151,13 @@ class Event
     /**
      * Add attendee
      *
-     * @param KekRozsak\SecurityBundle\Entity\User $attendee
+     * @param  KekRozsak\SecurityBundle\Entity\User $attendee
      * @return Event
      */
     public function addAttendee(User $attendee)
     {
         $this->attendees[] = $attendee;
+
         return $this;
     }
 
@@ -170,13 +174,12 @@ class Event
     /**
      * Check if a user is attending
      *
-     * @param KekRozsak\SecurityBundle\Entity\User $user
+     * @param  KekRozsak\SecurityBundle\Entity\User $user
      * @return boolean
      */
     public function isAttending(User $user)
     {
-        $users = $this->attendees->filter(function ($attendee) use ($user)
-        {
+        $users = $this->attendees->filter(function ($attendee) use ($user) {
             if ($attendee == $user) {
                 return true;
             }
@@ -199,13 +202,14 @@ class Event
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string $title
      * @return Event
      */
     public function setTitle($title)
     {
         // TODO: Check if empty or null!
         $this->title = $title;
+
         return $this;
     }
 
@@ -233,13 +237,14 @@ class Event
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string $slug
      * @return Event
      */
     public function setSlug($slug)
     {
         // TODO: Check if empty or null!
         $this->slug = $slug;
+
         return $this;
     }
 
@@ -267,13 +272,14 @@ class Event
     /**
      * Set description
      *
-     * @param string $description
+     * @param  string $description
      * @return Event
      */
     public function setDescription($description)
     {
         // TODO: Check if empty!
         $this->description = $description;
+
         return $this;
     }
 
@@ -297,12 +303,13 @@ class Event
     /**
      * Set group
      *
-     * @param KekRozsak\FrontBundle\Entity\Group $group
+     * @param  KekRozsak\FrontBundle\Entity\Group $group
      * @return Event
      */
     public function setGroup(Group $group = null)
     {
         $this->group = $group;
+
         return $this;
     }
 
@@ -328,13 +335,14 @@ class Event
     /**
      * Set cancelled
      *
-     * @param boolean $cancelled
+     * @param  boolean $cancelled
      * @return Event
      */
     public function setCancelled($cancelled = false)
     {
         // TODO: Check if parameter is boolean
         $this->cancelled = $cancelled;
+
         return $this;
     }
 
@@ -360,12 +368,13 @@ class Event
     /**
      * Set startTime
      *
-     * @param DateTime $startTime
+     * @param  DateTime $startTime
      * @return Event
      */
     public function setStartTime(\DateTime $startTime)
     {
         $this->startTime = $startTime;
+
         return $this;
     }
 
@@ -391,13 +400,14 @@ class Event
      /**
      * Set endTime
      *
-     * @param DateTime $endTime
+     * @param  DateTime $endTime
      * @return Event
      */
     public function setEndTime(\DateTime $endTime = null)
     {
         // TODO: Check if endTime is later than startDate + startTime
         $this->endTime = $endTime;
+
         return $this;
     }
 
@@ -414,7 +424,7 @@ class Event
     /**
      * Check if an event will go on a specific date
      *
-     * @param DateTime $date
+     * @param  DateTime $date
      * @return boolean
      */
     public function isOnDate(\DateTime $date)
@@ -436,7 +446,7 @@ class Event
     /**
      * Check if the event happened before a given date
      *
-     * @param DateTime $date
+     * @param  DateTime $date
      * @return boolean
      */
     public function isPast(\DateTime $date = null)

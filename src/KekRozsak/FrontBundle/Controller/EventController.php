@@ -17,6 +17,10 @@ class EventController extends Controller
      * @Template()
      * @ParamConverter("event", class="KekRozsakFrontBundle:Event", options={"mapping"={"eventSlug" = "slug", "startDate"="startDate"}})
      * @ParamConverter("startDate", class="DateTime", options={"format"="Y-m-d"})
+     *
+     * @param  DateTime                           $startDate
+     * @param  KekRozsak\FrontBundle\Entity\Event $event
+     * @return array
      */
     public function viewAction(\DateTime $startDate, Event $event)
     {
@@ -36,6 +40,10 @@ class EventController extends Controller
      * @Template()
      * @ParamConverter("event", class="KekRozsakFrontBundle:Event", options={"mapping"={"eventSlug": "slug", "startDate": "startDate"}})
      * @ParamConverter("startDate", class="DateTime", options={"format"="Y-m-d"})
+     *
+     * @param  DateTime                           $startDate
+     * @param  KekRozsak\FrontBundle\Entity\Event $event
+     * @return array
      */
     public function joinAction(\DateTime $startDate, Event $event)
     {
@@ -62,6 +70,9 @@ class EventController extends Controller
     /**
      * @Route("/esemenyek/{date}", name="KekRozsakFrontBundle_eventList", defaults={"date": null})
      * @Template()
+     *
+     * @param  string $date
+     * @return array
      */
     public function listAction($date = null)
     {
@@ -87,6 +98,9 @@ class EventController extends Controller
      * @Route("/esemenyek/{date}/ajax-lista.{_format}", name="KekRozsakFrontBundle_eventAjaxList", requirements={"_format": "html"})
      * @Template()
      * @ParamConverter("date", options={"format": "Y-m-d"})
+     *
+     * @param  DateTime $date
+     * @return array
      */
     public function ajaxListAction(\DateTime $date)
     {

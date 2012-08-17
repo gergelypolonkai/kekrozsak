@@ -90,13 +90,14 @@ class BookCopy
     /**
      * Set borrowable
      *
-     * @param boolean $borrowable
+     * @param  boolean  $borrowable
      * @return BookCopy
      */
     public function setBorrowable($borrowable)
     {
         // TODO: Check if parameter is boolean!
         $this->borrowable = $borrowable;
+
         return $this;
     }
 
@@ -122,13 +123,14 @@ class BookCopy
     /**
      * Set buyable
      *
-     * @param boolean $buyable
+     * @param  boolean  $buyable
      * @return BookCopy
      */
     public function setBuyable($buyable)
     {
         // Check if parameter is boolean!
         $this->buyable = $buyable;
+
         return $this;
     }
 

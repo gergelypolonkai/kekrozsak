@@ -53,13 +53,14 @@ class ForumTopicGroup
     /**
      * Set createdBy
      *
-     * @param KekRozsak\SecurityBundle\Entity\User $createdBy
+     * @param  KekRozsak\SecurityBundle\Entity\User $createdBy
      * @return ForumTopicGroup
      */
     public function setCreatedBy(User $createdBy)
     {
         // TODO: Check if null!
         $this->createdBy = $createdBy;
+
         return $this;
     }
 
@@ -85,13 +86,14 @@ class ForumTopicGroup
     /**
      * Set createdAt
      *
-     * @param DateTime $createdAt
+     * @param  DateTime        $createdAt
      * @return ForumTopicGroup
      */
     public function setCreatedAt(\DateTime $createdAt)
     {
         // TODO: Check if null!
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
@@ -117,13 +119,14 @@ class ForumTopicGroup
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string          $slug
      * @return ForumTopicGroup
      */
     public function setSlug($slug)
     {
         // TODO: Check if empty or null!
         $this->slug = $slug;
+
         return $this;
     }
 
@@ -149,12 +152,13 @@ class ForumTopicGroup
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string          $title
      * @return ForumTopicGroup
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -180,13 +184,14 @@ class ForumTopicGroup
     /**
      * Add topic
      *
-     * @param ForumTopic $topic
+     * @param  ForumTopic      $topic
      * @return ForumTopicGroup
      */
     public function addTopic(ForumTopic $topic)
     {
         // TODO: Check if null!
         $this->topics[] = $topic;
+
         return $this;
     }
 

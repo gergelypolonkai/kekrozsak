@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 use KekRozsak\SecurityBundle\Entity\User;
 
-/** 
+/**
  * @ORM\Entity
  * @ORM\Table(name="articles")
  */
@@ -46,12 +46,13 @@ class Article
     /**
      * Set createdBy
      *
-     * @param KekRozsak\SecurityBundle\Entity\User $createdBy
+     * @param  KekRozsak\SecurityBundle\Entity\User $createdBy
      * @return Article
      */
-    public function setCreatedBy(\KekRozsak\SecurityBundle\Entity\User $createdBy)
+    public function setCreatedBy(User $createdBy)
     {
         $this->createdBy = $createdBy;
+
         return $this;
     }
 
@@ -77,12 +78,13 @@ class Article
     /**
      * Set createdAt
      *
-     * @param DateTime $createdAt
+     * @param  DateTime $createdAt
      * @return Article
      */
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
@@ -108,12 +110,13 @@ class Article
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string  $title
      * @return Article
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -139,12 +142,13 @@ class Article
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string  $slug
      * @return Article
      */
     public function setSlug($slug)
     {
         $this->slug = $slug;
+
         return $this;
     }
 
@@ -170,12 +174,13 @@ class Article
     /**
      * Set text
      *
-     * @param string $text
+     * @param  string  $text
      * @return Article
      */
     public function setText($text)
     {
         $this->text = $text;
+
         return $this;
     }
 
@@ -201,12 +206,13 @@ class Article
     /**
      * Set mainPage
      *
-     * @param boolean $mainPage
+     * @param  boolean $mainPage
      * @return Article
      */
     public function setMainPage($mainPage)
     {
         $this->mainPage = $mainPage;
+
         return $this;
     }
 
@@ -232,12 +238,13 @@ class Article
     /**
      * Set public
      *
-     * @param boolean $public
+     * @param  boolean $public
      * @return Article
      */
     public function setPublic($public = false)
     {
         $this->public = $public;
+
         return $this;
     }
 
@@ -263,12 +270,13 @@ class Article
     /**
      * Set source
      *
-     * @param string $source
+     * @param  string  $source
      * @return Article
      */
     public function setSource($source = null)
     {
         $this->source = $source;
+
         return $this;
     }
 

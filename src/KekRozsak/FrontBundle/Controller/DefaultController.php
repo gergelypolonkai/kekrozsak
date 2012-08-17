@@ -5,10 +5,7 @@ namespace KekRozsak\FrontBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
-use KekRozsak\FrontBundle\Entity\UserGroupMembership;
-use KekRozsak\FrontBundle\Entity\UserData;
 use KekRozsak\FrontBundle\Entity\Article;
 
 use KekRozsak\SecurityBundle\Form\Type\UserType;

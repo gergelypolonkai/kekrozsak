@@ -12,4 +12,3 @@ KekRozsakFrontBundle:
 KekRozsakSecurityBundle:
     resource: "@KekRozsakSecurityBundle/Controller/"
     type:     annotation
-

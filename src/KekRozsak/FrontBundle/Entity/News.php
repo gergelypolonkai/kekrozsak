@@ -45,13 +45,14 @@ class News
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string $title
      * @return News
      */
     public function setTitle($title)
     {
         // TODO: Check if empty or null!
         $this->title = $title;
+
         return $this;
     }
 
@@ -77,12 +78,13 @@ class News
     /**
      * Set text
      *
-     * @param string $text
+     * @param  string $text
      * @return News
      */
     public function setText($text)
     {
         $this->text = $text;
+
         return $this;
     }
 
@@ -108,13 +110,14 @@ class News
     /**
      * Set createdAt
      *
-     * @param DateTime $createdAt
+     * @param  DateTime $createdAt
      * @return News
      */
     public function setCreatedAt(\DateTime $createdAt)
     {
         // TODO: Check if null!
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
@@ -131,9 +134,9 @@ class News
     /**
      * The User who created this News item
      *
-     * @var \KekRozsak\SecurityBundle\Entity\User $createdBy
+     * @var KekRozsak\SecurityBundle\Entity\User $createdBy
      *
-     * @ORM\ManyToOne(targetEntity="\KekRozsak\SecurityBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User")
      * @ORM\JoinColumn(name="created_by_id")
      */
     protected $createdBy;
@@ -141,20 +144,21 @@ class News
     /**
      * Set createdBy
      *
-     * @param \KekRozsak\SecurityBundle\Entity\User $createdBy
+     * @param  KekRozsak\SecurityBundle\Entity\User $createdBy
      * @return News
      */
     public function setCreatedBy(User $createdBy)
     {
         // TODO: Check if null!
         $this->createdBy = $createdBy;
+
         return $this;
     }
 
     /**
      * Get createdBy
      *
-     * @return \KekRozsak\SecurityBundle\Entity\User
+     * @return KekRozsak\SecurityBundle\Entity\User
      */
     public function getCreatedBy()
     {
@@ -173,13 +177,14 @@ class News
     /**
      * Set public
      *
-     * @param boolean $public
+     * @param  boolean $public
      * @return News
      */
     public function setPublic($public)
     {
         // TODO: Check if parameter is boolean!
         $this->public = $public;
+
         return $this;
     }
 

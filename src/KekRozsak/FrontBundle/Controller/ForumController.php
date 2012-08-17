@@ -37,6 +37,9 @@ class ForumController extends Controller
      * @Route("/{slug}", name="KekRozsakFrontBundle_forumTopicList")
      * @Template()
      * @ParamConverter("topicGroup")
+     *
+     * @param  KekRozsak\FrontBundle\Entity\ForumTopicGroup $topicGroup
+     * @return array
      */
     public function topicListAction(ForumTopicgRoup $topicGroup)
     {
@@ -50,6 +53,10 @@ class ForumController extends Controller
      * @Template()
      * @ParamConverter("topic", options={"mapping"={"topicGroup"="topicGroup", "topicSlug"="slug"}})
      * @ParamConverter("topicGroup", options={"mapping"={"topicGroupSlug"="slug"}})
+     *
+     * @param  KekRozsak\FrontBundle\Entity\ForumTopicGroup $topicGroup
+     * @param  KekRozsak\FrontBundle\Entity\ForumTopic      $topic
+     * @return array
      */
     public function postListAction(ForumTopicGroup $topicGroup, ForumTopic $topic)
     {
@@ -88,9 +95,9 @@ class ForumController extends Controller
                         $this->generateUrl(
                                 'KekRozsakFrontBundle_forumPostList',
                                 array(
-					'topicGroupSlug' => $topicGroup->getSlug(),
-					'topicSlug'      => $topic->getSlug(),
-				)
+                                    'topicGroupSlug' => $topicGroup->getSlug(),
+                                    'topicSlug'      => $topic->getSlug(),
+                                )
                             )
                     );
             }

@@ -19,6 +19,8 @@ class GroupController extends Controller
     /**
      * @Route("/csoportok", name="KekRozsakFrontBundle_groupList")
      * @Template()
+     *
+     * @return array
      */
     public function listAction()
     {
@@ -36,6 +38,9 @@ class GroupController extends Controller
      * @Route("/csoport/{slug}", name="KekRozsakFrontBundle_groupView")
      * @Template()
      * @ParamConverter("group")
+     *
+     * @param  KekRozsak\FrontBundle\Entity\Group $group
+     * @return array
      */
     public function viewAction(Group $group)
     {
@@ -48,6 +53,9 @@ class GroupController extends Controller
      * @Route("/csoport/{slug}/tagok", name="KekRozsakFrontBundle_groupMembers")
      * @Template()
      * @ParamConverter("group")
+     *
+     * @param  KekRozsak\FrontBundle\Entity\Group $group
+     * @return array
      */
     public function membersAction(Group $group)
     {
@@ -60,6 +68,9 @@ class GroupController extends Controller
      * @Route("/csoport/{slug}/dokumentumok", name="KekRozsakFrontBundle_groupDocuments")
      * @Template()
      * @ParamConverter("group")
+     *
+     * @param  KekRozsak\FrontBundle\Entity\Group $group
+     * @return array
      */
     public function documentsAction(Group $group)
     {
@@ -72,6 +83,9 @@ class GroupController extends Controller
      * @Route("/csoport/{slug}/belepes", name="KekRozsakFrontBundle_groupJoin")
      * @Template()
      * @ParamConverter("group")
+     *
+     * @param  KekRozsak\FrontBundle\Entity\Group $group
+     * @return array
      */
     public function joinAction(Group $group)
     {
@@ -123,6 +137,8 @@ class GroupController extends Controller
     /**
      * @Route("/csoportok/uj", name="KekRozsakFrontBundle_groupCreate")
      * @Template()
+     *
+     * @return array
      */
     public function createAction()
     {

@@ -32,6 +32,8 @@ class BookController extends Controller
      * @Route("/konyvadat/{id}/ajax.{_format}", name="KekRozsakFrontBundle_bookAjaxData", defaults={"_format": "html"}, options={"expose": true})
      * @Template()
      * @ParamConverter("book")
+     *
+     * @param KekRozsak\FrontBundle\Entity\Book $book
      */
     public function ajaxDataAction(Book $book)
     {
@@ -43,13 +45,14 @@ class BookController extends Controller
     /**
      * @Route("/konyv/torles/{id}", name="KekRozsakFrontBundle_bookDeleteCopy", requirements={"id": "\d+"}, options={"expose": true})
      * @ParamConverter("book")
+     *
+     * @param KekRozsak\FrontBundle\Entity\Book $book
      */
     public function ajaxDeleteBookAction(Book $book)
     {
         $copies = $book->getUsersCopies($this->get('security.context')->getToken()->getUser());
         $em = $this->getDoctrine()->getEntityManager();
-        $copies->forAll(function($key, $copy) use ($book, $em)
-        {
+        $copies->forAll(function($key, $copy) use ($book, $em) {
             $book->removeCopy($copy);
             $em->remove($copy);
         });
@@ -62,6 +65,8 @@ class BookController extends Controller
     /**
      * @Route("/konyv/ujpeldany/{id}", name="KekRozsakFrontBundle_bookAddCopy", requirements={"id": "\d+"}, options={"expose": true})
      * @ParamConverter("book")
+     *
+     * @param KekRozsak\FrontBundle\Entity\Book $book
      */
     public function ajaxAddCopyAction(Book $book)
     {
@@ -80,14 +85,16 @@ class BookController extends Controller
     /**
      * @Route("/konyv/kolcsonozheto/{id}/{newValue}", name="KekRozsakFrontBundle_bookSetCopyBorrowable", requirements={"id": "\d+"}, options={"expose": true})
      * @ParamConverter("book")
+     *
+     * @param KekRozsak\FrontBundle\Entity\Book $book
+     * @param boolean                           $newValue
      */
     public function ajaxSetBookCopyBorrowableAction(Book $book, $newValue)
     {
         $user = $this->get('security.context')->getToken()->getUser();
         $copies = $book->getUsersCopies($user);
         $em = $this->getDoctrine()->getEntityManager();
-        $copies->forAll(function($key, $copy) use ($em, $newValue)
-        {
+        $copies->forAll(function($key, $copy) use ($em, $newValue) {
             $copy->setBorrowable($newValue);
             $em->persist($copy);
         });
@@ -99,14 +106,16 @@ class BookController extends Controller
     /**
      * @Route("/konyv/megveheto/{id}/{newValue}", name="KekRozsakFrontBundle_bookSetCopyForSale", requirements={"id": "\d+"}, options={"expose": true})
      * @ParamConverter("book")
+     *
+     * @param KekRozsak\FrontBundle\Entity\Book $book
+     * @param boolean                           $newValue
      */
     public function ajaxSetBookCopyForSaleAction(Book $book, $newValue)
     {
         $user = $this->get('security.context')->getToken()->getUser();
         $copies = $book->getUsersCopies($user);
         $em = $this->getDoctrine()->getEntityManager();
-        $copies->forAll(function($key, $copy) use ($em, $newValue)
-        {
+        $copies->forAll(function($key, $copy) use ($em, $newValue) {
             $copy->setBuyable($newValue);
             $em->persist($copy);
         });
@@ -118,6 +127,9 @@ class BookController extends Controller
     /**
      * @Route("/konyv/szeretnek/{id}/{wantToBuy}", name="KekRozsakFrontBundle_bookWantOne", requirements={"id": "\d+"}, options={"expose": true})
      * @ParamConverter("book")
+     *
+     * @param KekRozsak\FrontBundle\Entity\Book $book
+     * @param boolean                           $wantToBuy
      */
     public function ajaxWantABookAction(Book $book, $wantToBuy)
     {
