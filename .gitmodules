@@ -1,3 +1,6 @@
 [submodule "web/js/jquery-cluetip"]
 	path = web/js/jquery-cluetip
 	url = git://github.com/kswedberg/jquery-cluetip.git
+[submodule "web/js/jquery-form"]
+	path = web/js/jquery-form
+	url = git://github.com/malsup/form.git
