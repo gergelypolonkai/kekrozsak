@@ -155,8 +155,8 @@ $('.book-row').click(function() {
             bookid = $(this).attr('id').replace(/^want-to-(buy|borrow)-button-/, '');
             url = Routing.generate('KekRozsakFrontBundle_bookWantOne', { id: bookid, wantToBuy: toBuy });
             $.ajax({
-                method: 'GET',
-                url:    url
+                type: 'GET',
+                url:  url
             }).done(function()
             {
                 doPopup('', 'Betöltés...', bookUrl, 400, 300, bookCallback);
@@ -172,7 +172,17 @@ $('.book-row').click(function() {
 
 function setupAjaxBookForm()
 {
-    $('#new-book-form').ajaxForm();
+    $('#new-book-form').ajaxForm({
+        target:        '#new-book-form-result',
+        replaceTarget: true,
+        success:       function(data) {
+            if (data == 'success') {
+                // TODO: Reload the book list with an AJAX request instead of
+                // reloading the page.
+                window.location = Routing.generate('KekRozsakFrontBundle_bookList');
+            }
+        }
+    });
 }
 
 $('.new-book-button').click(function() {
@@ -185,10 +195,7 @@ $('#new-book-form').on('submit', function(e) {
 
     $(this).ajaxSubmit({
         target:        '#new-book-form-result',
-        replaceTarget: true,
-        success:       function(data) {
-            alert(data);
-        }
+        replaceTarget: true
     });
 });
 </script>

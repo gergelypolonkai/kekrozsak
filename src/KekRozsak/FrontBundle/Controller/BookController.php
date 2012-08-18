@@ -15,7 +15,7 @@ use KekRozsak\FrontBundle\Form\Type\BookType;
 class BookController extends Controller
 {
     /**
-     * @Route("/konyvtar", name="KekRozsakFrontBundle_bookList")
+     * @Route("/konyvtar", name="KekRozsakFrontBundle_bookList", options={"expose" = true})
      * @Template()
      */
     public function listAction()
@@ -46,7 +46,7 @@ class BookController extends Controller
                 $em->persist($book);
                 $em->flush();
 
-                return new Response();
+                return new Response('success');
             }
         }
 
