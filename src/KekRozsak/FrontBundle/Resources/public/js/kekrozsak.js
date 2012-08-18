@@ -12,7 +12,7 @@ function doPopup(title, content, url, w, h, callback)
     $('#popup-container').center();
     $('#popup-container').fadeIn();
     $.ajax({
-        method: 'GET',
+        type: 'GET',
         url:    url
     }).done(function(data)
     {
