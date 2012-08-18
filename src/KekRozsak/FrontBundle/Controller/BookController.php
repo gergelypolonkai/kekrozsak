@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 use KekRozsak\FrontBundle\Entity\Book;
 use KekRozsak\FrontBundle\Entity\BookCopy;
+use KekRozsak\FrontBundle\Form\Type\BookType;
 
 class BookController extends Controller
 {
@@ -25,6 +26,32 @@ class BookController extends Controller
 
         return array(
             'books' => $books,
+        );
+    }
+
+    /**
+     * @Route("/konyvtar/uj-konyv.html", name="KekRozsakFrontBundle_bookNew", options={"expose" = true})
+     * @Template()
+     */
+    public function newAction()
+    {
+        $book = new Book();
+        $newBookForm = $this->createForm(new BookType(), $book);
+        $request = $this->getRequest();
+
+        if ($request->getMethod() == 'POST') {
+            $newBookForm->bindRequest($request);
+            if ($newBookForm->isValid()) {
+                $em = $this->getDoctrine()->getEntityManager();
+                $em->persist($book);
+                $em->flush();
+
+                return new Response();
+            }
+        }
+
+        return array(
+            'form'  => $newBookForm->createView(),
         );
     }
 

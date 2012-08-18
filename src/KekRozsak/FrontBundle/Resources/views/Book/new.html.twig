@@ -1,0 +1,9 @@
+{% form_theme form 'KekRozsakFrontBundle:Form:user_form.html.twig' %}
+<div id="new-book-form-result">
+    <form method="POST" action="{{ path('KekRozsakFrontBundle_bookNew') }}" id="new-book-form">
+        <table>
+            {{ form_widget(form) }}
+        </table>
+        <button id="new-book-save-button" type="submit">Mentés</button>
+    </form>
+</div>

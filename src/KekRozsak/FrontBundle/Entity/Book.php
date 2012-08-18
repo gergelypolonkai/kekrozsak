@@ -274,6 +274,29 @@ class Book
     protected $commentable;
 
     /**
+     * Set commentable
+     *
+     * @param  boolean $commentable
+     * @return Book
+     */
+    public function setCommentable($commentable)
+    {
+        // TODO: Check if parameter is boolean!
+        $this->commentable = $commentable;
+        return $this;
+    }
+
+    /**
+     * Get commentable
+     *
+     * @return boolean
+     */
+    public function isCommentable()
+    {
+        return $this->commentable;
+    }
+
+    /**
      * Collection of Users who would like to borrow a copy
      *
      * @var Doctrine\Common\Collections\ArrayCollection $wouldBorrow

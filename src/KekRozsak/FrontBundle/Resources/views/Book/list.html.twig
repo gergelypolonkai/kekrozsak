@@ -1,10 +1,11 @@
 {# vim: ft=htmljinja
 #}
 {% extends 'KekRozsakFrontBundle:Default:main_template.html.twig' %}
+
 {% block title %} - Könyvtár{% endblock %}
 
 {% block buttonlist %}
-[Új könyv]
+<span class="gomb new-book-button">[Új könyv]</span>
 {% if books|length > 0 %}
 [Saját könyveim]
 [Nálam lévő kölcsönzött könyvek]
@@ -167,6 +168,28 @@ $('.book-row').click(function() {
     };
 
     doPopup('', 'Betöltés...', bookUrl, 400, 300, bookCallback);
+});
+
+function setupAjaxBookForm()
+{
+    $('#new-book-form').ajaxForm();
+}
+
+$('.new-book-button').click(function() {
+    creatorUrl = Routing.generate('KekRozsakFrontBundle_bookNew');
+    doPopup('Új könyv', 'Betöltés...', creatorUrl, 500, 400, setupAjaxBookForm);
+});
+
+$('#new-book-form').on('submit', function(e) {
+    e.preventDefault();
+
+    $(this).ajaxSubmit({
+        target:        '#new-book-form-result',
+        replaceTarget: true,
+        success:       function(data) {
+            alert(data);
+        }
+    });
 });
 </script>
 {% endblock bottomscripts %}
