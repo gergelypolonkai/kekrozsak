@@ -197,4 +197,35 @@ class News
     {
         return $this->public;
     }
+
+    /**
+     * TRUE if this News is "sticky" (it should be visible all the time)
+     *
+     * @var boolean $sticky
+     *
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    protected $sticky;
+
+    /**
+     * Set sticky
+     *
+     * @param  boolean $sticky
+     * @return News
+     */
+    public function setSticky($sticky)
+    {
+        $this->sticky = $sticky;
+        return $this;
+    }
+    
+    /**
+     * Get sticky
+     *
+     * @return boolean
+     */
+    public function isSticky()
+    {
+        return $this->sticky;
+    }
 }
