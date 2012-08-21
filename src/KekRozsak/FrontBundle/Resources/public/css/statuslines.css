@@ -58,3 +58,8 @@
     background-color: transparent;
     color: #c4d3ff;
 }
+
+#moonphase {
+    float: right;
+    width: 30px;
+}
