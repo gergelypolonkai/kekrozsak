@@ -1,0 +1,6 @@
+<?php
+/*
+ * User
+ * ForumTopic
+ * lastVisitedAt
+ */
