@@ -11,6 +11,7 @@ use KekRozsak\FrontBundle\Entity\ForumTopicGroup;
 use KekRozsak\FrontBundle\Entity\ForumTopic;
 use KekRozsak\FrontBundle\Entity\ForumPost;
 use KekRozsak\FrontBundle\Form\Type\ForumTopicGroupType;
+use KekRozsak\FrontBundle\Form\Type\ForumTopicType;
 use KekRozsak\FrontBundle\Form\Type\ForumPostType;
 use KekRozsak\FrontBundle\Extensions\Slugifier;
 
@@ -70,8 +71,38 @@ class ForumController extends Controller
      */
     public function topicListAction(ForumTopicgRoup $topicGroup)
     {
+        $request = $this->getRequest();
+        $newTopic = new ForumTopic();
+        $newTopicForm = $this->createForm(new ForumTopicType(), $newTopic);
+
+        if ($request->getMethod() == 'POST') {
+            $newTopicForm->bind($request);
+
+            if ($newTopicForm->isValid()) {
+                $slugifier = new \KekRozsak\FrontBundle\Extensions\Slugifier();
+                $newTopic->setSlug($slugifier->slugify($newTopic->getTitle()));
+                $newTopic->setCreatedAt(new \DateTime('now'));
+                $newTopic->setCreatedBy($this->get('security.context')->getToken()->getUser());
+                $newTopic->setTopicGroup($topicGroup);
+
+                $em = $this->getDoctrine()->getEntityManager();
+                $em->persist($newTopic);
+                $em->flush();
+
+                return $this->redirect(
+                        $this->generateUrl(
+                                'KekRozsakFrontBundle_forumTopicList',
+                                array(
+                                    'slug' => $topicGroup->getSlug(),
+                                )
+                            )
+                    );
+            }
+        }
+
         return array(
-            'topicGroup' => $topicGroup,
+            'topicGroup'   => $topicGroup,
+            'newTopicForm' => $newTopicForm->createView(),
         );
     }
 

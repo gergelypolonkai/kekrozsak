@@ -1,9 +1,19 @@
 {# vim: ft=htmljinja
 #}
 {% extends 'KekRozsakFrontBundle:Default:main_template.html.twig' %}
+{% form_theme newTopicForm 'KekRozsakFrontBundle:Form:user_form.html.twig' %}
+
 {% block title %} - Fórum - {{ topicGroup.title }}{% endblock %}
+
 {% block content %}
 <h3><a href="{{ path('KekRozsakFrontBundle_forumTopicGroupList') }}">Fórum</a> - {{ topicGroup.title }}</h3>
+<span class="gomb" id="new-topic-button">[Új téma]</span><br />
+<form method="post" action="{{ path('KekRozsakFrontBundle_forumTopicList', { slug: topicGroup.slug }) }}">
+    <table>
+        {{ form_widget(newTopicForm) }}
+    </table>
+        <button type="submit">Mentés</button>
+</form>
 {% if topicGroup.topics|length > 0 %}
 <table class="forum-lista">
     <thead>

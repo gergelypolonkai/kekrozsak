@@ -4,12 +4,19 @@ namespace KekRozsak\FrontBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 
 use KekRozsak\SecurityBundle\Entity\User;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="forum_topics")
+ * @ORM\Table(name="forum_topics", uniqueConstraints={
+ *     @ORM\UniqueConstraint(columns={"topic_group_id", "title"}),
+ *     @ORM\UniqueConstraint(columns={"topic_group_id", "slug"})
+ * })
+ * @DoctrineAssert\UniqueEntity(fields={"topicGroup", "title"}, message="Ilyen nevű téma már létezik ebben a témakörben. Kérlek válassz másikat!")
+ * @DoctrineAssert\UniqueEntity(fields={"topicGroup", "slug"}, message="Ilyen nevű téma már létezik ebben a témakörben. Kérlek válassz másikat!")
  */
 class ForumTopic
 {
@@ -112,7 +119,7 @@ class ForumTopic
      * @var ForumTopicGroup $topicGroup
      *
      * @ORM\ManyToOne(targetEntity="ForumTopicGroup", inversedBy="topics")
-     * @ORM\JoinColumn(name="topic_group_id")
+     * @ORM\JoinColumn(name="topic_group_id", nullable=false)
      */
     protected $topicGroup;
 
