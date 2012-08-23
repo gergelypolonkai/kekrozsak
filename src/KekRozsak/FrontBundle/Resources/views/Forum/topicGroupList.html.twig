@@ -1,9 +1,28 @@
 {# vim: ft=htmljinja
 #}
 {% extends 'KekRozsakFrontBundle:Default:main_template.html.twig' %}
+{% form_theme newTopicGroupForm 'KekRozsakFrontBundle:Form:user_form.html.twig' %}
+
 {% block title %} - Fórum{% endblock %}
+
 {% block content %}
 <h3>Fórum</h3>
+{% if is_granted('ROLE_ADMIN') %}
+<span class="gomb" id="new-topic-group-button">[Új témakör]</span><br />
+<div id="new-topic-group">
+{# TODO: make this an AJAX form #}
+    <form method="post" action="{{ path('KekRozsakFrontBundle_forumTopicGroupList') }}">
+        <table>
+            {{ form_widget(newTopicGroupForm) }}
+        </table>
+        <button type="submit">Mentés</button>
+    </form>
+</div>
+{#
+{% else %}
+<span class="gomb">[Új témakör kérése]</span>
+#}
+{% endif %}
 {% for topicGroup in topicGroups %}
 <table class="forum-lista">
     <thead>
@@ -39,3 +58,13 @@
 </table>
 {% endfor %}
 {% endblock content %}
+
+{% block bottomscripts %}
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#new-topic-group-button').click(function() {
+        alert('Juj!');
+    });
+});
+</script>
+{% endblock bottomscripts %}

@@ -4,6 +4,8 @@ namespace KekRozsak\FrontBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 
 use KekRozsak\SecurityBundle\Entity\User;
 
@@ -11,6 +13,8 @@ use KekRozsak\SecurityBundle\Entity\User;
  * KekRozsak\FrontBundle\Entity\ForumTopicGroup
  * @ORM\Entity
  * @ORM\Table(name="forum_topic_groups")
+ * @DoctrineAssert\UniqueEntity(fields={"title"}, message="Ilyen nevű témakör már létezik. Kérlek válassz másikat!")
+ * @DoctrineAssert\UniqueEntity(fields={"slug"}, message="Ilyen nevű témakör már létezik. Kérlek válassz másikat!")
  */
 class ForumTopicGroup
 {
@@ -146,6 +150,7 @@ class ForumTopicGroup
      * @var string $title
      *
      * @ORM\Column(type="string", length=100, nullable=false, unique=true)
+     * @Assert\NotBlank()
      */
     protected $title;
 

@@ -10,7 +10,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use KekRozsak\FrontBundle\Entity\ForumTopicGroup;
 use KekRozsak\FrontBundle\Entity\ForumTopic;
 use KekRozsak\FrontBundle\Entity\ForumPost;
+use KekRozsak\FrontBundle\Form\Type\ForumTopicGroupType;
 use KekRozsak\FrontBundle\Form\Type\ForumPostType;
+use KekRozsak\FrontBundle\Extensions\Slugifier;
 
 /**
  * @Route("/forum")
@@ -24,12 +26,37 @@ class ForumController extends Controller
     public function topicGroupListAction()
     {
         $groupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:ForumTopicGroup');
+        $request = $this->getRequest();
+        $newTopicGroup = new ForumTopicGroup();
+        $newTopicGroupForm = $this->createForm(new ForumTopicGroupType(), $newTopicGroup);
+
+        if ($request->getMethod() == 'POST') {
+            $newTopicGroupForm->bind($request);
+
+            if ($newTopicGroupForm->isValid()) {
+                $slugifier = new \KekRozsak\FrontBundle\Extensions\Slugifier();
+                $newTopicGroup->setSlug($slugifier->slugify($newTopicGroup->getTitle()));
+                $newTopicGroup->setCreatedAt(new \DateTime('now'));
+                $newTopicGroup->setCreatedBy($this->get('security.context')->getToken()->getUser());
+
+                $em = $this->getDoctrine()->getEntityManager();
+                $em->persist($newTopicGroup);
+                $em->flush();
+
+                return $this->redirect(
+                        $this->generateUrl(
+                                'KekRozsakFrontBundle_forumTopicGroupList'
+                            )
+                    );
+            }
+        }
 
         // TODO: ORDER the topic list by last post date
         $topicGroups = $groupRepo->findAll();
 
         return array(
-            'topicGroups' => $topicGroups,
+            'topicGroups'       => $topicGroups,
+            'newTopicGroupForm' => $newTopicGroupForm->createView(),
         );
     }
 
