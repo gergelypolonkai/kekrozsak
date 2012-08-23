@@ -4,12 +4,15 @@ namespace KekRozsak\FrontBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\Response;
 
 use KekRozsak\FrontBundle\Entity\ForumTopicGroup;
 use KekRozsak\FrontBundle\Entity\ForumTopic;
 use KekRozsak\FrontBundle\Entity\ForumPost;
+use KekRozsak\FrontBundle\Entity\UserData;
 use KekRozsak\FrontBundle\Form\Type\ForumTopicGroupType;
 use KekRozsak\FrontBundle\Form\Type\ForumTopicType;
 use KekRozsak\FrontBundle\Form\Type\ForumPostType;
@@ -167,5 +170,57 @@ class ForumController extends Controller
             'posts'      => $posts,
             'form'       => $form->createView(),
         );
+    }
+
+    /**
+     * @Route("/{topicGroupSlug}/{topicSlug}/kedvenc-be", name="KekRozsakFrontBundle_forumFavouriteTopic", options={"expose": true})
+     * @Method("GET")
+     * @ParamConverter("topic", options={"mapping"={"topicGroup"="topicGroup", "topicSlug"="slug"}})
+     * @ParamConverter("topicGroup", options={"mapping"={"topicGroupSlug"="slug"}})
+     *
+     * @param  KekRozsak\FrontBundle\Entity\ForumTopicGroup $topicGroup
+     * @param  KekRozsak\FrontBundle\Entity\ForumTopic      $topic
+     * @return array
+     */
+    public function favouriteTopic(ForumTopicGroup $topicGroup, ForumTopic $topic)
+    {
+        $user = $this->get('security.context')->getToken()->getUser();
+        if (($userData = $user->getUserData()) === null) {
+            $userData = new UserData();
+            $userData->setUser($user);
+        }
+        $userData->addFavouriteTopic($topic);
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->persist($userData);
+        $em->flush();
+
+        return new Response();
+    }
+
+    /**
+     * @Route("/{topicGroupSlug}/{topicSlug}/kedvenc-ki", name="KekRozsakFrontBundle_forumUnfavouriteTopic", options={"expose": true})
+     * @Method("GET")
+     * @ParamConverter("topic", options={"mapping"={"topicGroup"="topicGroup", "topicSlug"="slug"}})
+     * @ParamConverter("topicGroup", options={"mapping"={"topicGroupSlug"="slug"}})
+     *
+     * @param  KekRozsak\FrontBundle\Entity\ForumTopicGroup $topicGroup
+     * @param  KekRozsak\FrontBundle\Entity\ForumTopic      $topic
+     * @return array
+     */
+    public function unfavouriteTopic(ForumTopicGroup $topicGroup, ForumTopic $topic)
+    {
+        $user = $this->get('security.context')->getToken()->getUser();
+        if (($userData = $user->getUserData()) === null) {
+            $userData = new UserData();
+            $userData->setUser($user);
+        }
+        $userData->removeFavouriteTopic($topic);
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->persist($userData);
+        $em->flush();
+
+        return new Response();
     }
 }

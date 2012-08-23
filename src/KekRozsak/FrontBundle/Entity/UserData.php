@@ -3,6 +3,7 @@
 namespace KekRozsak\FrontBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 use KekRozsak\SecurityBundle\Entity\User;
 
@@ -21,6 +22,7 @@ class UserData
         $this->googleTalkPublic = false;
         $this->skypePublic = false;
         $this->phoneNumberPublic = false;
+        $this->favouriteTopics = new ArrayCollection();
     }
 
     /**
@@ -451,5 +453,67 @@ class UserData
     public function isPhoneNumberPublic()
     {
         return $this->phoneNumberPublic;
+    }
+
+    /**
+     * ArrayCollection of the User's favourite ForumTopics
+     *
+     * @var Doctrine\Common\Collections\ArrayCollection $favouriteTopics
+     *
+     * @ORM\ManyToMany(targetEntity="ForumTopic", fetch="LAZY")
+     * @ORM\JoinTable(name="user_favourite_forum_topics", joinColumns={
+     *         @ORM\JoinColumn(name="user_id", referencedColumnName="user_id")
+     *     }, inverseJoinColumns={
+     *         @ORM\JoinColumn(name="forum_topic_id")
+     *     }
+     * )
+     */
+    protected $favouriteTopics;
+
+    /**
+     * Add a favourite ForumTopic
+     *
+     * @param  KekRozsak\FrontBundle\Entity\ForumTopic $topic
+     * @return UserData
+     */
+    public function addFavouriteTopic(ForumTopic $topic)
+    {
+        // TODO: Check if not null
+        $this->favouriteTopics->add($topic);
+        return $this;
+    }
+
+    /**
+     * Remove a favourite ForumTopic
+     *
+     * @param  KekRozsak\FrontBundle\Entity\ForumTopic $topic
+     * @return UserData
+     */
+    public function removeFavouriteTopic(ForumTopic $topic)
+    {
+        // TODO: Check if not null
+        $this->favouriteTopics->removeElement($topic);
+        return $this;
+    }
+
+    /**
+     * Get favourite ForumTopics
+     *
+     * @return Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getFavouriteTopics()
+    {
+        return $this->favouriteTopics;
+    }
+
+    /**
+     * Check if given ForumTopic is favourited by User
+     *
+     * @param  KekRozsak\FrontBundle\Entity\ForumTopic $topic
+     * @return boolean
+     */
+    public function isFavouriteForumTopic(ForumTopic $topic)
+    {
+        return $this->favouriteTopics->contains($topic);
     }
 }
