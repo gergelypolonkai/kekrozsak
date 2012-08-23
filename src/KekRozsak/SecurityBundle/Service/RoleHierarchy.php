@@ -43,7 +43,7 @@ class RoleHierarchy implements RoleHierarchyInterface
         $roles = $this->roleRepo->findAll();
         foreach ($roles as $mainRole) {
             $main = $mainRole->getRole();
-            $this->map[$main] = array();
+            $this->map[$main] = array($main);
             foreach ($mainRole->getInheritedRoles() as $childRole) {
                 $this->map[$main][] = $childRole->getRole();
                 // TODO: This is one-level only. Get as deep as possible.
