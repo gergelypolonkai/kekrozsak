@@ -51,7 +51,7 @@
             </td>
         </tr>
         <tr>
-            <td class="szoveg"><div>{{ post.text|bbdecode }}</div></td>
+            <td class="szoveg"><div>{{ post.text|raw }}</div></td>
         </tr>
 {% endfor %}
     </tbody>
