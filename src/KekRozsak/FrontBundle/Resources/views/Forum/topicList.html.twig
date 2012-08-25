@@ -27,10 +27,11 @@
 {% for topic in topicGroup.topics %}
         <tr class="{{ cycle(['odd', 'even'], loop.index0) }}">
             <td>
+                [ikon]
 {% if app.user.userData and app.user.userData.isFavouriteForumTopic(topic) %}
-                <span class="gomb unfavourite-topic-button" id="unfavourite-topic-button-{{ topic.slug }}">[Kedvenc ikon]</span>
+                <span class="gomb unfavourite-topic-button topicgroup-{{ topicGroup.slug }}" id="unfavourite-topic-button-{{ topic.slug }}">[Kedvenc ikon]</span>
 {% else %}
-                <span class="gomb favourite-topic-button" id="favourite-topic-button-{{ topic.slug }}">[Nem kedvenc ikon]</span>
+                <span class="gomb favourite-topic-button topicgroup-{{ topicGroup.slug }}" id="favourite-topic-button-{{ topic.slug }}">[Nem kedvenc ikon]</span>
 {% endif %}
             </td>
             <td><a href="{{ path('KekRozsakFrontBundle_forumPostList', { topicGroupSlug: topicGroup.slug, topicSlug: topic.slug }) }}">{{ topic.title }}</a></td>
@@ -51,64 +52,3 @@
 Ebben a témakörben nincsenek témák.
 {% endif %}
 {% endblock content %}
-
-{% block bottomscripts %}
-<script type="text/javascript">
-{# TODO: The following two functions should also update the top-left profile
- # box
- #}
-    function favouriteOn()
-    {
-        var self = $(this)
-        var topicSlug = self.attr('id').replace(/^favourite-topic-button-/, '');
-        url = Routing.generate('KekRozsakFrontBundle_forumFavouriteTopic', {
-            topicGroupSlug: '{{ topicGroup.slug }}',
-            topicSlug:      topicSlug
-        });
-        $.ajax({
-            type: 'GET',
-            url:  url
-        }).done(function() {
-            self.html('[Kedvenc ikon]');
-            self.removeClass('favourite-topic-button');
-            self.addClass('unfavourite-topic-button');
-            self.attr('id', 'unfavourite-topic-button-' + topicSlug);
-            self.off('click.updateFav');
-            self.on('click.updateFav', favouriteOff);
-        }).error(function() {
-            alert('Nem siker!');
-        });
-    }
-
-    function favouriteOff()
-    {
-        var self = $(this)
-        var topicSlug = self.attr('id').replace(/^unfavourite-topic-button-/, '');
-        url = Routing.generate('KekRozsakFrontBundle_forumUnfavouriteTopic', {
-            topicGroupSlug: '{{ topicGroup.slug }}',
-            topicSlug:      topicSlug
-        });
-        $.ajax({
-            type: 'GET',
-            url:  url
-        }).done(function() {
-            self.html('[Nem kedvenc ikon]');
-            self.removeClass('unfavourite-topic-button');
-            self.addClass('favourite-topic-button');
-            self.attr('id', 'favourite-topic-button-' + topicSlug);
-            self.off('click.updateFav');
-            self.on('click.updateFav', favouriteOn);
-        }).error(function() {
-            alert('Nem siker!');
-        });
-    }
-
-    function setupFavButtons()
-    {
-        $('.favourite-topic-button').on('click.updateFav', favouriteOn);
-        $('.unfavourite-topic-button').on('click.updateFav', favouriteOff);
-    }
-
-    $(document).ready(setupFavButtons);
-</script>
-{% endblock bottomscripts %}

@@ -3,7 +3,16 @@
 {% extends 'KekRozsakFrontBundle:Default:main_template.html.twig' %}
 {% block title %} - Fórum - {{ topicGroup.title }} - {{ topic.title }}{% endblock %}
 {% block content %}
-<h3><a href="{{ path('KekRozsakFrontBundle_forumTopicGroupList') }}">Fórum</a> - <a href="{{ path('KekRozsakFrontBundle_forumTopicList', {slug: topicGroup.slug}) }}">{{ topicGroup.title }}</a> - {{ topic.title }}</h3>
+<h3>
+{% if app.user.userData and app.user.userData.isFavouriteForumTopic(topic) %}
+    <span class="gomb unfavourite-topic-button topicgroup-{{ topicGroup.slug }}" id="unfavourite-topic-button-{{ topic.slug }}">[Kedvenc ikon]</span>
+{% else %}
+    <span class="gomb favourite-topic-button topicgroup-{{ topicGroup.slug }}" id="favourite-topic-button-{{ topic.slug }}">[Nem kedvenc ikon]</span>
+{% endif %}
+    <a href="{{ path('KekRozsakFrontBundle_forumTopicGroupList') }}">Fórum</a> -
+    <a href="{{ path('KekRozsakFrontBundle_forumTopicList', {slug: topicGroup.slug}) }}">{{ topicGroup.title }}</a> -
+    {{ topic.title }}
+</h3>
 <table class="post-lista">
     <tbody>
         <tr>
