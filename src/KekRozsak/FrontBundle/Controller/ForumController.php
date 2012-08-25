@@ -175,15 +175,23 @@ class ForumController extends Controller
     /**
      * @Route("/{topicGroupSlug}/{topicSlug}/kedvenc-be", name="KekRozsakFrontBundle_forumFavouriteTopic", options={"expose": true})
      * @Method("GET")
-     * @ParamConverter("topic", options={"mapping"={"topicGroup"="topicGroup", "topicSlug"="slug"}})
-     * @ParamConverter("topicGroup", options={"mapping"={"topicGroupSlug"="slug"}})
      *
      * @param  KekRozsak\FrontBundle\Entity\ForumTopicGroup $topicGroup
      * @param  KekRozsak\FrontBundle\Entity\ForumTopic      $topic
      * @return array
      */
-    public function favouriteTopic(ForumTopicGroup $topicGroup, ForumTopic $topic)
+    public function favouriteTopic($topicGroupSlug, $topicSlug)
     {
+	    $topicGroupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:ForumTopicGroup');
+        if (null === $topicGroup = $topicGroupRepo->findOneBySlug($topicGroupSlug)) {
+            throw $this->createNotFoundException('Ilyen témakör nem létezik!');
+        }
+
+        $topicRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:ForumTopic');
+        if (null === $topic = $topicRepo->findOneBy(array('slug' => $topicSlug, 'topicGroup' => $topicGroup))) {
+            throw $this->createNotFoundException('Ilyen téma nem létezik!');
+        }
+
         $user = $this->get('security.context')->getToken()->getUser();
         if (($userData = $user->getUserData()) === null) {
             $userData = new UserData();
@@ -201,15 +209,23 @@ class ForumController extends Controller
     /**
      * @Route("/{topicGroupSlug}/{topicSlug}/kedvenc-ki", name="KekRozsakFrontBundle_forumUnfavouriteTopic", options={"expose": true})
      * @Method("GET")
-     * @ParamConverter("topic", options={"mapping"={"topicGroup"="topicGroup", "topicSlug"="slug"}})
-     * @ParamConverter("topicGroup", options={"mapping"={"topicGroupSlug"="slug"}})
      *
      * @param  KekRozsak\FrontBundle\Entity\ForumTopicGroup $topicGroup
      * @param  KekRozsak\FrontBundle\Entity\ForumTopic      $topic
      * @return array
      */
-    public function unfavouriteTopic(ForumTopicGroup $topicGroup, ForumTopic $topic)
+    public function unfavouriteTopic($topicGroupSlug, $topicSlug)
     {
+	    $topicGroupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:ForumTopicGroup');
+        if (null === $topicGroup = $topicGroupRepo->findOneBySlug($topicGroupSlug)) {
+            throw $this->createNotFoundException('Ilyen témakör nem létezik!');
+        }
+
+        $topicRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:ForumTopic');
+        if (null === $topic = $topicRepo->findOneBy(array('slug' => $topicSlug, 'topicGroup' => $topicGroup))) {
+            throw $this->createNotFoundException('Ilyen téma nem létezik!');
+        }
+
         $user = $this->get('security.context')->getToken()->getUser();
         if (($userData = $user->getUserData()) === null) {
             $userData = new UserData();
