@@ -24,7 +24,8 @@ function favouriteOn()
         type: 'GET',
         url:  url
     }).done(function() {
-        elem.html('[Kedvenc ikon]');
+        elem.find('img').attr('alt', '[Kedvenc]');
+        elem.find('img').attr('src', webRoot + '/bundles/kekrozsakfront/images/penta-yellow-24.png');
         elem.removeClass('favourite-topic-button');
         elem.addClass('unfavourite-topic-button');
         elem.attr('id', 'unfavourite-topic-button-' + topicSlug);
@@ -58,7 +59,8 @@ function favouriteOff()
         type: 'GET',
         url:  url
     }).done(function() {
-        elem.html('[Nem kedvenc ikon]');
+        elem.find('img').attr('alt', '[Nem kedvenc]');
+        elem.find('img').attr('src', webRoot + '/bundles/kekrozsakfront/images/penta-blue-24.png');
         elem.removeClass('unfavourite-topic-button');
         elem.addClass('favourite-topic-button');
         elem.attr('id', 'favourite-topic-button-' + topicSlug);

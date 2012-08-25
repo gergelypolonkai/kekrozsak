@@ -20,6 +20,9 @@
 {% javascripts 'bundles/kekrozsakfront/js/*' output='js/kekrozsak.js' %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}
+        <script type="text/javascript">
+            var webRoot = '{{ asset('') }}';
+        </script>
 {% block additional_js %}{% endblock %}
     </head>
     <body>
