@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Io\TcpdfBundle\IoTcpdfBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new Jmikola\JsAssetsHelperBundle\JmikolaJsAssetsHelperBundle(),
             // Own bundles
             new KekRozsak\FrontBundle\KekRozsakFrontBundle(),
             new KekRozsak\SecurityBundle\KekRozsakSecurityBundle(),

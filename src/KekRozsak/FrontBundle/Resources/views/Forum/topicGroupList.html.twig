@@ -39,9 +39,9 @@
             <td>
                 [ikon]
 {% if app.user.userData and app.user.userData.isFavouriteForumTopic(topic) %}
-                <span class="gomb unfavourite-topic-button topicgroup-{{ topic.topicGroup.slug }}" id="unfavourite-topic-button-{{ topic.slug }}">[Kedvenc ikon]</span>
+                <span class="unfavourite-topic-button topicgroup-{{ topic.topicGroup.slug }}" id="unfavourite-topic-button-{{ topic.slug }}"><img src="{{ asset('bundles/kekrozsakfront/images/penta-yellow-24.png') }}" alt="[Kedvenc]" /></span>
 {% else %}
-                <span class="gomb favourite-topic-button topicgroup-{{ topic.topicGroup.slug }}" id="favourite-topic-button-{{ topic.slug }}">[Nem kedvenc ikon]</span>
+                <span class="favourite-topic-button topicgroup-{{ topic.topicGroup.slug }}" id="favourite-topic-button-{{ topic.slug }}"><img src="{{ asset('bundles/kekrozsakfront/images/penta-blue-24.png') }}" alt="[Nem kedvenc]" /></span>
 {% endif %}
             </td>
             <td><a href="{{ path('KekRozsakFrontBundle_forumPostList', {topicGroupSlug: topicGroup.slug, topicSlug: topic.slug}) }}">{{ topic.title }}</a></td>
