@@ -1,0 +1,17 @@
+{# vim: ft=htmljinja
+#}
+{% extends 'KekRozsakFrontBundle:Default:main_template.html.twig' %}
+{% block content %}
+<h3>Blog</h3>
+{% for post in posts %}
+<h4>{{ post.title }}</h4>
+{{ post.createdAt|date('Y-m-d H:i') }}<br />
+{% if not post.published %}
+inaktív<br />
+{% endif %}
+{{ post.content }}
+<hr />
+{% else %}
+Nincs bejegyzés.
+{% endfor %}
+{% endblock %}

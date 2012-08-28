@@ -1,0 +1,14 @@
+{% extends 'KekRozsakFrontBundle:Default:main_template.html.twig' %}
+
+{% block content %}
+<h3>A keresett oldal nem létezik</h3>
+<p>
+{% spaceless %}
+    A keresett oldal nem létezik. Válassz valamit a menüből
+{% if app.user %}
+    vagy kattints a bal felső sarokban a nevedre a további lehetőségekért
+{% endif %}
+    !
+{% endspaceless %}
+</p>
+{% endblock content %}
