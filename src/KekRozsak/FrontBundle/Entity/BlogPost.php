@@ -208,7 +208,7 @@ class BlogPost
      * @param  DateTime $createdAt
      * @return BlogPost
      */
-    public function setCreatedAt(\DataTime $createdAt)
+    public function setCreatedAt(\DateTime $createdAt)
     {
         // TODO: Check if not null!
         $this->createdAt = $createdAt;
