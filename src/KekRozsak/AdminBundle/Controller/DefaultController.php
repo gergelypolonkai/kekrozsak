@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use JMS\DiExtraBundle\Annotation as DI;
 
 /**
  * @Route("/admin")
@@ -13,7 +14,14 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/manage_regs", name="KekRozsakAdminBundle_manage_regs")
+     * @var Symfony\Component\Security\Core\SecurityContext $securityContext
+     *
+     * @DI\Inject("security.context")
+     */
+    private $securityContext;
+
+    /**
+     * @Route("/regisztraltak.html", name="KekRozsakAdminBundle_manage_regs")
      * @Template()
      */
     public function manageRegsAction()
@@ -44,33 +52,45 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/csoport_jelentkezok", name="KekRozsakAdminBundle_groupJoinRequests")
+     * @Route("/csoport-jelentkezok.html", name="KekRozsakAdminBundle_groupJoinRequests")
      * @Template()
      */
     public function groupJoinRequestsAction()
     {
-        $user = $this->get('security.context')->getToken()->getUser();
-        $groupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:Group');
-        $myGroups = $groupRepo->findByLeader($user);
-
+        $user = $this->securityContext->getToken()->getUser();
         $request = $this->getRequest();
+
+        $groupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:Group');
+        if ($this->securityContext->isGranted('ROLE_ADMIN') === false) {
+            $myGroups = $groupRepo->findByLeader($user);
+        } else {
+            $myGroups = $groupRepo->findAll();
+        }
+
         if ($request->getMethod() == 'POST') {
             if ($request->request->has('group') && $request->request->has('user')) {
                 $userRepo = $this->getDoctrine()->getRepository('KekRozsakSecurityBundle:User');
                 $aUser = $userRepo->findOneById($request->request->get('user'));
                 $aGroup = $groupRepo->findOneById($request->request->get('group'));
                 if ($aUser && $aGroup) {
-                    $membershipRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:UserGroupMembership');
-                    $membershipObject = $membershipRepo->findOneBy(array('user' => $aUser, 'group' => $aGroup));
-                    if ($membershipObject) {
-                        $membershipObject->setMembershipAcceptedAt(new \DateTime('now'));
-                        $membershipObject->setMembershipAcceptedBy($user);
+                    if (
+                            ($aGroup->getLeader() == $user)
+                            || $this->securityContext->isGranted('ROLE_ADMIN')
+                    ) {
+                        $membershipRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:UserGroupMembership');
+                        $membershipObject = $membershipRepo->findOneBy(array('user' => $aUser, 'group' => $aGroup));
+                        if ($membershipObject) {
+                            $membershipObject->setMembershipAcceptedAt(new \DateTime('now'));
+                            $membershipObject->setMembershipAcceptedBy($user);
 
-                        $em = $this->getDoctrine()->getEntityManager();
-                        $em->persist($membershipObject);
-                        $em->flush();
+                            $em = $this->getDoctrine()->getEntityManager();
+                            $em->persist($membershipObject);
+                            $em->flush();
 
-                        return $this->redirect($this->generateUrl('KekRozsakAdminBundle_groupJoinRequests'));
+                            return $this->redirect($this->generateUrl('KekRozsakAdminBundle_groupJoinRequests'));
+                        }
+                    } else {
+                        throw new AccessDeniedException('Csak a csoport vezetője hagyhatja jóvá a jelentkezéseket!');
                     }
                 }
             }
