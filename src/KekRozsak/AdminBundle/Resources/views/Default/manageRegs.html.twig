@@ -23,6 +23,7 @@
             <td>{{ user.registeredAt|date('Y-m-d H:i') }}</td>
             <td>
                 <form method="post" action="">
+                    <input type="hidden" name="userid" value="{{ user.id }}" />
                     <button type="submit">Engedélyezem</button>
                 </form>
             </td>

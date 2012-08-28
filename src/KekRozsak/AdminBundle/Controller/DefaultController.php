@@ -5,6 +5,7 @@ namespace KekRozsak\AdminBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @Route("/admin")
@@ -17,7 +18,25 @@ class DefaultController extends Controller
      */
     public function manageRegsAction()
     {
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException('Ehhez a művelethez nincs jogosultságod.');
+        }
         $users = $this->getDoctrine()->getEntityManager()->createQuery('SELECT u FROM KekRozsakSecurityBundle:User u WHERE u.acceptedBy IS NULL')->getResult();
+        $request = $this->getRequest();
+
+        if ($request->getMethod() == 'POST') {
+            if (is_numeric($userid = $request->get('userid'))) {
+                if (($user = $this->getDoctrine()->getRepository('KekRozsakSecurityBundle:User')->findOneById($userid)) != null) {
+                    $activeUser = $this->get('security.context')->getToken()->getUser();
+                    $user->setAcceptedBy($activeUser);
+                    $em = $this->getDoctrine()->getEntityManager();
+                    $em->persist($user);
+                    $em->flush();
+
+                    return $this->redirect($this->generateUrl('KekRozsakAdminBundle_manage_regs'));
+                }
+            }
+        }
 
         return array(
             'users' => $users,
