@@ -25,7 +25,7 @@ function favouriteOn()
         url:  url
     }).done(function() {
         elem.find('img').attr('alt', '[Kedvenc]');
-        elem.find('img').attr('src', AssetsHelper.getURL('bundles/kekrozsakfront/images/penta-yellow-24.png'));
+        elem.find('img').attr('src', AssetsHelper.getUrl('bundles/kekrozsakfront/images/penta-yellow-24.png'));
         elem.removeClass('favourite-topic-button');
         elem.addClass('unfavourite-topic-button');
         elem.attr('id', 'unfavourite-topic-button-' + topicSlug);
