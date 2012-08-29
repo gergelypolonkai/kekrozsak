@@ -34,7 +34,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/profil", name="KekRozsakFrontBundle_profile_edit")
+     * @Route("/profil.html", name="KekRozsakFrontBundle_profile_edit")
      * @Template("KekRozsakFrontBundle:Default:userprofile.html.twig")
      */
     public function profileEditAction()

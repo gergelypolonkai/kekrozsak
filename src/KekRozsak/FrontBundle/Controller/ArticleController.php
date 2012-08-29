@@ -13,11 +13,11 @@ use KekRozsak\FrontBundle\Entity\Article;
 class ArticleController extends Controller
 {
     /**
-     * @Route("/cikk/{slug}", name="KekRozsakFrontBundle_articleView")
+     * @param KekRozsak\FrontBundle\Entity\Article $article
+     *
+     * @Route("/cikk/{slug}.html", name="KekRozsakFrontBundle_articleView")
      * @Template()
      * @ParamConverter("article")
-     *
-     * @param KekRozsak\FrontBundle\Entity\Article $article
      */
     public function viewAction(Article $article)
     {

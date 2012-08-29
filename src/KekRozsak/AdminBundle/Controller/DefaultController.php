@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/manage_regs", name="KekRozsakAdminBundle_manage_regs")
+     * @Route("/regisztraltak.html", name="KekRozsakAdminBundle_manage_regs")
      * @Template()
      */
     public function manageRegsAction()
@@ -44,7 +44,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/csoport_jelentkezok", name="KekRozsakAdminBundle_groupJoinRequests")
+     * @Route("/csoport-jelentkezok.html", name="KekRozsakAdminBundle_groupJoinRequests")
      * @Template()
      */
     public function groupJoinRequestsAction()
@@ -82,7 +82,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/csoport_jelentkezok/elutasit", name="KekRozsakAdminBundle_groupJoinDecline")
+     * @Route("/csoport-jelentkezok/elutasitas.html", name="KekRozsakAdminBundle_groupJoinDecline")
      * @Template()
      */
     public function groupJoinDeclineAction()

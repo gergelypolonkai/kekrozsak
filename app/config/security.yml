@@ -27,7 +27,7 @@ security:
             security: false
 
         login:
-            pattern:  ^/login$
+            pattern:  ^/belepes.html$
             security: false
 
         stylesheets:
@@ -42,19 +42,18 @@ security:
             pattern:    ^/
 
             form_login:
-                check_path: /login_check
-                login_path: /login
+                check_path: /belepes.do
+                login_path: /belepes.html
             logout:
-                path:   /logout
+                path:   /kilepes.do
                 target: /
             anonymous: ~
 
     access_control:
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/cikk/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/jelentkezes, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/most_varj, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/jelentkezes.html, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/most-varj.html, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: [ IS_AUTHENTICATED_FULLY, IS_AUTHENTICATED_REMEMBERED ] }
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
         #- { path: ^/_internal/secure, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }

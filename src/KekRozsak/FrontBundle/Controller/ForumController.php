@@ -65,12 +65,12 @@ class ForumController extends Controller
     }
 
     /**
-     * @Route("/{slug}", name="KekRozsakFrontBundle_forumTopicList")
-     * @Template()
-     * @ParamConverter("topicGroup")
-     *
      * @param  KekRozsak\FrontBundle\Entity\ForumTopicGroup $topicGroup
      * @return array
+     *
+     * @Route("/{slug}/", name="KekRozsakFrontBundle_forumTopicList")
+     * @Template()
+     * @ParamConverter("topicGroup")
      */
     public function topicListAction(ForumTopicgRoup $topicGroup)
     {
@@ -110,14 +110,14 @@ class ForumController extends Controller
     }
 
     /**
-     * @Route("/{topicGroupSlug}/{topicSlug}", name="KekRozsakFrontBundle_forumPostList")
-     * @Template()
-     * @ParamConverter("topic", options={"mapping"={"topicGroup"="topicGroup", "topicSlug"="slug"}})
-     * @ParamConverter("topicGroup", options={"mapping"={"topicGroupSlug"="slug"}})
-     *
      * @param  KekRozsak\FrontBundle\Entity\ForumTopicGroup $topicGroup
      * @param  KekRozsak\FrontBundle\Entity\ForumTopic      $topic
      * @return array
+     *
+     * @Route("/{topicGroupSlug}/{topicSlug}/", name="KekRozsakFrontBundle_forumPostList")
+     * @Template()
+     * @ParamConverter("topic", options={"mapping"={"topicGroup"="topicGroup", "topicSlug"="slug"}})
+     * @ParamConverter("topicGroup", options={"mapping"={"topicGroupSlug"="slug"}})
      */
     public function postListAction(ForumTopicGroup $topicGroup, ForumTopic $topic)
     {
@@ -173,12 +173,12 @@ class ForumController extends Controller
     }
 
     /**
-     * @Route("/{topicGroupSlug}/{topicSlug}/kedvenc-be", name="KekRozsakFrontBundle_forumFavouriteTopic", options={"expose": true})
-     * @Method("GET")
-     *
      * @param  KekRozsak\FrontBundle\Entity\ForumTopicGroup $topicGroup
      * @param  KekRozsak\FrontBundle\Entity\ForumTopic      $topic
-     * @return array
+     * @return Symfony\Component\HttpFoundation\Response
+     *
+     * @Route("/{topicGroupSlug}/{topicSlug}/kedvenc-be.do", name="KekRozsakFrontBundle_forumFavouriteTopic", options={"expose": true})
+     * @Method("GET")
      */
     public function favouriteTopic($topicGroupSlug, $topicSlug)
     {
@@ -207,16 +207,16 @@ class ForumController extends Controller
     }
 
     /**
-     * @Route("/{topicGroupSlug}/{topicSlug}/kedvenc-ki", name="KekRozsakFrontBundle_forumUnfavouriteTopic", options={"expose": true})
-     * @Method("GET")
-     *
      * @param  KekRozsak\FrontBundle\Entity\ForumTopicGroup $topicGroup
      * @param  KekRozsak\FrontBundle\Entity\ForumTopic      $topic
-     * @return array
+     * @return Symfony\Component\HttpFoundation\Response
+     *
+     * @Route("/{topicGroupSlug}/{topicSlug}/kedvenc-ki.do", name="KekRozsakFrontBundle_forumUnfavouriteTopic", options={"expose": true})
+     * @Method("GET")
      */
     public function unfavouriteTopic($topicGroupSlug, $topicSlug)
     {
-	    $topicGroupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:ForumTopicGroup');
+        $topicGroupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:ForumTopicGroup');
         if (null === $topicGroup = $topicGroupRepo->findOneBySlug($topicGroupSlug)) {
             throw $this->createNotFoundException('Ilyen témakör nem létezik!');
         }

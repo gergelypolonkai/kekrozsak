@@ -15,7 +15,7 @@ use KekRozsak\FrontBundle\Form\Type\BookType;
 class BookController extends Controller
 {
     /**
-     * @Route("/konyvtar", name="KekRozsakFrontBundle_bookList", options={"expose" = true})
+     * @Route("/konyvtar/", name="KekRozsakFrontBundle_bookList", options={"expose" = true})
      * @Template()
      */
     public function listAction()
@@ -65,11 +65,11 @@ class BookController extends Controller
     }
 
     /**
-     * @Route("/konyvadat/{id}/ajax.{_format}", name="KekRozsakFrontBundle_bookAjaxData", defaults={"_format": "html"}, options={"expose": true})
+     * @param KekRozsak\FrontBundle\Entity\Book $book
+     *
+     * @Route("/konyvtar/{id}/adatok.{_format}", name="KekRozsakFrontBundle_bookAjaxData", defaults={"_format": "html"}, options={"expose": true})
      * @Template()
      * @ParamConverter("book")
-     *
-     * @param KekRozsak\FrontBundle\Entity\Book $book
      */
     public function ajaxDataAction(Book $book)
     {
@@ -79,10 +79,10 @@ class BookController extends Controller
     }
 
     /**
-     * @Route("/konyv/torles/{id}", name="KekRozsakFrontBundle_bookDeleteCopy", requirements={"id": "\d+"}, options={"expose": true})
-     * @ParamConverter("book")
-     *
      * @param KekRozsak\FrontBundle\Entity\Book $book
+     *
+     * @Route("/konyvtar/{id}/torol.do}", name="KekRozsakFrontBundle_bookDeleteCopy", requirements={"id": "\d+"}, options={"expose": true})
+     * @ParamConverter("book")
      */
     public function ajaxDeleteBookAction(Book $book)
     {
@@ -99,10 +99,10 @@ class BookController extends Controller
     }
 
     /**
-     * @Route("/konyv/ujpeldany/{id}", name="KekRozsakFrontBundle_bookAddCopy", requirements={"id": "\d+"}, options={"expose": true})
-     * @ParamConverter("book")
-     *
      * @param KekRozsak\FrontBundle\Entity\Book $book
+     *
+     * @Route("/konyvtar/{id}/ujpeldany.do", name="KekRozsakFrontBundle_bookAddCopy", requirements={"id": "\d+"}, options={"expose": true})
+     * @ParamConverter("book")
      */
     public function ajaxAddCopyAction(Book $book)
     {
@@ -119,14 +119,15 @@ class BookController extends Controller
     }
 
     /**
-     * @Route("/konyv/kolcsonozheto/{id}/{newValue}", name="KekRozsakFrontBundle_bookSetCopyBorrowable", requirements={"id": "\d+"}, options={"expose": true})
-     * @ParamConverter("book")
-     *
      * @param KekRozsak\FrontBundle\Entity\Book $book
      * @param boolean                           $newValue
+     *
+     * @Route("/konyvtar/{id}/kolcsonozheto.do/{newValue}", name="KekRozsakFrontBundle_bookSetCopyBorrowable", requirements={"id": "\d+"}, options={"expose": true})
+     * @ParamConverter("book")
      */
     public function ajaxSetBookCopyBorrowableAction(Book $book, $newValue)
     {
+	error_log($newValue);
         $user = $this->get('security.context')->getToken()->getUser();
         $copies = $book->getUsersCopies($user);
         $em = $this->getDoctrine()->getEntityManager();
@@ -140,11 +141,11 @@ class BookController extends Controller
     }
 
     /**
-     * @Route("/konyv/megveheto/{id}/{newValue}", name="KekRozsakFrontBundle_bookSetCopyForSale", requirements={"id": "\d+"}, options={"expose": true})
-     * @ParamConverter("book")
-     *
      * @param KekRozsak\FrontBundle\Entity\Book $book
      * @param boolean                           $newValue
+     *
+     * @Route("/konyvtar/{id}/megveheto.do/{newValue}", name="KekRozsakFrontBundle_bookSetCopyForSale", requirements={"id": "\d+"}, options={"expose": true})
+     * @ParamConverter("book")
      */
     public function ajaxSetBookCopyForSaleAction(Book $book, $newValue)
     {
@@ -161,11 +162,11 @@ class BookController extends Controller
     }
 
     /**
-     * @Route("/konyv/szeretnek/{id}/{wantToBuy}", name="KekRozsakFrontBundle_bookWantOne", requirements={"id": "\d+"}, options={"expose": true})
-     * @ParamConverter("book")
-     *
      * @param KekRozsak\FrontBundle\Entity\Book $book
      * @param boolean                           $wantToBuy
+     *
+     * @Route("/konyvtar/{id}/szeretnek.do/{wantToBuy}", name="KekRozsakFrontBundle_bookWantOne", requirements={"id": "\d+"}, options={"expose": true})
+     * @ParamConverter("book")
      */
     public function ajaxWantABookAction(Book $book, $wantToBuy)
     {

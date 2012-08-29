@@ -10,14 +10,16 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
  * Description of NewsController
  *
  * @author polesz
+ *
+ * @Route("/hirek")
  */
 class NewsController extends Controller
 {
     /**
-     * @Route("/newsSideList.html", name="KekRozsakFrontBundle_newsSideList", options={"expose": true})
-     * @Template()
-     *
      * @return array
+     *
+     * @Route("/oldalso-lista.html", name="KekRozsakFrontBundle_newsSideList", options={"expose": true})
+     * @Template()
      */
     public function sideListAction()
     {

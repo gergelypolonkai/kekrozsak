@@ -17,7 +17,7 @@ use KekRozsak\FrontBundle\Entity\UserData;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/login", name="KekRozsakSecurityBundle_login")
+     * @Route("/belepes.html", name="KekRozsakSecurityBundle_login")
      * @Template()
      */
     public function loginAction()
@@ -39,7 +39,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/login_check", name="KekRozsakSecurityBundle_login_check")
+     * @Route("/belepes.do", name="KekRozsakSecurityBundle_login_check")
      */
     public function loginCheckAction()
     {
@@ -47,7 +47,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/logout", name="KekRozsakSecurityBundle_logout")
+     * @Route("/kilepes.do", name="KekRozsakSecurityBundle_logout")
      */
     public function logoutAction()
     {
@@ -55,7 +55,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/jelentkezes", name="KekRozsakSecurityBundle_registration")
+     * @Route("/jelentkezes.html", name="KekRozsakSecurityBundle_registration")
      * @Template()
      */
     public function registrationAction()
@@ -129,7 +129,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/most_varj", name="KekRozsakSecurityBundle_reg_success")
+     * @Route("/most-varj.html", name="KekRozsakSecurityBundle_reg_success")
      * @Template()
      */
     public function regSuccessAction()
