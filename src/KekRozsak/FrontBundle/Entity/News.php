@@ -12,6 +12,12 @@ use KekRozsak\SecurityBundle\Entity\User;
  */
 class News
 {
+    public function __construct()
+    {
+        $this->public = false;
+        $this->draft = true;
+    }
+
     /**
      * The ID of this News
      *
@@ -228,4 +234,38 @@ class News
     {
         return $this->sticky;
     }
+
+    /**
+     * True if the News item is just a draft. Drafts can onlz be seen by the
+     * creator and the administrators
+     *
+     * @var boolean $draft
+     *
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    protected $draft;
+
+    /**
+     * Set draft
+     *
+     * @param  boolean $draft
+     * @return News
+     */
+    public function setDraft($draft)
+    {
+        // TODO: Check if parameter is boolean!
+        $this->draft = $draft;
+        return $this;
+    }
+
+    /**
+     * Get draft
+     *
+     * @return boolean
+     */
+    public function getDraft()
+    {
+        return $this->draft;
+    }
 }
+
