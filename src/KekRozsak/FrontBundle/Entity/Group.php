@@ -48,7 +48,7 @@ class Group
 
     /**
      * @var KekRozsak\SecurityBundle\Entity\User $leader
-     * @ORM\ManyToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="KekRozsak\SecurityBundle\Entity\User", inversedBy="ledGroups")
      */
     protected $leader;
 

@@ -27,6 +27,7 @@ class User implements UserInterface, AdvancedUserInterface
     {
         $this->groups = new ArrayCollection();
         $this->roles = new ArrayCollection();
+        $this->ledGroups = new ArrayCollection();
     }
 
     /**
@@ -346,6 +347,46 @@ class User implements UserInterface, AdvancedUserInterface
     public function getGroups()
     {
         return $this->groups;
+    }
+
+    /**
+     * Get all groups, including led groups (which are sometimes not included
+     * in $groups)
+     *
+     * @return Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getAllGroups()
+    {
+        $groups = $this->ledGroups;
+
+        $this->getGroups()->forAll(function($i, $membership) use ($groups) {
+            $group = $membership->getGroup();
+            if ($groups->contains($group)) {
+                return true;
+            }
+            $groups->add($group);
+            return true;
+        });
+        return $groups;
+    }
+
+    /**
+     * Groups led by this User
+     *
+     * @var Doctrine\Common\Collections\ArrayCollection $ledGroups
+     *
+     * @ORM\OneToMany(targetEntity="KekRozsak\FrontBundle\Entity\Group", mappedBy="leader", fetch="LAZY")
+     */
+    protected $ledGroups;
+
+    /**
+     * Get ledGroups
+     *
+     * @return Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getLedGroups()
+    {
+        return $this->ledGroups;
     }
 
     /**
