@@ -7,6 +7,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Security\Acl\Domain\RoleSecurityIdentity;
 use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
 use Symfony\Component\Security\Acl\Permission\MaskBuilder;
+use Symfony\Component\Security\Acl\Exception\AclNotFoundException;
 
 class SecurityInitCommand extends ContainerAwareCommand
 {
@@ -47,11 +48,21 @@ EOF
         $securityContext = $container->get('security.context');
         $aclProvider = $container->get('security.acl.provider');
 
-        $securityIdentity = new RoleSecurityIdentity('ADMIN');
-        $objectIdentity = new ObjectIdentity('class', 'KekRozsak\\FrontBundle\\Entity\\News');
-	// TODO: Check if the ACL exists, and if so, if it has the same permission mask
-        $acl = $aclProvider->createAcl($objectIdentity);
-        $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
-        $aclProvider->updateAcl($acl);
+        $classNames = array(
+            'KekRozsak\\FrontBundle\\Entity\\News',
+            'KekRozsak\\FrontBundle\\Entity\\Articles',
+        );
+
+        $securityIdentity = new RoleSecurityIdentity('ROLE_ADMIN');
+        foreach ($classNames as $className) {
+            $objectIdentity = new ObjectIdentity('class', $className);
+            try {
+                $acl = $aclProvider->findAcl($objectIdentity, array($securityIdentity));
+            } catch (AclNotFoundException $e) {
+                $acl = $aclProvider->createAcl($objectIdentity);
+            }
+            $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
+            $aclProvider->updateAcl($acl);
+        }
     }
 }
