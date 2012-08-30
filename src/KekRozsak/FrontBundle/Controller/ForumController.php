@@ -116,11 +116,19 @@ class ForumController extends Controller
      *
      * @Route("/{topicGroupSlug}/{topicSlug}/", name="KekRozsakFrontBundle_forumPostList")
      * @Template()
-     * @ParamConverter("topic", options={"mapping"={"topicGroup"="topicGroup", "topicSlug"="slug"}})
-     * @ParamConverter("topicGroup", options={"mapping"={"topicGroupSlug"="slug"}})
      */
-    public function postListAction(ForumTopicGroup $topicGroup, ForumTopic $topic)
+    public function postListAction($topicGroupSlug, $topicSlug)
     {
+        $topicGroupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:ForumTopicGroup');
+        if (null === $topicGroup = $topicGroupRepo->findOneBySlug($topicGroupSlug)) {
+            throw $this->createNotFoundException('Ilyen témakör nem létezik!');
+        }
+
+        $topicRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:ForumTopic');
+        if (null === $topic = $topicRepo->findOneBy(array('slug' => $topicSlug, 'topicGroup' => $topicGroup))) {
+            throw $this->createNotFoundException('Ilyen téma nem létezik!');
+        }
+
         // Get the list of posts in the requested topic
         $postRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:ForumPost');
         $posts = $postRepo->findBy(
