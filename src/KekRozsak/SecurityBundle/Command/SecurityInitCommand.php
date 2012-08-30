@@ -49,19 +49,19 @@ EOF
         $aclProvider = $container->get('security.acl.provider');
 
         $classNames = array(
-            'KekRozsak\\FrontBundle\\Entity\\News',
-            'KekRozsak\\FrontBundle\\Entity\\Articles',
+            'newsClass'     => 'KekRozsak\\FrontBundle\\Entity\\News',
+            'articlesClass' => 'KekRozsak\\FrontBundle\\Entity\\Articles',
         );
 
         $securityIdentity = new RoleSecurityIdentity('ROLE_ADMIN');
-        foreach ($classNames as $className) {
-            $objectIdentity = new ObjectIdentity('class', $className);
+        foreach ($classNames as $id => $className) {
+            $objectIdentity = new ObjectIdentity($id, $className);
             try {
                 $acl = $aclProvider->findAcl($objectIdentity, array($securityIdentity));
             } catch (AclNotFoundException $e) {
                 $acl = $aclProvider->createAcl($objectIdentity);
             }
-            $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
+            $acl->insertClassAce($securityIdentity, MaskBuilder::MASK_OWNER);
             $aclProvider->updateAcl($acl);
         }
     }
