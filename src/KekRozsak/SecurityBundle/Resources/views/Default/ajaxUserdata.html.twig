@@ -19,16 +19,17 @@
         <strong>MSN cím</strong>: {{ user.userData.msnAddress }}<br />
 {% endif %}
 {% if user.userData and user.userData.googleTalk != '' and (is_granted('ROLE_ADMIN') or user.userData.googleTalkPublic) %}
-        <strong>Google Talk cím</strong>: {{ user.userData.googleTalk }}
+        <strong>Google Talk cím</strong>: {{ user.userData.googleTalk }}<br />
 {% endif %}
 {% if user.userData and user.userData.skype != '' and (is_granted('ROLE_ADMIN') or user.userData.skypePublic) %}
-        <strong>Skype név</strong>: {{ user.userData.skypePublic }}
+        <strong>Skype név</strong>: {{ user.userData.skype}}<br />
 {% endif %}
 {% if user.userData and user.userData.phoneNumber != '' and (is_granted('ROLE_ADMIN') or user.userData.phoneNumberPublic) %}
         <strong>Telefonszám</strong>: {{ user.userData.phoneNumber }}<br />
 {% endif %}
 {% if user.userData and user.userData.selfDescription != '' %}
-        <strong>Leírás</strong>: {{ user.userData.selfDescription }}<br />
+        <strong>Leírás</strong>:<br />
+	{{ user.userData.selfDescription }}<br />
 {% endif %}
         <strong>Csoportok</strong>:<br />
 {% set groupCount = 0 %}
@@ -44,7 +45,10 @@ Egy csoportnak sem tagja.<br />
 {% if is_granted('ROLE_ADMIN') %}
         <strong>Jóváhagyta</strong>: {{ user.acceptedBy.displayName }}<br />
         <strong>Utolsó bejelentkezés</strong>: {{ user.lastLoginAt|date('Y-m-d H:i') }}<br />
-        <strong>Jogok</strong>:
+        <strong>Jogok</strong>:<br />
+{% for role in user.roles %}
+	{{ role.shortDescription }}<br />
+{% endfor %}
 {% endif %}
     </body>
 </html>
