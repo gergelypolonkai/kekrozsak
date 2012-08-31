@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Exception\RouteNotFoundException;
  * Description of HelpUrlExtension
  *
  * @author Gergely Polonkai
- * 
+ *
  * @DI\Service
  * @DI\Tag("twig.extension")
  */
@@ -33,7 +33,7 @@ class HelpUrlExtension extends \Twig_Extension
 
     public function getGlobals() {
         parent::getGlobals();
-        
+
         $request = $this->container->get('request');
         $router = $this->container->get('router');
 
@@ -61,7 +61,7 @@ class HelpUrlExtension extends \Twig_Extension
             'helpUrl' => $helpUrl,
         );
     }
-    
+
     public function getName()
     {
         return 'HelpUrl';

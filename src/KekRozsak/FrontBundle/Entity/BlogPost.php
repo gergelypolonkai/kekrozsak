@@ -30,7 +30,7 @@ class BlogPost
     {
         return $this->id;
     }
-    
+
     /**
      * True if the BlogPost is published. If not, only the author and the
      * administrators can see it.
@@ -63,7 +63,7 @@ class BlogPost
     {
         return $this->published;
     }
-    
+
     /**
      * The Group which this BlogPost is associated with
      *

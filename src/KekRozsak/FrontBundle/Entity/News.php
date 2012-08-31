@@ -224,7 +224,7 @@ class News
         $this->sticky = $sticky;
         return $this;
     }
-    
+
     /**
      * Get sticky
      *

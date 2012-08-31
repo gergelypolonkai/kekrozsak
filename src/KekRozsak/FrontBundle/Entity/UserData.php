@@ -516,4 +516,36 @@ class UserData
     {
         return $this->favouriteTopics->contains($topic);
     }
+
+    /**
+     * The avatar image of the user
+     *
+     * @var UploadedFile $avatarImage
+     *
+     * @ORM\ManyToOne(targetEntity="KekRozsak\FrontBundle\Entity\UploadedFile")
+     * @ORM\JoinColumn(name="avatar_image_id", nullable=true)
+     */
+    protected $avatarImage;
+
+    /**
+     * Set avaratImage
+     *
+     * @param  KekRozsak\FrontBundle\Entity\UploadedFile $avatarImage
+     * @return UserData
+     */
+    public function setAvatarImage(UploadedFile $avatarImage)
+    {
+        $this->avatarImage = $avatarImage;
+        return $this;
+    }
+
+    /**
+     * Get avatarImage
+     *
+     * @return KekRozsak\FrontBundle\Entity\UploadedFile
+     */
+    public function getAvatarImage()
+    {
+        return $this->avatarImage;
+    }
 }
