@@ -1,0 +1,32 @@
+{# vim: ft=htmljinja
+#}
+{% extends 'KekRozsakFrontBundle:Default:main_template.html.twig' %}
+
+{% block content %}
+<h3>Adminisztráció - Hírek</h3>
+<table>
+    <thead>
+        <tr>
+            <td></td>
+            <td>Írta</td>
+            <td>Dátum</td>
+            <td>Cím</td>
+        </tr>
+    </thead>
+    <tbody>
+{% for item in news %}
+        <tr>
+            <td>
+                {% if item.public %}[Publikus ikon]{% else %}[Nem publikus ikon]{% endif %}
+                {% if item.sticky %}[Ragadós ikon]{% else %}[Nem ragadós ikon]{% endif %}
+                {% if item.draft %}[Vázlat ikon]{% else %}[Publikált ikon]{% endif %}
+            </td>
+            <td>{{ item.createdBy.displayName }}</td>
+            <td>{{ item.createdAt|date('Y-m-d') }}</td>
+            <td>{{ item.title }}</td>
+            <td>[Törlés ikon]</td>
+        </tr>
+{% endfor %}
+    </tbody>
+</table>
+{% endblock content %}
