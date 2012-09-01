@@ -24,19 +24,15 @@ class RoleHierarchy implements RoleHierarchyInterface
     {
         $reachableRoles = array();
         foreach ($roles as $role) {
-            if ($role instanceof RoleInterface) {
-                $thisRole = $role->getRole();
-            } else {
-                $thisRole = $role;
-            }
+            $thisRole = $role->getRole();
             if (!isset($this->map[$thisRole])) {
                 continue;
             }
-            $reachableRoles[] = $thisRole;
+            $reachableRoles[] = $role;
 
             foreach ($this->map[$thisRole] as $r) {
                 if (($childRole = $this->roleRepo->findOneByName($r)) !== null) {
-                    $reachableRoles[] = $childRole->getRole();
+                    $reachableRoles[] = $childRole;
                 }
             }
         }

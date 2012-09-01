@@ -4,6 +4,7 @@ namespace KekRozsak\SecurityBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\Role\RoleInterface;
+use Symfony\Component\Security\Core\Role\Role as SymfonyRole;
 
 /**
  * KekRozsak\SecurityBundle\Entity\Role
@@ -11,7 +12,7 @@ use Symfony\Component\Security\Core\Role\RoleInterface;
  * @ORM\Entity
  * @ORM\Table(name="roles")
  */
-class Role implements RoleInterface
+class Role extends SymfonyRole implements RoleInterface
 {
     /**
      * The ID of the Role
