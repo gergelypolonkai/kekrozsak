@@ -69,7 +69,7 @@ class EventsExtension extends \Twig_Extension
             'today'           => $today,
             'firstDay'        => $firstDay,
             'lastDay'         => $lastDay,
-            'firstDayWeekday' => $firstDayWeekday,
+            'firstDayWeekday' => ($firstDayWeekday == 0) ? 7 : $firstDayWeekday,
             'numDays'         => $numDays,
         );
     }

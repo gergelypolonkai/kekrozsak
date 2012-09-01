@@ -21,31 +21,30 @@
                                 <tbody>
                                     <tr>
                                         <td class="woy">{{ firstDay|date('W') }}</td>
-{% set curDow = 0 %}
+{% set woy = firstDay|date('W') + 1 %}
 {% if firstDayWeekday != 1 %}
-{% for i in 1..(firstDayWeekday - 1) %}
-{% set curDow = curDow + 1 %}{% if curDow == 8 %}{% set curDow = 1 %}{% endif %}
+{% for i in 1..firstDayWeekday - 1 %}
                                         <td></td>
 {% endfor %}
 {% endif %}
-{% set cur = firstDayWeekday - 1 %}
+{% set curDow = firstDayWeekday %}
 {% for i in 1..numDays %}
-{% set cur = cur + 1 %}
-{% set curDow = curDow + 1 %}{% if curDow == 8 %}{% set curDow = 1 %}{% endif %}
-{% set eventCount = 0 %}
                                         <td id="event-calendar-{{ i }}"{% if eventList[i].events|length > 0 %} class="program" rel="{{ path('KekRozsakFrontBundle_eventAjaxList', {date: eventList[i].date|date('Y-m-d'), _format: 'html'}) }}"{% endif %}>
                                             <a href="{{ path('KekRozsakFrontBundle_eventList', { date: eventList[i].date|date('Y-m-d')}) }}">{{ eventList[i].date|date('d') }}</a>
                                         </td>
-{% if cur is divisibleby(7) %}
+{% if curDow is divisibleby(7) %}
+{% set curDow = 0 %}
                                     </tr>
-{% if cur != numDays %}
                                     <tr>
-                                        <td class="woy">{{ eventList[i + 1].date|date('W') }}</td>
+{% if i != numDays %}
+                                        <td class="woy">{{ woy }}</td>
+{% set woy = woy + 1 %}
 {% endif %}
 {% endif %}
+{% set curDow = curDow + 1 %}
 {% endfor %}
-{% if curDow != 7 %}
-{% for i in (curDow + 1)..7 %}
+{% if curDow != 1 %}
+{% for i in curDow..7 %}
                                         <td></td>
 {% endfor %}
 {% endif %}
