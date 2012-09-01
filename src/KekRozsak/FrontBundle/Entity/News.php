@@ -73,6 +73,37 @@ class News
     }
 
     /**
+     * The slugified title of this News
+     *
+     * @var string $slug
+     *
+     * @ORM\Column(type="string", length=100, nullable=false, unique=true)
+     */
+    protected $slug;
+
+    /**
+     * Set slug
+     *
+     * @param  string $slug
+     * @return News
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
      * The contents of this News
      *
      * @var string $text
