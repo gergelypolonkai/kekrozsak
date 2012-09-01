@@ -71,7 +71,7 @@ class EventController extends Controller
      * @param  string $date
      * @return array
      *
-     * @Route("/esemenyek/{date}/", name="KekRozsakFrontBundle_eventList", defaults={"date": null})
+     * @Route("/esemenyek/{date}", name="KekRozsakFrontBundle_eventList", defaults={"date": null})
      * @Template()
      */
     public function listAction($date = null)
