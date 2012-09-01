@@ -4,6 +4,7 @@ namespace KekRozsak\SecurityBundle\Service;
 
 use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\Security\Core\Role\RoleInterface;
 
 class RoleHierarchy implements RoleHierarchyInterface
 {
@@ -23,13 +24,19 @@ class RoleHierarchy implements RoleHierarchyInterface
     {
         $reachableRoles = array();
         foreach ($roles as $role) {
-            if (!isset($this->map[$role->getRole()])) {
+            if ($role instanceof RoleInterface) {
+                $thisRole = $role->getRole();
+            } else {
+                $thisRole = $role;
+            }
+            if (!isset($this->map[$thisRole])) {
                 continue;
             }
+            $reachableRoles[] = $thisRole;
 
-            foreach ($this->map[$role->getRole()] as $r) {
+            foreach ($this->map[$thisRole] as $r) {
                 if (($childRole = $this->roleRepo->findOneByName($r)) !== null) {
-                    $reachableRoles[] = $childRole;
+                    $reachableRoles[] = $childRole->getRole();
                 }
             }
         }
