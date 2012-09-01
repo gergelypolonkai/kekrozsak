@@ -365,8 +365,10 @@ class User implements UserInterface, AdvancedUserInterface
                 return true;
             }
             $groups->add($group);
+
             return true;
         });
+
         return $groups;
     }
 

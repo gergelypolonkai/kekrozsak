@@ -480,6 +480,7 @@ class UserData
     {
         // TODO: Check if not null
         $this->favouriteTopics->add($topic);
+
         return $this;
     }
 
@@ -493,6 +494,7 @@ class UserData
     {
         // TODO: Check if not null
         $this->favouriteTopics->removeElement($topic);
+
         return $this;
     }
 
@@ -536,6 +538,7 @@ class UserData
     public function setAvatarImage(UploadedFile $avatarImage)
     {
         $this->avatarImage = $avatarImage;
+
         return $this;
     }
 

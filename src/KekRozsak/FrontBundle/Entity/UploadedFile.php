@@ -57,6 +57,7 @@ class UploadedFile
     {
         // TODO: Check if not null!
         $this->namespace = $namespace;
+
         return $this;
     }
 
@@ -76,19 +77,21 @@ class UploadedFile
      * @var string $filename
      *
      * @ORM\Column(type="string", length=100, nullable=false)
+     * @Assert\NotBlank()
      */
     protected $filename;
 
     /**
      * Set filename
      *
-     * @param  string $filename
+     * @param  string       $filename
      * @return UploadedFile
      */
     public function setFilename($filename)
     {
         // TODO: Check if not null nor empty!
         $this->filename = $filename;
+
         return $this;
     }
 
@@ -124,13 +127,14 @@ class UploadedFile
     /**
      * Set mimeType
      *
-     * @param  string $mimeType
+     * @param  string       $mimeType
      * @return UploadedFile
      */
     public function setMimeType($mimeType)
     {
         // TODO: Check if not null nor empty!
         $this->mimeType = $mimeType;
+
         return $this;
     }
 
@@ -156,7 +160,7 @@ class UploadedFile
     /**
      * Set description
      *
-     * @param  string $description
+     * @param  string       $description
      * @return UploadedFile
      */
     public function setDescription($description)
@@ -166,6 +170,7 @@ class UploadedFile
         }
 
         $this->description = $description;
+
         return $this;
     }
 

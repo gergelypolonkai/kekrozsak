@@ -190,7 +190,7 @@ class ForumController extends Controller
      */
     public function favouriteTopic($topicGroupSlug, $topicSlug)
     {
-	    $topicGroupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:ForumTopicGroup');
+        $topicGroupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:ForumTopicGroup');
         if (null === $topicGroup = $topicGroupRepo->findOneBySlug($topicGroupSlug)) {
             throw $this->createNotFoundException('Ilyen témakör nem létezik!');
         }

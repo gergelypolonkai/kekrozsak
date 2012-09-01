@@ -50,13 +50,14 @@ class UploadNamespace
     /**
      * Set name
      *
-     * @param  string $name
+     * @param  string          $name
      * @return UploadNamespace
      */
     public function setName($name)
     {
         // TODO: Check if not null!
         $this->name = $name;
+
         return $this;
     }
 
@@ -82,13 +83,14 @@ class UploadNamespace
     /**
      * Set slug
      *
-     * @param  string $slug
+     * @param  string          $slug
      * @return UploadNamespace
      */
     public function setSlug($slug)
     {
         // TODO: Check if not null!
         $this->slug = $slug;
+
         return $this;
     }
 

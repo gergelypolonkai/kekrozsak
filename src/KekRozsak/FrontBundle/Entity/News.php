@@ -222,6 +222,7 @@ class News
     public function setSticky($sticky)
     {
         $this->sticky = $sticky;
+
         return $this;
     }
 
@@ -255,6 +256,7 @@ class News
     {
         // TODO: Check if parameter is boolean!
         $this->draft = $draft;
+
         return $this;
     }
 
@@ -268,4 +270,3 @@ class News
         return $this->draft;
     }
 }
-

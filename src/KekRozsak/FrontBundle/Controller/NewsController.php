@@ -26,7 +26,7 @@ class NewsController extends Controller
         $newsRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:News');
         $searchCriteria = array(
             'draft' => false,
-	    );
+        );
         if (
                 !is_object($this->get('security.context')->getToken())
                 || !is_object($this->get('security.context')->getToken()->getUser())

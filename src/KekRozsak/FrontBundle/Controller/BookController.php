@@ -127,7 +127,6 @@ class BookController extends Controller
      */
     public function ajaxSetBookCopyBorrowableAction(Book $book, $newValue)
     {
-	error_log($newValue);
         $user = $this->get('security.context')->getToken()->getUser();
         $copies = $book->getUsersCopies($user);
         $em = $this->getDoctrine()->getEntityManager();

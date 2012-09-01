@@ -27,11 +27,13 @@ class HelpUrlExtension extends \Twig_Extension
      *     "container" = @DI\Inject("service_container")
      * })
      */
-    public function __construct(ContainerInterface $container) {
+    public function __construct(ContainerInterface $container)
+    {
         $this->container = $container;
     }
 
-    public function getGlobals() {
+    public function getGlobals()
+    {
         parent::getGlobals();
 
         $request = $this->container->get('request');

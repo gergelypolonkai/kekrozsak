@@ -186,6 +186,8 @@ class ForumTopic
      * @var string $title
      *
      * @ORM\Column(type="string", length=100, nullable=false)
+     *
+     * @Assert\NotBlank()
      */
     protected $title;
 

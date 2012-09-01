@@ -44,13 +44,14 @@ class BlogPost
     /**
      * Set published
      *
-     * @param  boolean $published
+     * @param  boolean  $published
      * @return BlogPost
      */
     public function setPublished($published)
     {
         // TODO: Check if parameter is boolean!
         $this->published = $published;
+
         return $this;
     }
 
@@ -83,6 +84,7 @@ class BlogPost
     public function setGroup(Group $group)
     {
         $this->group = $group;
+
         return $this;
     }
 
@@ -108,13 +110,14 @@ class BlogPost
     /**
      * Set title
      *
-     * @param  string $title
+     * @param  string   $title
      * @return BlogPost
      */
     public function setTitle($title)
     {
         // TODO: Check if not null nor empty!
         $this->title = $title;
+
         return $this;
     }
 
@@ -140,13 +143,14 @@ class BlogPost
     /**
      * Set slug
      *
-     * @param  string $slug
+     * @param  string   $slug
      * @return BlogPost
      */
     public function setSlug($slug)
     {
         // TODO: Check if not null nor empty!
         $this->slug = $slug;
+
         return $this;
     }
 
@@ -180,6 +184,7 @@ class BlogPost
     {
         // TODO: Check if not null!
         $this->createdBy = $createdBy;
+
         return $this;
     }
 
@@ -212,6 +217,7 @@ class BlogPost
     {
         // TODO: Check if not null!
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
@@ -244,6 +250,7 @@ class BlogPost
     public function setUpdatedBy(User $updatedBy)
     {
         $this->updatedBy = $updatedBy;
+
         return $this;
     }
 
@@ -276,6 +283,7 @@ class BlogPost
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
         return $this;
     }
 
@@ -291,7 +299,7 @@ class BlogPost
     /**
      * Set updateReason
      *
-     * @param  string $updateReason
+     * @param  string   $updateReason
      * @return BlogPost
      */
     public function setUpdateReason($updateReason)
@@ -300,6 +308,7 @@ class BlogPost
             $updateReason = null;
         }
         $this->updateReason = $updateReason;
+
         return $this;
     }
 
@@ -325,13 +334,14 @@ class BlogPost
     /**
      * Set content
      *
-     * @param  string $content
+     * @param  string   $content
      * @return BlogPost
      */
     public function setContent($content)
     {
         // TODO: Check if not null nor empty!
         $this->content = $content;
+
         return $this;
     }
 

@@ -283,6 +283,7 @@ class Book
     {
         // TODO: Check if parameter is boolean!
         $this->commentable = $commentable;
+
         return $this;
     }
 
