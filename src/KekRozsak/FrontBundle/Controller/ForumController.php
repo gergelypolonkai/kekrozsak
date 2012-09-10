@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
 
 use KekRozsak\FrontBundle\Entity\ForumTopicGroup;
 use KekRozsak\FrontBundle\Entity\ForumTopic;
@@ -29,6 +30,7 @@ class ForumController extends Controller
      */
     public function topicGroupListAction()
     {
+        $topicGroupOid = new ObjectIdentity(ForumTopicGroup::ACL_OID, 'KekRozsak\\FrontBundle\\Entity\\ForumTopicGroup');
         $groupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:ForumTopicGroup');
         $request = $this->getRequest();
         $newTopicGroup = new ForumTopicGroup();
@@ -61,6 +63,7 @@ class ForumController extends Controller
         return array(
             'topicGroups'       => $topicGroups,
             'newTopicGroupForm' => $newTopicGroupForm->createView(),
+            'oid'               => $topicGroupOid,
         );
     }
 

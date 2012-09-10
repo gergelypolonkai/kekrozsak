@@ -18,6 +18,13 @@ use KekRozsak\SecurityBundle\Entity\User;
  */
 class ForumTopicGroup
 {
+    /**
+     * The ACL class OID for this class
+     *
+     * @const ACL_OID
+     */
+    const ACL_OID = 'forumTopicGroupClass';
+
     public function __construct()
     {
         $this->topics = new ArrayCollection();

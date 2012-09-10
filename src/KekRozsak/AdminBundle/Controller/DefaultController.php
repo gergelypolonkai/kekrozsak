@@ -6,7 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
 use JMS\DiExtraBundle\Annotation as DI;
+
+use KekRozsak\FrontBundle\Entity\Group;
+use KekRozsak\SecurityBundle\Entity\User;
 
 /**
  * @Route("/admin")
@@ -26,9 +30,12 @@ class DefaultController extends Controller
      */
     public function manageRegsAction()
     {
-        if (!$this->$securityContext->isGranted('ROLE_ADMIN')) {
+        $objectIdentity = new ObjectIdentity(User::ACL_OID, 'KekRozsak\\SecurityBundle\\Entity\\User');
+
+        if (!$this->securityContext->isGranted('OWNER', $objectIdentity)) {
             throw new AccessDeniedException('Ehhez a művelethez nincs jogosultságod.');
         }
+
         $users = $this->getDoctrine()->getEntityManager()->createQuery('SELECT u FROM KekRozsakSecurityBundle:User u WHERE u.acceptedBy IS NULL')->getResult();
         $request = $this->getRequest();
 
@@ -59,9 +66,10 @@ class DefaultController extends Controller
     {
         $user = $this->securityContext->getToken()->getUser();
         $request = $this->getRequest();
+        $objectIdentity = new ObjectIdentity(Group::ACL_OID, 'KekRozsak\\FrontBundle\\Entity\\Group');
+	$groupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:Group');
 
-        $groupRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:Group');
-        if ($this->securityContext->isGranted('ROLE_ADMIN') === false) {
+        if (!$this->securityContext->isGranted('OWNER', $objectIdentity)) {
             $myGroups = $groupRepo->findByLeader($user);
         } else {
             $myGroups = $groupRepo->findAll();
@@ -75,7 +83,7 @@ class DefaultController extends Controller
                 if ($aUser && $aGroup) {
                     if (
                             ($aGroup->getLeader() == $user)
-                            || $this->securityContext->isGranted('ROLE_ADMIN')
+                            || $this->securityContext->isGranted('OWNER', $objectIdentity)
                     ) {
                         $membershipRepo = $this->getDoctrine()->getRepository('KekRozsakFrontBundle:UserGroupMembership');
                         $membershipObject = $membershipRepo->findOneBy(array('user' => $aUser, 'group' => $aGroup));

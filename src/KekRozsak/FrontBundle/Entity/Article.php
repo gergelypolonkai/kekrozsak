@@ -13,6 +13,13 @@ use KekRozsak\SecurityBundle\Entity\User;
 class Article
 {
     /**
+     * The ACL class OID for this class
+     *
+     * @const ACL_OID
+     */
+    const ACL_OID = 'articleClass';
+
+    /**
      * The ID of the Article
      *
      * @var integer $id

@@ -47,14 +47,21 @@ EOF
 
         $securityContext = $container->get('security.context');
         $aclProvider = $container->get('security.acl.provider');
+        $roleRepo = $container->get('doctrine')->getRepository('KekRozsakSecurityBundle:Role');
+        $adminRole = $roleRepo->findOneByName('ROLE_ADMIN');
 
         $classNames = array(
-            'newsClass'     => 'KekRozsak\\FrontBundle\\Entity\\News',
-            'articlesClass' => 'KekRozsak\\FrontBundle\\Entity\\Articles',
+            'KekRozsak\\FrontBundle\\Entity\\News',
+            'KekRozsak\\FrontBundle\\Entity\\Article',
+            'KekRozsak\\FrontBundle\\Entity\\Group',
+            'KekRozsak\\FrontBundle\\Entity\\ForumTopicGroup',
+            'KekRozsak\\SecurityBundle\\Entity\\User',
         );
 
-        $securityIdentity = new RoleSecurityIdentity('ROLE_ADMIN');
-        foreach ($classNames as $id => $className) {
+        $securityIdentity = new RoleSecurityIdentity($adminRole);
+        foreach ($classNames as $className) {
+            $id = $className::ACL_OID;
+
             $objectIdentity = new ObjectIdentity($id, $className);
             try {
                 $acl = $aclProvider->findAcl($objectIdentity, array($securityIdentity));

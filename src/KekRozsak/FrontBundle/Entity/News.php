@@ -12,6 +12,13 @@ use KekRozsak\SecurityBundle\Entity\User;
  */
 class News
 {
+    /**
+     * The ACL class OID for this class
+     *
+     * @const ACL_OID
+     */
+    const ACL_OID = 'newsClass';
+
     public function __construct()
     {
         $this->public = false;

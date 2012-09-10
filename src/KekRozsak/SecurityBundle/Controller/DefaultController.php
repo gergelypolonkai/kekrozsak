@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
 
 use KekRozsak\SecurityBundle\Entity\User;
 use KekRozsak\SecurityBundle\Form\Type\UserType;
@@ -146,7 +147,9 @@ class DefaultController extends Controller
      */
     public function ajaxUserdataAction(User $user)
     {
+        $userOid = new ObjectIdentity(User::ACL_OID, get_class($user));
         return array(
+            'oid'  => $userOid,
             'user' => $user,
         );
     }

@@ -19,6 +19,13 @@ use KekRozsak\FrontBundle\Entity\Document;
  */
 class Group
 {
+    /**
+     * The ACL class OID for this class
+     *
+     * @const ACL_OID
+     */
+    const ACL_OID = 'groupClass';
+
     public function __construct()
     {
         $this->members = new ArrayCollection();

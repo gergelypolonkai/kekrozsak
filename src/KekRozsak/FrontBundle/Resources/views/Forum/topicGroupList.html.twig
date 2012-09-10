@@ -7,7 +7,7 @@
 
 {% block content %}
 <h3>Fórum</h3>
-{% if is_granted('ROLE_ADMIN') %}
+{% if is_granted('OWNER', oid) %}
 <span class="gomb" id="new-topic-group-button">[Új témakör]</span><br />
 <div id="new-topic-group">
 {# TODO: make this an AJAX form #}

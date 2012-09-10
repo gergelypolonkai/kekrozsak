@@ -23,6 +23,13 @@ use KekRozsak\SecurityBundle\Entity\Role;
  */
 class User implements UserInterface, AdvancedUserInterface
 {
+    /**
+     * The ACL class OID for this class
+     *
+     * @const ACL_OID
+     */
+    const ACL_OID = 'userClass';
+
     public function __construct()
     {
         $this->groups = new ArrayCollection();

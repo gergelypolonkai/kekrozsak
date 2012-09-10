@@ -6,25 +6,25 @@
     </head>
     <body>
         <strong>Tagság kezdete</strong>: {{ user.registeredAt|date('Y-m-d') }}<br />
-{% if is_granted('ROLE_ADMIN') %}
+{% if is_granted('OWNER', oid) %}
         <strong>Felhasználónév</strong>: {{ user.username }}<br />
 {% endif %}
-{% if is_granted('ROLE_ADMIN') or (user.userData and user.userData.emailPublic) %}
+{% if is_granted('OWNER', oid) or (user.userData and user.userData.emailPublic) %}
         <strong>E-mail</strong>: {{ user.email }}<br />
 {% endif %}
-{% if user.userData and (is_granted('ROLE_ADMIN') or (user.userData.realNamePublic and (user.userData.realName == ''))) %}
+{% if user.userData and (is_granted('OWNER', oid) or (user.userData.realNamePublic and (user.userData.realName == ''))) %}
         <strong>Valódi név</strong>: {{ user.userData.realName }}<br />
 {% endif %}
-{% if user.userData and user.userData.msnAddress != '' and (is_granted('ROLE_ADMIN') or user.userData.msnAddressPublic) %}
+{% if user.userData and user.userData.msnAddress != '' and (is_granted('OWNER', oid) or user.userData.msnAddressPublic) %}
         <strong>MSN cím</strong>: {{ user.userData.msnAddress }}<br />
 {% endif %}
-{% if user.userData and user.userData.googleTalk != '' and (is_granted('ROLE_ADMIN') or user.userData.googleTalkPublic) %}
+{% if user.userData and user.userData.googleTalk != '' and (is_granted('OWNER', oid) or user.userData.googleTalkPublic) %}
         <strong>Google Talk cím</strong>: {{ user.userData.googleTalk }}<br />
 {% endif %}
-{% if user.userData and user.userData.skype != '' and (is_granted('ROLE_ADMIN') or user.userData.skypePublic) %}
+{% if user.userData and user.userData.skype != '' and (is_granted('OWNER', oid) or user.userData.skypePublic) %}
         <strong>Skype név</strong>: {{ user.userData.skype}}<br />
 {% endif %}
-{% if user.userData and user.userData.phoneNumber != '' and (is_granted('ROLE_ADMIN') or user.userData.phoneNumberPublic) %}
+{% if user.userData and user.userData.phoneNumber != '' and (is_granted('OWNER', oid) or user.userData.phoneNumberPublic) %}
         <strong>Telefonszám</strong>: {{ user.userData.phoneNumber }}<br />
 {% endif %}
 {% if user.userData and user.userData.selfDescription != '' %}
@@ -34,7 +34,7 @@
         <strong>Csoportok</strong>:<br />
 {% set groupCount = 0 %}
 {% for group in user.allGroups %}
-{#% if is_granted('ROLE_ADMIN') or group.isMember(app.user) or group.open %#}
+{#% if is_granted('OWNER', oid) or group.isMember(app.user) or group.open %#}
 {% set groupCount = groupCount + 1 %}
 {{ group.name }}<br />
 {#% endif %#}
@@ -42,7 +42,7 @@
 {% if groupCount == 0 %}
 Egy csoportnak sem tagja.<br />
 {% endif %}
-{% if is_granted('ROLE_ADMIN') %}
+{% if is_granted('OWNER', oid) %}
         <strong>Jóváhagyta</strong>: {{ user.acceptedBy.displayName }}<br />
         <strong>Utolsó bejelentkezés</strong>: {{ user.lastLoginAt|date('Y-m-d H:i') }}<br />
         <strong>Jogok</strong>:<br />
