@@ -8,9 +8,10 @@
     <thead>
         <tr>
             <td></td>
+            <td>Cím</td>
             <td>Írta</td>
             <td>Dátum</td>
-            <td>Cím</td>
+            <td></td>
         </tr>
     </thead>
     <tbody>
@@ -21,9 +22,9 @@
                 {% if item.sticky %}[Ragadós ikon]{% else %}[Nem ragadós ikon]{% endif %}
                 {% if item.draft %}[Vázlat ikon]{% else %}[Publikált ikon]{% endif %}
             </td>
-            <td>{{ item.createdBy.displayName }}</td>
+            <td><a href="{{ path('KekRozsakAdminBundle_newsEdit', {slug: item.slug}) }}">{{ item.title }}</a></td>
+            <td>{{ item.createdBy|userdataspan }}</td>
             <td>{{ item.createdAt|date('Y-m-d') }}</td>
-            <td>{{ item.title }}</td>
             <td>[Törlés ikon]</td>
         </tr>
 {% endfor %}
