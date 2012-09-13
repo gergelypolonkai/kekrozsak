@@ -210,7 +210,12 @@ class Document
 
     /**
      * @var Doctrine\Common\Collections\ArrayCollection $groups
-     * @ORM\ManyToMany(targetEntity="KekRozsak\FrontBundle\Entity\Group", mappedBy="documents")
+     * @ORM\ManyToMany(targetEntity="KekRozsak\FrontBundle\Entity\Group", inversedBy="documents")
+     * @ORM\JoinTable(name="group_document", joinColumns={
+     *     @ORM\JoinColumn(name="document_id", referencedColumnName="id"),
+     * }, inverseJoinColumns={
+     *     @ORM\JoinColumn(name="group_id", referencedColumnName="id")
+     * })
      */
     protected $groups;
 
@@ -234,7 +239,7 @@ class Document
      */
     public function getGroups()
     {
-        return $this->group;
+        return $this->groups;
     }
 
     /**

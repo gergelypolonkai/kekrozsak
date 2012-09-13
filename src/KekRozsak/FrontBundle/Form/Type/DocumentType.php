@@ -12,14 +12,19 @@ class DocumentType extends AbstractType
          $builder->add('title', null, array(
                     'label' => 'A dokumentum címe',
                 )
-            );
+            )
 
-        $builder->add('content', 'ckeditor', array(
+         ->add('groups', null, array(
+                    'label'    => 'Csoportok',
+                    'property' => 'name',
+                    'required' => true,
+                )
+            )
+
+        ->add('content', 'ckeditor', array(
                     'label' => ' ',
                 )
             );
-
-        // TODO: possibility to add to other groups!
     }
 
     public function getName()
