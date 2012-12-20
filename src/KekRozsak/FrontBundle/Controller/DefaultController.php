@@ -21,10 +21,7 @@ class DefaultController extends Controller
                 ->getDoctrine()
                 ->getRepository('KekRozsakFrontBundle:Article')
                 ->findOneBy(
-                        array('mainPage' => true),
-                        true,
-                        array('createdAt', 'DESC'),
-                        1
+                        array('mainPage' => true)
                     );
         if (!$mainPageArticle) {
             throw $this->createNotFoundException('A keresett cikk nem létezik!');
