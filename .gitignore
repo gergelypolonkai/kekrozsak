@@ -3,11 +3,11 @@ app/bootstrap*
 app/SymfonyRequirements.php
 
 # Symfony directories
-vendor/*
-app/logs/*
-app/cache/*
-web/uploads/*
-web/bundles/*
+vendor/
+app/logs/
+app/cache/
+web/uploads/
+web/bundles/
 
 # Configuration files
 app/config/parameters.ini
@@ -16,14 +16,14 @@ app/config/parameters.ini
 vendor/composer/installed.json
 
 # Assetic-generated .js and .css files
-web/js/*
-web/css/*
+web/js/
+web/css/
 
 # Project's upload directory
-web/upload/*
+web/upload/
 
 # Spool directory
-spool/*
+spool/
 
 # Backup files
 *~
