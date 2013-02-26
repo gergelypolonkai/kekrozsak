@@ -43,7 +43,25 @@ class EventsExtension extends \Twig_Extension
          * collection, adding each element to $monthEvents array's
          * 'day'th element array.
          */
-        $query = $this->_doctrine->getEntityManager()->createQuery('SELECT e FROM KekRozsakFrontBundle:Event e WHERE e.cancelled = FALSE AND ((e.startDate < :firstDay AND e.endDate >= :firstDay) OR e.startDate BETWEEN :firstDay AND :lastDay)');
+        $query = $this->
+                _doctrine
+                ->getManager()
+                ->createQuery('
+                    SELECT
+                        e
+                    FROM
+                        KekRozsakFrontBundle:Event e
+                    WHERE
+                        e.cancelled = FALSE
+                        AND (
+                            (
+                                e.startDate < :firstDay
+                                AND e.endDate >= :firstDay
+                            )
+                            OR e.startDate BETWEEN :firstDay AND :lastDay
+                        )
+                    ')
+            ;
         $query->setParameter('firstDay', $firstDay, \Doctrine\DBAL\Types\Type::DATE);
         $query->setParameter('lastDay', $lastDay, \Doctrine\DBAL\Types\Type::DATE);
         $events = $query->getResult();

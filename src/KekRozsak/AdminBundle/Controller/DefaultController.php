@@ -36,7 +36,12 @@ class DefaultController extends Controller
             throw new AccessDeniedException('Ehhez a művelethez nincs jogosultságod.');
         }
 
-        $users = $this->getDoctrine()->getEntityManager()->createQuery('SELECT u FROM KekRozsakSecurityBundle:User u WHERE u.acceptedBy IS NULL')->getResult();
+        $users = $this
+                ->getDoctrine()
+                ->getManager()
+                ->createQuery('SELECT u FROM KekRozsakSecurityBundle:User u WHERE u.acceptedBy IS NULL')
+                ->getResult()
+            ;
         $request = $this->getRequest();
 
         if ($request->getMethod() == 'POST') {
@@ -44,7 +49,7 @@ class DefaultController extends Controller
                 if (($user = $this->getDoctrine()->getRepository('KekRozsakSecurityBundle:User')->findOneById($userid)) != null) {
                     $activeUser = $this->$securityContext->getToken()->getUser();
                     $user->setAcceptedBy($activeUser);
-                    $em = $this->getDoctrine()->getEntityManager();
+                    $em = $this->getDoctrine()->getManager();
                     $em->persist($user);
                     $em->flush();
 
@@ -91,7 +96,7 @@ class DefaultController extends Controller
                             $membershipObject->setMembershipAcceptedAt(new \DateTime('now'));
                             $membershipObject->setMembershipAcceptedBy($user);
 
-                            $em = $this->getDoctrine()->getEntityManager();
+                            $em = $this->getDoctrine()->getManager();
                             $em->persist($membershipObject);
                             $em->flush();
 

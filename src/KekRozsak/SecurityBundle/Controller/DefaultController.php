@@ -93,7 +93,7 @@ class DefaultController extends Controller
                     $user->addRole($role);
                 }
 
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->getDoctrine()->getManager();
                 $em->persist($user);
                 $em->flush();
 

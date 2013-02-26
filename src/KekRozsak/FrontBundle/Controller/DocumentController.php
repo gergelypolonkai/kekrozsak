@@ -60,7 +60,7 @@ class DocumentController extends Controller
                 $document->setCreatedAt(new \DateTime('now'));
                 $document->setCreatedBy($this->get('security.context')->getToken()->getUser());
 
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->getDoctrine()->getManager();
                 $em->persist($document);
                 $em->flush();
 
@@ -98,7 +98,7 @@ class DocumentController extends Controller
                 $document->setSlug($slugifier->slugify($document->getTitle()));
                 // TODO: add updatedAt, updatedBy, updateReason, etc.
 
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->getDoctrine()->getManager();
                 $em->persist($document);
                 $em->flush();
 

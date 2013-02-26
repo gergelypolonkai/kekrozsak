@@ -45,7 +45,7 @@ class ForumController extends Controller
                 $newTopicGroup->setCreatedAt(new \DateTime('now'));
                 $newTopicGroup->setCreatedBy($this->get('security.context')->getToken()->getUser());
 
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->getDoctrine()->getManager();
                 $em->persist($newTopicGroup);
                 $em->flush();
 
@@ -91,7 +91,7 @@ class ForumController extends Controller
                 $newTopic->setCreatedBy($this->get('security.context')->getToken()->getUser());
                 $newTopic->setTopicGroup($topicGroup);
 
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->getDoctrine()->getManager();
                 $em->persist($newTopic);
                 $em->flush();
 
@@ -158,7 +158,7 @@ class ForumController extends Controller
                 $post->setCreatedBy($this->get('security.context')->getToken()->getUser());
                 $post->setTopic($topic);
 
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->getDoctrine()->getManager();
                 $em->persist($post);
                 $em->persist($topic);
                 $em->flush();
@@ -210,7 +210,7 @@ class ForumController extends Controller
         }
         $userData->addFavouriteTopic($topic);
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $em->persist($userData);
         $em->flush();
 
@@ -244,7 +244,7 @@ class ForumController extends Controller
         }
         $userData->removeFavouriteTopic($topic);
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $em->persist($userData);
         $em->flush();
 

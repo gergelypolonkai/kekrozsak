@@ -18,7 +18,7 @@ class BlogController extends Controller
     {
         $query = $this
                     ->getDoctrine()
-                    ->getEntityManager()
+                    ->getManager()
                     ->createQuery('
                         SELECT
                             p

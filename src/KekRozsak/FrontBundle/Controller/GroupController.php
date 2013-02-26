@@ -114,7 +114,7 @@ class GroupController extends Controller
             $membership->setMembershipAcceptedAt(new \DateTime('now'));
         }
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $em->persist($membership);
         $em->flush();
 
@@ -160,7 +160,7 @@ class GroupController extends Controller
                 $group->setCreatedAt(new \DateTime('now'));
                 $group->setOpen(true);
 
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->getDoctrine()->getManager();
                 $em->persist($group);
                 $em->flush();
 

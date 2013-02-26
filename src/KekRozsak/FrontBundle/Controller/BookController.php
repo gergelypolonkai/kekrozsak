@@ -20,7 +20,20 @@ class BookController extends Controller
      */
     public function listAction()
     {
-        $query = $this->getDoctrine()->getEntityManager()->createQuery('SELECT b FROM KekRozsakFrontBundle:Book b ORDER BY b.author ASC, b.title ASC, b.year ASC');
+        $query = $this
+                ->getDoctrine()
+                ->getManager()
+                ->createQuery('
+                    SELECT
+                        b
+                    FROM
+                        KekRozsakFrontBundle:Book b
+                    ORDER BY
+                        b.author ASC,
+                        b.title ASC,
+                        b.year ASC
+                ')
+            ;
 
         $books = $query->getResult();
 
@@ -42,7 +55,7 @@ class BookController extends Controller
         if ($request->getMethod() == 'POST') {
             $newBookForm->bindRequest($request);
             if ($newBookForm->isValid()) {
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->getDoctrine()->getManager();
                 $em->persist($book);
                 $em->flush();
 
@@ -87,7 +100,7 @@ class BookController extends Controller
     public function ajaxDeleteBookAction(Book $book)
     {
         $copies = $book->getUsersCopies($this->get('security.context')->getToken()->getUser());
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $copies->forAll(function($key, $copy) use ($book, $em) {
             $book->removeCopy($copy);
             $em->remove($copy);
@@ -110,7 +123,7 @@ class BookController extends Controller
         $copies = $book->getUsersCopies($user);
         if ($copies->count() == 0) {
             $copy = new BookCopy($book, $user);
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($copy);
             $em->flush();
         }
@@ -129,7 +142,7 @@ class BookController extends Controller
     {
         $user = $this->get('security.context')->getToken()->getUser();
         $copies = $book->getUsersCopies($user);
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $copies->forAll(function($key, $copy) use ($em, $newValue) {
             $copy->setBorrowable($newValue);
             $em->persist($copy);
@@ -150,7 +163,7 @@ class BookController extends Controller
     {
         $user = $this->get('security.context')->getToken()->getUser();
         $copies = $book->getUsersCopies($user);
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $copies->forAll(function($key, $copy) use ($em, $newValue) {
             $copy->setBuyable($newValue);
             $em->persist($copy);
@@ -177,7 +190,7 @@ class BookController extends Controller
             $book->addWouldBorrow($user);
         }
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $em->persist($book);
         $em->flush();
 

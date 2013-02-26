@@ -57,7 +57,7 @@ class EventController extends Controller
 
         $event->addAttendee($user);
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $em->persist($event);
         $em->flush();
 
@@ -79,11 +79,11 @@ class EventController extends Controller
         $realDate = null;
 
         if ($date === null) {
-            $query = $this->getDoctrine()->getEntityManager()->createQuery('SELECT e FROM KekRozsakFrontBundle:Event e WHERE e.cancelled = FALSE AND (e.startDate >= :day OR (e.startDate <= :day AND e.endDate >= :day))');
+            $query = $this->getDoctrine()->getManager()->createQuery('SELECT e FROM KekRozsakFrontBundle:Event e WHERE e.cancelled = FALSE AND (e.startDate >= :day OR (e.startDate <= :day AND e.endDate >= :day))');
             $query->setParameter('day', new \DateTime('now'), \Doctrine\DBAL\Types\Type::DATE);
         } else {
             $realDate = \DateTime::createFromFormat('Y-m-d', $date);
-            $query = $this->getDoctrine()->getEntityManager()->createQuery('SELECT e FROM KekRozsakFrontBundle:Event e WHERE e.cancelled = FALSE AND ((e.startDate < :day AND e.endDate >= :day) OR e.startDate = :day)');
+            $query = $this->getDoctrine()->getManager()->createQuery('SELECT e FROM KekRozsakFrontBundle:Event e WHERE e.cancelled = FALSE AND ((e.startDate < :day AND e.endDate >= :day) OR e.startDate = :day)');
             $query->setParameter('day', $realDate, \Doctrine\DBAL\Types\Type::DATE);
         }
         $events = $query->getResult();
@@ -104,7 +104,7 @@ class EventController extends Controller
      */
     public function ajaxListAction(\DateTime $date)
     {
-        $query = $this->getDoctrine()->getEntityManager()->createQuery('SELECT e FROM KekRozsakFrontBundle:Event e WHERE e.cancelled = FALSE AND ((e.startDate < :day AND e.endDate >= :day) OR e.startDate = :day)');
+        $query = $this->getDoctrine()->getManager()->createQuery('SELECT e FROM KekRozsakFrontBundle:Event e WHERE e.cancelled = FALSE AND ((e.startDate < :day AND e.endDate >= :day) OR e.startDate = :day)');
         $query->setParameter('day', $date, \Doctrine\DBAL\Types\Type::DATE);
         $events = $query->getResult();
 

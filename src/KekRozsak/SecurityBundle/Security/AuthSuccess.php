@@ -34,7 +34,7 @@ class AuthSuccess implements AuthenticationSuccessHandlerInterface
     public function onSecurityAuthenticationSuccess(AuthenticationEvent $event)
     {
         $user = $event->getAuthenticationToken()->getUser();
-        $em = $this->doctrine->getEntityManager();
+        $em = $this->doctrine->getManager();
         $user->setLastLoginAt(new \DateTime('now'));
         $em->persist($user);
         $em->flush();
@@ -43,7 +43,7 @@ class AuthSuccess implements AuthenticationSuccessHandlerInterface
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
         $user = $token->getUser();
-        $em = $this->doctrine->getEntityManager();
+        $em = $this->doctrine->getManager();
         $user->setLastLoginAt(new \DateTime('now'));
         $em->persist($user);
         $em->flush();
