@@ -22,9 +22,9 @@ class AppKernel extends Kernel
             // 3rd party bundles
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
-            new Io\TcpdfBundle\IoTcpdfBundle(),
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-            new Jmikola\JsAssetsHelperBundle\JmikolaJsAssetsHelperBundle(),
+            new JMS\TwigJsBundle\JMSTwigJsBundle(),
             // Own bundles
             new KekRozsak\FrontBundle\KekRozsakFrontBundle(),
             new KekRozsak\SecurityBundle\KekRozsakSecurityBundle(),

@@ -8,9 +8,6 @@ jms_di_extra:
         bundles: [ KekRozsakFrontBundle, KekRozsakSecurityBundle ]
         directories: [ "%kernel.root_dir%/../src" ]
 
-jmikola_js_assets_helper:
-    packages_to_expose: [ KekRozsakFrontBundle ]
-
 framework:
     #esi:             ~
     #translator:      { fallback: %locale% }
@@ -22,7 +19,7 @@ framework:
     validation:      { enable_annotations: true }
     templating:
         engines: ['twig']
-        packages: 
+        packages:
             KekRozsakFrontBundle: ~
     default_locale:  %locale%
     trust_proxy_headers: false # Should Request object should trust proxy headers (X_FORWARDED_FOR/HTTP_CLIENT_IP)
