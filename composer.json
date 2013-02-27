@@ -15,7 +15,7 @@
         "doctrine/doctrine-migrations-bundle": "dev-master",
         "egeloen/ckeditor-bundle": "dev-master",
         "friendsofsymfony/jsrouting-bundle": "1.1.*",
-        "jms/twig-js-bundle": "dev-master",
+        "jmikola/js-assets-helper-bundle": "dev-master",
         "knplabs/knp-snappy-bundle": "dev-master"
     },
     "minimum-stability": "dev",

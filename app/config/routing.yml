@@ -1,6 +1,9 @@
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
+jmikola_js_assets_helper_routing:
+    resource: "@JmikolaJsAssetsHelperBundle/Resources/config/routing/routing.xml"
+
 KekRozsakAdminBundle:
     resource: "@KekRozsakAdminBundle/Controller/"
     type:     annotation

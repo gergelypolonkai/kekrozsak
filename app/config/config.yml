@@ -8,6 +8,9 @@ jms_di_extra:
         bundles: [ KekRozsakFrontBundle, KekRozsakSecurityBundle ]
         directories: [ "%kernel.root_dir%/../src" ]
 
+jmikola_js_assets_helper:
+    packages_to_expose: [ KekRozsakFrontBundle ]
+
 framework:
     #esi:             ~
     #translator:      { fallback: %locale% }
